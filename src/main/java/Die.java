@@ -11,6 +11,4 @@ public class Die {
     public int getFacevalue() {
         return rand.nextInt(MAXVALUE) + 1;
     }
-
-
 }
