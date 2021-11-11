@@ -15,7 +15,6 @@ public class Cup {
     }
 
     public int getSum() {
-        sum = Die1.getFacevalue() + Die2.getFacevalue();
         return sum;
     }
 
@@ -25,5 +24,9 @@ public class Cup {
         } else {
             return false;
         }
+    }
+
+    public void roll() {
+        sum = Die1.getFacevalue() + Die2.getFacevalue();
     }
 }
