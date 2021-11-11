@@ -42,7 +42,11 @@ public class Board {
             int numberOfPlayers = gui.getUserInteger("Indtast et tal.");
 
             for(int i = 0; i < numberOfPlayers; i++) {
-                gui.showMessage("Vælg en spiller: ");
+                if(i==0) {
+                    gui.showMessage("Tilføj en spiller: ");
+                } else {
+                    gui.showMessage("Tilføj endnu en spiller: ");
+                }
                 String name = gui.getUserString("");
                 player[i] = new GUI_Player(name, 2000);
                 gui.addPlayer(player[i]);
@@ -54,11 +58,10 @@ public class Board {
             gui.getUserButtonPressed("spiller x tur", "Rul terning");
         }
         void movePlayer(int currentPlayer, int sum) {
-            fields[0].setCar(player[currentPlayer], false);
             fields[0 + sum].setCar(player[currentPlayer], true);
         }
-        GUI_Player getPlayer() {
-            return player[0];
+        GUI_Player getPlayer(GUI_Player[] player, int number) {
+            return player[number];
         }/*
         String getFields() {
 
