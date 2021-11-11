@@ -1,5 +1,4 @@
-import gui_fields.GUI_Field;
-import gui_fields.GUI_Start;
+import gui_fields.*;
 import gui_main.GUI;
 
 import javax.swing.*;
@@ -10,6 +9,8 @@ public class Main {
         System.out.println("Hello");
         System.out.println("Hello");
 
-        GUI gui = new GUI();
+        Board.iniGUI();
+        Board.iniPlayer(2);
+
     }
 }
