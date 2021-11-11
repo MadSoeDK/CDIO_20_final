@@ -1,13 +1,10 @@
-import gui_fields.GUI_Chance;
-import gui_fields.GUI_Field;
-import gui_fields.GUI_Jail;
-import gui_fields.GUI_Start;
+import gui_fields.*;
 import gui_main.GUI;
+import java.lang.Math;
 public class Board {
-    static void iniGUI() {
         GUI_Field[] fields = {
                 new GUI_Start(),
-                new GUI_Jail(),
+                new GUI_Brewery(),
                 new GUI_Jail(),
                 new GUI_Jail(),
                 new GUI_Jail(),
@@ -33,14 +30,33 @@ public class Board {
 
         };
         GUI gui = new GUI(fields);
-    }
-    static void iniPlayer(int playerAmount) {
-        if(playerAmount >= 2 && playerAmount <= 4) {
-            int[] players = new int[playerAmount];
+        int[] cards = new int[100];
+
+        void createPlayer() {
+            gui.showMessage("Hvor mange spillere?");
+            int numberOfPlayers = gui.getUserInteger("Indtast et tal.");
+            int[] players = new int[numberOfPlayers];
 
             for(int i = 0; i < players.length; i++) {
-
+                gui.showMessage("Vælg en spiller: ");
+                String name = gui.getUserString("");
+                GUI_Player player = new GUI_Player(name, 2000);
+                gui.addPlayer(player);
             }
         }
+        void getPlayer() {
+
+        }
+        void getPlayers() {
+
+        }
+        void getFields() {
+
+        }
+        void shuffleCard() {
+
+        }
+        void getCard() {
+
+        }
     }
-}

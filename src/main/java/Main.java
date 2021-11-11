@@ -9,8 +9,8 @@ public class Main {
         System.out.println("Hello");
         System.out.println("Hello");
 
-        Board.iniGUI();
-        Board.iniPlayer(2);
+        Board board = new Board();
+        board.createPlayer();
 
     }
 }
