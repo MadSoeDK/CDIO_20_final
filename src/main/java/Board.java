@@ -33,28 +33,33 @@ public class Board {
 
         };
 
-        GUI gui = new GUI(fields);
-        int[] cards = new int[100];
-        GUI_Player player;
+        private GUI gui = new GUI(fields);
+        private int[] cards = new int[100];
+        private GUI_Player[] player = new GUI_Player[4];
 
         void createPlayer() {
             gui.showMessage("Hvor mange spillere?");
             int numberOfPlayers = gui.getUserInteger("Indtast et tal.");
-            int[] players = new int[numberOfPlayers];
 
-            for(int i = 0; i < players.length; i++) {
+            for(int i = 0; i < numberOfPlayers; i++) {
                 gui.showMessage("Vælg en spiller: ");
                 String name = gui.getUserString("");
-                player = new GUI_Player(name, 2000);
-                gui.addPlayer(player);
+                player[i] = new GUI_Player(name, 2000);
+                gui.addPlayer(player[i]);
+
+                fields[0].setCar(player[i], true);
             }
+        }
+        void button() {
+            gui.getUserButtonPressed("spiller x tur", "Rul terning");
+        }
+        void movePlayer(int currentPlayer, int sum) {
+            fields[0].setCar(player[currentPlayer], false);
+            fields[0 + sum].setCar(player[currentPlayer], true);
+        }
+        GUI_Player getPlayer() {
+            return player[0];
         }/*
-        String getPlayer() {
-
-        }
-        String getPlayers() {
-
-        }
         String getFields() {
 
         }
