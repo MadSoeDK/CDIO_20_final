@@ -32,53 +32,112 @@ Vi har identificeret og analyseret en række use cases i den udleverede opgave. 
         \item \textbf{UC3.1:} Brug chancekort
     \end{itemize}
 \end{itemize}
-
-
-\textbf{Brief}
-
+\newline
+\textbf{Brief}\\
+\newline
+\textbf{ID: UC1} Start spil \\
+\textbf{Actor:} Spiller\\
+\textbf{Basic flow:} Spiller starter spillet.\\
+\newline
+\textbf{ID: UC1.1} Vælg antal spillere\\
+\textbf{Actor:} Spiller\\
+\textbf{Basic flow:} Spiller vælger hvor mange spillere der deltager i spillet.\\
+\newline
+\textbf{ID: UC1.2} Vælg brik \\
+\textbf{Actor:} Spiller \\
+\textbf{Basic flow}: Hver spiller vælger en brik som de får tildelt resten af spillet. \\
+\newline
+\textbf{ID: UC2} Tag en tur \\
+\textbf{Actor:} Spiller \\
+\textbf{Basic flow: } Spiller påbegynder tag en tur. \\
+\newline
+\textbf{ID: UC2.1} Betal/modtag penge \\
+\textbf{Actor: } Spiller \\
+\textbf{Basic flow} Spiller betaler en modspiller (eller bank) penge. \\
+\newline
+\textbf{ID: UC2.2} Ryk brik \\
+\textbf{Actor: } Spiller \\
+\textbf{Basic flow} Spiller rykker sin brik antal felter frem på brættet med det antal øjne, terningen viser. \\
+\newline
+\textbf{ID: UC2.3} Rul terning \\
+\textbf{Actor: } Spiller \\
+\textbf{Basic flow} Når det er den pågældende spillers tur, så ruller spilleren terningen, hvorefter en terningsværdi fås. Værdien benyttes til at ændre spillerens position. \\
+\newline
+\textbf{ID: UC3} Træk chancekort \\
+\textbf{Actor: } Spiller \\
+\textbf{Basic flow} Spiller trækker et chancekort, hvorefter et tilfældigt kort modtages. \\
+\newline
+\textbf{ID: UC3.1} Brug chancekort \\
+\textbf{Actor: } Spiller \\
+\textbf{Basic flow: } Spiller benytter sit chancekort. \\
+\newline
+\textbf{Fully dressed}
 \begin{table}[H]
     \renewcommand{\arraystretch}{1.5}
     \centering
-    \begin{table}{l{12cm}}
+    \begin{tabular}{|p{14cm}|}
         \hline
-        \textbf{ID: UC1} Start spil \\
-        \hline
-        \textbf{Actor:} Spiller\\
-        \hline
-        \textbf{Basic flow:} Spiller starter spillet.\\
-        \hline
-    \end{table}\\
-    \begin{table}{l{12cm}}
-        \hline
-        \textbf{ID: UC1.1} Vælg antal spillere \\
+        \textbf{ID:} UC2 Tag en Tur\\
         \hline
         \textbf{Actor:} Spiller\\
         \hline
-        \textbf{Basic flow:} Spiller vælger hvor mange spillere der deltager i spillet.\\
+        \textbf{Stakeholders}. Spillerne: Vil gerne få en høj balance og vinde spillet. Vil gerne underholdes.\\
+        \hline
+        \textbf{Pre-conditions:}\\
+        1. Spillet skal være startet\\
+        2. Det skal være den nuværende spillers tur\\
+        \hline
+        \textbf{Post-conditions:}\\
+        1. Spillerens tur er slut eller spillet er vundet \\
+        \hline
+        \textbf{Basic flow} \\
+        1. Spiller modtager besked fra GUI’en: “Spiller X tur, klik på rul terning” \\
+        2. Spiller klikker på knap som ruller med terninger med resultat “X”\\
+        3. Spillerens brik rykkes “X” antal felter frem\\
+        4. Spillet tjekker hvilket felt de er landet på\\
+        5. Feltet er ikke købt \\
+        \hspace{0.2cm}5.1.1: Derfor betaler spilleren for feltets pris\\
+        \hspace{0.2cm}5.1.2: Feltet opdateres til at være ejet af spilleren\\
+        6. Spilleren passerede ikke start \\
+        7. Spillet tjekker om spilleren har en negativ account balance \\
+        7.1.1: Spilleren har en positiv balance \\
+        8. Spillet ændre hvilken spiller er aktiv \\
+        \hline
+        \textbf{Alternative Flows}
+        5.2.1: Feltet er købt \\
+        5.2.2: Spilleren betaler feltets lejepris til ejeren af feltet \\
+        5.3.1: Feltet er Chancen \\
+        5.3.1.1: Spilleren trækker et chancekort \\
+        5.3.1.2: Spilleren udfører chancekortets effekt \\
+        5.4.1: Feltet er enten “Water show” eller “Fireworks”\\
+        5.4.1.1: Spilleren betaler \$2 til “Loose Change” \\
+        5.5.1: Feltet er “Loose Change” \\
+        5.5.1.1: Spilleren tilføjer \$ lig med værdien af “Loose Change” \\
+        5.5.1.2: “Loose Change” bliver sat lig med 0 \\
+        5.6.1: Feltet er “Railroad” \\
+        5.6.1.2: Spilleren ruller med terningen igen \\
+        5.6.1.2. Spillet tjekker feltet (se basis flow 4) \\
+        5.7.1: Feltet er “Gå i fængsel” \\
+        5.7.1.1: Spilleren betaler \$3 \\
+        5.7.1.2: Spillerens position bliver sat til “Fængsel” \\
+        5.8.1: Feltet er “Fængsel” \\
         \hline
     \end{tabular}
 \end{table}
-
-        ID: UC1.2 Vælg brik \\
-        Actor: Spiller \\
-        Basic flow: Hver spiller vælger en brik som de får tildelt resten af spillet. \\
-        ID: UC2 Tag en tur \\
-        Actor: Spiller \\
-        Basic flow: Spiller påbegynder tag en tur. \\
-        ID: UC2.1 Betal/modtag penge \\
-        Actor: Spiller \\
-        Basic flow: Spiller betaler en modspiller (eller bank) penge. \\
-        ID: UC2.2 Ryk brik \\
-        Actor: Spiller \\
-        Basic flow: Spiller rykker sin brik antal felter frem på brættet med det antal øjne, terningen viser. \\
-        ID: UC2.3 Rul terning \\
-        Actor: Spiller \\
-        Basic flow: Når det er den pågældende spillers tur, så ruller spilleren terningen, hvorefter en terningsværdi fås. Værdien benyttes til at ændre spillerens position. \\
-        ID: UC3 Træk chancekort \\
-        Actor: Spiller \\
-        Basic flow: Spiller trækker et chancekort, hvorefter et tilfældigt kort modtages. \\
-        ID: UC3.1 Brug chancekort \\
-        Actor: Spiller \\
-        Basic flow: Spiller benytter sit chancekort. \\
-        \bottomrule
+\begin{table}[H]
+    \renewcommand{\arraystretch}{1.5}
+    \centering
+    \begin{tabular}{|p{14cm}|} \\
+        5.8.1.1: Spilleren betaler ingen penge \\
+        6.1.1: Spilleren passerede startfeltet \\
+        6.1.1: Spilleren indsamler \$2 \\
+        7.2.1: Spilleren har en negativ balance \\
+        7.2.1.1: Spillet tjekker hvilken spiller har den højeste balance \\
+        7.2.1.2: En enkel spiller har højeste balance \\
+        7.2.1.3: Den givne spiller vinder spillet og stopper spillet \\
+        7.2.1.1: Flere spillere har den højeste balance \\
+        7.2.2.2: De spillere har begge vundet og stopper spillet \\
+        \hline
+    \end{tabular}
+\end{table}
 
