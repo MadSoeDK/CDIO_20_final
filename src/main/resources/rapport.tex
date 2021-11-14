@@ -6,6 +6,21 @@
 
 % Packages
 \usepackage{amsmath}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{float}
+\usepackage[danish]{babel}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\graphicspath{{figures/}{anotherFigureDirectory/}}
+\usepackage{listings}
+\usepackage{amssymb}
+\usepackage{fourier}
+\usepackage{mathtools}
+\usepackage{color}
+
+
 
 \author{Mads Sørensen, Bertram Kjær, Lucas Schoubye, Ismail Ali, Mark Nielsen}
 
@@ -20,6 +35,12 @@
 
     \section*{Abstract}
     Some text
+
+    \newpage
+
+    \include{Chapters/introduction}
+    \include{Chapters/requirements}
+
 
 
 \end{document}
