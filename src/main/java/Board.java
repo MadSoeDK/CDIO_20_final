@@ -29,39 +29,53 @@ public class Board {
                 new GUI_Chance(),
                 new GUI_Street(),
                 new GUI_Street(),
-
         };
 
         private GUI gui = new GUI(fields);
         private int[] cards = new int[10];
-        private GUI_Player[] player = new GUI_Player[4];
+        private Player[] player = new Player[4];
+    int amountOfPlayers;
 
-    void createPlayer() {
-            gui.showMessage("Hvor mange spillere?");
-            int numberOfPlayers = gui.getUserInteger("Indtast et tal.");
-
-            for(int i = 0; i < numberOfPlayers; i++) {
-                if(i==0) {
-                    gui.showMessage("Tilføj en spiller: ");
-                } else {
-                    gui.showMessage("Tilføj endnu en spiller: ");
-                }
-                String name = gui.getUserString("");
-                player[i] = new GUI_Player(name, 2000);
-                gui.addPlayer(player[i]);
-
-                fields[0].setCar(player[i], true);
+        void newGame() {
+            switch (gui.getUserSelection("How many players?", "2", "3", "4")) {
+                case "2":
+                    createPlayer(2);
+                    amountOfPlayers=2;
+                    break;
+                case "3":
+                    createPlayer(3);
+                    amountOfPlayers=3;
+                    break;
+                case "4":
+                    createPlayer(4);
+                    amountOfPlayers=4;
+                    break;
             }
         }
+
+    void createPlayer(int n) {
+            for(int i = 0; i < n; i++) {
+                gui.showMessage("Tilføj en spiller: ");
+                player[i] = new Player(gui.getUserString(""), 35);
+                gui.addPlayer(player[i].getPlayer());
+            }
+        }
+
         void button() {
             gui.getUserButtonPressed("spiller x tur", "Rul terning");
         }
-        void movePlayer(int currentPlayer, int sum) {
-            fields[0].setCar(player[currentPlayer], false);
-            fields[0 + sum].setCar(player[currentPlayer], true);
+
+        void movePlayer(int currentPlayer, int sum, int placement) {
+            fields[placement].setCar(player[currentPlayer].getPlayer(), false);
+            fields[placement + sum].setCar(player[currentPlayer].getPlayer(), true);
         }
-        GUI_Player getPlayer(int number) {
+
+        Player getPlayer(int number) {
             return player[number];
+        }
+
+        Player[] getPlayers() {
+            return player;
         }
         void check(int number) {
 
@@ -76,7 +90,7 @@ public class Board {
     /**
      * Sætter
      */
-    void setBoard() {
+    public Board() {
         //titler
         fields[0].setTitle("Start");
         fields[1].setTitle("Burgerbaren");

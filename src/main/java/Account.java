@@ -7,13 +7,12 @@ public class Account {
 
     private int balance;
 
-    public Account() {
-        balance = 35;
+    public Account(int balance) {
+        this.balance = balance;
     }
 
     /**
      * Changes the balance. The balance can't be negative, and is then set to 0.
-     *
      * @param amount Positive or negative integer
      */
     public void setBalance(int amount) {
