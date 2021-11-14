@@ -1,0 +1,84 @@
+%! Author = Mads Sørensen
+%! Date = 14-11-2021
+
+\section{Analyse}
+Analysen af opgaven tager udgangspunkt i følgende artefakter; domænemodel, kravspecificering, use case diagram, use case beskrivelser, systemsekvensdiagram, sekvensdiagram.
+
+\input{Chapters/requirements}
+
+\subsection{Use case diagram}
+\begin{figure}[H]
+    \includegraphics[width=10cm]{figures/usecasediagram}
+    \caption{Use case diagram}
+\end{figure}
+
+\subsection{Use cases}
+Vi har identificeret og analyseret en række use cases i den udleverede opgave. De vigtigste use cases er: \textit{Start spil, Tag tur} og \textit{Træk chancekort}.
+
+\begin{itemize}
+    \item \textbf{UC1:} Start spil
+    \begin{itemize}
+        \item \textbf{UC1.1:} Vælg antal spillere
+        \item \textbf{UC1.2:} Tag en tur
+    \end{itemize}
+    \item \textbf{UC2:} Tag en tur
+    \begin{itemize}
+        \item \textbf{UC2.1:} Betal/Modtag penge
+        \item \textbf{UC2.2:} Ryk brik
+        \item \textbf{UC2.3:} Rul terning
+    \end{itemize}
+    \item \textbf{UC3:} Træk chancekort
+    \begin{itemize}
+        \item \textbf{UC3.1:} Brug chancekort
+    \end{itemize}
+\end{itemize}
+
+
+\textbf{Brief}
+
+\begin{table}[H]
+    \renewcommand{\arraystretch}{1.5}
+    \centering
+    \begin{table}{l{12cm}}
+        \hline
+        \textbf{ID: UC1} Start spil \\
+        \hline
+        \textbf{Actor:} Spiller\\
+        \hline
+        \textbf{Basic flow:} Spiller starter spillet.\\
+        \hline
+    \end{table}\\
+    \begin{table}{l{12cm}}
+        \hline
+        \textbf{ID: UC1.1} Vælg antal spillere \\
+        \hline
+        \textbf{Actor:} Spiller\\
+        \hline
+        \textbf{Basic flow:} Spiller vælger hvor mange spillere der deltager i spillet.\\
+        \hline
+    \end{tabular}
+\end{table}
+
+        ID: UC1.2 Vælg brik \\
+        Actor: Spiller \\
+        Basic flow: Hver spiller vælger en brik som de får tildelt resten af spillet. \\
+        ID: UC2 Tag en tur \\
+        Actor: Spiller \\
+        Basic flow: Spiller påbegynder tag en tur. \\
+        ID: UC2.1 Betal/modtag penge \\
+        Actor: Spiller \\
+        Basic flow: Spiller betaler en modspiller (eller bank) penge. \\
+        ID: UC2.2 Ryk brik \\
+        Actor: Spiller \\
+        Basic flow: Spiller rykker sin brik antal felter frem på brættet med det antal øjne, terningen viser. \\
+        ID: UC2.3 Rul terning \\
+        Actor: Spiller \\
+        Basic flow: Når det er den pågældende spillers tur, så ruller spilleren terningen, hvorefter en terningsværdi fås. Værdien benyttes til at ændre spillerens position. \\
+        ID: UC3 Træk chancekort \\
+        Actor: Spiller \\
+        Basic flow: Spiller trækker et chancekort, hvorefter et tilfældigt kort modtages. \\
+        ID: UC3.1 Brug chancekort \\
+        Actor: Spiller \\
+        Basic flow: Spiller benytter sit chancekort. \\
+        \bottomrule
+
