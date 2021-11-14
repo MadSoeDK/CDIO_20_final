@@ -1,0 +1,4 @@
+\babel@toc {danish}{}\relax 
+\contentsline {section}{\numberline {1}Indledning}{4}{section.1}%
+\contentsline {section}{\numberline {2}Projektplanlægning}{4}{section.2}%
+\contentsline {section}{\numberline {3}Kravspecifikation}{5}{section.3}%
