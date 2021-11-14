@@ -55,15 +55,20 @@ public class Board {
                 gui.showMessage("Tilføj en spiller: ");
                 player[i] = new Player(gui.getUserString(""), 35);
                 gui.addPlayer(player[i].getPlayer());
+
+                fields[0].setCar(player[i].getPlayer(), true);
+
             }
         }
 
         void button() {
             gui.getUserButtonPressed("spiller x tur", "Rul terning");
         }
-
+        void removePlayer(int currentPlayer, int sum, int placement) {
+            fields[placement].setCar(player[currentPlayer].getPlayer(), false);
+        }
         void movePlayer(int currentPlayer, int sum, int placement) {
-            fields[placement - sum].setCar(player[currentPlayer].getPlayer(), false);
+            //fields[placement + sum].setCar(player[currentPlayer].getPlayer(), true);
             fields[placement].setCar(player[currentPlayer].getPlayer(), true);
         }
 
