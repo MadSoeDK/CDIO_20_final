@@ -55,7 +55,6 @@ public class Board {
                 gui.showMessage("Tilføj en spiller: ");
                 player[i] = new Player(gui.getUserString(""), 35);
                 gui.addPlayer(player[i].getPlayer());
-
                 fields[0].setCar(player[i].getPlayer(), true);
 
             }

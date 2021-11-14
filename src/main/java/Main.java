@@ -9,6 +9,7 @@ public class Main extends Board{
         board.newGame();
         Cup cup = new Cup();
 
+
         Player[] players = board.getPlayers();
 
         int sum = 0;
@@ -27,17 +28,18 @@ public class Main extends Board{
 
             board.removePlayer(currentPlayer, sum, placement);
 
+            System.out.println(sum);
             if(placement + sum >= 24) {
                 //placement = placement + sum - 24;
-                board.getPlayer(currentPlayer).setPlacement((placement + sum) - 24);
+                board.getPlayer(currentPlayer).setPlacement(sum - 24);
                 board.removePlayer(currentPlayer, sum, placement);
                 sum = 0;
             }
-            System.out.println(sum);
             board.getPlayer(currentPlayer).setPlacement(sum);
             placement = board.getPlayer(currentPlayer).getPlacement();
             board.movePlayer(currentPlayer, sum, placement);
 
+            board.getPlayer(currentPlayer).setPlayerBalance(board.getPlayer(currentPlayer).getPlayerBalance() - 3);
 
             currentPlayer++;
 
