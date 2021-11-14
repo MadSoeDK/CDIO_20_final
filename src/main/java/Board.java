@@ -33,27 +33,24 @@ public class Board {
 
         private GUI gui = new GUI(fields);
         private int[] cards = new int[10];
-        private Player[] player = new Player[4];
-    int amountOfPlayers;
+        private Player[] player;
 
         void newGame() {
             switch (gui.getUserSelection("How many players?", "2", "3", "4")) {
                 case "2":
                     createPlayer(2);
-                    amountOfPlayers=2;
                     break;
                 case "3":
                     createPlayer(3);
-                    amountOfPlayers=3;
                     break;
                 case "4":
                     createPlayer(4);
-                    amountOfPlayers=4;
                     break;
             }
         }
 
     void createPlayer(int n) {
+            player = new Player[n];
             for(int i = 0; i < n; i++) {
                 gui.showMessage("Tilføj en spiller: ");
                 player[i] = new Player(gui.getUserString(""), 35);
@@ -66,8 +63,8 @@ public class Board {
         }
 
         void movePlayer(int currentPlayer, int sum, int placement) {
-            fields[placement].setCar(player[currentPlayer].getPlayer(), false);
-            fields[placement + sum].setCar(player[currentPlayer].getPlayer(), true);
+            fields[placement - sum].setCar(player[currentPlayer].getPlayer(), false);
+            fields[placement].setCar(player[currentPlayer].getPlayer(), true);
         }
 
         Player getPlayer(int number) {
