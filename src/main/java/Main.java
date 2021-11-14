@@ -9,8 +9,6 @@ public class Main extends Board{
         board.newGame();
         Cup cup = new Cup();
 
-        Player[] players = board.getPlayers();
-
         int sum = 0;
         int currentPlayer = 0;
 
@@ -18,16 +16,19 @@ public class Main extends Board{
          * Game logik
          */
 
+        Player[] players = board.getPlayers();
+
         while(true) {
             board.button();
             cup.roll();
             sum = cup.getSum();
+            System.out.println(sum);
 
             board.getPlayer(currentPlayer).setPlacement(sum);
             int placement = board.getPlayer(currentPlayer).getPlacement();
             board.movePlayer(currentPlayer, sum, placement);
 
-            if(currentPlayer == 3) {
+            if(currentPlayer == players.length) {
                 currentPlayer = 0;
             }
             currentPlayer++;
