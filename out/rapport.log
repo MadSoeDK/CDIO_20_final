@@ -1,62 +1,53 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.10) (preloaded format=pdflatex 2021.11.2)  14 NOV 2021 21:18
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.10) (preloaded format=pdflatex 2021.11.14)  14 NOV 2021 22:58
 entering extended mode
 **./rapport.tex
 (rapport.tex
-LaTeX2e <2021-06-01> patch level 1
-L3 programming layer <2021-10-18>
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/base\article.c
-ls
-Document Class: article 2021/02/12 v1.4n Standard LaTeX document class
-
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/base\size10.cl
-o
-File: size10.clo 2021/02/12 v1.4n Standard LaTeX file (size option)
+LaTeX2e <2021-11-15>
+L3 programming layer <2021-11-12>
+(C:\Downloads\Miktex\tex/latex/base\article.cls
+Document Class: article 2021/10/04 v1.4n Standard LaTeX document class
+(C:\Downloads\Miktex\tex/latex/base\size10.clo
+File: size10.clo 2021/10/04 v1.4n Standard LaTeX file (size option)
 )
-\c@part=\count182
-\c@section=\count183
-\c@subsection=\count184
-\c@subsubsection=\count185
-\c@paragraph=\count186
-\c@subparagraph=\count187
-\c@figure=\count188
-\c@table=\count189
+\c@part=\count183
+\c@section=\count184
+\c@subsection=\count185
+\c@subsubsection=\count186
+\c@paragraph=\count187
+\c@subparagraph=\count188
+\c@figure=\count189
+\c@table=\count190
 \abovecaptionskip=\skip47
 \belowcaptionskip=\skip48
 \bibindent=\dimen138
 )
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmat
-h.sty
-Package: amsmath 2021/04/20 v2.17j AMS math features
+(C:\Downloads\Miktex\tex/latex/amsmath\amsmath.sty
+Package: amsmath 2021/10/15 v2.17l AMS math features
 \@mathmargin=\skip49
 
 For additional information on amsmath, use the `?' option.
+(C:\Downloads\Miktex\tex/latex/amsmath\amstext.sty
+Package: amstext 2021/08/26 v2.01 AMS text
 
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amstex
-t.sty
-Package: amstext 2000/06/29 v2.01 AMS text
-
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen
-.sty
+(C:\Downloads\Miktex\tex/latex/amsmath\amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks16
 \ex@=\dimen139
 ))
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy
-.sty
+(C:\Downloads\Miktex\tex/latex/amsmath\amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 \pmbraise@=\dimen140
 )
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn
-.sty
-Package: amsopn 2016/03/08 v2.02 operator names
+(C:\Downloads\Miktex\tex/latex/amsmath\amsopn.sty
+Package: amsopn 2021/08/26 v2.02 operator names
 )
-\inf@bad=\count190
+\inf@bad=\count191
 LaTeX Info: Redefining \frac on input line 234.
-\uproot@=\count191
-\leftroot@=\count192
+\uproot@=\count192
+\leftroot@=\count193
 LaTeX Info: Redefining \overline on input line 399.
-\classnum@=\count193
-\DOTSCASE@=\count194
+\classnum@=\count194
+\DOTSCASE@=\count195
 LaTeX Info: Redefining \ldots on input line 496.
 LaTeX Info: Redefining \dots on input line 499.
 LaTeX Info: Redefining \cdots on input line 620.
@@ -65,15 +56,15 @@ LaTeX Info: Redefining \cdots on input line 620.
 \big@size=\dimen141
 LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
-\macc@depth=\count195
-\c@MaxMatrixCols=\count196
+\macc@depth=\count196
+\c@MaxMatrixCols=\count197
 \dotsspace@=\muskip16
-\c@parentequation=\count197
-\dspbrk@lvl=\count198
+\c@parentequation=\count198
+\dspbrk@lvl=\count199
 \tag@help=\toks17
-\row@=\count199
-\column@=\count266
-\maxfields@=\count267
+\row@=\count266
+\column@=\count267
+\maxfields@=\count268
 \andhelp@=\toks18
 \eqnshift@=\dimen142
 \alignsep@=\dimen143
@@ -85,74 +76,62 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
 \multlinegap=\skip50
 \multlinetaggap=\skip51
 \mathdisplay@stack=\toks20
-LaTeX Info: Redefining \[ on input line 2923.
-LaTeX Info: Redefining \] on input line 2924.
+LaTeX Info: Redefining \[ on input line 2938.
+LaTeX Info: Redefining \] on input line 2939.
 )
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/base\inputenc.
-sty
+(C:\Downloads\Miktex\tex/latex/base\inputenc.sty
 Package: inputenc 2021/02/14 v1.3d Input encoding file
 \inpenc@prehook=\toks21
 \inpenc@posthook=\toks22
 )
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/base\fontenc.s
-ty
+(C:\Downloads\Miktex\tex/latex/base\fontenc.sty
 Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
 )
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/float\float.st
-y
+(C:\Downloads\Miktex\tex/latex/float\float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count268
+\c@float@type=\count269
 \float@exts=\toks23
 \float@box=\box52
 \@float@everytoks=\toks24
 \@floatcapt=\box53
 )
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/generic/babel\babel.
-sty
-Package: babel 2021/10/19 3.65 The Babel package
-\babel@savecnt=\count269
+(C:\Downloads\Miktex\tex/generic/babel\babel.sty
+Package: babel 2021/11/08 3.66 The Babel package
+\babel@savecnt=\count270
 \U@D=\dimen148
 \l@unhyphenated=\language79
 
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/generic/babel\txtbab
-el.def)
+(C:\Downloads\Miktex\tex/generic/babel\txtbabel.def)
 \bbl@readstream=\read2
-\bbl@dirlevel=\count270
+\bbl@dirlevel=\count271
 
 *************************************
 * Local config file bblopts.cfg used
 *
-
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/arabi\bblopts.
-cfg
+(C:\Downloads\Miktex\tex/latex/arabi\bblopts.cfg
 File: bblopts.cfg 2005/09/08 v0.1 add Arabic and Farsi to "declared" options of
  babel
 )
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/babel-danish\d
-anish.ldf
+(C:\Downloads\Miktex\tex/latex/babel-danish\danish.ldf
 Language: danish 2021/02/06 v1.3s Danish support from the babel system
 Package babel Info: Making " an active character on input line 82.
 ))
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geome
-try.sty
+(C:\Downloads\Miktex\tex/latex/geometry\geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
 
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyva
-l.sty
+(C:\Downloads\Miktex\tex/latex/graphics\keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 \KV@toks@=\toks25
 )
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifvtex
-.sty
+(C:\Downloads\Miktex\tex/generic/iftex\ifvtex.sty
 Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.
-sty
+(C:\Downloads\Miktex\tex/generic/iftex\iftex.sty
 Package: iftex 2020/03/06 v1.0d TeX engine tests
 ))
-\Gm@cnth=\count271
-\Gm@cntv=\count272
-\c@Gm@tempcnt=\count273
+\Gm@cnth=\count272
+\Gm@cntv=\count273
+\c@Gm@tempcnt=\count274
 \Gm@bindingoffset=\dimen149
 \Gm@wd@mp=\dimen150
 \Gm@odd@mp=\dimen151
@@ -163,84 +142,67 @@ Package: iftex 2020/03/06 v1.0d TeX engine tests
 \Gm@layoutvoffset=\dimen156
 \Gm@dimlist=\toks26
 
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geome
-try.cfg))
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hyper
-ref.sty
+(C:\Downloads\Miktex\tex/latex/geometry\geometry.cfg))
+(C:\Downloads\Miktex\tex/latex/hyperref\hyperref.sty
 Package: hyperref 2021-06-07 v7.00m Hypertext links for LaTeX
 
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/generic/ltxcmds\ltxc
-mds.sty
+(C:\Downloads\Miktex\tex/generic/ltxcmds\ltxcmds.sty
 Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
 )
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/generic/pdftexcmds\p
-dftexcmds.sty
+(C:\Downloads\Miktex\tex/generic/pdftexcmds\pdftexcmds.sty
 Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
 )
 
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/generic/infwarerr\in
-fwarerr.sty
+(C:\Downloads\Miktex\tex/generic/infwarerr\infwarerr.sty
 Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
 )
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode found.
 )
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/generic/kvsetkeys\kv
-setkeys.sty
+(C:\Downloads\Miktex\tex/generic/kvsetkeys\kvsetkeys.sty
 Package: kvsetkeys 2019/12/15 v1.18 Key value parser (HO)
 )
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/generic/kvdefinekeys
-\kvdefinekeys.sty
+(C:\Downloads\Miktex\tex/generic/kvdefinekeys\kvdefinekeys.sty
 Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
 )
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/generic/pdfescape\pd
-fescape.sty
+(C:\Downloads\Miktex\tex/generic/pdfescape\pdfescape.sty
 Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
 )
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/hycolor\hycolo
-r.sty
+(C:\Downloads\Miktex\tex/latex/hycolor\hycolor.sty
 Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
 )
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/letltxmacro\le
-tltxmacro.sty
+(C:\Downloads\Miktex\tex/latex/letltxmacro\letltxmacro.sty
 Package: letltxmacro 2019/12/03 v1.6 Let assignment for LaTeX macros (HO)
 )
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/auxhook\auxhoo
-k.sty
+(C:\Downloads\Miktex\tex/latex/auxhook\auxhook.sty
 Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
 )
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\kvop
-tions.sty
+(C:\Downloads\Miktex\tex/latex/kvoptions\kvoptions.sty
 Package: kvoptions 2020-10-07 v3.14 Key value format for package options (HO)
 )
 \@linkdim=\dimen157
-\Hy@linkcounter=\count274
-\Hy@pagecounter=\count275
+\Hy@linkcounter=\count275
+\Hy@pagecounter=\count276
 
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\pd1en
-c.def
+(C:\Downloads\Miktex\tex/latex/hyperref\pd1enc.def
 File: pd1enc.def 2021-06-07 v7.00m Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
 )
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hyper
-ref-langpatches.def
+(C:\Downloads\Miktex\tex/latex/hyperref\hyperref-langpatches.def
 File: hyperref-langpatches.def 2021-06-07 v7.00m Hyperref: patches for babel la
 nguages
 )
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/generic/intcalc\intc
-alc.sty
+(C:\Downloads\Miktex\tex/generic/intcalc\intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 )
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/generic/etexcmds\ete
-xcmds.sty
+(C:\Downloads\Miktex\tex/generic/etexcmds\etexcmds.sty
 Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
 )
-\Hy@SavedSpaceFactor=\count276
+\Hy@SavedSpaceFactor=\count277
 
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\puenc
-.def
+(C:\Downloads\Miktex\tex/latex/hyperref\puenc.def
 File: puenc.def 2021-06-07 v7.00m Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
 ... no UTF-8 mapping file for font encoding PU
@@ -252,25 +214,23 @@ Package hyperref Info: Plain pages OFF on input line 4207.
 Package hyperref Info: Backreferencing OFF on input line 4212.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4445.
-\c@Hy@tempcnt=\count277
+\c@Hy@tempcnt=\count278
 
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty
+(C:\Downloads\Miktex\tex/latex/url\url.sty
 \Urlmuskip=\muskip17
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 LaTeX Info: Redefining \url on input line 4804.
 \XeTeXLinkMargin=\dimen158
 
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/generic/bitset\bitse
-t.sty
+(C:\Downloads\Miktex\tex/generic/bitset\bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
 
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/generic/bigintcalc\b
-igintcalc.sty
+(C:\Downloads\Miktex\tex/generic/bigintcalc\bigintcalc.sty
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
 )
 ))
-\Fld@menulength=\count278
+\Fld@menulength=\count279
 \Field@Width=\dimen159
 \Fld@charsize=\dimen160
 Package hyperref Info: Hyper figures OFF on input line 6076.
@@ -283,36 +243,31 @@ Package hyperref Info: PDF/A mode OFF on input line 6106.
 LaTeX Info: Redefining \ref on input line 6146.
 LaTeX Info: Redefining \pageref on input line 6150.
 
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/base\atbegshi-
-ltx.sty
+(C:\Downloads\Miktex\tex/latex/base\atbegshi-ltx.sty
 Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
 package with kernel methods
 )
-\Hy@abspage=\count279
-\c@Item=\count280
-\c@Hfootnote=\count281
+\Hy@abspage=\count280
+\c@Item=\count281
+\c@Hfootnote=\count282
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
 
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hpdft
-ex.def
+(C:\Downloads\Miktex\tex/latex/hyperref\hpdftex.def
 File: hpdftex.def 2021-06-07 v7.00m Hyperref driver for pdfTeX
 
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/base\atveryend
--ltx.sty
-Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atvery packag
-e
+(C:\Downloads\Miktex\tex/latex/base\atveryend-ltx.sty
+Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend pac
+kage
 with kernel methods
 )
-\Fld@listcount=\count282
-\c@bookmark@seq@number=\count283
+\Fld@listcount=\count283
+\c@bookmark@seq@number=\count284
 
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/rerunfilecheck
-\rerunfilecheck.sty
+(C:\Downloads\Miktex\tex/latex/rerunfilecheck\rerunfilecheck.sty
 Package: rerunfilecheck 2019/12/05 v1.9 Rerun checks for auxiliary files (HO)
 
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/generic/uniquecounte
-r\uniquecounter.sty
+(C:\Downloads\Miktex\tex/generic/uniquecounter\uniquecounter.sty
 Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 )
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
@@ -320,65 +275,55 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 \Hy@SectionHShift=\skip52
 )
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graph
-icx.sty
-Package: graphicx 2020/12/05 v1.2c Enhanced LaTeX Graphics (DPC,SPQR)
+(C:\Downloads\Miktex\tex/latex/graphics\graphicx.sty
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
 
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graph
-ics.sty
+(C:\Downloads\Miktex\tex/latex/graphics\graphics.sty
 Package: graphics 2021/03/04 v1.4d Standard LaTeX Graphics (DPC,SPQR)
 
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.
-sty
-Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+(C:\Downloads\Miktex\tex/latex/graphics\trig.sty
+Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
 )
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\g
-raphics.cfg
+(C:\Downloads\Miktex\tex/latex/graphics-cfg\graphics.cfg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 107.
 
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\p
-dftex.def
+(C:\Downloads\Miktex\tex/latex/graphics-def\pdftex.def
 File: pdftex.def 2020/10/05 v1.2a Graphics/color driver for pdftex
 ))
 \Gin@req@height=\dimen161
 \Gin@req@width=\dimen162
 )
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/listings\listi
-ngs.sty
-\lst@mode=\count284
+(C:\Downloads\Miktex\tex/latex/listings\listings.sty
+\lst@mode=\count285
 \lst@gtempboxa=\box54
 \lst@token=\toks27
-\lst@length=\count285
+\lst@length=\count286
 \lst@currlwidth=\dimen163
-\lst@column=\count286
-\lst@pos=\count287
+\lst@column=\count287
+\lst@pos=\count288
 \lst@lostspace=\dimen164
 \lst@width=\dimen165
-\lst@newlines=\count288
-\lst@lineno=\count289
+\lst@newlines=\count289
+\lst@lineno=\count290
 \lst@maxwidth=\dimen166
 
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstmi
-sc.sty
+(C:\Downloads\Miktex\tex/latex/listings\lstmisc.sty
 File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
-\c@lstnumber=\count290
-\lst@skipnumbers=\count291
+\c@lstnumber=\count291
+\lst@skipnumbers=\count292
 \lst@framebox=\box55
 )
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/listings\listi
-ngs.cfg
+(C:\Downloads\Miktex\tex/latex/listings\listings.cfg
 File: listings.cfg 2020/03/24 1.8d listings configuration
 ))
 Package: listings 2020/03/24 1.8d (Carsten Heinz)
 
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amssy
-mb.sty
+(C:\Downloads\Miktex\tex/latex/amsfonts\amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
 
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amsfo
-nts.sty
+(C:\Downloads\Miktex\tex/latex/amsfonts\amsfonts.sty
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
@@ -386,8 +331,7 @@ LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 ))
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/fourier\fourie
-r.sty
+(C:\Downloads\Miktex\tex/latex/fourier\fourier.sty
 Package: fourier 2020/03/03 2.2 fourier-GUTenberg package
 Now handling font encoding FML ...
 ... no UTF-8 mapping file for font encoding FML
@@ -396,22 +340,18 @@ Now handling font encoding FMS ...
 Now handling font encoding FMX ...
 ... no UTF-8 mapping file for font encoding FMX
 
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/base\fontenc.s
-ty
+(C:\Downloads\Miktex\tex/latex/base\fontenc.sty
 Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
 LaTeX Font Info:    Trying to load font information for T1+futs on input line 1
 12.
 
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/fourier\t1futs
-.fd
+(C:\Downloads\Miktex\tex/latex/fourier\t1futs.fd
 File: t1futs.fd 2004/03/02 Fontinst v1.926 font definitions for T1/futs.
 ))
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/base\textcomp.
-sty
+(C:\Downloads\Miktex\tex/latex/base\textcomp.sty
 Package: textcomp 2020/02/02 v2.0n Standard LaTeX package
 )
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/fourier\fourie
-r-orns.sty
+(C:\Downloads\Miktex\tex/latex/fourier\fourier-orns.sty
 Package: fourier-orns 2020/03/03 2.2 fourier-ornaments package
 )
 LaTeX Font Info:    Redeclaring symbol font `operators' on input line 63.
@@ -541,32 +481,30 @@ LaTeX Font Info:    Redeclaring math accent \dot on input line 268.
 LaTeX Font Info:    Redeclaring math accent \mathring on input line 269.
 \symUfutm=\mathgroup7
 )
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/mathtools\math
-tools.sty
+(C:\Downloads\Miktex\tex/latex/mathtools\mathtools.sty
 Package: mathtools 2021/04/12 v1.27 mathematical typesetting tools
 
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/tools\calc.sty
+(C:\Downloads\Miktex\tex/latex/tools\calc.sty
 Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count292
-\calc@Bcount=\count293
+\calc@Acount=\count293
+\calc@Bcount=\count294
 \calc@Adimen=\dimen167
 \calc@Bdimen=\dimen168
 \calc@Askip=\skip53
 \calc@Bskip=\skip54
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count294
+\calc@Ccount=\count295
 \calc@Cskip=\skip55
 )
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/mathtools\mhse
-tup.sty
+(C:\Downloads\Miktex\tex/latex/mathtools\mhsetup.sty
 Package: mhsetup 2021/03/18 v1.4 programming setup (MH)
 )
 LaTeX Info: Thecontrolsequence`\('isalreadyrobust on input line 130.
 LaTeX Info: Thecontrolsequence`\)'isalreadyrobust on input line 130.
 LaTeX Info: Thecontrolsequence`\['isalreadyrobust on input line 130.
 LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 130.
-\g_MT_multlinerow_int=\count295
+\g_MT_multlinerow_int=\count296
 \l_MT_multwidth_dim=\dimen169
 \origjot=\skip56
 \l_MT_shortvdotswithinadjustabove_dim=\dimen170
@@ -578,75 +516,86 @@ LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 130.
 \xmathstrut@box=\box56
 \xmathstrut@dim=\dimen176
 )
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/graphics\color
-.sty
-Package: color 2020/02/24 v1.2b Standard LaTeX Color (DPC)
+(C:\Downloads\Miktex\tex/latex/graphics\color.sty
+Package: color 2021/10/11 v1.3b Standard LaTeX Color (DPC)
 
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\c
-olor.cfg
+(C:\Downloads\Miktex\tex/latex/graphics-cfg\color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package color Info: Driver file: pdftex.def on input line 149.
 )
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3ba
-ckend-pdftex.def
+(C:\Downloads\Miktex\tex/latex/booktabs\booktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen177
+\lightrulewidth=\dimen178
+\cmidrulewidth=\dimen179
+\belowrulesep=\dimen180
+\belowbottomsep=\dimen181
+\aboverulesep=\dimen182
+\abovetopsep=\dimen183
+\cmidrulesep=\dimen184
+\cmidrulekern=\dimen185
+\defaultaddspace=\dimen186
+\@cmidla=\count297
+\@cmidlb=\count298
+\@aboverulesep=\dimen187
+\@belowrulesep=\dimen188
+\@thisruleclass=\count299
+\@lastruleclass=\count300
+\@thisrulewidth=\dimen189
+)
+(C:\Downloads\Miktex\tex/latex/l3backend\l3backend-pdftex.def
 File: l3backend-pdftex.def 2021-10-18 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count296
+\l__color_backend_stack_int=\count301
 \l__pdf_internal_box=\box57
 )
-(C:/Users\Mads Sørensen\OneDrive - Danmarks Tekniske Universitet\DTU\1. semest
-er\Versionsstyring og testmetoder\CDIO_20_del3\out\rapport.aux
-(C:/Users\Mads Sørensen\OneDrive - Danmarks Tekniske Universitet\DTU\1. semest
-er\Versionsstyring og testmetoder\CDIO_20_del3\out\Chapters/introduction.aux)
-(C:/Users\Mads Sørensen\OneDrive - Danmarks Tekniske Universitet\DTU\1. semest
-er\Versionsstyring og testmetoder\CDIO_20_del3\out\Chapters/requirements.aux))
+(C:/Downloads\CDIO_20_del3\out\rapport.aux
+(C:/Downloads\CDIO_20_del3\out\Chapters/introduction.aux)
+(C:/Downloads\CDIO_20_del3\out\Chapters/design.aux))
 \openout1 = `rapport.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for FML/futm/m/it on input line 28.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for FML/futm/m/it on input line 29.
 LaTeX Font Info:    Trying to load font information for FML+futm on input line 
-28.
+29.
 
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/fourier\fmlfut
-m.fd
+(C:\Downloads\Miktex\tex/latex/fourier\fmlfutm.fd
 File: fmlfutm.fd 2004/10/30 Fontinst v1.926 font definitions for FML/futm.
 )
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for FMS/futm/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for FMS/futm/m/n on input line 29.
 LaTeX Font Info:    Trying to load font information for FMS+futm on input line 
-28.
+29.
 
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/fourier\fmsfut
-m.fd
+(C:\Downloads\Miktex\tex/latex/fourier\fmsfutm.fd
 File: fmsfutm.fd 2004/10/30 Fontinst v1.926 font definitions for FMS/futm.
 )
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for FMX/futm/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for FMX/futm/m/n on input line 29.
 LaTeX Font Info:    Trying to load font information for FMX+futm on input line 
-28.
+29.
 
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/fourier\fmxfut
-m.fd
+(C:\Downloads\Miktex\tex/latex/fourier\fmxfutm.fd
 File: fmxfutm.fd futm-extension
 )
-LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    ... okay on input line 29.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -682,214 +631,177 @@ LaTeX Font Info:    ... okay on input line 28.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring OFF on input line 28.
-
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\namer
-ef.sty
+Package hyperref Info: Link coloring OFF on input line 29.
+(C:\Downloads\Miktex\tex/latex/hyperref\nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
 
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/refcount\refco
-unt.sty
+(C:\Downloads\Miktex\tex/latex/refcount\refcount.sty
 Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 )
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/generic/gettitlestri
-ng\gettitlestring.sty
+(C:\Downloads\Miktex\tex/generic/gettitlestring\gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count297
+\c@section@level=\count302
 )
-LaTeX Info: Redefining \ref on input line 28.
-LaTeX Info: Redefining \pageref on input line 28.
-LaTeX Info: Redefining \nameref on input line 28.
+LaTeX Info: Redefining \ref on input line 29.
+LaTeX Info: Redefining \pageref on input line 29.
+LaTeX Info: Redefining \nameref on input line 29.
 
-(C:/Users\Mads Sørensen\OneDrive - Danmarks Tekniske Universitet\DTU\1. semest
-er\Versionsstyring og testmetoder\CDIO_20_del3\out\rapport.out)
-(C:/Users\Mads Sørensen\OneDrive - Danmarks Tekniske Universitet\DTU\1. semest
-er\Versionsstyring og testmetoder\CDIO_20_del3\out\rapport.out)
+(C:/Downloads\CDIO_20_del3\out\rapport.out)
+(C:/Downloads\CDIO_20_del3\out\rapport.out)
 \@outlinefile=\write3
 \openout3 = `rapport.out'.
 
 
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\su
-pp-pdf.mkii
+(C:\Downloads\Miktex\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count298
-\scratchdimen=\dimen177
+\scratchcounter=\count303
+\scratchdimen=\dimen190
 \scratchbox=\box58
-\nofMPsegments=\count299
-\nofMParguments=\count300
+\nofMPsegments=\count304
+\nofMParguments=\count305
 \everyMPshowfont=\toks28
-\MPscratchCnt=\count301
-\MPscratchDim=\dimen178
-\MPnumerator=\count302
-\makeMPintoPDFobject=\count303
+\MPscratchCnt=\count306
+\MPscratchDim=\dimen191
+\MPnumerator=\count307
+\makeMPintoPDFobject=\count308
 \everyMPtoPDFconversion=\toks29
-)
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\e
-pstopdf-base.sty
+) (C:\Downloads\Miktex\tex/latex/epstopdf-pkg\epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 85.
 
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epsto
-pdf-sys.cfg
+(C:\Downloads\Miktex\tex/latex/00miktex\epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-\c@lstlisting=\count304
-LaTeX Font Info:    Redeclaring math accent \widehat on input line 28.
-LaTeX Font Info:    Redeclaring math accent \widetilde on input line 28.
+\c@lstlisting=\count309
+LaTeX Font Info:    Redeclaring math accent \widehat on input line 29.
+LaTeX Font Info:    Redeclaring math accent \widetilde on input line 29.
 
 
-rapport.tex:30: LaTeX Error: No \title given.
+rapport.tex:31: LaTeX Error: No \title given.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.30     \newpage
+l.31     \newpage
                  
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 LaTeX Font Info:    Trying to load font information for FML+futmi on input line
- 30.
-
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/fourier\fmlfut
-mi.fd
+ 31.
+(C:\Downloads\Miktex\tex/latex/fourier\fmlfutmi.fd
 File: fmlfutmi.fd 2004/10/30 Fontinst v1.926 font definitions for FML/futmi.
 )
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 11.03998pt on input line 30.
+(Font)              scaled to size 11.03998pt on input line 31.
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 8.27998pt on input line 30.
+(Font)              scaled to size 8.27998pt on input line 31.
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 6.43999pt on input line 30.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 30.
+(Font)              scaled to size 6.43999pt on input line 31.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 31.
 
 
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.
-fd
+(C:\Downloads\Miktex\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 30.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 31.
 
 
-(C:\Users\Mads Sørensen\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.
-fd
+(C:\Downloads\Miktex\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 11.03998pt on input line 30.
+(Font)              scaled to size 11.03998pt on input line 31.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 8.27998pt on input line 30.
+(Font)              scaled to size 8.27998pt on input line 31.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 6.43999pt on input line 30.
+(Font)              scaled to size 6.43999pt on input line 31.
  [1
 
-{C:/Users/Mads Sørensen/AppData/Local/MiKTeX/pdftex/config/pdftex.map}]
-(C:/Users\Mads Sørensen\OneDrive - Danmarks Tekniske Universitet\DTU\1. semest
-er\Versionsstyring og testmetoder\CDIO_20_del3\out\rapport.toc)
+{C:/Users/bertr/AppData/Local/MiKTeX/pdftex/config/pdftex.map}] (C:/Downloads\C
+DIO_20_del3\out\rapport.toc
+LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
+(Font)              scaled to size 9.19998pt on input line 5.
+LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
+(Font)              scaled to size 6.99199pt on input line 5.
+LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
+(Font)              scaled to size 5.51999pt on input line 5.
+LaTeX Font Info:    Font shape `U/futm/m/n' will be
+(Font)              scaled to size 9.19998pt on input line 5.
+LaTeX Font Info:    Font shape `U/futm/m/n' will be
+(Font)              scaled to size 6.99199pt on input line 5.
+LaTeX Font Info:    Font shape `U/futm/m/n' will be
+(Font)              scaled to size 5.51999pt on input line 5.
+)
 \tf@toc=\write4
 \openout4 = `rapport.toc'.
 
- [2] [3]
+[2] [3]
 \openout2 = `Chapters/introduction.aux'.
 
-
-(Chapters/introduction.tex) [4
-
-]
-\openout2 = `Chapters/requirements.aux'.
-
- (Chapters/requirements.tex
-LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 9.19998pt on input line 12.
-LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 6.99199pt on input line 12.
-LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 5.51999pt on input line 12.
-LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 9.19998pt on input line 12.
-LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 6.99199pt on input line 12.
-LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 5.51999pt on input line 12.
-
-Chapters/requirements.tex:18: Missing $ inserted.
-<inserted text> 
-                $
-l.18 ...   02 & Hver spiller skal starte med $35 &
-                                                   Høj\\
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-
-Overfull \hbox (1.37361pt too wide) in paragraph at lines 26--26
-[]\T1/futs/m/n/10 05A| 
- []
-
-
-Overfull \hbox (1.37361pt too wide) in paragraph at lines 29--29
-[]\T1/futs/m/n/10 06A| 
- []
-
-
-Overfull \hbox (1.37361pt too wide) in paragraph at lines 32--32
-[]\T1/futs/m/n/10 07A| 
- []
-
-
-Overfull \hbox (1.4736pt too wide) in paragraph at lines 33--33
-[]\T1/futs/m/n/10 07B| 
- []
-
-
-Overfull \hbox (1.82361pt too wide) in paragraph at lines 34--34
-[]\T1/futs/m/n/10 07C| 
- []
-
-
-Overfull \hbox (1.37361pt too wide) in paragraph at lines 55--55
-[]\T1/futs/m/n/10 17A| 
- []
-
-) [5
-
-
+ (Chapters/introduction.tex) [4
 
 ]
-(C:/Users\Mads Sørensen\OneDrive - Danmarks Tekniske Universitet\DTU\1. semest
-er\Versionsstyring og testmetoder\CDIO_20_del3\out\rapport.aux
-(C:/Users\Mads Sørensen\OneDrive - Danmarks Tekniske Universitet\DTU\1. semest
-er\Versionsstyring og testmetoder\CDIO_20_del3\out\Chapters/introduction.aux)
-(C:/Users\Mads Sørensen\OneDrive - Danmarks Tekniske Universitet\DTU\1. semest
-er\Versionsstyring og testmetoder\CDIO_20_del3\out\Chapters/requirements.aux))
+\openout2 = `Chapters/design.aux'.
 
-Package rerunfilecheck Warning: File `rapport.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
+ (Chapters/design.tex
+<figures/Design klasse diagram Game Board.png, id=83, 513.92pt x 383.4325pt>
+File: figures/Design klasse diagram Game Board.png Graphic file (type png)
+<use figures/Design klasse diagram Game Board.png>
+Package pdftex.def Info: figures/Design klasse diagram Game Board.png  used on 
+input line 4.
+(pdftex.def)             Requested size: 284.52756pt x 212.28683pt.
+<figures/Design klasse diagram fields.png, id=84, 233.87375pt x 513.92pt>
+File: figures/Design klasse diagram fields.png Graphic file (type png)
+<use figures/Design klasse diagram fields.png>
+Package pdftex.def Info: figures/Design klasse diagram fields.png  used on inpu
+t line 10.
+(pdftex.def)             Requested size: 142.26378pt x 312.62814pt.
+ [5
 
-Package rerunfilecheck Info: Checksums for `rapport.out':
-(rerunfilecheck)             Before: 6D2C13A763797106D85ECA5280AFFEEB;221
-(rerunfilecheck)             After:  F6B3317D10FDFCBA9AC70308D17E1697;357.
+
+
+ <./figures/Design klasse diagram Game Board.png>]
+<figures/Design klasse diagram Cup Die.png, id=90, 513.92pt x 214.8025pt>
+File: figures/Design klasse diagram Cup Die.png Graphic file (type png)
+<use figures/Design klasse diagram Cup Die.png>
+Package pdftex.def Info: figures/Design klasse diagram Cup Die.png  used on inp
+ut line 15.
+(pdftex.def)             Requested size: 284.52756pt x 118.92508pt.
+<figures/Design klasse diagram Board Player Account.png, id=91, 366.36874pt x 5
+13.92pt>
+File: figures/Design klasse diagram Board Player Account.png Graphic file (type
+ png)
+<use figures/Design klasse diagram Board Player Account.png>
+Package pdftex.def Info: figures/Design klasse diagram Board Player Account.png
+  used on input line 20.
+(pdftex.def)             Requested size: 284.52756pt x 399.13863pt.
+ [6 <./figures/Design klasse diagram fields.png> <./figures/Design klasse diagr
+am Cup Die.png>]) [7 <./figures/Design klasse diagram Board Player Account.png>
+] (C:/Downloads\CDIO_20_del3\out\rapport.aux
+(C:/Downloads\CDIO_20_del3\out\Chapters/introduction.aux)
+(C:/Downloads\CDIO_20_del3\out\Chapters/design.aux))
+Package rerunfilecheck Info: File `rapport.out' has not changed.
+(rerunfilecheck)             Checksum: C8D92259D15F58BF7E0DE9F7F7BA14B3;1410.
  ) 
 Here is how much of TeX's memory you used:
- 13051 strings out of 478907
- 200366 string characters out of 2847590
- 532818 words of memory out of 3000000
- 30688 multiletter control sequences out of 15000+600000
+ 13735 strings out of 478699
+ 215169 string characters out of 2858736
+ 518865 words of memory out of 3000000
+ 31555 multiletter control sequences out of 15000+600000
  472786 words of font info for 91 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,11n,66p,950b,346s stack positions out of 5000i,500n,10000p,200000b,80000s
-{C:/Users/Mads Sørensen/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8
-r.enc}<C:/Users/Mads Sørensen/AppData/Local/Programs/MiKTeX/fonts/type1/adobe/
-utopia/putb8a.pfb><C:/Users/Mads Sørensen/AppData/Local/Programs/MiKTeX/fonts/
-type1/adobe/utopia/putr8a.pfb>
-Output written on "C:/Users\Mads Sørensen\OneDrive - Danmarks Tekniske Univers
-itet\DTU\1. semester\Versionsstyring og testmetoder\CDIO_20_del3\out\rapport.pd
-f" (5 pages, 48657 bytes).
+ 60i,7n,63p,950b,346s stack positions out of 5000i,500n,10000p,200000b,80000s
+{C:/Downloads/Miktex/fonts/enc/dvips/base/8r.enc}<C:/Downloads/Miktex/fonts/t
+ype1/adobe/utopia/putb8a.pfb><C:/Downloads/Miktex/fonts/type1/adobe/utopia/putr
+8a.pfb>
+Output written on C:/Downloads\CDIO_20_del3\out\rapport.pdf (7 pages, 169545 by
+tes).
 PDF statistics:
- 60 PDF objects out of 1000 (max. 8388607)
- 16 named destinations out of 1000 (max. 500000)
- 17 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 123 PDF objects out of 1000 (max. 8388607)
+ 29 named destinations out of 1000 (max. 500000)
+ 109 words of extra memory for PDF output out of 10000 (max. 10000000)
 
