@@ -1,4 +1,12 @@
 \babel@toc {danish}{}\relax 
 \contentsline {section}{\numberline {1}Indledning}{4}{section.1}%
 \contentsline {section}{\numberline {2}Projektplanlægning}{4}{section.2}%
-\contentsline {section}{\numberline {3}Kravspecifikation}{5}{section.3}%
+\contentsline {section}{\numberline {3}Design}{5}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Designklassediagram}{5}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Sekvensdiagram}{7}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}GRASP}{7}{subsection.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.1}Creator}{7}{subsubsection.3.3.1}%
+\contentsline {subsubsection}{\numberline {3.3.2}Information Expert}{7}{subsubsection.3.3.2}%
+\contentsline {subsubsection}{\numberline {3.3.3}Low Coupling High Cohesion}{7}{subsubsection.3.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.4}Polymorphism}{7}{subsubsection.3.3.4}%
+\contentsline {subsubsection}{\numberline {3.3.5}Pure Fabrication}{7}{subsubsection.3.3.5}%
