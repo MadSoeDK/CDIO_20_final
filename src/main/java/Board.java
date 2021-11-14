@@ -4,7 +4,6 @@ import gui_main.GUI;
 import java.awt.*;
 
 public class Board {
-    GUI_Field field;
         GUI_Field[] fields = {
                 new GUI_Start(),
                 new GUI_Street(),
@@ -34,10 +33,10 @@ public class Board {
         };
 
         private GUI gui = new GUI(fields);
-        private int[] cards = new int[100];
+        private int[] cards = new int[10];
         private GUI_Player[] player = new GUI_Player[4];
 
-        void createPlayer() {
+    void createPlayer() {
             gui.showMessage("Hvor mange spillere?");
             int numberOfPlayers = gui.getUserInteger("Indtast et tal.");
 
@@ -58,14 +57,15 @@ public class Board {
             gui.getUserButtonPressed("spiller x tur", "Rul terning");
         }
         void movePlayer(int currentPlayer, int sum) {
+            fields[0].setCar(player[currentPlayer], false);
             fields[0 + sum].setCar(player[currentPlayer], true);
         }
-        GUI_Player getPlayer(GUI_Player[] player, int number) {
+        GUI_Player getPlayer(int number) {
             return player[number];
-        }/*
-        String getFields() {
-
         }
+        void check(int number) {
+
+        }/*
         void shuffleCard() {
 
         }

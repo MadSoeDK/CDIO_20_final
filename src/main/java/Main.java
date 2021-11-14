@@ -17,15 +17,17 @@ public class Main extends Board{
          */
         int sum = 0;
         int currentPlayer = 0;
+
         while(true) {
             board.button();
             cup.roll();
-
-            board.getPlayer(player, currentPlayer);
             sum = cup.getSum() + sum;
+
+            board.getPlayer(currentPlayer);
             board.movePlayer(currentPlayer, sum);
 
-            if(currentPlayer == 4) {
+
+            if(currentPlayer == 3) {
                 currentPlayer = 0;
             }
             currentPlayer++;
