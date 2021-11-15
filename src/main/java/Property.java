@@ -17,14 +17,14 @@ public class Property extends Field {
      * @param color
      * @param fieldType
      */
-    public Property(GUI_Street field, int rent, String name, Color color, int fieldType) {
+    public Property(GUI_Street field, int rent, String name, Color color) {
         field.setTitle(name);
         field.setBackGroundColor(color);
         field.setSubText("$" + rent);
         this.field = field;
         this.rent = rent;
         this.name = name;
-        this.fieldType = fieldType;
+        this.fieldType = 3;
     }
     @Override
     public String getName() {
