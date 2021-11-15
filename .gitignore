@@ -4,8 +4,10 @@
 .out/
 /target/classes/Chapters/
 /target/classes/figures/
+/target/classes/rapport.tex
 
 *.iml
 *.iws
 *.class
+
 
