@@ -1,11 +1,54 @@
 import gui_fields.*;
 import gui_main.GUI;
 
-import java.awt.*;
+import java.awt.Color;
 
 public class Board {
-        GUI_Field[] fields = {
+
+    private GUI_Field[] GUIfields;
+
+    private Field[] fields = {
+            new Property(new GUI_Street(),1, "Burgerbaren", Color.white, 3),
+            new Property(new GUI_Street(),1, "Burgerbaren", Color.white, 3),
+            new Property(new GUI_Street(),1, "Burgerbaren", Color.white, 3),
+            new Property(new GUI_Street(),1, "Burgerbaren", Color.white, 3),
+            new Property(new GUI_Street(),1, "Burgerbaren", Color.white, 3),
+            new Property(new GUI_Street(),1, "Burgerbaren", Color.white, 3),
+            new Property(new GUI_Street(),1, "Burgerbaren", Color.white, 3),
+            new Property(new GUI_Street(),1, "Burgerbaren", Color.white, 3),
+            new Property(new GUI_Street(),1, "Burgerbaren", Color.white, 3),
+            new Property(new GUI_Street(),1, "Burgerbaren", Color.white, 3),
+            new Property(new GUI_Street(),1, "Burgerbaren", Color.white, 3),
+            new Property(new GUI_Street(),1, "Burgerbaren", Color.white, 3),
+            new Property(new GUI_Street(),1, "Burgerbaren", Color.white, 3),
+            new Property(new GUI_Street(),1, "Burgerbaren", Color.white, 3),
+            new Property(new GUI_Street(),1, "Burgerbaren", Color.white, 3),
+            new Property(new GUI_Street(),1, "Burgerbaren", Color.white, 3),
+            new Property(new GUI_Street(),1, "Burgerbaren", Color.white, 3),
+            new Property(new GUI_Street(),1, "Burgerbaren", Color.white, 3),
+            new Property(new GUI_Street(),1, "Burgerbaren", Color.white, 3),
+            new Property(new GUI_Street(),1, "Burgerbaren", Color.white, 3),
+            new Property(new GUI_Street(),1, "Burgerbaren", Color.white, 3),
+            new Property(new GUI_Street(),1, "Burgerbaren", Color.white, 3),
+            new Property(new GUI_Street(),1, "Burgerbaren", Color.white, 3),
+            new Property(new GUI_Street(),1, "Burgerbaren", Color.white, 3),
+    };
+
+    public Board() {
+    }
+
+    public GUI_Field[] converter(Field[] fields) {
+        GUIfields = new GUI_Field[24];
+        for(int i = 0; i < GUIfields.length; i++) {
+            GUIfields[i] = fields[i].field;
+        }
+        return GUIfields;
+    }
+    private GUI gui = new GUI(converter(fields));
+
+        /*GUI_Field[] fields = {
                 new GUI_Start(),
+                new Property(new GUI_Street(),1, "Burgerbaren",3),
                 new GUI_Street(),
                 new GUI_Street(),
                 new GUI_Chance(),
@@ -29,9 +72,8 @@ public class Board {
                 new GUI_Chance(),
                 new GUI_Street(),
                 new GUI_Street(),
-        };
+        };*/
 
-        private GUI gui = new GUI(fields);
         private int[] cards = new int[10];
         private Player[] player;
 
@@ -55,7 +97,7 @@ public class Board {
                 gui.showMessage("Tilføj en spiller: ");
                 player[i] = new Player(gui.getUserString(""), 35);
                 gui.addPlayer(player[i].getPlayer());
-                fields[0].setCar(player[i].getPlayer(), true);
+                GUIfields[0].setCar(player[i].getPlayer(), true);
 
             }
         }
@@ -64,11 +106,11 @@ public class Board {
             gui.getUserButtonPressed("Nu er det " + player[currentPlayer].getName() + "'s tur, rul terningen!", "Rul terning");
         }
         void removePlayer(int currentPlayer, int sum, int placement) {
-            fields[placement].setCar(player[currentPlayer].getPlayer(), false);
+            GUIfields[placement].setCar(player[currentPlayer].getPlayer(), false);
         }
         void movePlayer(int currentPlayer, int sum, int placement) {
             //fields[placement + sum].setCar(player[currentPlayer].getPlayer(), true);
-            fields[placement].setCar(player[currentPlayer].getPlayer(), true);
+            GUIfields[placement].setCar(player[currentPlayer].getPlayer(), true);
         }
         void getDice(int sum) {
             gui.setDie(sum);
@@ -92,7 +134,7 @@ public class Board {
 
     /**
      * Sætter
-     */
+     *//*
     public Board() {
         //titler
         fields[0].setTitle("Start");
@@ -165,5 +207,5 @@ public class Board {
         fields[23].setTitle("$5");
 
 
-    }
+    }*/
 }
