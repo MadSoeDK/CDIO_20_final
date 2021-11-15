@@ -2,7 +2,10 @@
 .idea/
 .target/
 .out/
+/target/classes/Chapters/
+/target/classes/figures/
 
 *.iml
 *.iws
 *.class
+
