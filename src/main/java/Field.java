@@ -7,6 +7,7 @@ public abstract class Field {
     protected int fieldType;
     protected GUI_Field field;
     protected int rent;
+    protected Player owner;
 
     /*public Field(String name, int fieldType) {
 
@@ -15,5 +16,6 @@ public abstract class Field {
     public abstract String getName();
     public abstract int getType();
     public abstract int getRent();
+    public abstract void setOwner(Player owner);
 
 }

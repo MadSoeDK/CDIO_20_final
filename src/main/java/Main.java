@@ -39,12 +39,25 @@ public class Main extends Board{
 
             //Get field and switch fieldtype
             switch (board.getField(placement).fieldType) {
+                //Felt er ikke købt
                 case 3:
-                    //Felter er ikke købt
+                    //Subtract player balance from field rent
                     board.getPlayer(currentPlayer).setPlayerBalance(-board.getField(placement).getRent());
+
                     //Get the GUI-object and display the current player balance
                     board.getPlayer(currentPlayer).getPlayer().setBalance(board.getPlayer(currentPlayer).getPlayerBalance());
+
+                    // Set field owner
+                    board.getField(placement).setOwner(board.getPlayer(currentPlayer));
+
+                    // Set GUI Field
+                    GUI_Ownable ownable = (GUI_Ownable) board.getField(placement).field;
+                    ownable.setOwnerName(board.getPlayer(currentPlayer).getName());
+                    ownable.setBorder(Color.BLACK);
                     break;
+                case 4:
+
+
                 default:
                     System.out.println("Ikke genkendelig felttype");
             }
