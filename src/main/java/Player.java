@@ -6,11 +6,13 @@ public class Player {
     private String name;
     private GUI_Player player;
     private Account account;
+    private int playerindex = 0;
 
     public Player(String name, int balance) {
          account = new Account(balance);
          this.player = new GUI_Player(name, balance);
          this.name = name;
+         playerindex++;
     }
 
     public int getPlayerBalance() {
@@ -28,11 +30,16 @@ public class Player {
     public int getPlacement() {
         return placement;
     }
+
     public void setPlacement(int sum) {
         placement += sum;
     }
 
     public String getName() {
         return name;
+    }
+
+    public int getPlayerindex() {
+        return playerindex;
     }
 }

@@ -84,6 +84,7 @@ public class Board {
         void setDice(int sum) {
             gui.setDie(sum);
         }
+
         Player getPlayer(int number) {
             return player[number];
         }

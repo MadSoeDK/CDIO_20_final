@@ -54,10 +54,22 @@ public class Main extends Board{
                     GUI_Ownable ownable = (GUI_Ownable) board.getField(placement).field;
                     ownable.setOwnerName(board.getPlayer(currentPlayer).getName());
                     ownable.setBorder(Color.BLACK);
+
+                    //Update field type to purchased
+                    board.getField(placement).setFieldType(4);
                     break;
                 case 4:
+                    // get field owner
+                    Player fieldOwner = board.getField(placement).getOwner();
 
+                    // Subtract from currentplayer add to owner
+                    board.getPlayer(currentPlayer).setPlayerBalance(-board.getField(placement).getRent());
+                    board.getPlayer(fieldOwner.getPlayerindex()).setPlayerBalance(board.getField(placement).getRent());
 
+                    //Get the GUI-object and display the current player balance
+                    board.getPlayer(currentPlayer).getPlayer().setBalance(board.getPlayer(currentPlayer).getPlayerBalance());
+                    board.getPlayer(fieldOwner.getPlayerindex()).getPlayer().setBalance(board.getPlayer(fieldOwner.getPlayerindex()).getPlayerBalance());
+                    break;
                 default:
                     System.out.println("Ikke genkendelig felttype");
             }

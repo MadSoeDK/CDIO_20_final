@@ -45,6 +45,12 @@ public class Property extends Field {
     public void setOwner(Player player) {
         this.owner = player;
     }
+
+    @Override
+    public void setFieldType(int fieldType) {
+        this.fieldType = fieldType;
+    }
+
     public Player getOwner() {
         return owner;
     }
