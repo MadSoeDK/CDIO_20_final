@@ -5,12 +5,10 @@ import java.awt.*;
 
 public class Main extends Board{
     public static void main(String[] args) {
+
         Board board = new Board();
         board.newGame();
         Cup cup = new Cup();
-
-
-        Player[] players = board.getPlayers();
 
         int sum = 0;
         int currentPlayer = 0;
@@ -28,7 +26,8 @@ public class Main extends Board{
 
             board.removePlayer(currentPlayer, sum, placement);
 
-            board.getDice(sum);
+            board.setDice(sum);
+
             if(placement + sum >= 24) {
                 board.getPlayer(currentPlayer).setPlacement(sum - 24);
                 board.removePlayer(currentPlayer, sum, placement);
@@ -38,12 +37,22 @@ public class Main extends Board{
             placement = board.getPlayer(currentPlayer).getPlacement();
             board.movePlayer(currentPlayer, sum, placement);
 
+            //Get field and switch fieldtype
+            switch (board.getField(placement).fieldType) {
+                case 3:
+                    //Felter er ikke købt
+                    board.getPlayer(currentPlayer).setPlayerBalance(-3);
+                    break;
+                default:
+                    System.out.println("Ikke genkendelig felttype");
+            }
 
+            System.out.println(board.getPlayer(currentPlayer).getPlayerBalance());
             //board.getPlayer(currentPlayer).setPlayerBalance(board.getPlayer(currentPlayer).getPlayerBalance() - 3);
 
             currentPlayer++;
 
-            if(currentPlayer == players.length) {
+            if(currentPlayer == board.amountofPlayers()) {
                 currentPlayer = 0;
             }
 
