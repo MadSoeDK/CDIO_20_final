@@ -20,7 +20,7 @@ public class Main extends Board{
          */
 
         while(true) {
-            board.button();
+            board.button(currentPlayer);
             cup.roll();
             sum = cup.getSum();
 
@@ -28,9 +28,8 @@ public class Main extends Board{
 
             board.removePlayer(currentPlayer, sum, placement);
 
-            System.out.println(sum);
+            board.getDice(sum);
             if(placement + sum >= 24) {
-                //placement = placement + sum - 24;
                 board.getPlayer(currentPlayer).setPlacement(sum - 24);
                 board.removePlayer(currentPlayer, sum, placement);
                 sum = 0;
@@ -39,7 +38,8 @@ public class Main extends Board{
             placement = board.getPlayer(currentPlayer).getPlacement();
             board.movePlayer(currentPlayer, sum, placement);
 
-            board.getPlayer(currentPlayer).setPlayerBalance(board.getPlayer(currentPlayer).getPlayerBalance() - 3);
+
+            //board.getPlayer(currentPlayer).setPlayerBalance(board.getPlayer(currentPlayer).getPlayerBalance() - 3);
 
             currentPlayer++;
 

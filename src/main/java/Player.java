@@ -2,10 +2,10 @@ import gui_fields.GUI_Player;
 
 public class Player {
 
-    int placement;
-    String name;
-    GUI_Player player;
-    Account account;
+    private int placement;
+    private String name;
+    private GUI_Player player;
+    private Account account;
 
     public Player(String name, int balance) {
          account = new Account(balance);
@@ -30,5 +30,9 @@ public class Player {
     }
     public void setPlacement(int sum) {
         placement += sum;
+    }
+
+    public String getName() {
+        return name;
     }
 }
