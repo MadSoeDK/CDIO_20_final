@@ -41,7 +41,9 @@ public class Main extends Board{
             switch (board.getField(placement).fieldType) {
                 case 3:
                     //Felter er ikke købt
-                    board.getPlayer(currentPlayer).setPlayerBalance(-3);
+                    board.getPlayer(currentPlayer).setPlayerBalance(-board.getField(placement).getRent());
+                    //Get the GUI-object and display the current player balance
+                    board.getPlayer(currentPlayer).getPlayer().setBalance(board.getPlayer(currentPlayer).getPlayerBalance());
                     break;
                 default:
                     System.out.println("Ikke genkendelig felttype");

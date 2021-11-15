@@ -6,34 +6,35 @@ public class Board {
 
     private GUI_Field[] GUIfields;
     private GUI gui;
+    private int[] cards = new int[10];
+    private Player[] player;
 
     private Field[] fields = {
             new Property(new GUI_Street(),1, "Start", Color.WHITE),
             new Property(new GUI_Street(),1, "Burgerbaren", Color.GRAY),
             new Property(new GUI_Street(),1, "Pizzahuset", Color.GRAY),
             new Property(new GUI_Street(),1, "Chance", Color.WHITE),
-            new Property(new GUI_Street(),1, "Slikbutik", Color.CYAN),
-            new Property(new GUI_Street(),1, "Iskiosk", Color.CYAN),
+            new Property(new GUI_Street(),2, "Slikbutik", Color.CYAN),
+            new Property(new GUI_Street(),2, "Iskiosk", Color.CYAN),
             new Property(new GUI_Street(),1, "Fængsel", Color.WHITE),
-            new Property(new GUI_Street(),1, "Museeum", Color.PINK),
-            new Property(new GUI_Street(),1, "Bibliotek", Color.PINK),
+            new Property(new GUI_Street(),2, "Museeum", Color.PINK),
+            new Property(new GUI_Street(),2, "Bibliotek", Color.PINK),
             new Property(new GUI_Street(),1, "Chance", Color.WHITE),
-            new Property(new GUI_Street(),1, "Skateparken", Color.ORANGE),
-            new Property(new GUI_Street(),1, "Swimmingpool", Color.ORANGE),
+            new Property(new GUI_Street(),2, "Skateparken", Color.ORANGE),
+            new Property(new GUI_Street(),2, "Swimmingpool", Color.ORANGE),
             new Property(new GUI_Street(),1, "Fri parkering", Color.WHITE),
-            new Property(new GUI_Street(),1, "Spillehal", Color.RED),
-            new Property(new GUI_Street(),1, "Kinobiograf", Color.RED),
+            new Property(new GUI_Street(),3, "Spillehal", Color.RED),
+            new Property(new GUI_Street(),3, "Kinobiograf", Color.RED),
             new Property(new GUI_Street(),1, "Chance", Color.WHITE),
-            new Property(new GUI_Street(),1, "Legetøjsbutik", Color.YELLOW),
-            new Property(new GUI_Street(),1, "Dyrehandel", Color.YELLOW),
+            new Property(new GUI_Street(),3, "Legetøjsbutik", Color.YELLOW),
+            new Property(new GUI_Street(),3, "Dyrehandel", Color.YELLOW),
             new Property(new GUI_Street(),1, "Gå i fængsel", Color.WHITE),
-            new Property(new GUI_Street(),1, "Bowlinghal", Color.GREEN),
-            new Property(new GUI_Street(),1, "Zoologisk have", Color.GREEN),
+            new Property(new GUI_Street(),4, "Bowlinghal", Color.GREEN),
+            new Property(new GUI_Street(),4, "Zoologisk have", Color.GREEN),
             new Property(new GUI_Street(),1, "Chance", Color.WHITE),
-            new Property(new GUI_Street(),1, "Vandland", Color.BLUE),
-            new Property(new GUI_Street(),1, "Strandpromenade", Color.BLUE),
+            new Property(new GUI_Street(),5, "Vandland", Color.BLUE),
+            new Property(new GUI_Street(),5, "Strandpromenade", Color.BLUE),
     };
-
 
     public Board() {
         gui = new GUI(converter(fields));
@@ -46,8 +47,6 @@ public class Board {
         }
         return GUIfields;
     }
-        private int[] cards = new int[10];
-        private Player[] player;
 
         void newGame() {
             switch (gui.getUserSelection("How many players?", "2", "3", "4")) {
@@ -72,7 +71,6 @@ public class Board {
                 GUIfields[0].setCar(player[i].getPlayer(), true);
             }
         }
-
         void button(int currentPlayer) {
             gui.getUserButtonPressed("Nu er det " + player[currentPlayer].getName() + "'s tur, rul terningen!", "Rul terning");
         }
