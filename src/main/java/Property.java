@@ -6,21 +6,22 @@ import java.awt.Color;
  */
 public class Property extends Field {
     protected Color color;
-    protected int rent;
+    //protected int rent;
     protected Player owner;
 
     /**
-     *
+     * Constructor
      * @param field
      * @param rent
      * @param name
      * @param color
-     * @param fieldType
      */
     public Property(GUI_Street field, int rent, String name, Color color) {
+
         field.setTitle(name);
         field.setBackGroundColor(color);
         field.setSubText("$" + rent);
+
         this.field = field;
         this.rent = rent;
         this.name = name;
