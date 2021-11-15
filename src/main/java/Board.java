@@ -60,8 +60,8 @@ public class Board {
             }
         }
 
-        void button() {
-            gui.getUserButtonPressed("spiller x tur", "Rul terning");
+        void button(int currentPlayer) {
+            gui.getUserButtonPressed("Nu er det " + player[currentPlayer].getName() + "'s tur, rul terningen!", "Rul terning");
         }
         void removePlayer(int currentPlayer, int sum, int placement) {
             fields[placement].setCar(player[currentPlayer].getPlayer(), false);
@@ -70,7 +70,9 @@ public class Board {
             //fields[placement + sum].setCar(player[currentPlayer].getPlayer(), true);
             fields[placement].setCar(player[currentPlayer].getPlayer(), true);
         }
-
+        void getDice(int sum) {
+            gui.setDie(sum);
+        }
         Player getPlayer(int number) {
             return player[number];
         }
