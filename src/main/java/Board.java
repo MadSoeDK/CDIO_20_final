@@ -1,6 +1,5 @@
 import gui_fields.*;
 import gui_main.GUI;
-
 import java.awt.Color;
 
 public class Board {
@@ -8,31 +7,32 @@ public class Board {
     private GUI_Field[] GUIfields;
 
     private Field[] fields = {
-            new Property(new GUI_Street(),1, "Burgerbaren", Color.white, 3),
-            new Property(new GUI_Street(),1, "Burgerbaren", Color.white, 3),
-            new Property(new GUI_Street(),1, "Burgerbaren", Color.white, 3),
-            new Property(new GUI_Street(),1, "Burgerbaren", Color.white, 3),
-            new Property(new GUI_Street(),1, "Burgerbaren", Color.white, 3),
-            new Property(new GUI_Street(),1, "Burgerbaren", Color.white, 3),
-            new Property(new GUI_Street(),1, "Burgerbaren", Color.white, 3),
-            new Property(new GUI_Street(),1, "Burgerbaren", Color.white, 3),
-            new Property(new GUI_Street(),1, "Burgerbaren", Color.white, 3),
-            new Property(new GUI_Street(),1, "Burgerbaren", Color.white, 3),
-            new Property(new GUI_Street(),1, "Burgerbaren", Color.white, 3),
-            new Property(new GUI_Street(),1, "Burgerbaren", Color.white, 3),
-            new Property(new GUI_Street(),1, "Burgerbaren", Color.white, 3),
-            new Property(new GUI_Street(),1, "Burgerbaren", Color.white, 3),
-            new Property(new GUI_Street(),1, "Burgerbaren", Color.white, 3),
-            new Property(new GUI_Street(),1, "Burgerbaren", Color.white, 3),
-            new Property(new GUI_Street(),1, "Burgerbaren", Color.white, 3),
-            new Property(new GUI_Street(),1, "Burgerbaren", Color.white, 3),
-            new Property(new GUI_Street(),1, "Burgerbaren", Color.white, 3),
-            new Property(new GUI_Street(),1, "Burgerbaren", Color.white, 3),
-            new Property(new GUI_Street(),1, "Burgerbaren", Color.white, 3),
-            new Property(new GUI_Street(),1, "Burgerbaren", Color.white, 3),
-            new Property(new GUI_Street(),1, "Burgerbaren", Color.white, 3),
-            new Property(new GUI_Street(),1, "Burgerbaren", Color.white, 3),
+            new Property(new GUI_Street(),1, "Start", Color.WHITE, 3),
+            new Property(new GUI_Street(),1, "Burgerbaren", Color.GRAY, 3),
+            new Property(new GUI_Street(),1, "Pizzahuset", Color.GRAY, 3),
+            new Property(new GUI_Street(),1, "Chance", Color.WHITE, 3),
+            new Property(new GUI_Street(),1, "Slikbutik", Color.CYAN, 3),
+            new Property(new GUI_Street(),1, "Iskiosk", Color.CYAN, 3),
+            new Property(new GUI_Street(),1, "Fængsel", Color.WHITE, 3),
+            new Property(new GUI_Street(),1, "Museeum", Color.PINK, 3),
+            new Property(new GUI_Street(),1, "Bibliotek", Color.PINK, 3),
+            new Property(new GUI_Street(),1, "Chance", Color.WHITE, 3),
+            new Property(new GUI_Street(),1, "Skateparken", Color.ORANGE, 3),
+            new Property(new GUI_Street(),1, "Swimmingpool", Color.ORANGE, 3),
+            new Property(new GUI_Street(),1, "Fri parkering", Color.WHITE, 3),
+            new Property(new GUI_Street(),1, "Spillehal", Color.RED, 3),
+            new Property(new GUI_Street(),1, "Kinobiograf", Color.RED, 3),
+            new Property(new GUI_Street(),1, "Chance", Color.WHITE, 3),
+            new Property(new GUI_Street(),1, "Legetøjsbutik", Color.YELLOW, 3),
+            new Property(new GUI_Street(),1, "Dyrehandel", Color.YELLOW, 3),
+            new Property(new GUI_Street(),1, "Gå i fængsel", Color.WHITE, 3),
+            new Property(new GUI_Street(),1, "Bowlinghal", Color.GREEN, 3),
+            new Property(new GUI_Street(),1, "Zoologisk have", Color.GREEN, 3),
+            new Property(new GUI_Street(),1, "Chance", Color.WHITE, 3),
+            new Property(new GUI_Street(),1, "Vandland", Color.BLUE, 3),
+            new Property(new GUI_Street(),1, "Strandpromenade", Color.BLUE, 3),
     };
+
 
     public Board() {
     }
@@ -48,7 +48,6 @@ public class Board {
 
         /*GUI_Field[] fields = {
                 new GUI_Start(),
-                new Property(new GUI_Street(),1, "Burgerbaren",3),
                 new GUI_Street(),
                 new GUI_Street(),
                 new GUI_Chance(),
