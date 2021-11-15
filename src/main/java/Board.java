@@ -46,34 +46,6 @@ public class Board {
         }
         return GUIfields;
     }
-
-        /*GUI_Field[] fields = {
-                new GUI_Start(),
-                new GUI_Street(),
-                new GUI_Street(),
-                new GUI_Chance(),
-                new GUI_Street(),
-                new GUI_Street(),
-                new GUI_Jail(),
-                new GUI_Street(),
-                new GUI_Street(),
-                new GUI_Chance(),
-                new GUI_Street(),
-                new GUI_Street(),
-                new GUI_Tax(),
-                new GUI_Street(),
-                new GUI_Street(),
-                new GUI_Chance(),
-                new GUI_Street(),
-                new GUI_Street(),
-                new GUI_Jail(),
-                new GUI_Street(),
-                new GUI_Street(),
-                new GUI_Chance(),
-                new GUI_Street(),
-                new GUI_Street(),
-        };*/
-
         private int[] cards = new int[10];
         private Player[] player;
 
@@ -98,7 +70,6 @@ public class Board {
                 player[i] = new Player(gui.getUserString(""), 35);
                 gui.addPlayer(player[i].getPlayer());
                 GUIfields[0].setCar(player[i].getPlayer(), true);
-
             }
         }
 
@@ -112,7 +83,7 @@ public class Board {
             //fields[placement + sum].setCar(player[currentPlayer].getPlayer(), true);
             GUIfields[placement].setCar(player[currentPlayer].getPlayer(), true);
         }
-        void getDice(int sum) {
+        void setDice(int sum) {
             gui.setDie(sum);
         }
         Player getPlayer(int number) {
@@ -121,6 +92,15 @@ public class Board {
 
         Player[] getPlayers() {
             return player;
+        }
+        public Field[] getFields() {
+            return fields;
+        }
+        public Field getField(int placement) {
+            return fields[placement];
+        }
+        public int amountofPlayers() {
+            return player.length;
         }
         void check(int number) {
 
@@ -205,7 +185,32 @@ public class Board {
         fields[20].setTitle("$4");
         fields[22].setTitle("$5");
         fields[23].setTitle("$5");
-
-
     }*/
+
+          /*GUI_Field[] fields = {
+                new GUI_Start(),
+                new GUI_Street(),
+                new GUI_Street(),
+                new GUI_Chance(),
+                new GUI_Street(),
+                new GUI_Street(),
+                new GUI_Jail(),
+                new GUI_Street(),
+                new GUI_Street(),
+                new GUI_Chance(),
+                new GUI_Street(),
+                new GUI_Street(),
+                new GUI_Tax(),
+                new GUI_Street(),
+                new GUI_Street(),
+                new GUI_Chance(),
+                new GUI_Street(),
+                new GUI_Street(),
+                new GUI_Jail(),
+                new GUI_Street(),
+                new GUI_Street(),
+                new GUI_Chance(),
+                new GUI_Street(),
+                new GUI_Street(),
+        };*/
 }
