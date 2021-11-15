@@ -5,6 +5,7 @@ import java.awt.Color;
 public class Board {
 
     private GUI_Field[] GUIfields;
+    private GUI gui;
 
     private Field[] fields = {
             new Property(new GUI_Street(),1, "Start", Color.WHITE, 3),
@@ -35,6 +36,7 @@ public class Board {
 
 
     public Board() {
+        gui = new GUI(converter(fields));
     }
 
     public GUI_Field[] converter(Field[] fields) {
@@ -44,7 +46,6 @@ public class Board {
         }
         return GUIfields;
     }
-    private GUI gui = new GUI(converter(fields));
 
         /*GUI_Field[] fields = {
                 new GUI_Start(),
