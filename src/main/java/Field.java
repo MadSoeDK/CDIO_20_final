@@ -6,4 +6,11 @@ public abstract class Field {
     protected String name;
     protected int fieldType;
 
+    /*public Field(String name, int fieldType) {
+
+    }
+*/
+    public abstract String getName();
+    public abstract int getType();
+
 }
