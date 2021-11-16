@@ -24,18 +24,8 @@ public class Start extends Field {
     public int getType() {
         return fieldType;
     }
-
-    @Override
-    public void setOwner(Player player) {
-        this.owner = player;
-    }
-
     @Override
     public void setFieldType(int fieldType) {
         this.fieldType = fieldType;
-    }
-    @Override
-    public Player getOwner() {
-        return owner;
     }
 }

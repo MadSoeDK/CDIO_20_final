@@ -19,6 +19,6 @@ public abstract class Field {
     //public abstract int getRent();
     //public abstract void setOwner(Player owner);
     public abstract void setFieldType(int fieldType);
-    public abstract Player getOwner();
+    //public abstract Player getOwner();
 
 }

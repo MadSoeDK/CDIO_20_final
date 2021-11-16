@@ -31,7 +31,6 @@ public class Jail extends Field {
         this.fieldType = fieldType;
     }
 
-    @Override
     public Player getOwner() {
         return null;
     }
