@@ -32,6 +32,8 @@ public class Main extends Board{
                 board.getPlayer(currentPlayer).setPlacement(sum - 24);
                 board.removePlayer(currentPlayer, sum, placement);
                 sum = 0;
+                // Pass Start field
+                board.getPlayer(currentPlayer).setPlayerBalance(+2);
             }
             board.getPlayer(currentPlayer).setPlacement(sum);
             placement = board.getPlayer(currentPlayer).getPlacement();

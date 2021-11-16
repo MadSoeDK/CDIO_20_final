@@ -11,7 +11,7 @@ public class Board {
     private Color[] colors = {Color.green, Color.BLUE, Color.ORANGE, Color.RED};
 
     private Field[] fields = {
-            new Property(new GUI_Street(),1, "Start", Color.WHITE),
+            new Start(new GUI_Start(),"Start", Color.WHITE, "Startfeltet"),
             new Property(new GUI_Street(),1, "Burgerbaren", Color.GRAY),
             new Property(new GUI_Street(),1, "Pizzahuset", Color.GRAY),
             new Property(new GUI_Street(),1, "Chance", Color.WHITE),

@@ -1,3 +1,4 @@
+import gui_fields.GUI_Car;
 import gui_fields.GUI_Player;
 import java.awt.Color;
 public class Player {
@@ -11,7 +12,7 @@ public class Player {
 
     public Player(String name, int balance, Color color) {
          account = new Account(balance);
-         this.player = new GUI_Player(name, balance);
+         this.player = new GUI_Player(name, balance, new GUI_Car(color,color, GUI_Car.Type.CAR, GUI_Car.Pattern.FILL));
          this.name = name;
          this.color = color;
          playerindex++;

@@ -6,8 +6,8 @@ import java.awt.Color;
  */
 public class Property extends Field {
     protected Color color;
-    //protected int rent;
-    //protected Player owner;
+    protected int rent;
+    protected Player owner;
 
     /**
      * Constructor
@@ -40,8 +40,6 @@ public class Property extends Field {
     public int getRent() {
         return rent;
     }
-
-    @Override
     public void setOwner(Player player) {
         this.owner = player;
     }
