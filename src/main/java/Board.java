@@ -75,10 +75,10 @@ public class Board {
         void button(int currentPlayer) {
             gui.getUserButtonPressed("Nu er det " + player[currentPlayer].getName() + "'s tur, rul terningen!", "Rul terning");
         }
-        void removePlayer(int currentPlayer, int sum, int placement) {
+        void removePlayer(int currentPlayer, int placement) {
             GUIfields[placement].setCar(player[currentPlayer].getPlayer(), false);
         }
-        void movePlayer(int currentPlayer, int sum, int placement) {
+        void movePlayer(int currentPlayer, int placement) {
             //fields[placement + sum].setCar(player[currentPlayer].getPlayer(), true);
             GUIfields[placement].setCar(player[currentPlayer].getPlayer(), true);
         }
