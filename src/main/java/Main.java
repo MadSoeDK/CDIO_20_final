@@ -39,9 +39,52 @@ public class Main extends Board{
             placement = board.getPlayer(currentPlayer).getPlacement();
             board.movePlayer(currentPlayer, sum, placement);
 
-            System.out.println(board.getField(placement).fieldType);
+            //System.out.println(board.getField(placement).fieldType);
             //Get field and switch fieldtype
-            switch (board.getField(placement).fieldType) {
+
+
+            Field field = board.getField(placement);
+
+
+            if (field instanceof Property) {
+
+                Property property = (Property) field;
+
+                // Purchased
+                if (property.getOwner() != null) {
+
+                    // get field owner
+                    Player fieldOwner = property.getOwner();
+
+                    // Subtract from currentplayer add to owner
+                    board.getPlayer(currentPlayer).setPlayerBalance(-property.getRent());
+                    board.getPlayer(fieldOwner.getPlayerindex()).setPlayerBalance(property.getRent());
+
+                    //Get the GUI-object and display the current player balance
+                    board.getPlayer(currentPlayer).getPlayer().setBalance(board.getPlayer(currentPlayer).getPlayerBalance());
+                    board.getPlayer(fieldOwner.getPlayerindex()).getPlayer().setBalance(board.getPlayer(fieldOwner.getPlayerindex()).getPlayerBalance());
+
+                } else {
+                    // Not purchased
+                    // Subtract player balance from Property rent
+                    board.getPlayer(currentPlayer).setPlayerBalance(property.getRent());
+
+                    //Get the GUI-object and display the current player balance
+                    board.getPlayer(currentPlayer).getPlayer().setBalance(property.getRent());
+
+                    // Set Property owner
+                    property.setOwner(board.getPlayer(currentPlayer));
+
+                    // Set GUI Field
+                    GUI_Ownable ownable = (GUI_Ownable) board.getField(placement).field;
+                    ownable.setOwnerName(board.getPlayer(currentPlayer).getName());
+                    ownable.setBorder(Color.BLACK);
+                }
+
+
+            }
+
+            /*switch (board.getField(placement).fieldType) {
                 //Felt er ikke købt
                 case 3:
                     //Subtract player balance from field rent
@@ -76,10 +119,7 @@ public class Main extends Board{
                     break;
                 default:
                     System.out.println("Ikke genkendelig felttype");
-            }
-
-            System.out.println(board.getPlayer(currentPlayer).getPlayerBalance());
-            //board.getPlayer(currentPlayer).setPlayerBalance(board.getPlayer(currentPlayer).getPlayerBalance() - 3);
+            }*/
 
             currentPlayer++;
 
