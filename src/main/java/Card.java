@@ -1,2 +1,2 @@
-public class Card {
+public class Card {//
 }
