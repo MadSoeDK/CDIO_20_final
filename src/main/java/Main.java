@@ -33,6 +33,7 @@ public class Main extends Board{
                 board.removePlayer(currentPlayer, sum, placement);
                 sum = 0;
             }
+
             board.getPlayer(currentPlayer).setPlacement(sum);
             placement = board.getPlayer(currentPlayer).getPlacement();
             board.movePlayer(currentPlayer, sum, placement);

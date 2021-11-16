@@ -11,3 +11,12 @@
 *.class
 
 
+/out/Chapters/analyse.aux
+/out/Chapters/design.aux
+/out/Chapters/introduction.aux
+/out/rapport.aux
+/out/rapport.log
+/out/rapport.out
+/out/rapport.pdf
+/out/rapport.synctex.gz
+/out/rapport.toc
