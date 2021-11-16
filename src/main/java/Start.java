@@ -4,7 +4,6 @@ import gui_fields.GUI_Street;
 import java.awt.*;
 
 public class Start extends Field {
-
     public Start(GUI_Start field, String name, Color color, String description) {
         field.setTitle(name);
         field.setBackGroundColor(color);

@@ -17,7 +17,6 @@ public class Property extends Field {
      * @param color
      */
     public Property(GUI_Street field, int rent, String name, Color color/*, String description*/) {
-
         field.setTitle(name);
         field.setBackGroundColor(color);
         field.setSubText("$" + rent);
