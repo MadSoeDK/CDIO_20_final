@@ -8,6 +8,7 @@ public class Board {
     private GUI gui;
     private int[] cards = new int[10];
     private Player[] player;
+    private Color[] colors = {Color.green, Color.BLUE, Color.ORANGE, Color.RED};
 
     private Field[] fields = {
             new Property(new GUI_Street(),1, "Start", Color.WHITE),
@@ -66,7 +67,7 @@ public class Board {
             player = new Player[n];
             for(int i = 0; i < n; i++) {
                 gui.showMessage("Tilføj en spiller: ");
-                player[i] = new Player(gui.getUserString(""), 35);
+                player[i] = new Player(gui.getUserString(""), 35, colors[i]);
                 gui.addPlayer(player[i].getPlayer());
                 GUIfields[0].setCar(player[i].getPlayer(), true);
             }

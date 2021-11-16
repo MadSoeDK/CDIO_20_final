@@ -8,6 +8,7 @@ public abstract class Field {
     protected GUI_Field field;
     protected int rent;
     protected Player owner;
+    protected String description;
 
     /*public Field(String name, int fieldType) {
 

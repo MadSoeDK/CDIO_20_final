@@ -20,7 +20,7 @@ public class Main extends Board{
         while(true) {
             board.button(currentPlayer);
             cup.roll();
-            sum = cup.getSum();
+            sum = 2;//cup.getSum();
 
             int placement = board.getPlayer(currentPlayer).getPlacement();
 
@@ -37,6 +37,7 @@ public class Main extends Board{
             placement = board.getPlayer(currentPlayer).getPlacement();
             board.movePlayer(currentPlayer, sum, placement);
 
+            System.out.println(board.getField(placement).fieldType);
             //Get field and switch fieldtype
             switch (board.getField(placement).fieldType) {
                 //Felt er ikke købt
@@ -58,6 +59,7 @@ public class Main extends Board{
                     //Update field type to purchased
                     board.getField(placement).setFieldType(4);
                     break;
+                //Feltet er købt
                 case 4:
                     // get field owner
                     Player fieldOwner = board.getField(placement).getOwner();
