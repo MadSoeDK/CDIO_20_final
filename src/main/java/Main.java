@@ -50,27 +50,63 @@ public class Main extends Board{
 
                 Property property = (Property) field;
 
-                // Purchased
-                if (property.getOwner() != null) {
-
+                // Someone is the owner
+                if (property.getOwner() != board.getPlayer(currentPlayer) && property.getOwner() != null) {
                     // get field owner
                     Player fieldOwner = property.getOwner();
 
-                    // Subtract from currentplayer add to owner
+                    // 1. Subtract from currentplayer 2. add to owner
                     board.getPlayer(currentPlayer).setPlayerBalance(-property.getRent());
-                    board.getPlayer(fieldOwner.getPlayerindex()).setPlayerBalance(property.getRent());
+                    fieldOwner.setPlayerBalance(property.getRent());
+
+                    //Update GUI-object and display the current player balance
+                    board.getPlayer(currentPlayer).getPlayer().setBalance(board.getPlayer(currentPlayer).getPlayerBalance());
+                    fieldOwner.getPlayer().setBalance(fieldOwner.getPlayerBalance());
+                }
+
+                // No one owns the Property
+                if (property.getOwner() == null) {
+                    // Subtract player balance from Property rent
+                    board.getPlayer(currentPlayer).setPlayerBalance(-property.getRent());
 
                     //Get the GUI-object and display the current player balance
                     board.getPlayer(currentPlayer).getPlayer().setBalance(board.getPlayer(currentPlayer).getPlayerBalance());
-                    board.getPlayer(fieldOwner.getPlayerindex()).getPlayer().setBalance(board.getPlayer(fieldOwner.getPlayerindex()).getPlayerBalance());
+
+                    // Set Property owner
+                    property.setOwner(board.getPlayer(currentPlayer));
+
+                    // Set GUI Field
+                    GUI_Ownable ownable = (GUI_Ownable) board.getField(placement).field;
+                    ownable.setOwnerName(board.getPlayer(currentPlayer).getName());
+                    ownable.setBorder(Color.BLACK);
+                }
+            }
+
+                // You are the owner
+                /*
+                if (property.getOwner() == board.getPlayer(currentPlayer)) {
+                    break;
+
+                    // You are not the owner!
+                } else if (property.getOwner() != board.getPlayer(currentPlayer)) {
+                    // get field owner
+                    Player fieldOwner = property.getOwner();
+
+                    // 1. Subtract from currentplayer 2. add to owner
+                    board.getPlayer(currentPlayer).setPlayerBalance(-property.getRent());
+                    fieldOwner.setPlayerBalance(property.getRent());
+
+                    //Get the GUI-object and display the current player balance
+                    board.getPlayer(currentPlayer).getPlayer().setBalance(board.getPlayer(currentPlayer).getPlayerBalance());
+                    fieldOwner.getPlayer().setBalance(board.getPlayer(fieldOwner.getPlayerindex()).getPlayerBalance());
 
                 } else {
                     // Not purchased
                     // Subtract player balance from Property rent
-                    board.getPlayer(currentPlayer).setPlayerBalance(property.getRent());
+                    board.getPlayer(currentPlayer).setPlayerBalance(-property.getRent());
 
                     //Get the GUI-object and display the current player balance
-                    board.getPlayer(currentPlayer).getPlayer().setBalance(property.getRent());
+                    board.getPlayer(currentPlayer).getPlayer().setBalance(board.getPlayer(currentPlayer).getPlayerBalance());
 
                     // Set Property owner
                     property.setOwner(board.getPlayer(currentPlayer));
@@ -82,7 +118,7 @@ public class Main extends Board{
                 }
 
 
-            }
+            }*/
 
             /*switch (board.getField(placement).fieldType) {
                 //Felt er ikke købt
