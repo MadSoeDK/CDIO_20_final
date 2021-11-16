@@ -88,6 +88,22 @@ public class Main extends Board{
                 }
             }
 
+            if (field instanceof Jail) {
+
+                // Typecast to Property
+                Jail jail = (Jail) field;
+
+                // Subtract player balance from Property rent
+                player.setPlayerBalance(jail.getRent());
+
+                // Move to Jail field
+                player.setPlacement(6);
+
+                // Update GUI with new placement
+                board.movePlayer(currentPlayer, placement);
+
+            }
+
             currentPlayer++;
 
             if(currentPlayer == board.amountofPlayers()) {

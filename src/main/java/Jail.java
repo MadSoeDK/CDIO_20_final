@@ -4,15 +4,22 @@ import java.awt.Color;
 
 public class Jail extends Field {
 
-    public Jail(GUI_Jail field, String name, Color color) {
+    protected int rent;
+
+    public Jail(GUI_Jail field, int rent, String name, Color color) {
 
         field.setTitle(name);
         field.setBackGroundColor(color);
-        field.setDescription("Gå i fængsel");
-        field.setSubText("Gå i fængsel");
+        field.setDescription(name);
+        field.setSubText(name);
 
         this.field = field;
         this.name = name;
+        this.rent = rent;
+    }
+
+    public int getRent() {
+        return rent;
     }
 
     @Override

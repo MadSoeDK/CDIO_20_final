@@ -7,7 +7,7 @@ import java.awt.Color;
 public class Property extends Field {
 
     protected int rent;
-    public Player owner;
+    protected Player owner;
 
     /**
      * Constructor
