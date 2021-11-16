@@ -7,7 +7,6 @@ public class Player {
     private String name;
     private GUI_Player player;
     private Account account;
-    private int playerindex;
     private Color color;
 
     public Player(String name, int balance, Color color) {
@@ -15,8 +14,6 @@ public class Player {
          this.player = new GUI_Player(name, balance, new GUI_Car(color,color, GUI_Car.Type.CAR, GUI_Car.Pattern.FILL));
          this.name = name;
          this.color = color;
-         playerindex = 0;
-         playerindex++;
     }
 
     public int getPlayerBalance() {
@@ -43,7 +40,4 @@ public class Player {
         return name;
     }
 
-    public int getPlayerindex() {
-        return playerindex;
-    }
 }
