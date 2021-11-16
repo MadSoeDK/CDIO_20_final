@@ -28,7 +28,7 @@ public class Board {
             new Property(new GUI_Street(),1, "Chance", Color.WHITE),
             new Property(new GUI_Street(),3, "Legetøjsbutik", Color.YELLOW),
             new Property(new GUI_Street(),3, "Dyrehandel", Color.YELLOW),
-            new Property(new GUI_Street(),1, "Gå i fængsel", Color.WHITE),
+            new Jail(new GUI_Jail(), "Gå i fængsel", Color.WHITE),
             new Property(new GUI_Street(),4, "Bowlinghal", Color.GREEN),
             new Property(new GUI_Street(),4, "Zoologisk have", Color.GREEN),
             new Property(new GUI_Street(),1, "Chance", Color.WHITE),
@@ -60,6 +60,7 @@ public class Board {
                 break;
         }
     }
+
     public void createPlayer(int n) {
         player = new Player[n];
         for(int i = 0; i < n; i++) {
@@ -69,6 +70,7 @@ public class Board {
             GUIfields[0].setCar(player[i].getPlayer(), true);
         }
     }
+
     public void button(int currentPlayer) {
         gui.getUserButtonPressed("Nu er det " + player[currentPlayer].getName() + "'s tur, rul terningen!", "Rul terning");
     }

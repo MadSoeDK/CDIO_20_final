@@ -1,6 +1,5 @@
 import gui_fields.*;
-import gui_main.GUI;
-import javax.swing.*;
+
 import java.awt.*;
 
 public class Main extends Board{
