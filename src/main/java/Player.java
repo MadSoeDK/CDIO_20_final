@@ -38,5 +38,8 @@ public class Player {
     public String getName() {
         return name;
     }
+    public Color getPlayerColor() {
+        return player.getPrimaryColor();
+    }
 
 }

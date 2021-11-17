@@ -84,7 +84,7 @@ public class Main extends Board{
                     // Set GUI Field
                     GUI_Ownable ownable = (GUI_Ownable) board.getField(placement).field;
                     ownable.setOwnerName(player.getName());
-                    ownable.setBorder(Color.BLACK);
+                    ownable.setBorder(player.getPlayerColor());
                 }
             }
 
