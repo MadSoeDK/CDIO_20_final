@@ -11,8 +11,6 @@ public class ChanceField extends Field {
 
         this.field = field;
         this.name = name;
-        this.fieldType = 3;
     }
-
 
 }
