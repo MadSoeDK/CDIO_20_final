@@ -5,7 +5,7 @@ import java.awt.Color;
  *
  */
 public class Property extends Field {
-    protected Color color;
+
     protected int rent;
     protected Player owner;
 
@@ -25,16 +25,10 @@ public class Property extends Field {
         this.field = field;
         this.rent = rent;
         this.name = name;
-        this.fieldType = 3;
     }
     @Override
     public String getName() {
         return name;
-    }
-
-    @Override
-    public int getType() {
-        return fieldType;
     }
     public int getRent() {
         return rent;
@@ -42,13 +36,8 @@ public class Property extends Field {
     public void setOwner(Player player) {
         this.owner = player;
     }
-    @Override
-    public void setFieldType(int fieldType) {
-        this.fieldType = fieldType;
-    }
     public Player getOwner() {
         return owner;
     }
-
 
 }

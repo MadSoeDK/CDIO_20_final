@@ -1,11 +1,10 @@
 import gui_fields.*;
-import gui_main.GUI;
-import javax.swing.*;
+
 import java.awt.*;
 
 public class Main extends Board{
-    public static void main(String[] args) {
 
+    public static void main(String[] args) {
         Board board = new Board();
         board.newGame();
         Cup cup = new Cup();
@@ -13,113 +12,97 @@ public class Main extends Board{
         int sum = 0;
         int currentPlayer = 0;
 
-        /**
-         * Game logik
-         */
-
+        // Game loop
         while(true) {
             board.button(currentPlayer);
             cup.roll();
-            sum = 2;//cup.getSum();
+            sum = cup.getSum();
 
-            int placement = board.getPlayer(currentPlayer).getPlacement();
+            // Get Player pre-turn information
+            Player player = board.getPlayer(currentPlayer);
+            int placement = player.getPlacement();
 
-            board.removePlayer(currentPlayer, sum, placement);
+            // Remove player from board
+            board.removePlayer(currentPlayer, placement);
 
+            // Display dice roll on GUI
             board.setDice(sum);
 
+            // Check for a complete round on board. Then recalibrate player placement
             if(placement + sum >= 24) {
-                board.getPlayer(currentPlayer).setPlacement(sum - 24);
-                board.removePlayer(currentPlayer, sum, placement);
+                player.setPlacement(sum - 24);
+                board.removePlayer(currentPlayer, placement);
                 sum = 0;
-                // Pass Start field
-                board.getPlayer(currentPlayer).setPlayerBalance(+2);
+
+                // Pass Start field and gain $2
+                player.setPlayerBalance(2);
             }
-            board.getPlayer(currentPlayer).setPlacement(sum);
-            placement = board.getPlayer(currentPlayer).getPlacement();
-            board.movePlayer(currentPlayer, sum, placement);
 
-            //System.out.println(board.getField(placement).fieldType);
-            //Get field and switch fieldtype
+            // Set new placement incremented by dice. Then get the new placement.
+            player.setPlacement(sum);
+            placement = player.getPlacement();
 
+            // Update GUI with new placement
+            board.movePlayer(currentPlayer, placement);
 
             Field field = board.getField(placement);
 
-
+            // Check field type
             if (field instanceof Property) {
 
+                // Typecast to Property
                 Property property = (Property) field;
 
-                // Purchased
-                if (property.getOwner() != null) {
+                // Field is owned by another player and it's not the current player
+                if (property.getOwner() != player && property.getOwner() != null) {
 
-                    // get field owner
+                    // Get field owner
                     Player fieldOwner = property.getOwner();
 
-                    // Subtract from currentplayer add to owner
-                    board.getPlayer(currentPlayer).setPlayerBalance(-property.getRent());
-                    board.getPlayer(fieldOwner.getPlayerindex()).setPlayerBalance(property.getRent());
+                    // 1. Subtract rent from current player 2. add to field owner
+                    player.setPlayerBalance(-property.getRent());
+                    fieldOwner.setPlayerBalance(property.getRent());
 
-                    //Get the GUI-object and display the current player balance
+                    //Update GUI-object and display the current player balance
                     board.getPlayer(currentPlayer).getPlayer().setBalance(board.getPlayer(currentPlayer).getPlayerBalance());
-                    board.getPlayer(fieldOwner.getPlayerindex()).getPlayer().setBalance(board.getPlayer(fieldOwner.getPlayerindex()).getPlayerBalance());
+                    fieldOwner.getPlayer().setBalance(fieldOwner.getPlayerBalance());
 
-                } else {
-                    // Not purchased
-                    // Subtract player balance from Property rent
-                    board.getPlayer(currentPlayer).setPlayerBalance(property.getRent());
-
-                    //Get the GUI-object and display the current player balance
-                    board.getPlayer(currentPlayer).getPlayer().setBalance(property.getRent());
-
-                    // Set Property owner
-                    property.setOwner(board.getPlayer(currentPlayer));
-
-                    // Set GUI Field
-                    GUI_Ownable ownable = (GUI_Ownable) board.getField(placement).field;
-                    ownable.setOwnerName(board.getPlayer(currentPlayer).getName());
-                    ownable.setBorder(Color.BLACK);
                 }
 
+                // No one owns the Property
+                if (property.getOwner() == null) {
 
-            }
-
-            /*switch (board.getField(placement).fieldType) {
-                //Felt er ikke købt
-                case 3:
-                    //Subtract player balance from field rent
-                    board.getPlayer(currentPlayer).setPlayerBalance(-board.getField(placement).getRent());
+                    // Subtract player balance from Property rent
+                    player.setPlayerBalance(-property.getRent());
 
                     //Get the GUI-object and display the current player balance
-                    board.getPlayer(currentPlayer).getPlayer().setBalance(board.getPlayer(currentPlayer).getPlayerBalance());
+                    player.getPlayer().setBalance(player.getPlayerBalance());
 
-                    // Set field owner
-                    board.getField(placement).setOwner(board.getPlayer(currentPlayer));
+                    // Set Property owner
+                    property.setOwner(player);
 
                     // Set GUI Field
                     GUI_Ownable ownable = (GUI_Ownable) board.getField(placement).field;
-                    ownable.setOwnerName(board.getPlayer(currentPlayer).getName());
+                    ownable.setOwnerName(player.getName());
                     ownable.setBorder(Color.BLACK);
+                }
+            }
 
-                    //Update field type to purchased
-                    board.getField(placement).setFieldType(4);
-                    break;
-                //Feltet er købt
-                case 4:
-                    // get field owner
-                    Player fieldOwner = board.getField(placement).getOwner();
+            if (field instanceof Jail) {
 
-                    // Subtract from currentplayer add to owner
-                    board.getPlayer(currentPlayer).setPlayerBalance(-board.getField(placement).getRent());
-                    board.getPlayer(fieldOwner.getPlayerindex()).setPlayerBalance(board.getField(placement).getRent());
+                // Typecast to Property
+                Jail jail = (Jail) field;
 
-                    //Get the GUI-object and display the current player balance
-                    board.getPlayer(currentPlayer).getPlayer().setBalance(board.getPlayer(currentPlayer).getPlayerBalance());
-                    board.getPlayer(fieldOwner.getPlayerindex()).getPlayer().setBalance(board.getPlayer(fieldOwner.getPlayerindex()).getPlayerBalance());
-                    break;
-                default:
-                    System.out.println("Ikke genkendelig felttype");
-            }*/
+                // Subtract player balance from Property rent
+                player.setPlayerBalance(jail.getRent());
+
+                // Move to Jail field
+                player.setPlacement(6);
+
+                // Update GUI with new placement
+                board.movePlayer(currentPlayer, placement);
+
+            }
 
             currentPlayer++;
 

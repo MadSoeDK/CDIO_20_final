@@ -1,37 +1,29 @@
 import gui_fields.GUI_Jail;
-import gui_fields.GUI_Start;
 
 import java.awt.Color;
 
 public class Jail extends Field {
-    public Jail(GUI_Jail field, String name, String description, Color color) {
+
+    protected int rent;
+
+    public Jail(GUI_Jail field, int rent, String name, Color color) {
+
         field.setTitle(name);
         field.setBackGroundColor(color);
-        field.setDescription("Passér start og modtag $2.");
-        field.setSubText("");
+        field.setDescription(name);
+        field.setSubText(name);
 
         this.field = field;
         this.name = name;
-        this.description = description;
-        this.fieldType = 1;
+        this.rent = rent;
+    }
+
+    public int getRent() {
+        return rent;
     }
 
     @Override
     public String getName() {
-        return name;
-    }
-
-    @Override
-    public int getType() {
-        return fieldType;
-    }
-
-    @Override
-    public void setFieldType(int fieldType) {
-        this.fieldType = fieldType;
-    }
-
-    public Player getOwner() {
-        return null;
+        return this.name;
     }
 }
