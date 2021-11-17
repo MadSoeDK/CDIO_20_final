@@ -26,10 +26,6 @@ public class Property extends Field {
         this.rent = rent;
         this.name = name;
     }
-    @Override
-    public String getName() {
-        return name;
-    }
     public int getRent() {
         return rent;
     }

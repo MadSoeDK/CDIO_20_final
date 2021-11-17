@@ -13,8 +13,4 @@ public class Start extends Field {
         this.name = name;
         this.description = description;
     }
-    @Override
-    public String getName() {
-        return name;
-    }
 }

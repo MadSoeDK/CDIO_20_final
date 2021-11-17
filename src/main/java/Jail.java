@@ -22,8 +22,4 @@ public class Jail extends Field {
         return rent;
     }
 
-    @Override
-    public String getName() {
-        return this.name;
-    }
 }
