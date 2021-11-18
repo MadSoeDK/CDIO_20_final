@@ -22,7 +22,13 @@ public class FreeParking extends Field {
     public static void setBalance(int value){
         balance=balance+value;
     }
+    public static int getBalance(){
+        return balance;
+    }
     public static void resetBalance(int value){
         balance=0;
+    }
+    public void updateGUIBalance(){
+        field.setSubText("Modtag: "+String.valueOf(balance));
     }
 }

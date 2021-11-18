@@ -108,6 +108,19 @@ public class Main extends Board{
 
             }
 
+            if (field instanceof FreeParking) {
+
+                // Give money to player
+                player.setPlayerBalance(FreeParking.getBalance());
+
+                // Reset Free Parking
+                player.setPlacement(6);
+
+                // Set GUI Balance
+                field.getGUIField().setSubText("Modtag: "+String.valueOf(FreeParking.getBalance()));
+
+            }
+
             currentPlayer++;
 
             if(currentPlayer == board.amountofPlayers()) {
