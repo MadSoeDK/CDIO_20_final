@@ -96,6 +96,9 @@ public class Main extends Board{
                 // Subtract player balance from Property rent
                 player.setPlayerBalance(jail.getRent());
 
+                // Add money to Free Parking
+                FreeParking.setBalance(3);
+
                 // Move to Jail field
                 player.setPlacement(6);
 

@@ -22,7 +22,7 @@ public class Board {
             new Property(new GUI_Street(),1, "Chance", Color.WHITE),
             new Property(new GUI_Street(),2, "Skateparken", Color.ORANGE),
             new Property(new GUI_Street(),2, "Swimmingpool", Color.ORANGE),
-            new Property(new GUI_Street(),1, "Fri parkering", Color.WHITE),
+            new FreeParking(new GUI_Tax(),0,"Fri Parkering",Color.WHITE,"Modtag Penge"),
             new Property(new GUI_Street(),3, "Spillehal", Color.RED),
             new Property(new GUI_Street(),3, "Kinobiograf", Color.RED),
             new Property(new GUI_Street(),1, "Chance", Color.WHITE),
