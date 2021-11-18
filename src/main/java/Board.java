@@ -75,6 +75,10 @@ public class Board {
         gui.getUserButtonPressed("Nu er det " + player[currentPlayer].getName() + "'s tur, rul terningen!", "Rul terning");
     }
 
+    public void guiMessage(String message){
+        gui.showMessage(message);
+    }
+
     public void removePlayer(int currentPlayer, int placement) {
         GUIfields[placement].setCar(player[currentPlayer].getPlayer(), false);
     }
@@ -106,4 +110,29 @@ public class Board {
     public Field getField(int placement) {
             return fields[placement];
         }
+
+    public boolean checkWinner(){
+        // If no winner
+        boolean winner=false;
+        for (int i=0; i< player.length; i++)
+        {
+            if (player[i].getPlayerBalance()<1){
+                winner=true;
+            }
+        }
+        return winner;
+    }
+
+    public int getWinner(){
+        int winner=0;
+        int high_score=0;
+        for (int i=0; i< player.length; i++)
+        {
+            if (player[i].getPlayerBalance()>high_score){
+                winner=i;
+                high_score=player[i].getPlayerBalance();
+            }
+        }
+        return winner;
+    }
 }

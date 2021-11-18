@@ -130,11 +130,23 @@ public class Main extends Board{
 
             }
 
+            // Check if player has won (Balance<1)
+            if (board.checkWinner()==true){
+                // Continue to Show winner Loop
+                break;
+            }
+
             currentPlayer++;
 
             if(currentPlayer == board.amountofPlayers()) {
                 currentPlayer = 0;
             }
         }
+        while (true)
+        {
+            // Show Winner
+            board.guiMessage(board.getPlayer(board.getWinner()).getName()+" HAS WON THE GAME!");
+        }
+
     }
 }
