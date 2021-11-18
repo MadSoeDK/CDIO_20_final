@@ -101,6 +101,7 @@ public class Main extends Board{
 
                 // Update GUI with new placement
                 board.movePlayer(currentPlayer, placement);
+                board.removePlayer(currentPlayer, 18);
 
             }
 
