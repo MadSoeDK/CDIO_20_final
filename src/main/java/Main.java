@@ -97,14 +97,18 @@ public class Main extends Board{
                 player.setPlayerBalance(-jail.getRent());
                 player.getPlayer().setBalance(player.getPlayerBalance());
 
-                // Add money to Free Parking
-                FreeParking.setBalance(3);
+                // Add money to Free Parking if landed on "Go To Jail"
+                if (placement==18)
+                {
+                    FreeParking.setBalance(3);
+                }
 
                 // Set GUI Balance
                 board.getField(12).getGUIField().setSubText("Modtag: "+String.valueOf(FreeParking.getBalance()));
 
                 // Move to Jail field
                 player.gotoPlacement(6);
+                placement = player.getPlacement();
 
                 // Update GUI with new placement
                 board.movePlayer(currentPlayer, placement);
