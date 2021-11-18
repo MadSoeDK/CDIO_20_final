@@ -31,6 +31,8 @@ public class Player {
         return placement;
     }
 
+    public void gotoPlacement(int placement) { placement = placement; }
+
     public void setPlacement(int sum) {
         placement += sum;
     }

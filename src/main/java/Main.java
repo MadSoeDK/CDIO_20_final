@@ -16,7 +16,7 @@ public class Main extends Board{
         while(true) {
             board.button(currentPlayer);
             cup.roll();
-            sum = cup.getSum();
+            sum = 18;
 
             // Get Player pre-turn information
             Player player = board.getPlayer(currentPlayer);
@@ -93,8 +93,9 @@ public class Main extends Board{
                 // Typecast to Property
                 Jail jail = (Jail) field;
 
-                // Subtract player balance from Property rent
-                player.setPlayerBalance(jail.getRent());
+                // Subtract player balance from Property rent. 2. Update GUI
+                player.setPlayerBalance(-jail.getRent());
+                player.getPlayer().setBalance(player.getPlayerBalance());
 
                 // Add money to Free Parking
                 FreeParking.setBalance(3);
@@ -103,7 +104,7 @@ public class Main extends Board{
                 board.getField(12).getGUIField().setSubText("Modtag: "+String.valueOf(FreeParking.getBalance()));
 
                 // Move to Jail field
-                player.setPlacement(6);
+                player.gotoPlacement(6);
 
                 // Update GUI with new placement
                 board.movePlayer(currentPlayer, placement);
@@ -129,7 +130,6 @@ public class Main extends Board{
             if(currentPlayer == board.amountofPlayers()) {
                 currentPlayer = 0;
             }
-
         }
     }
 }
