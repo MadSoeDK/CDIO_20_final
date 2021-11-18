@@ -8,6 +8,7 @@ public class Property extends Field {
 
     protected int rent;
     protected Player owner;
+    protected Color color;
 
     /**
      * Constructor
@@ -25,6 +26,7 @@ public class Property extends Field {
         this.field = field;
         this.rent = rent;
         this.name = name;
+        this.color = color;
     }
     public int getRent() {
         return rent;
@@ -35,5 +37,7 @@ public class Property extends Field {
     public Player getOwner() {
         return owner;
     }
-
+    public Color getColor() {
+        return color;
+    }
 }

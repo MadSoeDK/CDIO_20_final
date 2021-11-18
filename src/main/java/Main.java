@@ -12,11 +12,14 @@ public class Main extends Board{
         int sum = 0;
         int currentPlayer = 0;
 
+        int same_color_owner=0;
+        int rent_mutiplier=1;
+
         // Game loop
         while(true) {
             board.button(currentPlayer);
             cup.roll();
-            sum = 3;
+            sum = 1;
 
             // Get Player pre-turn information
             Player player = board.getPlayer(currentPlayer);
@@ -59,14 +62,62 @@ public class Main extends Board{
                     // Get field owner
                     Player fieldOwner = property.getOwner();
 
+                    // Check if both fields of same color is owned by the same player
+                    if (placement-2<0)
+                    {
+                        for (int i=0; i<(placement+3) ;i++)
+                        {
+                            // Check 2 field in either direction
+                            if (board.getField(i) instanceof Property){
+                                // Typecast to Property
+                                Property property_check = (Property) board.getField(i);
+
+                                // Check if owner/color is the same
+                                if (property_check.getColor()==property.getColor() && property_check.getOwner()==property.getOwner())
+                                {
+                                    same_color_owner++;
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        for (int i=placement-2; i<placement+3 ;i++)
+                        {
+                            // Check 2 field in either direction
+                            if (board.getField(i) instanceof Property){
+                                // Typecast to Property
+                                Property property_check = (Property) board.getField(i);
+                                // Check if owner/color is the same
+                                if (property_check.getColor()==property.getColor() && property_check.getOwner()==property.getOwner())
+                                {
+                                    same_color_owner++;
+                                }
+                            }
+                        }
+                    }
+
+
+                    // Increase rent if owner owns entire color
+                    if (same_color_owner==2)
+                    {
+                        rent_mutiplier=2;
+                    }
+                    else
+                    {
+                        rent_mutiplier=1;
+                    }
+
                     // 1. Subtract rent from current player 2. add to field owner
-                    player.setPlayerBalance(-property.getRent());
-                    fieldOwner.setPlayerBalance(property.getRent());
+                    player.setPlayerBalance(-property.getRent()*rent_mutiplier);
+                    fieldOwner.setPlayerBalance(property.getRent()*rent_mutiplier);
 
                     //Update GUI-object and display the current player balance
                     board.getPlayer(currentPlayer).getPlayer().setBalance(board.getPlayer(currentPlayer).getPlayerBalance());
                     fieldOwner.getPlayer().setBalance(fieldOwner.getPlayerBalance());
 
+                    // Reset
+                    same_color_owner=0;
                 }
 
                 // No one owns the Property
