@@ -99,6 +99,9 @@ public class Main extends Board{
                 // Add money to Free Parking
                 FreeParking.setBalance(3);
 
+                // Set GUI Balance
+                board.getField(12).getGUIField().setSubText("Modtag: "+String.valueOf(FreeParking.getBalance()));
+
                 // Move to Jail field
                 player.setPlacement(6);
 

@@ -28,7 +28,7 @@ public class Board {
             new Property(new GUI_Street(),1, "Chance", Color.WHITE),
             new Property(new GUI_Street(),3, "Legetøjsbutik", Color.YELLOW),
             new Property(new GUI_Street(),3, "Dyrehandel", Color.YELLOW),
-            new Jail(new GUI_Jail(), 1, "Gå i fængsel", Color.WHITE),
+            new Jail(new GUI_Jail(), 3, "Gå i fængsel", Color.WHITE),
             new Property(new GUI_Street(),4, "Bowlinghal", Color.GREEN),
             new Property(new GUI_Street(),4, "Zoologisk have", Color.GREEN),
             new Property(new GUI_Street(),1, "Chance", Color.WHITE),
