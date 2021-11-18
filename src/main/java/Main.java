@@ -16,7 +16,7 @@ public class Main extends Board{
         while(true) {
             board.button(currentPlayer);
             cup.roll();
-            sum = 18;
+            sum = 3;
 
             // Get Player pre-turn information
             Player player = board.getPlayer(currentPlayer);
@@ -116,9 +116,10 @@ public class Main extends Board{
 
                 // Give money to player
                 player.setPlayerBalance(FreeParking.getBalance());
+                player.getPlayer().setBalance(player.getPlayerBalance());
 
                 // Reset Free Parking
-                player.setPlacement(6);
+                FreeParking.resetBalance();
 
                 // Set GUI Balance
                 field.getGUIField().setSubText("Modtag: "+String.valueOf(FreeParking.getBalance()));

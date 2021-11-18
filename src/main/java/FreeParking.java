@@ -25,7 +25,7 @@ public class FreeParking extends Field {
     public static int getBalance(){
         return balance;
     }
-    public static void resetBalance(int value){
+    public static void resetBalance(){
         balance=0;
     }
     public void updateGUIBalance(){
