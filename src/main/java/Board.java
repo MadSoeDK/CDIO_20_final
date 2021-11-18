@@ -5,7 +5,7 @@ import java.awt.Color;
 public class Board {
     private GUI_Field[] GUIfields;
     private GUI gui;
-    private int[] cards = new int[10];
+    private ChanceCardDeck chanceCard;
     private Player[] player;
     private Color[] colors = {Color.green, Color.BLUE, Color.ORANGE, Color.RED};
 
@@ -134,5 +134,10 @@ public class Board {
             }
         }
         return winner;
+    }
+    public ChanceCard chanceCard() {
+        ChanceCardDeck chanceCard = new ChanceCardDeck();
+        chanceCard.drawCard();
+        gui.displayChanceCard("Du trak " + chanceCard.drawCard());
     }
 }
