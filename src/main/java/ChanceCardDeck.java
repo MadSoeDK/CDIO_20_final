@@ -4,9 +4,10 @@ import java.util.Random;
 
 public class ChanceCardDeck {
     private ChanceCard[] deck;
-    private final int MAX_VALUE = 3;
-    private int position = 0;
-    protected Player player;
+    //private final int MAX_VALUE = 3;
+    //private int position = 0;
+    //protected Player player;
+    //protected Board board;
 
     public ChanceCardDeck() {
         deck = new ChanceCard[3];
@@ -49,17 +50,15 @@ public class ChanceCardDeck {
         switch(deck[3].getNumber()) {
             case 0:
                 //Du har spist for meget slik. Betal $2 til banken.
-                player.setPlayerBalance(-2);
+                //board.getPlayer(board.getCurrentPlayer().setPlayerBalance())
                 break;
             case 1:
                 //Ryk frem til START. Modtag $2 fra banken
-                player.setPlayerBalance(+2);
-                player.setPlacement(0);
                 break;
             case 2:
                 //Du har lavet alle dine lektier. Modtag $2 fra banken
-                player.setPlayerBalance(+2);
                 break;
         }
     }
+
 }

@@ -8,6 +8,7 @@ public class Board {
     private ChanceCardDeck chanceCard;
     private Player[] player;
     private Color[] colors = {Color.green, Color.BLUE, Color.ORANGE, Color.RED};
+    private Main main;
 
     private Field[] fields = {
             new Start(new GUI_Start(),"Start", Color.WHITE, "Startfeltet"),
@@ -122,7 +123,8 @@ public class Board {
         }
         return winner;
     }
-
+    public void getCurrentPlayer() {
+    }
     public int getWinner(){
         int winner=0;
         int high_score=0;
@@ -135,9 +137,9 @@ public class Board {
         }
         return winner;
     }
-    public ChanceCard chanceCard() {
+    /*public ChanceCard chanceCard() {
         ChanceCardDeck chanceCard = new ChanceCardDeck();
         chanceCard.drawCard();
         gui.displayChanceCard("Du trak " + chanceCard.drawCard());
-    }
+    }*/
 }
