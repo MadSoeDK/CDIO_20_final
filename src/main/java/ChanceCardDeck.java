@@ -51,6 +51,7 @@ public class ChanceCardDeck {
                 //Du har spist for meget slik. Betal $2 til banken.
                 board.getCurrentPlayer().setPlayerBalance(-2);
                 System.out.println("Du har spist for meget Slik");
+                board.guiMessage("Du Har Spist for meget slik (-2)");
                 break;
             case 1:
                 //Ryk frem til START. Modtag $2 fra banken
@@ -58,11 +59,13 @@ public class ChanceCardDeck {
                 board.getCurrentPlayer().setPlacement(-board.getCurrentPlayer().getPlacement());
                 board.movePlayer(board.getCurrentPlayerVar(), board.getCurrentPlayer().getPlacement());
                 System.out.println("Ryk til Start");
+                board.guiMessage("Ryk tilbage til start, modtag penge");
                 break;
             case 2:
                 //Du har lavet alle dine lektier. Modtag $2 fra banken
                 board.getCurrentPlayer().setPlayerBalance(2);
                 System.out.println("Du har lavet alle dine lektier +2");
+                board.guiMessage("Du Har lavet alle dine Lektier (+2 Dollars)");
                 break;
         }
     }
