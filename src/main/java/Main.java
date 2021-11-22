@@ -192,6 +192,8 @@ public class Main extends Board{
             if(currentPlayer == board.amountofPlayers()) {
                 currentPlayer = 0;
             }
+
+            board.updateCurrentPlayer(currentPlayer);
         }
         while (true)
         {
@@ -199,6 +201,9 @@ public class Main extends Board{
             board.guiMessage(board.getPlayer(board.getWinner()).getName()+" HAS WON THE GAME!");
         }
 
+
+
     }
+
 }
 

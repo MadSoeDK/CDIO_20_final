@@ -7,14 +7,14 @@ public class ChanceCardDeck {
     //private final int MAX_VALUE = 3;
     //private int position = 0;
     //protected Player player;
-    //protected Board board;
+    protected Board board;
 
-    public ChanceCardDeck() {
+    public ChanceCardDeck(Board board) {
         deck = new ChanceCard[3];
         deck[0] = new ChanceCard("Du har spist for meget slik. Betal $2 til banken", "Chancekort 1", 0);
         deck[1] = new ChanceCard("Ryk frem til START. Modtag $2 fra banken.", "Chancekort 2", 1);
         deck[2] = new ChanceCard("Du har lavet alle dine lektier. Modtag $2 fra banken", "Chancekort 3", 2);
-
+        this.board = board;
         shuffleCard();
     }
     public void shuffleCard() {
@@ -50,10 +50,13 @@ public class ChanceCardDeck {
         switch(deck[3].getNumber()) {
             case 0:
                 //Du har spist for meget slik. Betal $2 til banken.
-                //board.getPlayer(board.getCurrentPlayer().setPlayerBalance())
+                board.getCurrentPlayer().setPlayerBalance(-2);
                 break;
             case 1:
                 //Ryk frem til START. Modtag $2 fra banken
+                //board.getCurrentPlayer().get;
+                board.getCurrentPlayer().setPlacement(0);
+                board.getCurrentPlayer().setPlacement(0);
                 break;
             case 2:
                 //Du har lavet alle dine lektier. Modtag $2 fra banken

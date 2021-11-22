@@ -8,6 +8,7 @@ public class Board {
     private ChanceCardDeck chanceCard;
     private Player[] player;
     private Color[] colors = {Color.green, Color.BLUE, Color.ORANGE, Color.RED};
+    private int currentPlayer;
 
     private Field[] fields = {
             new Start(new GUI_Start(),"Start", Color.WHITE, "Startfeltet"),
@@ -97,8 +98,9 @@ public class Board {
         }
 
     public Player getPlayer(int number) {
-            return player[number];
+        return player[number];
         }
+
 
     public Player[] getPlayers() {
             return player;
@@ -111,6 +113,14 @@ public class Board {
     public Field getField(int placement) {
             return fields[placement];
         }
+
+    public Player getCurrentPlayer(){
+        return player[currentPlayer];
+    }
+
+    public void updateCurrentPlayer(int currentPlayer){
+        this.currentPlayer=currentPlayer;
+    }
 
     public boolean checkWinner(){
         // If no winner
@@ -136,6 +146,7 @@ public class Board {
         }
         return winner;
     }
+
     /*
     public ChanceCard chanceCard() {
         ChanceCardDeck chanceCard = new ChanceCardDeck();
