@@ -31,7 +31,7 @@ public class Main extends Board{
             // Display dice roll on GUI
             board.setDice(sum);
 
-            // Check for a complete round on board. Then recalibrate player placement
+            // Check for a complete lap around on board. Then recalibrate player placement
             if(placement + sum >= 24) {
                 player.setPlacement(sum - 24);
                 board.removePlayer(currentPlayer, placement);
@@ -178,6 +178,12 @@ public class Main extends Board{
 
                 // Set GUI Balance
                 field.getGUIField().setSubText("Modtag: "+String.valueOf(FreeParking.getBalance()));
+
+            }
+
+            if (field instanceof ChanceField) {
+
+                // Draw Chance Card
 
             }
 
