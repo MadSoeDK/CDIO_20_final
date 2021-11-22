@@ -85,6 +85,10 @@ public class Board {
         GUIfields[placement].setCar(player[currentPlayer].getPlayer(), false);
     }
 
+    public int getCurrentPlayerVar (){
+        return currentPlayer;
+    }
+
     public void movePlayer(int currentPlayer, int placement) {
         GUIfields[placement].setCar(player[currentPlayer].getPlayer(), true);
     }

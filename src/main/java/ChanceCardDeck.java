@@ -54,12 +54,13 @@ public class ChanceCardDeck {
                 break;
             case 1:
                 //Ryk frem til START. Modtag $2 fra banken
-                //board.getCurrentPlayer().get;
+                board.removePlayer(board.getCurrentPlayerVar(), board.getCurrentPlayer().getPlacement());
                 board.getCurrentPlayer().setPlacement(0);
-                board.getCurrentPlayer().setPlacement(0);
+                board.movePlayer(board.getCurrentPlayerVar(), board.getCurrentPlayer().getPlacement());
                 break;
             case 2:
                 //Du har lavet alle dine lektier. Modtag $2 fra banken
+                board.getCurrentPlayer().setPlayerBalance(2);
                 break;
         }
     }
