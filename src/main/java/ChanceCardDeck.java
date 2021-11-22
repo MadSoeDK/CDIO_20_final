@@ -7,14 +7,15 @@ public class ChanceCardDeck {
     //private final int MAX_VALUE = 3;
     //private int position = 0;
     //protected Player player;
-    protected Board board;
+    private Board board;
 
-    public ChanceCardDeck(Board board) {
+    public ChanceCardDeck(Board owner) {
         deck = new ChanceCard[3];
         deck[0] = new ChanceCard("Du har spist for meget slik. Betal $2 til banken", "Chancekort 1", 0);
         deck[1] = new ChanceCard("Ryk frem til START. Modtag $2 fra banken.", "Chancekort 2", 1);
         deck[2] = new ChanceCard("Du har lavet alle dine lektier. Modtag $2 fra banken", "Chancekort 3", 2);
-        this.board = board;
+        this.board = owner;
+        //board.getCurrentPlayer().setPlayerBalance(-200);
         shuffleCard();
     }
     public void shuffleCard() {
@@ -44,23 +45,24 @@ public class ChanceCardDeck {
         return card;
     }
     public void useChanceCard() {
-        int value = 0;
-        int move = 0;
-
-        switch(deck[3].getNumber()) {
+        ChanceCard card = drawCard();
+        switch(card.getNumber()) {
             case 0:
                 //Du har spist for meget slik. Betal $2 til banken.
                 board.getCurrentPlayer().setPlayerBalance(-2);
+                System.out.println("Du har spist for meget Slik");
                 break;
             case 1:
                 //Ryk frem til START. Modtag $2 fra banken
                 board.removePlayer(board.getCurrentPlayerVar(), board.getCurrentPlayer().getPlacement());
-                board.getCurrentPlayer().setPlacement(0);
+                board.getCurrentPlayer().setPlacement(-board.getCurrentPlayer().getPlacement());
                 board.movePlayer(board.getCurrentPlayerVar(), board.getCurrentPlayer().getPlacement());
+                System.out.println("Ryk til Start");
                 break;
             case 2:
                 //Du har lavet alle dine lektier. Modtag $2 fra banken
                 board.getCurrentPlayer().setPlayerBalance(2);
+                System.out.println("Du har lavet alle dine lektier +2");
                 break;
         }
     }

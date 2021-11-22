@@ -5,10 +5,10 @@ import java.awt.Color;
 public class Board {
     private GUI_Field[] GUIfields;
     private GUI gui;
-    private ChanceCardDeck chanceCard;
     private Player[] player;
     private Color[] colors = {Color.green, Color.BLUE, Color.ORANGE, Color.RED};
     private int currentPlayer;
+    private ChanceCardDeck chanceCard = new ChanceCardDeck(this);
 
     private Field[] fields = {
             new Start(new GUI_Start(),"Start", Color.WHITE, "Startfeltet"),
@@ -40,6 +40,7 @@ public class Board {
 
     public Board() {
         gui = new GUI(converter(fields));
+        //this.chanceCard = new ChanceCardDeck(this);
     }
 
     public GUI_Field[] converter(Field[] fields) {
@@ -149,6 +150,10 @@ public class Board {
             }
         }
         return winner;
+    }
+
+    public ChanceCardDeck getChanceCardDeck(){
+        return chanceCard;
     }
 
     /*

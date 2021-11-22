@@ -184,6 +184,8 @@ public class Main extends Board{
             if (field instanceof ChanceField) {
 
                 // Draw Chance Card
+                board.getChanceCardDeck().useChanceCard();
+                player.getPlayer().setBalance(player.getPlayerBalance());
 
             }
 

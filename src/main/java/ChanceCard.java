@@ -1,4 +1,4 @@
-public class ChanceCard extends Field {
+public class ChanceCard {
 
     private String description;
     private String name;
