@@ -8,31 +8,31 @@ public class Board {
     private ChanceCardDeck chanceCard;
     private Player[] player;
     private Color[] colors = {Color.green, Color.BLUE, Color.ORANGE, Color.RED};
-    private Main main;
 
     private Field[] fields = {
             new Start(new GUI_Start(),"Start", Color.WHITE, "Startfeltet"),
             new Property(new GUI_Street(),1, "Burgerbaren", Color.GRAY),
             new Property(new GUI_Street(),1, "Pizzahuset", Color.GRAY),
-            new Property(new GUI_Street(),1, "Chance", Color.WHITE),
+            new ChanceField(new GUI_Chance()),
+            //new Property(new GUI_Street(),1, "Chance", Color.WHITE),
             new Property(new GUI_Street(),2, "Slikbutik", Color.CYAN),
             new Property(new GUI_Street(),2, "Iskiosk", Color.CYAN),
             new Jail(new GUI_Jail(), 0,"På besøg", Color.WHITE),
             new Property(new GUI_Street(),2, "Museeum", Color.PINK),
             new Property(new GUI_Street(),2, "Bibliotek", Color.PINK),
-            new Property(new GUI_Street(),1, "Chance", Color.WHITE),
+            new ChanceField(new GUI_Chance()),
             new Property(new GUI_Street(),2, "Skateparken", Color.ORANGE),
             new Property(new GUI_Street(),2, "Swimmingpool", Color.ORANGE),
             new FreeParking(new GUI_Tax(),0,"Fri Parkering",Color.WHITE,"Modtag Penge"),
             new Property(new GUI_Street(),3, "Spillehal", Color.RED),
             new Property(new GUI_Street(),3, "Kinobiograf", Color.RED),
-            new Property(new GUI_Street(),1, "Chance", Color.WHITE),
+            new ChanceField(new GUI_Chance()),
             new Property(new GUI_Street(),3, "Legetøjsbutik", Color.YELLOW),
             new Property(new GUI_Street(),3, "Dyrehandel", Color.YELLOW),
             new Jail(new GUI_Jail(), 3, "Gå i fængsel", Color.WHITE),
             new Property(new GUI_Street(),4, "Bowlinghal", Color.GREEN),
             new Property(new GUI_Street(),4, "Zoologisk have", Color.GREEN),
-            new Property(new GUI_Street(),1, "Chance", Color.WHITE),
+            new ChanceField(new GUI_Chance()),
             new Property(new GUI_Street(),5, "Vandland", Color.BLUE),
             new Property(new GUI_Street(),5, "Strandpromenade", Color.BLUE),
     };
@@ -123,8 +123,7 @@ public class Board {
         }
         return winner;
     }
-    public void getCurrentPlayer() {
-    }
+
     public int getWinner(){
         int winner=0;
         int high_score=0;
@@ -137,9 +136,12 @@ public class Board {
         }
         return winner;
     }
-    /*public ChanceCard chanceCard() {
+    /*
+    public ChanceCard chanceCard() {
         ChanceCardDeck chanceCard = new ChanceCardDeck();
         chanceCard.drawCard();
         gui.displayChanceCard("Du trak " + chanceCard.drawCard());
-    }*/
+    }
+    */
+
 }
