@@ -50,6 +50,17 @@ public class Main extends Board{
 
             Field field = board.getField(placement);
 
+
+            if (field instanceof ChanceField) {
+
+                // Draw Chance Card
+                board.getChanceCardDeck().useChanceCard();
+                player.getPlayer().setBalance(player.getPlayerBalance());
+                placement = player.getPlacement();
+                field = board.getField(placement);
+                sum=0;
+            }
+
             // Check field type
             if (field instanceof Property) {
 
@@ -178,14 +189,6 @@ public class Main extends Board{
 
                 // Set GUI Balance
                 field.getGUIField().setSubText("Modtag: "+String.valueOf(FreeParking.getBalance()));
-
-            }
-
-            if (field instanceof ChanceField) {
-
-                // Draw Chance Card
-                board.getChanceCardDeck().useChanceCard();
-                player.getPlayer().setBalance(player.getPlayerBalance());
 
             }
 

@@ -6,7 +6,7 @@ public class Board {
     private GUI_Field[] GUIfields;
     private GUI gui;
     private Player[] player;
-    private Color[] colors = {Color.green, Color.BLUE, Color.ORANGE, Color.RED};
+    private Color[] colors = {Color.RED, Color.WHITE, Color.ORANGE, Color.MAGENTA};
     private int currentPlayer;
     private ChanceCardDeck chanceCard = new ChanceCardDeck(this);
 
