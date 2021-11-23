@@ -19,7 +19,7 @@ public class Main extends Board{
         while(true) {
             board.button(currentPlayer);
             cup.roll();
-            sum = 1;
+            sum = cup.getSum();
 
             // Get Player pre-turn information
             Player player = board.getPlayer(currentPlayer);
