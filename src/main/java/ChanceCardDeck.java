@@ -10,11 +10,12 @@ public class ChanceCardDeck {
     private Board board;
 
     public ChanceCardDeck(Board owner) {
-        deck = new ChanceCard[4];
+        deck = new ChanceCard[5];
         deck[0] = new ChanceCard("Du har spist for meget slik. Betal $2 til banken", "Chancekort 1", 0);
         deck[1] = new ChanceCard("Ryk frem til START. Modtag $2 fra banken.", "Chancekort 2", 1);
         deck[2] = new ChanceCard("Du har lavet alle dine lektier. Modtag $2 fra banken", "Chancekort 3", 2);
         deck[3] = new ChanceCard("Ryk frem til Strandpromenaden", "Chancekort 4", 3);
+        deck[4] = new ChanceCard("Du har fødselsdag, Modtag $1 fra hver spiller", "Chancekort 5", 4);
 
 
         this.board = owner;
@@ -49,32 +50,42 @@ public class ChanceCardDeck {
     }
     public void useChanceCard() {
         ChanceCard card = drawCard();
-        switch(3){//card.getNumber()) {
+        switch(card.getNumber()) {
             case 0:
                 //Du har spist for meget slik. Betal $2 til banken.
+                board.guiMessage("Du Har Spist for meget slik betal $2");
                 board.getCurrentPlayer().setPlayerBalance(-2);
-                board.guiMessage("Du Har Spist for meget slik (-2)");
+
                 break;
             case 1:
                 //Ryk frem til START. Modtag $2 fra banken
+                board.guiMessage("Ryk tilbage til start, modtag penge");
                 board.removePlayer(board.getCurrentPlayerVar(), board.getCurrentPlayer().getPlacement());
                 board.getCurrentPlayer().gotoPlacement(0);
                 board.movePlayer(board.getCurrentPlayerVar(), board.getCurrentPlayer().getPlacement());
-                board.guiMessage("Ryk tilbage til start, modtag penge");
                 break;
             case 2:
                 //Du har lavet alle dine lektier. Modtag $2 fra banken
+                board.guiMessage("Du Har lavet alle dine Lektier modtag $2");
                 board.getCurrentPlayer().setPlayerBalance(2);
-                board.guiMessage("Du Har lavet alle dine Lektier (+2 Dollars)");
                 break;
             case 3:
                 //Ryk frem til strandpromenaden
+                board.guiMessage("Ryk frem til strandpromenaden");
                 board.removePlayer(board.getCurrentPlayerVar(), board.getCurrentPlayer().getPlacement());
                 //board.getCurrentPlayer().setPlacement(-board.getCurrentPlayer().getPlacement());
                 board.getCurrentPlayer().gotoPlacement(23);
                 board.movePlayer(board.getCurrentPlayerVar(), board.getCurrentPlayer().getPlacement());
-                board.guiMessage("Ryk frem til strandpromenaden");
                 break;
+            case 4:
+                //fødselsdag
+                board.guiMessage("Det er din fødselsdag, Modtag $1 fra alle spiller");
+                board.getCurrentPlayer().setPlayerBalance(board.amountofPlayers()+1);
+                for (int i=0; i<board.amountofPlayers()-1; i++) {
+                    board.getPlayer(i).setPlayerBalance(-1);
+                    board.getPlayer(i).getPlayer().setBalance(board.getPlayer(i).getPlayerBalance());
+                break;
+                }
         }
     }
 

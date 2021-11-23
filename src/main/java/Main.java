@@ -95,14 +95,16 @@ public class Main extends Board{
                     {
                         for (int i=placement-2; i<placement+3 ;i++)
                         {
+
                             // Check 2 field in either direction
-                            if (board.getField(i) instanceof Property){
-                                // Typecast to Property
-                                Property property_check = (Property) board.getField(i);
-                                // Check if owner/color is the same
-                                if (property_check.getColor()==property.getColor() && property_check.getOwner()==property.getOwner())
-                                {
-                                    same_color_owner++;
+                            if (i<24) {
+                                if (board.getField(i) instanceof Property) {
+                                    // Typecast to Property
+                                    Property property_check = (Property) board.getField(i);
+                                    // Check if owner/color is the same
+                                    if (property_check.getColor() == property.getColor() && property_check.getOwner() == property.getOwner()) {
+                                        same_color_owner++;
+                                    }
                                 }
                             }
                         }
