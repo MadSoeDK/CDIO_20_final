@@ -155,13 +155,5 @@ public class Board {
     public ChanceCardDeck getChanceCardDeck(){
         return chanceCard;
     }
-
-    /*
-    public ChanceCard chanceCard() {
-        ChanceCardDeck chanceCard = new ChanceCardDeck();
-        chanceCard.drawCard();
-        gui.displayChanceCard("Du trak " + chanceCard.drawCard());
-    }
-    */
-
+    
 }

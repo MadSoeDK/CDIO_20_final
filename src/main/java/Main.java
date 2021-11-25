@@ -16,7 +16,7 @@ public class Main extends Board{
         int rent_mutiplier=1;
 
         // Game loop
-        while(true) {
+        while(!board.checkWinner()) {
             board.button(currentPlayer);
             cup.roll();
             sum = cup.getSum();
@@ -74,10 +74,8 @@ public class Main extends Board{
                     Player fieldOwner = property.getOwner();
 
                     // Check if both fields of same color is owned by the same player
-                    if (placement-2<0)
-                    {
-                        for (int i=0; i<(placement+3) ;i++)
-                        {
+                    if (placement-2<0) {
+                        for (int i=0; i<(placement+3) ;i++) {
                             // Check 2 field in either direction
                             if (board.getField(i) instanceof Property){
                                 // Typecast to Property
@@ -90,14 +88,10 @@ public class Main extends Board{
                                 }
                             }
                         }
-                    }
-                    else
-                    {
-                        for (int i=placement-2; i<placement+3 ;i++)
-                        {
-
+                    } else {
+                        for (int i=placement-2; i<placement+3 ;i++) {
                             // Check 2 field in either direction
-                            if (i<24) {
+                            if ( i < 24 ) {
                                 if (board.getField(i) instanceof Property) {
                                     // Typecast to Property
                                     Property property_check = (Property) board.getField(i);
@@ -110,14 +104,10 @@ public class Main extends Board{
                         }
                     }
 
-
                     // Increase rent if owner owns entire color
-                    if (same_color_owner==2)
-                    {
+                    if (same_color_owner==2) {
                         rent_mutiplier=2;
-                    }
-                    else
-                    {
+                    } else {
                         rent_mutiplier=1;
                     }
 
@@ -162,8 +152,7 @@ public class Main extends Board{
                 player.getPlayer().setBalance(player.getPlayerBalance());
 
                 // Add money to Free Parking if landed on "Go To Jail"
-                if (placement==18)
-                {
+                if (placement==18) {
                     FreeParking.setBalance(3);
                 }
 
@@ -194,27 +183,18 @@ public class Main extends Board{
 
             }
 
-            // Check if player has won (Balance<1)
-            if (board.checkWinner()==true){
-                // Continue to Show winner Loop
-                break;
-            }
-
             currentPlayer++;
 
             if(currentPlayer == board.amountofPlayers()) {
                 currentPlayer = 0;
             }
-
             board.updateCurrentPlayer(currentPlayer);
         }
-        while (true)
-        {
-            // Show Winner
+
+        while (true) {
+            // Show Winner - has to be in while loop, or the winner text will be removed
             board.guiMessage(board.getPlayer(board.getWinner()).getName()+" HAS WON THE GAME!");
         }
-
-
 
     }
 
