@@ -6,7 +6,6 @@ import java.awt.*;
 import static org.junit.Assert.*;
 
 public class BoardTest {
-    Board board = new Board();
     Die die = new Die();
     Player player = new Player("Player", 0, Color.black);
     private Player[] players;
@@ -37,9 +36,5 @@ public class BoardTest {
         house.setOwner(player1);
 
         assertTrue("The selected player is not the owner of the property.", house.getOwner() == player1);
-    }
-    @Test
-    public void shuffleCard() {
-
     }
 }
