@@ -21,10 +21,10 @@ public class BoardTest {
     }
     @Test
     public void createPlayerTest() {
-        int testValue = 4;
-        players = new Player[testValue];
+        int amountOfPlayers = 4;
+        players = new Player[amountOfPlayers];
 
-        for(int i = 0; i < testValue; i++) {
+        for(int i = 0; i < amountOfPlayers; i++) {
                 players[i] = new Player("", 0, Color.black);
         }
         assertEquals(4, players.length);
