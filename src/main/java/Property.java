@@ -2,7 +2,7 @@ import gui_fields.GUI_Street;
 import java.awt.Color;
 
 /**
- *
+ * Child of Field, Used in field array, ownable game fields.
  */
 public class Property extends Field {
 

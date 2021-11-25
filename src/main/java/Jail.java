@@ -2,6 +2,9 @@ import gui_fields.GUI_Jail;
 
 import java.awt.Color;
 
+/**
+ * Child of Field, Sends players back and increments FreeParking
+ */
 public class Jail extends Field {
 
     protected int rent;

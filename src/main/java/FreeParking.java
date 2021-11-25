@@ -3,6 +3,9 @@ import gui_fields.GUI_Tax;
 
 import java.awt.*;
 
+/**
+ * Child of Field, Is used within field array, Tracks balance and gives to player landing on it.
+ */
 public class FreeParking extends Field {
 
     public static int balance;

@@ -1,6 +1,6 @@
 /**
  * Represents a raflecup that contains dies.
- * Creates 2 dies upon initialization
+ * Creates 1 die upon initialization
  */
 public class Cup {
 

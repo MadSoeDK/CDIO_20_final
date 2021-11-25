@@ -1,3 +1,6 @@
+/**
+ * Is used within chancecard-array for multiple effects.
+ */
 public class ChanceCard {
 
     private String description;

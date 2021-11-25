@@ -2,6 +2,9 @@ import gui_fields.GUI_Start;
 
 import java.awt.*;
 
+/**
+ * Child of Field, Effect is controlled in Main.
+ */
 public class Start extends Field {
     public Start(GUI_Start field, String name, Color color, String description) {
         field.setTitle(name);

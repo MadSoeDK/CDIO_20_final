@@ -1,7 +1,13 @@
 import gui_fields.*;
-
 import java.awt.*;
+/**
+    Main Class:
+    Responsible for gamelogic. Coupled with Board to get necessary information.
+        - Turn Logic
+        - Landing on fields
+        - Winning
 
+ */
 public class Main {
 
     public static void main(String[] args) {

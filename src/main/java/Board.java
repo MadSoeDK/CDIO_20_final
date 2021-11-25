@@ -1,6 +1,9 @@
 import gui_fields.*;
 import gui_main.GUI;
 import java.awt.Color;
+/**
+ * Handles field-array, Player-array, Gui-information.
+ */
 
 public class Board {
     private GUI_Field[] GUIfields;

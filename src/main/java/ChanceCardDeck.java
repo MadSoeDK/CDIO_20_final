@@ -2,6 +2,9 @@ import gui_main.GUI;
 import java.lang.Math;
 import java.util.Random;
 
+/**
+ * Initializes ChanceCards, Controls ChanceCard Effects.
+ */
 public class ChanceCardDeck {
     private ChanceCard[] deck;
     //private final int MAX_VALUE = 3;
