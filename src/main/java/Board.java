@@ -43,7 +43,6 @@ public class Board {
 
     public Board() {
         gui = new GUI(converter(fields));
-        //this.chanceCard = new ChanceCardDeck(this);
     }
 
     public GUI_Field[] converter(Field[] fields) {
@@ -107,15 +106,6 @@ public class Board {
 
     public Player getPlayer(int number) {
         return player[number];
-        }
-
-
-    public Player[] getPlayers() {
-            return player;
-        }
-
-    public Field[] getFields() {
-            return fields;
         }
 
     public Field getField(int placement) {

@@ -7,39 +7,34 @@ import java.awt.Color;
  */
 public class Player {
 
+    // Variables
     private int placement;
     private String name;
     private GUI_Player player;
     private Account account;
 
+    // Constructor
     public Player(String name, int balance, Color color) {
          account = new Account(balance);
          this.player = new GUI_Player(name, balance, new GUI_Car(color,color, GUI_Car.Type.CAR, GUI_Car.Pattern.FILL));
          this.name = name;
     }
 
+    // Methods
     public int getPlayerBalance() {
         return account.getBalance();
     }
-
-    public void setPlayerBalance(int amount) {
-        account.setBalance(amount);
-    }
-
+    public void setPlayerBalance(int amount) {account.setBalance(amount);}
     public GUI_Player getPlayer(){
         return this.player;
     }
-
     public int getPlacement() {
         return placement;
     }
-
     public void gotoPlacement(int placement) { this.placement = placement; }
-
     public void setPlacement(int sum) {
         placement += sum;
     }
-
     public String getName() {
         return name;
     }

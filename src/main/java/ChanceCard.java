@@ -15,10 +15,4 @@ public class ChanceCard {
     public int getNumber() {
         return number;
     }
-    public String getName() {
-        return name;
-    }
-    public String getDescription() {
-        return description;
-    }
 }

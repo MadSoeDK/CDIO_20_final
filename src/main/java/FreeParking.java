@@ -21,7 +21,6 @@ public class FreeParking extends Field {
         this.description = description;
         this.balance=balance;
     }
-
     public static void setBalance(int value){
         balance=balance+value;
     }
@@ -30,8 +29,5 @@ public class FreeParking extends Field {
     }
     public static void resetBalance(){
         balance=0;
-    }
-    public void updateGUIBalance(){
-        field.setSubText("Modtag: "+String.valueOf(balance));
     }
 }

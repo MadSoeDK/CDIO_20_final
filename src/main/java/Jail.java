@@ -24,5 +24,4 @@ public class Jail extends Field {
     public int getRent() {
         return rent;
     }
-
 }

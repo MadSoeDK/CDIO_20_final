@@ -7,22 +7,17 @@ import java.util.Random;
  */
 public class ChanceCardDeck {
     private ChanceCard[] deck;
-    //private final int MAX_VALUE = 3;
-    //private int position = 0;
-    //protected Player player;
     private Board board;
 
     public ChanceCardDeck(Board owner) {
+        // Initialize ChanceCard Array
         deck = new ChanceCard[5];
         deck[0] = new ChanceCard("Du har spist for meget slik. Betal $2 til banken", "Chancekort 1", 0);
         deck[1] = new ChanceCard("Ryk frem til START. Modtag $2 fra banken.", "Chancekort 2", 1);
         deck[2] = new ChanceCard("Du har lavet alle dine lektier. Modtag $2 fra banken", "Chancekort 3", 2);
         deck[3] = new ChanceCard("Ryk frem til Strandpromenaden", "Chancekort 4", 3);
         deck[4] = new ChanceCard("Du har fødselsdag, Modtag $1 fra hver spiller", "Chancekort 5", 4);
-
-
         this.board = owner;
-        //board.getCurrentPlayer().setPlayerBalance(-200);
         shuffleCard();
     }
     public void shuffleCard() {
@@ -58,7 +53,6 @@ public class ChanceCardDeck {
                 //Du har spist for meget slik. Betal $2 til banken.
                 board.guiMessage("Du Har Spist for meget slik betal $2");
                 board.getCurrentPlayer().setPlayerBalance(-2);
-
                 break;
             case 1:
                 //Ryk frem til START. Modtag $2 fra banken
@@ -81,7 +75,7 @@ public class ChanceCardDeck {
                 board.movePlayer(board.getCurrentPlayerVar(), board.getCurrentPlayer().getPlacement());
                 break;
             case 4:
-                //fødselsdag
+                //Du har Fødselsdag
                 board.guiMessage("Det er din fødselsdag, Modtag $1 fra alle spiller");
                 board.getCurrentPlayer().setPlayerBalance(board.amountofPlayers()+1);
                 for (int i=0; i<board.amountofPlayers()-1; i++) {

@@ -1,28 +1,28 @@
 import gui_fields.*;
 import java.awt.*;
 /**
-    Main Class:
-    Responsible for gamelogic. Coupled with Board to get necessary information.
-        - Turn Logic
-        - Landing on fields
-        - Winning
-
+    *Main Class: Responsible for gamelogic. Coupled with Board to get necessary information.
+    *Turn Logic, Landing on fields, Winning
  */
 public class Main {
 
     public static void main(String[] args) {
+
+        // Initialize and start objects
         Board board = new Board();
         board.newGame();
         Cup cup = new Cup();
 
+        // Initializing Variables
         int sum = 0;
         int currentPlayer = 0;
-
         int same_color_owner=0;
         int rent_mutiplier=1;
 
         // Game loop
         while(!board.checkWinner()) {
+
+            // Roll Cup
             board.button(currentPlayer);
             cup.roll();
             sum = cup.getSum();
@@ -53,7 +53,6 @@ public class Main {
 
             // Update GUI with new placement
             board.movePlayer(currentPlayer, placement);
-
             Field field = board.getField(placement);
 
 
@@ -172,7 +171,6 @@ public class Main {
                 // Update GUI with new placement
                 board.movePlayer(currentPlayer, placement);
                 board.removePlayer(currentPlayer, 18);
-
             }
 
             if (field instanceof FreeParking) {
@@ -188,9 +186,8 @@ public class Main {
                 field.getGUIField().setSubText("Modtag: "+String.valueOf(FreeParking.getBalance()));
 
             }
-
+            // Chance Player Turn/Reset to first player
             currentPlayer++;
-
             if(currentPlayer == board.amountofPlayers()) {
                 currentPlayer = 0;
             }
@@ -201,8 +198,6 @@ public class Main {
             // Show Winner - has to be in while loop, or the winner text will be removed
             board.guiMessage(board.getPlayer(board.getWinner()).getName()+" HAS WON THE GAME!");
         }
-
     }
-
 }
 

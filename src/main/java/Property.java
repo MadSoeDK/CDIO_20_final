@@ -6,6 +6,7 @@ import java.awt.Color;
  */
 public class Property extends Field {
 
+    // Variables
     protected int rent;
     protected Player owner;
     protected Color color;
@@ -17,6 +18,8 @@ public class Property extends Field {
      * @param name
      * @param color
      */
+
+    // Constructor
     public Property(GUI_Street field, int rent, String name, Color color/*, String description*/) {
         field.setTitle(name);
         field.setBackGroundColor(color);
@@ -28,6 +31,8 @@ public class Property extends Field {
         this.name = name;
         this.color = color;
     }
+
+    // Methods
     public int getRent() {
         return rent;
     }
