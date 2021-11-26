@@ -1,7 +1,9 @@
+package Model;
+
 import gui_fields.GUI_Field;
 
 /**
- * Parent Field Class
+ * Parent Model.Field Class
  */
 public abstract class Field {
     protected String name;

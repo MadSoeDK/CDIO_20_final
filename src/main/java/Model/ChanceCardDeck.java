@@ -1,16 +1,16 @@
-import gui_main.GUI;
-import java.lang.Math;
+package Model;
+
 import java.util.Random;
 
 /**
- * Initializes ChanceCards, Controls ChanceCard Effects.
+ * Initializes ChanceCards, Controls Model.ChanceCard Effects.
  */
 public class ChanceCardDeck {
     private ChanceCard[] deck;
     private Board board;
 
     public ChanceCardDeck(Board owner) {
-        // Initialize ChanceCard Array
+        // Initialize Model.ChanceCard Array
         deck = new ChanceCard[5];
         deck[0] = new ChanceCard("Du har spist for meget slik. Betal $2 til banken", "Chancekort 1", 0);
         deck[1] = new ChanceCard("Ryk frem til START. Modtag $2 fra banken.", "Chancekort 2", 1);

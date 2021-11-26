@@ -1,8 +1,9 @@
+import Model.*;
 import gui_fields.*;
-import java.awt.*;
+
 /**
-    *Main Class: Responsible for gamelogic. Coupled with Board to get necessary information.
-    *Turn Logic, Landing on fields, Winning
+ * Main Class: Responsible for gamelogic. Coupled with Model.Board to get necessary information.
+ * Turn Logic, Landing on fields, Winning
  */
 public class Main {
 
@@ -22,12 +23,12 @@ public class Main {
         // Game loop
         while(!board.checkWinner()) {
 
-            // Roll Cup
+            // Roll Model.Cup
             board.button(currentPlayer);
             cup.roll();
             sum = cup.getSum();
 
-            // Get Player pre-turn information
+            // Get Model.Player pre-turn information
             Player player = board.getPlayer(currentPlayer);
             int placement = player.getPlacement();
 
@@ -43,7 +44,7 @@ public class Main {
                 board.removePlayer(currentPlayer, placement);
                 sum = 0;
 
-                // Pass Start field and gain $2
+                // Pass Model.Start field and gain $2
                 player.setPlayerBalance(2);
             }
 
@@ -69,10 +70,10 @@ public class Main {
             // Check field type
             if (field instanceof Property) {
 
-                // Typecast to Property
+                // Typecast to Model.Property
                 Property property = (Property) field;
 
-                // Field is owned by another player and it's not the current player
+                // Model.Field is owned by another player and it's not the current player
                 if (property.getOwner() != player && property.getOwner() != null) {
 
                     // Get field owner
@@ -83,7 +84,7 @@ public class Main {
                         for (int i=0; i<(placement+3) ;i++) {
                             // Check 2 field in either direction
                             if (board.getField(i) instanceof Property){
-                                // Typecast to Property
+                                // Typecast to Model.Property
                                 Property property_check = (Property) board.getField(i);
 
                                 // Check if owner/color is the same
@@ -98,7 +99,7 @@ public class Main {
                             // Check 2 field in either direction
                             if ( i < 24 ) {
                                 if (board.getField(i) instanceof Property) {
-                                    // Typecast to Property
+                                    // Typecast to Model.Property
                                     Property property_check = (Property) board.getField(i);
                                     // Check if owner/color is the same
                                     if (property_check.getColor() == property.getColor() && property_check.getOwner() == property.getOwner()) {
@@ -128,20 +129,20 @@ public class Main {
                     same_color_owner=0;
                 }
 
-                // No one owns the Property
+                // No one owns the Model.Property
                 if (property.getOwner() == null) {
 
-                    // Subtract player balance from Property rent
+                    // Subtract player balance from Model.Property rent
                     player.setPlayerBalance(-property.getRent());
 
                     //Get the GUI-object and display the current player balance
                     player.getPlayer().setBalance(player.getPlayerBalance());
 
-                    // Set Property owner
+                    // Set Model.Property owner
                     property.setOwner(player);
 
-                    // Set GUI Field
-                    GUI_Ownable ownable = (GUI_Ownable) board.getField(placement).field;
+                    // Set GUI Model.Field
+                    GUI_Ownable ownable = (GUI_Ownable) board.getField(placement).getGUIField();
                     ownable.setOwnerName(player.getName());
                     ownable.setBorder(player.getPlayerColor());
                 }
@@ -149,14 +150,14 @@ public class Main {
 
             if (field instanceof Jail) {
 
-                // Typecast to Property
+                // Typecast to Model.Property
                 Jail jail = (Jail) field;
 
-                // Subtract player balance from Property rent. 2. Update GUI
+                // Subtract player balance from Model.Property rent. 2. Update GUI
                 player.setPlayerBalance(-jail.getRent());
                 player.getPlayer().setBalance(player.getPlayerBalance());
 
-                // Add money to Free Parking if landed on "Go To Jail"
+                // Add money to Free Parking if landed on "Go To Model.Jail"
                 if (placement==18) {
                     FreeParking.setBalance(3);
                 }
@@ -164,7 +165,7 @@ public class Main {
                 // Set GUI Balance
                 board.getField(12).getGUIField().setSubText("Modtag: "+String.valueOf(FreeParking.getBalance()));
 
-                // Move to Jail field
+                // Move to Model.Jail field
                 player.gotoPlacement(6);
                 placement = player.getPlacement();
 
@@ -186,7 +187,7 @@ public class Main {
                 field.getGUIField().setSubText("Modtag: "+String.valueOf(FreeParking.getBalance()));
 
             }
-            // Chance Player Turn/Reset to first player
+            // Chance Model.Player Turn/Reset to first player
             currentPlayer++;
             if(currentPlayer == board.amountofPlayers()) {
                 currentPlayer = 0;

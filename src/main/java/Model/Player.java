@@ -1,9 +1,12 @@
+package Model;
+
+import Model.Account;
 import gui_fields.GUI_Car;
 import gui_fields.GUI_Player;
 import java.awt.Color;
 
 /**
- * Used in Player Array, Controls Account-class, used to move, earn & lose money.
+ * Used in Model.Player Array, Controls Model.Account-class, used to move, earn & lose money.
  */
 public class Player {
 

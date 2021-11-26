@@ -1,10 +1,11 @@
-import gui_fields.GUI_Start;
+package Model;
+
 import gui_fields.GUI_Tax;
 
 import java.awt.*;
 
 /**
- * Child of Field, Is used within field array, Tracks balance and gives to player landing on it.
+ * Child of Model.Field, Is used within field array, Tracks balance and gives to player landing on it.
  */
 public class FreeParking extends Field {
 

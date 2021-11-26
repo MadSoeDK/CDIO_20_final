@@ -1,10 +1,11 @@
+package Model;
+
 import gui_fields.*;
 import gui_main.GUI;
 import java.awt.Color;
 /**
- * Handles field-array, Player-array, Gui-information.
+ * Handles field-array, Model.Player-array, Gui-information.
  */
-
 public class Board {
     private GUI_Field[] GUIfields;
     private GUI gui;
@@ -14,11 +15,10 @@ public class Board {
     private ChanceCardDeck chanceCard = new ChanceCardDeck(this);
 
     private Field[] fields = {
-            new Start(new GUI_Start(),"Start", Color.WHITE, "Startfeltet"),
+            new Start(new GUI_Start(),"Model.Start", Color.WHITE, "Startfeltet"),
             new Property(new GUI_Street(),1, "Burgerbaren", Color.GRAY),
             new Property(new GUI_Street(),1, "Pizzahuset", Color.GRAY),
             new ChanceField(new GUI_Chance()),
-            //new Property(new GUI_Street(),1, "Chance", Color.WHITE),
             new Property(new GUI_Street(),2, "Slikbutik", Color.CYAN),
             new Property(new GUI_Street(),2, "Iskiosk", Color.CYAN),
             new Jail(new GUI_Jail(), 0,"På besøg", Color.WHITE),
@@ -45,6 +45,11 @@ public class Board {
         gui = new GUI(converter(fields));
     }
 
+    /**
+     * Returns an array of the correct GUI_Fields type for the GUI to use
+     * @param fields
+     * @return
+     */
     public GUI_Field[] converter(Field[] fields) {
         GUIfields = new GUI_Field[24];
         for(int i = 0; i < GUIfields.length; i++) {

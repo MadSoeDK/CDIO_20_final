@@ -1,3 +1,5 @@
+package Model;
+
 /**
  * Is used within chancecard-array for multiple effects.
  */

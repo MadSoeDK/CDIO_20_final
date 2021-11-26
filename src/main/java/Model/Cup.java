@@ -1,3 +1,5 @@
+package Model;
+
 /**
  * Represents a raflecup that contains dies.
  * Creates 1 die upon initialization

@@ -1,7 +1,9 @@
+package Model;
+
 import static java.lang.Math.abs;
 
 /**
- * Account handles player balance
+ * Model.Account handles player balance
  */
 public class Account {
 
