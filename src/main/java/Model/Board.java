@@ -15,7 +15,7 @@ public class Board {
     private ChanceCardDeck chanceCard = new ChanceCardDeck(this);
 
     private Field[] fields = {
-            new Start(new GUI_Start(),"Model.Start", Color.WHITE, "Startfeltet"),
+            new Start(new GUI_Start(),"Start", Color.WHITE, "Startfeltet"),
             new Property(new GUI_Street(),1, "Burgerbaren", Color.GRAY),
             new Property(new GUI_Street(),1, "Pizzahuset", Color.GRAY),
             new ChanceField(new GUI_Chance()),
@@ -39,22 +39,8 @@ public class Board {
             new ChanceField(new GUI_Chance()),
             new Property(new GUI_Street(),5, "Vandland", Color.BLUE),
             new Property(new GUI_Street(),5, "Strandpromenade", Color.BLUE),
-            new Ferry(new GUI_Shipping()),
-            new Ferry(new GUI_Shipping()),
-            new Ferry(new GUI_Shipping()),
-            new Ferry(new GUI_Shipping()),
-            new Ferry(new GUI_Shipping()),
-            new Ferry(new GUI_Shipping()),
-            new Ferry(new GUI_Shipping()),
-            new Ferry(new GUI_Shipping()),
-            new Ferry(new GUI_Shipping()),
-            new Ferry(new GUI_Shipping()),
-            new Ferry(new GUI_Shipping()),
-            new Ferry(new GUI_Shipping()),
-            new Ferry(new GUI_Shipping()),
-            new Ferry(new GUI_Shipping()),
-            new Ferry(new GUI_Shipping()),
-            new Ferry(new GUI_Shipping()),
+            //new Ferry(new GUI_Shipping()),
+
     };
 
     public Board() {
@@ -67,7 +53,7 @@ public class Board {
      * @return
      */
     public GUI_Field[] converter(Field[] fields) {
-        GUIfields = new GUI_Field[39];
+        GUIfields = new GUI_Field[24];
         for(int i = 0; i < GUIfields.length; i++) {
             GUIfields[i] = fields[i].field;
         }
@@ -152,7 +138,9 @@ public class Board {
         }
         return winner;
     }
-
+    public int getFieldsTotal() {
+        return GUIfields.length;
+    }
     public int getWinner(){
         int winner=0;
         int high_score=0;
