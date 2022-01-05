@@ -39,8 +39,8 @@ public class Main {
             board.setDice(sum);
 
             // Check for a complete lap around on board. Then recalibrate player placement
-            if(placement + sum >= 24) {
-                player.setPlacement(sum - 24);
+            if(placement + sum >= 40) {
+                player.setPlacement(sum - 40);
                 board.removePlayer(currentPlayer, placement);
                 sum = 0;
 
