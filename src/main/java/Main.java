@@ -11,7 +11,8 @@ public class Main {
 
         GameController game = new GameController();
         game.startGame();
-
+        game.takeTurn();
+        //game.checkWinner();
     }
 }
 

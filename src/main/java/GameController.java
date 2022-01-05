@@ -204,9 +204,10 @@ public class GameController {
         board.movePlayer(currentPlayer, placement);
     }
 
-    public Player checkWinner() {
+    public void checkWinner() {
         //board.guiMessage(board.getPlayer(board.getWinner()).getName()+" HAS WON THE GAME!");
-        board.getCurrentPlayer().getPlayerBalance();
-        return board.getCurrentPlayer();
+        if(board.getCurrentPlayer().getPlayerBalance() < 11) {
+            board.guiMessage(board.getPlayer(board.getWinner()).getName()+ "WON THE GAME!");
+        }
     }
 }

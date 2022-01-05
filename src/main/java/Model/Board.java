@@ -39,23 +39,23 @@ public class Board {
             new FreeParking(new GUI_Tax(),0,"Fri Parkering",Color.WHITE,"Modtag Penge"),
             new Property(new GUI_Street(),1, "Rød", Color.RED),
             new ChanceField(new GUI_Chance()),
-            new Property(new GUI_Street(),1, "Rød", Color.RED),
-            new Property(new GUI_Street(),1, "Rød", Color.RED),
+            new Property(new GUI_Street(),2, "Rød", Color.RED),
+            new Property(new GUI_Street(),2, "Rød", Color.RED),
             new Ferry(new GUI_Shipping()),
-            new Property(new GUI_Street(),1, "Hvid", Color.WHITE),
-            new Property(new GUI_Street(),1, "COLA", Color.WHITE),
             new Property(new GUI_Street(),2, "Hvid", Color.WHITE),
-            new Property(new GUI_Street(),1, "HVID", Color.WHITE),
+            new Property(new GUI_Street(),3, "COLA", Color.WHITE),
+            new Property(new GUI_Street(),3, "Hvid", Color.WHITE),
+            new Property(new GUI_Street(),3, "HVID", Color.WHITE),
             new Jail(new GUI_Jail(), 3, "Gå i fængsel", Color.WHITE),
-            new Property(new GUI_Street(),1, "Gul", Color.YELLOW),
-            new Property(new GUI_Street(),1, "GUL", Color.YELLOW),
+            new Property(new GUI_Street(),4, "Gul", Color.YELLOW),
+            new Property(new GUI_Street(),4, "GUL", Color.YELLOW),
             new ChanceField(new GUI_Chance()),
-            new Property(new GUI_Street(),1, "Gul", Color.YELLOW),
+            new Property(new GUI_Street(),4, "Gul", Color.YELLOW),
             new Ferry(new GUI_Shipping()),
             new ChanceField(new GUI_Chance()),
-            new Property(new GUI_Street(),1, "Lilla", Color.PINK),
-            new Property(new GUI_Street(),1, "2000 Skat", Color.WHITE),
-            new Property(new GUI_Street(),1, "Lilla", Color.PINK),
+            new Property(new GUI_Street(),5, "Lilla", Color.PINK),
+            new Property(new GUI_Street(),5, "2000 Skat", Color.WHITE),
+            new Property(new GUI_Street(),5, "Lilla", Color.PINK),
     };
 
     public Board() {
@@ -128,7 +128,7 @@ public class Board {
 
     public Player getPlayer(int number) {
         return player[number];
-        }
+    }
 
     public Field getField(int placement) {
             return fields[placement];
