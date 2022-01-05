@@ -18,7 +18,7 @@ public class GameController {
         board.newGame();
     }
 
-    public void startGame() {
+    public void playGame() {
         do {
             takeTurn();
         } while (!board.checkWinner());
