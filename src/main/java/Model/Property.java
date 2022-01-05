@@ -38,6 +38,7 @@ public class Property extends Ownable {
     public int getRent() {
         return rent;
     }
+
     /*public void setOwner(Player player) {
         this.owner = player;
     }

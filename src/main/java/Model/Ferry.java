@@ -35,4 +35,7 @@ public class Ferry extends Ownable {
         //if ()
         return rent;
     }
+    public void setRent(int newRent) {
+        rent=newRent;
+    }
 }
