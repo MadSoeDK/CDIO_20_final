@@ -25,7 +25,7 @@ public class GameController {
             // Roll Model.Cup
             board.button(currentPlayer);
             cup.roll();
-            sum = cup.getSum();
+            sum = 5;//cup.getSum();
 
             // Get Model.Player pre-turn information
             Player player = board.getPlayer(currentPlayer);
@@ -189,16 +189,60 @@ public class GameController {
 
             if (field instanceof Ferry) {
 
+                // Typecast to Model.Property
+                Ferry property = (Ferry) field;
+
                 // Noone owns Ferry
-                //
-                player.setPlayerBalance(FreeParking.getBalance());
-                player.getPlayer().setBalance(player.getPlayerBalance());
+                if (property.getOwner() == null)
+                {
+                    // Subtract player balance from Model.Property rent
+                    player.setPlayerBalance(-500);
 
-                // Reset Free Parking
-                FreeParking.resetBalance();
+                    //Get the GUI-object and display the current player balance
+                    player.getPlayer().setBalance(player.getPlayerBalance());
 
-                // Set GUI Balance
-                field.getGUIField().setSubText("Modtag: "+String.valueOf(FreeParking.getBalance()));
+                    // Set Model.Property owner
+                    property.setOwner(player);
+
+                    // Set GUI Model.Field
+                    GUI_Ownable ownable = (GUI_Ownable) board.getField(placement).getGUIField();
+                    ownable.setOwnerName(player.getName());
+                    ownable.setBorder(player.getPlayerColor());
+                }
+                else // Other player Owns Ferry
+                {
+                    // Get field owner
+                    Player fieldOwner = property.getOwner();
+
+                    // Check amounts of other ferries owned
+                    int same_ferry_owner=0;
+                    int ferry_cost=500;
+
+                    for (var i=5; i<35; i+=10) {
+                        // Typecast
+                        Ferry property_check = (Ferry) board.getField(i);
+
+                        // Check if owner is the same
+                        if (property_check.getOwner() == property.getOwner()) {
+                            same_ferry_owner++;
+                            if (same_ferry_owner>1)
+                            {
+                                ferry_cost=ferry_cost*2;
+                            }
+
+                        }
+                    }
+
+                    // 1. Subtract rent from current player 2. add to field owner
+                    player.setPlayerBalance(-ferry_cost);
+                    fieldOwner.setPlayerBalance(ferry_cost);
+
+                    //Update GUI-object and display the current player balance
+                    board.getPlayer(currentPlayer).getPlayer().setBalance(board.getPlayer(currentPlayer).getPlayerBalance());
+                    fieldOwner.getPlayer().setBalance(fieldOwner.getPlayerBalance());
+
+                }
+
 
             }
             // Chance Model.Player Turn/Reset to first player

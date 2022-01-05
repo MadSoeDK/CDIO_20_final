@@ -92,7 +92,7 @@ public class Board {
         player = new Player[n];
         for(int i = 0; i < n; i++) {
             gui.showMessage("Tilføj en spiller: ");
-            player[i] = new Player(gui.getUserString(""), 35, colors[i]);
+            player[i] = new Player(gui.getUserString(""), 30000, colors[i]);
             gui.addPlayer(player[i].getPlayer());
             GUIfields[0].setCar(player[i].getPlayer(), true);
         }
