@@ -31,16 +31,16 @@ public class GameController {
             Player player = board.getPlayer(currentPlayer);
             int placement = player.getPlacement();
 
-            moveplayer(player, placement);
+            moveplayer(placement, player);
 
             Field field = board.getField(placement);
 
             checkFieldType(field, placement, player);
 
-            while (true) {
+            /*while (true) {
                 // Show Winner - has to be in while loop, or the winner text will be removed
                 board.guiMessage(board.getPlayer(board.getWinner()).getName() + " HAS WON THE GAME!");
-            }
+            }*/
         }
     }
 
@@ -174,8 +174,29 @@ public class GameController {
         }
         board.updateCurrentPlayer(currentPlayer);
     }
-    public void moveplayer() {
+    public void moveplayer(int placement, Player player) {
+        // Remove player from board
+        board.removePlayer(currentPlayer, placement);
 
+        // Display dice roll on GUI
+        board.setDice(sum);
+
+        // Check for a complete lap around on board. Then recalibrate player placement
+        if(placement + sum >= 40) {
+            player.setPlacement(sum - 40);
+            board.removePlayer(currentPlayer, placement);
+            sum = 0;
+
+            // Pass Model.Start field and gain $2
+            player.setPlayerBalance(2);
+        }
+
+        // Set new placement incremented by dice. Then get the new placement.
+        player.setPlacement(sum);
+        placement = player.getPlacement();
+
+        // Update GUI with new placement
+        board.movePlayer(currentPlayer, placement);
     }
 
     public Player checkWinner() {
