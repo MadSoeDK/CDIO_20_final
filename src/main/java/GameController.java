@@ -207,7 +207,7 @@ public class GameController {
     public void checkWinner() {
         //board.guiMessage(board.getPlayer(board.getWinner()).getName()+" HAS WON THE GAME!");
         if(board.getCurrentPlayer().getPlayerBalance() < 11) {
-            board.guiMessage(board.getPlayer(board.getWinner()).getName()+ " WON THE GAME!");
+            board.guiMessage(board.getPlayer(board.getWinner()).getName()+ "WON THE GAME!");
         }
     }
 }
