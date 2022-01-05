@@ -156,26 +156,41 @@ public class GameController {
                 player.setPlayerBalance(-jail.getRent());
                 player.getPlayer().setBalance(player.getPlayerBalance());
 
-                // Add money to Free Parking if landed on "Go To Model.Jail"
-                if (placement==18) {
-                    FreeParking.setBalance(3);
+                // Add money to Free Parking if landed on "Go To Jail"
+                if (placement==30) {
+                    FreeParking.setBalance(2000);
                 }
 
                 // Set GUI Balance
-                board.getField(12).getGUIField().setSubText("Modtag: "+String.valueOf(FreeParking.getBalance()));
+                board.getField(20).getGUIField().setSubText("Modtag: "+String.valueOf(FreeParking.getBalance()/1000)+"K");
 
                 // Move to Model.Jail field
-                player.gotoPlacement(6);
+                player.gotoPlacement(10);
                 placement = player.getPlacement();
 
                 // Update GUI with new placement
                 board.movePlayer(currentPlayer, placement);
-                board.removePlayer(currentPlayer, 18);
+                board.removePlayer(currentPlayer, 30);
             }
 
             if (field instanceof FreeParking) {
 
                 // Give money to player
+                player.setPlayerBalance(FreeParking.getBalance());
+                player.getPlayer().setBalance(player.getPlayerBalance());
+
+                // Reset Free Parking
+                FreeParking.resetBalance();
+
+                // Set GUI Balance
+                field.getGUIField().setSubText("Modtag: "+String.valueOf(FreeParking.getBalance()));
+
+            }
+
+            if (field instanceof Ferry) {
+
+                // Noone owns Ferry
+                //
                 player.setPlayerBalance(FreeParking.getBalance());
                 player.getPlayer().setBalance(player.getPlayerBalance());
 

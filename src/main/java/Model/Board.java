@@ -21,7 +21,7 @@ public class Board {
             new ChanceField(new GUI_Chance()),
             new Property(new GUI_Street(),1, "Blå", Color.CYAN),
             new Tax(new GUI_Tax(), 2000),
-            new Ferry(new GUI_Shipping()),
+            new Ferry(new GUI_Shipping(), 500, "Færge", Color.white),
             new Property(new GUI_Street(),1, "Orange", Color.ORANGE),
             new ChanceField(new GUI_Chance()),
             new Property(new GUI_Street(),1, "Orange", Color.ORANGE),
@@ -31,7 +31,7 @@ public class Board {
             new Property(new GUI_Street(),1, "SQUASH", Color.WHITE),
             new Property(new GUI_Street(),2, "Gul", Color.YELLOW),
             new Property(new GUI_Street(),1, "Gul", Color.YELLOW),
-            new Ferry(new GUI_Shipping()),
+            new Ferry(new GUI_Shipping(), 500, "Færge", Color.white),
             new Property(new GUI_Street(),1, "Grå", Color.GRAY),
             new ChanceField(new GUI_Chance()),
             new Property(new GUI_Street(),1, "Grå", Color.GRAY),
@@ -41,7 +41,7 @@ public class Board {
             new ChanceField(new GUI_Chance()),
             new Property(new GUI_Street(),1, "Rød", Color.RED),
             new Property(new GUI_Street(),1, "Rød", Color.RED),
-            new Ferry(new GUI_Shipping()),
+            new Ferry(new GUI_Shipping(), 500, "Færge", Color.white),
             new Property(new GUI_Street(),1, "Hvid", Color.WHITE),
             new Property(new GUI_Street(),1, "COLA", Color.WHITE),
             new Property(new GUI_Street(),2, "Hvid", Color.WHITE),
@@ -51,7 +51,7 @@ public class Board {
             new Property(new GUI_Street(),1, "GUL", Color.YELLOW),
             new ChanceField(new GUI_Chance()),
             new Property(new GUI_Street(),1, "Gul", Color.YELLOW),
-            new Ferry(new GUI_Shipping()),
+            new Ferry(new GUI_Shipping(), 500, "Færge", Color.white),
             new ChanceField(new GUI_Chance()),
             new Property(new GUI_Street(),1, "Lilla", Color.PINK),
             new Property(new GUI_Street(),1, "2000 Skat", Color.WHITE),
@@ -68,7 +68,7 @@ public class Board {
      * @return
      */
     public GUI_Field[] converter(Field[] fields) {
-        GUIfields = new GUI_Field[40];
+        GUIfields = new GUI_Field[fields.length];
         for(int i = 0; i < GUIfields.length; i++) {
             GUIfields[i] = fields[i].field;
         }
