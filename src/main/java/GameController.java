@@ -21,27 +21,32 @@ public class GameController {
 
         board.newGame();
 
-        while (!board.checkWinner()) {
-            // Roll Model.Cup
-            board.button(currentPlayer);
-            cup.roll();
-            sum = cup.getSum();
+        do {
+            takeTurn();
+        } while (!board.checkWinner());
+    }
+    public void takeTurn() {
+        // Roll Model.Cup
+        board.button(currentPlayer);
+        cup.roll();
+        sum = cup.getSum();
 
-            // Get Player pre-turn information
-            Player player = board.getPlayer(currentPlayer);
-            int placement = player.getPlacement();
+        // Get Player pre-turn information
+        Player player = board.getPlayer(currentPlayer);
+        int placement = player.getPlacement();
 
-            moveplayer(placement, player);
+        moveplayer(placement, player);
 
-            Field field = board.getField(placement);
+        Field field = board.getField(placement);
 
-            checkFieldType(field, placement, player);
+        checkFieldType(field, placement, player);
 
-            /*while (true) {
-                // Show Winner - has to be in while loop, or the winner text will be removed
-                board.guiMessage(board.getPlayer(board.getWinner()).getName() + " HAS WON THE GAME!");
-            }*/
-        }
+        checkWinner();
+
+        /*while (true) {
+            // Show Winner - has to be in while loop, or the winner text will be removed
+            board.guiMessage(board.getPlayer(board.getWinner()).getName() + " HAS WON THE GAME!");
+        }*/
     }
 
     public void checkFieldType(Field field, int placement, Player player) {
