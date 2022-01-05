@@ -6,18 +6,18 @@ public class GameController {
     Board board;
     Cup cup;
 
+    // Initializing Variables
+    int sum = 0;
+    int currentPlayer = 0;
+    int same_color_owner=0;
+    int rent_mutiplier=1;
+
     public GameController() {
         board = new Board();
         cup = new Cup();
     }
 
     public void startGame() {
-
-        // Initializing Variables
-        int sum = 0;
-        int currentPlayer = 0;
-        int same_color_owner=0;
-        int rent_mutiplier=1;
 
         board.newGame();
 
@@ -27,37 +27,15 @@ public class GameController {
             cup.roll();
             sum = cup.getSum();
 
-            // Get Model.Player pre-turn information
+            // Get Player pre-turn information
             Player player = board.getPlayer(currentPlayer);
             int placement = player.getPlacement();
 
-            // Remove player from board
-            board.removePlayer(currentPlayer, placement);
+            moveplayer(player, placement);
 
-            // Display dice roll on GUI
-            board.setDice(sum);
-
-            // Check for a complete lap around on board. Then recalibrate player placement
-            if(placement + sum >= 40) {
-                player.setPlacement(sum - 40);
-                board.removePlayer(currentPlayer, placement);
-                sum = 0;
-
-                // Pass Model.Start field and gain $2
-                player.setPlayerBalance(2);
-            }
-
-            // Set new placement incremented by dice. Then get the new placement.
-            player.setPlacement(sum);
-            placement = player.getPlacement();
-
-            // Update GUI with new placement
-            board.movePlayer(currentPlayer, placement);
             Field field = board.getField(placement);
 
-
             if (field instanceof ChanceField) {
-
                 // Draw Chance Card
                 board.getChanceCardDeck().useChanceCard();
                 player.getPlayer().setBalance(player.getPlayerBalance());
@@ -199,8 +177,30 @@ public class GameController {
         }
     }
 
-    public void moveplayer() {
+    public void moveplayer(Player player, int placement) {
 
+        // Remove player from board
+        board.removePlayer(currentPlayer, placement);
+
+        // Display dice roll on GUI
+        board.setDice(sum);
+
+        // Check for a complete lap around on board. Then recalibrate player placement
+        if(placement + sum >= 40) {
+            player.setPlacement(sum - 40);
+            board.removePlayer(currentPlayer, placement);
+            sum = 0;
+
+            // Pass Model.Start field and gain $2
+            player.setPlayerBalance(2);
+        }
+
+        // Set new placement incremented by dice. Then get the new placement.
+        player.setPlacement(sum);
+        placement = player.getPlacement();
+
+        // Update GUI with new placement
+        board.movePlayer(currentPlayer, placement);
     }
 
     public Player checkWinner() {
@@ -208,4 +208,5 @@ public class GameController {
         board.getCurrentPlayer().getPlayerBalance();
         return board.getCurrentPlayer();
     }
+
 }
