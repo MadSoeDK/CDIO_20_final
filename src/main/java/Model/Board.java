@@ -39,7 +39,8 @@ public class Board {
             new ChanceField(new GUI_Chance()),
             new Property(new GUI_Street(),5, "Vandland", Color.BLUE),
             new Property(new GUI_Street(),5, "Strandpromenade", Color.BLUE),
-            //new Ferry(new GUI_Shipping()),
+            new Ferry(new GUI_Shipping()),
+            new Ferry(new GUI_Shipping()),
 
     };
 
@@ -53,7 +54,7 @@ public class Board {
      * @return
      */
     public GUI_Field[] converter(Field[] fields) {
-        GUIfields = new GUI_Field[24];
+        GUIfields = new GUI_Field[26];
         for(int i = 0; i < GUIfields.length; i++) {
             GUIfields[i] = fields[i].field;
         }
