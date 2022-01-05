@@ -1,0 +1,35 @@
+\babel@toc {danish}{}\relax 
+\contentsline {section}{\numberline {1}Indledning}{3}{section.1}%
+\contentsline {section}{\numberline {2}Projektplanlægning}{3}{section.2}%
+\contentsline {section}{\numberline {3}Analyse}{5}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Kravspecifikation}{5}{subsection.3.1}%
+\contentsline {section}{\numberline {4}Begrebsforklaring}{10}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Arv}{10}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Abstract}{10}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Polymorphism}{10}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Design}{11}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Designklassediagram}{11}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Sekvensdiagram}{13}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}GRASP}{14}{subsection.5.3}%
+\contentsline {subsubsection}{\numberline {5.3.1}Creator}{14}{subsubsection.5.3.1}%
+\contentsline {subsubsection}{\numberline {5.3.2}Information Expert}{14}{subsubsection.5.3.2}%
+\contentsline {subsubsection}{\numberline {5.3.3}Low Coupling High Cohesion}{14}{subsubsection.5.3.3}%
+\contentsline {subsubsection}{\numberline {5.3.4}Polymorphism}{15}{subsubsection.5.3.4}%
+\contentsline {subsubsection}{\numberline {5.3.5}Pure Fabrication}{15}{subsubsection.5.3.5}%
+\contentsline {section}{\numberline {5}Implementering}{15}{section.5}%
+\contentsline {section}{\numberline {6}Konfiguration}{16}{section.6}%
+\contentsline {paragraph}{Importering af projektet i IntelliJ fra Git}{16}{section*.8}%
+\contentsline {paragraph}{Hvordan kører man programmet?}{16}{section*.9}%
+\contentsline {section}{\numberline {7}Test}{17}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Brugertest}{17}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Test cases}{19}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Test Planlægning}{21}{subsection.7.3}%
+\contentsline {subsection}{\numberline {7.4}Code Coverage}{22}{subsection.7.4}%
+\contentsline {subsection}{\numberline {7.5}Traceability matrix}{23}{subsection.7.5}%
+\contentsline {subsection}{\numberline {7.6}Test Planlægning}{23}{subsection.7.6}%
+\contentsline {subsection}{\numberline {7.7}Automatiserede Test}{23}{subsection.7.7}%
+\contentsline {subsection}{\numberline {7.8}White box/Black box}{23}{subsection.7.8}%
+\contentsline {subsection}{\numberline {7.9}Integrationstest}{23}{subsection.7.9}%
+\contentsline {section}{\numberline {8}Versionsstyring}{24}{section.8}%
+\contentsline {section}{\numberline {9}Konklusion}{25}{section.9}%
+\contentsline {section}{\numberline {10}Bilag}{26}{section.10}%
