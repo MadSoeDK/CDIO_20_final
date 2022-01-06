@@ -15,16 +15,15 @@ public class GameController {
     public GameController() {
         board = new Board();
         cup = new Cup();
+        board.newGame();
     }
 
-    public void startGame() {
-
-        board.newGame();
-
+    public void playGame() {
         do {
             takeTurn();
         } while (!board.checkWinner());
     }
+
     public void takeTurn() {
         // Roll Model.Cup
         board.button(currentPlayer);
@@ -41,18 +40,22 @@ public class GameController {
 
         checkFieldType(field, placement, player);
 
+        nextTurn();
+
         checkWinner();
 
-        /*while (true) {
-            // Show Winner - has to be in while loop, or the winner text will be removed
-            board.guiMessage(board.getPlayer(board.getWinner()).getName() + " HAS WON THE GAME!");
-        }*/
+    }
+
+    public void nextTurn() {
+        // Chance Model.Player Turn/Reset to first player
+        currentPlayer++;
+        if (currentPlayer == board.amountofPlayers()) {
+            currentPlayer = 0;
+        }
+        board.updateCurrentPlayer(currentPlayer);
     }
 
     public void checkFieldType(Field field, int placement, Player player) {
-        //placement = player.getPlacement();
-
-        //Field field = board.getField(placement);
         // Check field type
         if (field instanceof Property) {
 
@@ -172,13 +175,8 @@ public class GameController {
             field.getGUIField().setSubText("Modtag: " + String.valueOf(FreeParking.getBalance()));
 
         }
-        // Chance Model.Player Turn/Reset to first player
-        currentPlayer++;
-        if (currentPlayer == board.amountofPlayers()) {
-            currentPlayer = 0;
-        }
-        board.updateCurrentPlayer(currentPlayer);
     }
+
     public void moveplayer(int placement, Player player) {
         // Remove player from board
         board.removePlayer(currentPlayer, placement);

@@ -68,7 +68,7 @@ public class Board {
      * @return
      */
     public GUI_Field[] converter(Field[] fields) {
-        GUIfields = new GUI_Field[40];
+        GUIfields = new GUI_Field[fields.length];
         for(int i = 0; i < GUIfields.length; i++) {
             GUIfields[i] = fields[i].field;
         }
