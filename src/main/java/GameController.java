@@ -3,59 +3,77 @@ import gui_fields.GUI_Ownable;
 
 public class GameController {
 
-    Board board;
-    Cup cup;
+    private Board board;
+    private Cup cup;
+    private GUIController gui;
+    private Player[] players;
+    private Player currentPlayer;
+
 
     // Initializing Variables
     int sum = 0;
-    int currentPlayer = 0;
+    //int currentPlayer = 0;
     int same_color_owner = 0;
     int rent_mutiplier = 1;
 
     public GameController() {
         board = new Board();
         cup = new Cup();
-        board.newGame();
+        gui = new GUIController(board.getFields());
+        gui.createPlayers();
+        setupPlayers(gui.getPlayernames());
+        playGame();
     }
 
     public void playGame() {
         do {
             takeTurn();
-        } while (!board.checkWinner());
+        } while (true);
     }
 
     public void takeTurn() {
-        // Roll Model.Cup
-        board.button(currentPlayer);
-        cup.roll();
-        sum = cup.getSum();
 
         // Get Player pre-turn information
-        Player player = board.getPlayer(currentPlayer);
-        int placement = player.getPlacement();
+        //Player player = board.getPlayer(currentPlayer);
+        int from = currentPlayer.getPlacement();
 
-        moveplayer(placement, player);
+        // Roll die, get value, show die
+        gui.Button("Nu er det" + currentPlayer + "'s tur, rul terningen!", "Rul terning");
+        cup.roll();
+        sum = cup.getSum();
+        gui.showDie(sum);
+
+        // Move player position
+        moveplayer(from, currentPlayer);
+
+        int placement = currentPlayer.getPlacement();
+
+        // Get new position and Update GUI
+        gui.movePlayer(currentPlayer, from, placement);
 
         Field field = board.getField(placement);
 
-        checkFieldType(field, placement, player);
+        checkFieldType(field, placement);
 
         nextTurn();
 
-        checkWinner();
+        //checkWinner();
 
     }
 
     public void nextTurn() {
-        // Chance Model.Player Turn/Reset to first player
-        currentPlayer++;
-        if (currentPlayer == board.amountofPlayers()) {
-            currentPlayer = 0;
+        // Chance Player Turn/Reset to first player
+        int playerindex = java.util.Arrays.asList(players).indexOf(currentPlayer);
+
+        if (playerindex == players.length-1) {
+            currentPlayer = players[0];
+        } else {
+            currentPlayer = players[playerindex + 1];
         }
-        board.updateCurrentPlayer(currentPlayer);
+        //board.updateCurrentPlayer(currentPlayer);
     }
 
-    public void checkFieldType(Field field, int placement, Player player) {
+    public void checkFieldType(Field field, int placement) {
         // Check field type
         if (field instanceof Property) {
 
@@ -63,7 +81,7 @@ public class GameController {
             Property property = (Property) field;
 
             // Model.Field is owned by another player and it's not the current player
-            if (property.getOwner() != player && property.getOwner() != null) {
+            if (property.getOwner() != currentPlayer && property.getOwner() != null) {
 
                 // Get field owner
                 Player fieldOwner = property.getOwner();
@@ -106,12 +124,16 @@ public class GameController {
                 }
 
                 // 1. Subtract rent from current player 2. add to field owner
-                player.setPlayerBalance(-property.getRent() * rent_mutiplier);
+                currentPlayer.setPlayerBalance(-property.getRent() * rent_mutiplier);
                 fieldOwner.setPlayerBalance(property.getRent() * rent_mutiplier);
 
-                //Update GUI-object and display the current player balance
-                board.getPlayer(currentPlayer).getPlayer().setBalance(board.getPlayer(currentPlayer).getPlayerBalance());
-                fieldOwner.getPlayer().setBalance(fieldOwner.getPlayerBalance());
+                //Update GUI balance from currentplayer and field owner
+                gui.setguiPlayerBalance(currentPlayer, currentPlayer.getPlayerBalance());
+                gui.setguiPlayerBalance(fieldOwner, fieldOwner.getPlayerBalance());
+
+                //gui.getGuiPlayer(currentPlayer).setBalance(board.getPlayer(currentPlayer).getPlayerBalance());
+                //board.getPlayer(currentPlayer).getPlayer().setBalance(board.getPlayer(currentPlayer).getPlayerBalance());
+                //fieldOwner.getPlayer().setBalance(fieldOwner.getPlayerBalance());
 
                 // Reset
                 same_color_owner = 0;
@@ -121,18 +143,19 @@ public class GameController {
             if (property.getOwner() == null) {
 
                 // Subtract player balance from Model.Property rent
-                player.setPlayerBalance(-property.getRent());
+                currentPlayer.setPlayerBalance(-property.getRent());
 
-                //Get the GUI-object and display the current player balance
-                player.getPlayer().setBalance(player.getPlayerBalance());
+                // Update GUI balance
+                gui.setguiPlayerBalance(currentPlayer, currentPlayer.getPlayerBalance());
+                //gui.getGuiPlayer(currentPlayer).setBalance(currentPlayer.getPlayerBalance());
 
-                // Set Model.Property owner
-                property.setOwner(player);
+                // Set Property owner
+                property.setOwner(currentPlayer);
 
-                // Set GUI Model.Field
-                GUI_Ownable ownable = (GUI_Ownable) board.getField(placement).getGUIField();
-                ownable.setOwnerName(player.getName());
-                ownable.setBorder(player.getPlayerColor());
+                // Set GUI Field
+                GUI_Ownable ownable = (GUI_Ownable) gui.getGuiField(placement);//board.getField(placement).getGUIField();
+                ownable.setOwnerName(currentPlayer.getName());
+                ownable.setBorder(gui.getPlayerColor(currentPlayer));
             }
         }
 
@@ -142,8 +165,8 @@ public class GameController {
             Jail jail = (Jail) field;
 
             // Subtract player balance from Model.Property rent. 2. Update GUI
-            player.setPlayerBalance(-jail.getRent());
-            player.getPlayer().setBalance(player.getPlayerBalance());
+            currentPlayer.setPlayerBalance(-jail.getRent());
+            gui.getGuiPlayer(currentPlayer).setBalance(currentPlayer.getPlayerBalance());
 
             // Add money to Free Parking if landed on "Go To Model.Jail"
             if (placement == 18) {
@@ -151,43 +174,54 @@ public class GameController {
             }
 
             // Set GUI Balance
-            board.getField(12).getGUIField().setSubText("Modtag: " + String.valueOf(FreeParking.getBalance()));
+            gui.getGuiField(placement).setSubText("Modtag: " + String.valueOf(FreeParking.getBalance()));
 
             // Move to Model.Jail field
-            player.gotoPlacement(6);
-            placement = player.getPlacement();
+            currentPlayer.gotoPlacement(6);
+            placement = currentPlayer.getPlacement();
 
             // Update GUI with new placement
-            board.movePlayer(currentPlayer, placement);
-            board.removePlayer(currentPlayer, 18);
+            gui.movePlayer(currentPlayer, 18, placement);
+            //board.movePlayer(currentPlayer, placement);
+            //board.removePlayer(currentPlayer, 18);
         }
 
         if (field instanceof FreeParking) {
 
             // Give money to player
-            player.setPlayerBalance(FreeParking.getBalance());
-            player.getPlayer().setBalance(player.getPlayerBalance());
+            currentPlayer.setPlayerBalance(FreeParking.getBalance());
+            //gui.getGuiPlayer(currentPlayer).setBalance(player.getPlayerBalance());
+            // Update GUI
+            gui.setguiPlayerBalance(currentPlayer, currentPlayer.getPlayerBalance());
 
             // Reset Free Parking
             FreeParking.resetBalance();
 
             // Set GUI Balance
-            field.getGUIField().setSubText("Modtag: " + String.valueOf(FreeParking.getBalance()));
+            gui.getGuiField(placement).setSubText("Modtag: " + String.valueOf(FreeParking.getBalance()));
 
         }
     }
 
-    public void moveplayer(int placement, Player player) {
-        // Remove player from board
-        board.removePlayer(currentPlayer, placement);
+    public void setupPlayers(String[] playerNames) {
+        final int STARTBALANCE = 30000;
+        players = new Player[playerNames.length];
 
-        // Display dice roll on GUI
-        board.setDice(sum);
+        for (int i = 0; i < playerNames.length; i++) {
+            players[i] = new Player(playerNames[i],STARTBALANCE);
+        }
+
+        currentPlayer = players[0];
+    }
+    public void moveplayer(int from, Player player) {
+        // Remove player from board
+        //board.removePlayer(currentPlayer, placement);
 
         // Check for a complete lap around on board. Then recalibrate player placement
-        if(placement + sum >= 40) {
+        if(from + sum >= 40) {
             player.setPlacement(sum - 40);
-            board.removePlayer(currentPlayer, placement);
+            //board.removePlayer(currentPlayer, from);
+            gui.movePlayer(player, from, player.getPlacement());
             sum = 0;
 
             // Pass Model.Start field and gain $2
@@ -196,15 +230,16 @@ public class GameController {
 
         // Set new placement incremented by dice. Then get the new placement.
         player.setPlacement(sum);
-        placement = player.getPlacement();
+        //placement = player.getPlacement();
 
         // Update GUI with new placement
-        board.movePlayer(currentPlayer, placement);
+        //board.movePlayer(currentPlayer, placement);
     }
 
-    public Player checkWinner() {
-        //board.guiMessage(board.getPlayer(board.getWinner()).getName()+" HAS WON THE GAME!");
+    /*public Player checkWinner() {
+        gui.guiMessage(board.getPlayer(board.getWinner()).getName()+" HAS WON THE GAME!");
         board.getCurrentPlayer().getPlayerBalance();
         return board.getCurrentPlayer();
-    }
+    }*/
+
 }
