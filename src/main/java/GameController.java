@@ -356,13 +356,14 @@ public class GameController {
         }
     }
 
-    public void auction(GUI gui) {
+    public int auction(GUI gui) {
 
         // Add players to auction
             Player[] aucPlayers = board.getPlayerArray();
 
         // Initialize Auction start variables
-            int curAucIndex = 0;
+        int auctionWinner=0;
+        int curAucIndex = 0;
             Player curAucPlayer = aucPlayers[curAucIndex];
             int auctionSum = 0;
             int auctionPlayersLeft = aucPlayers.length;
@@ -376,7 +377,8 @@ public class GameController {
             }
 
         // Bid/Pass
-        while (auctionPlayersLeft != 1) {
+        while (auctionPlayersLeft != 1)
+        {
             switch (gui.getUserSelection("Current Bid Amount: " + String.valueOf(auctionSum) + " " + curAucPlayer.getName() + ": Select Bid Option", "Pass", "100", "200", "500", "1000", "2000")) {
                 case "Pass":
                     auctionPlayersLeft -= 1;
@@ -400,29 +402,77 @@ public class GameController {
                     break;
             }
             // Next Player
-
+            if (curAucIndex+1 != aucPlayers.length) // If this player is not the last
+            {
+                if (aucPlayers[curAucIndex + 1] == null) // If the next player should be skipped
+                {
+                    curAucIndex++;
+                    while (aucPlayers[curAucIndex] == null) // Skip them
+                    {
+                        curAucIndex++;
+                        if (curAucIndex == aucPlayers.length-1) {
+                            //curAucIndex = 0;
+                        }
+                    }
+                }
+                else // Else Proceed
+                {
+                    curAucIndex++;
+                }
+            }
+            else
+            {
+                // If the player is the last player
+                if (aucPlayers[0] == null) // And the first player should be skipped
+                {
+                    curAucIndex=0;
+                    while (aucPlayers[curAucIndex+1] == null) // Skip them
+                    {
+                        curAucIndex++;
+                        if (curAucIndex == aucPlayers.length-1) {
+                            curAucIndex = 0;
+                        }
+                    }
+                }
+                else
+                {
+                    // If the first player shouldn't be skipped
+                    curAucIndex = 0;
+                }
+            }
+            if (curAucIndex == aucPlayers.length) {
+                curAucIndex = 0;
+            }
             // Skip passed players
+
+            /*
             curAucIndex++;
             if (curAucIndex == aucPlayers.length) {edgeCase = 1;}else{edgeCase = 0;}
             while (aucPlayers[curAucIndex-edgeCase]==null && playerPassed==false)
             {
                 curAucIndex++;
                 //curAucIndex = 0;
-                //if (curAucIndex == aucPlayers.length) {
-                    //curAucIndex = 0;
-                //}
+                if (curAucIndex == aucPlayers.length) {
+                    curAucIndex = 0;
+                }
             }
 
             playerPassed=false;
             if (curAucIndex == aucPlayers.length) {
                 curAucIndex = 0;
             }
-
+*/
             curAucPlayer = aucPlayers[curAucIndex];
         }
-            // Increase price
-            // Remove player from auction
-        // New player
+        // Return winner of Auction
+        for (int i=0; i<aucPlayers.length; i++)
+        {
+            if (aucPlayers[i] != null)
+            {
+                auctionWinner=i;
+            }
+        }
+        return auctionWinner;
 
         // If only one player left, wins auction
     }
