@@ -1,5 +1,6 @@
 import Model.*;
 import gui_fields.GUI_Ownable;
+import gui_main.GUI;
 
 public class GameController {
 
@@ -131,6 +132,9 @@ public class GameController {
                 // No one owns the Model.Property
                 if (property.getOwner() == null) {
 
+                    // Auction/Buy
+                    buyOrSellOption(board.getGui());
+
                     // Subtract player balance from Model.Property rent
                     player.setPlayerBalance(-property.getRent());
 
@@ -241,13 +245,6 @@ public class GameController {
                 {
                     otherCompany = (Company) board.getField(27);
                 }
-                /*
-                else
-                {
-                    otherCompany = (Company) board.getField(37);
-                }
-                */
-
 
                 // Check Company Rent
                 int company_cost = sum*100;
@@ -255,7 +252,6 @@ public class GameController {
                 {
                     company_cost = sum*200;
                 }
-
 
                 // Noone owns Company
                 if (property.getOwner() == null)
@@ -273,9 +269,6 @@ public class GameController {
                     GUI_Ownable ownable = (GUI_Ownable) board.getField(placement).getGUIField();
                     ownable.setOwnerName(player.getName());
                     ownable.setBorder(player.getPlayerColor());
-
-                    //ferry_cost = getFerryRent(property);
-                    //updateFerryGUI(property, ferry_cost);
                 }
                 else // Other player Owns Company
                 {
@@ -350,6 +343,88 @@ public class GameController {
         //board.guiMessage(board.getPlayer(board.getWinner()).getName()+" HAS WON THE GAME!");
         board.getCurrentPlayer().getPlayerBalance();
         return board.getCurrentPlayer();
+    }
+
+    public void buyOrSellOption(GUI gui) {
+        switch (gui.getUserSelection("Buy or Auction Property?", "Buy", "Start Auction")) {
+            case "Buy":
+                //
+                break;
+            case "Start Auction":
+                auction(gui);
+            break;
+        }
+    }
+
+    public void auction(GUI gui) {
+
+        // Add players to auction
+            Player[] aucPlayers = board.getPlayerArray();
+
+        // Initialize Auction start variables
+            int curAucIndex = 0;
+            Player curAucPlayer = aucPlayers[curAucIndex];
+            int auctionSum = 0;
+            int auctionPlayersLeft = aucPlayers.length;
+            boolean playerPassed = false;
+            int edgeCase = 0;
+
+        // Show Participants
+            for (int i=0; i<aucPlayers.length; i++)
+            {
+                System.out.println(aucPlayers[i]);
+            }
+
+        // Bid/Pass
+        while (auctionPlayersLeft != 1) {
+            switch (gui.getUserSelection("Current Bid Amount: " + String.valueOf(auctionSum) + " " + curAucPlayer.getName() + ": Select Bid Option", "Pass", "100", "200", "500", "1000", "2000")) {
+                case "Pass":
+                    auctionPlayersLeft -= 1;
+                    aucPlayers[curAucIndex]=null;
+                    playerPassed = true;
+                    break;
+                case "100":
+                    auctionSum += 100;
+                    break;
+                case "200":
+                    auctionSum += 200;
+                    break;
+                case "500":
+                    auctionSum += 500;
+                    break;
+                case "1000":
+                    auctionSum += 1000;
+                    break;
+                case "2000":
+                    auctionSum += 2000;
+                    break;
+            }
+            // Next Player
+
+            // Skip passed players
+            curAucIndex++;
+            if (curAucIndex == aucPlayers.length) {edgeCase = 1;}else{edgeCase = 0;}
+            while (aucPlayers[curAucIndex-edgeCase]==null && playerPassed==false)
+            {
+                curAucIndex++;
+                //curAucIndex = 0;
+                //if (curAucIndex == aucPlayers.length) {
+                    //curAucIndex = 0;
+                //}
+            }
+
+            playerPassed=false;
+            if (curAucIndex == aucPlayers.length) {
+                curAucIndex = 0;
+            }
+
+            curAucPlayer = aucPlayers[curAucIndex];
+        }
+            // Increase price
+            // Remove player from auction
+        // New player
+
+        // If only one player left, wins auction
     }
 }
 

@@ -172,5 +172,13 @@ public class Board {
     public ChanceCardDeck getChanceCardDeck(){
         return chanceCard;
     }
-    
+
+    public GUI getGui() {
+        return gui;
+    }
+
+    public Player[] getPlayerArray(){
+        return player;
+    }
+
 }
