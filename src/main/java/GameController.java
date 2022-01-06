@@ -24,7 +24,7 @@ public class GameController {
 
         board.newGame();
 
-        while (!board.checkWinner()) {
+        while (1==1){//!board.checkWinner()) {
             // Roll Model.Cup
             board.button(currentPlayer);
             cup.roll();
@@ -299,10 +299,13 @@ public class GameController {
             }
             board.updateCurrentPlayer(currentPlayer);
         }
+        /*
         while (true) {
             // Show Winner - has to be in while loop, or the winner text will be removed
             board.guiMessage(board.getPlayer(board.getWinner()).getName()+" HAS WON THE GAME!");
         }
+
+         */
     }
 
     public void moveplayer() {
@@ -368,8 +371,12 @@ public class GameController {
 
     public int auction(GUI gui) {
 
-        // Add players to auction
-            Player[] aucPlayers = board.getPlayerArray();
+        // Add players to auction array
+            Player[] aucPlayers = new Player[board.getPlayerArray().length];
+            for (int q = 0; q<board.getPlayerArray().length; q++)
+            {
+                aucPlayers[q] = board.getPlayerArray()[q];
+            }
 
         // Initialize Auction start variables
         int auctionWinner=0;
@@ -420,8 +427,8 @@ public class GameController {
                     while (aucPlayers[curAucIndex] == null) // Skip them
                     {
                         curAucIndex++;
-                        if (curAucIndex == aucPlayers.length-1) {
-                            //curAucIndex = 0;
+                        if (curAucIndex == aucPlayers.length) {
+                            curAucIndex = 0;
                         }
                     }
                 }
@@ -435,11 +442,11 @@ public class GameController {
                 // If the player is the last player
                 if (aucPlayers[0] == null) // And the first player should be skipped
                 {
-                    curAucIndex=0;
-                    while (aucPlayers[curAucIndex+1] == null) // Skip them
+                    curAucIndex=0; // Check next player
+                    while (aucPlayers[curAucIndex] == null) // Skip them
                     {
                         curAucIndex++;
-                        if (curAucIndex == aucPlayers.length-1) {
+                        if (curAucIndex == aucPlayers.length) {
                             curAucIndex = 0;
                         }
                     }
