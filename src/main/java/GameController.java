@@ -222,4 +222,8 @@ public class GameController {
         System.out.println(player.getName() + "'s net worth: " + netWorth);
         return netWorth;
     }
+    /*
+    public boolean bankrupt() {
+
+    }*/
 }
