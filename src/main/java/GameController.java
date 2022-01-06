@@ -183,7 +183,7 @@ public class GameController {
         board.setDice(sum);
 
         // Check for a complete lap around on board. Then recalibrate player placement
-        if(placement + sum >= 40) {
+        if (placement + sum >= 40) {
             player.setPlacement(sum - 40);
             board.removePlayer(currentPlayer, placement);
             sum = 0;
@@ -202,19 +202,20 @@ public class GameController {
 
     public void checkWinner() {
         //board.guiMessage(board.getPlayer(board.getWinner()).getName()+" HAS WON THE GAME!");
-        if(board.getCurrentPlayer().getPlayerBalance() < 11) {
-            board.guiMessage(board.getPlayer(board.getWinner()).getName()+ "WON THE GAME!");
+        if (board.getCurrentPlayer().getPlayerBalance() < 11) {
+            board.guiMessage(board.getPlayer(board.getWinner()).getName() + "WON THE GAME!");
         }
     }
+
     public int netWorth(Player player) {
         int netWorth = player.getPlayerBalance();
 
-        for(int i = 0; i < board.getFieldsTotal(); i++) {
+        for (int i = 0; i < board.getFieldsTotal(); i++) {
             //Type casting field to Ownable
-            if(board.getField(i) instanceof Ownable) {
+            if (board.getField(i) instanceof Ownable) {
                 //Verifying that the current field is of the type Ownable
                 Ownable property = (Ownable) board.getField(i);
-                if(player == property.getOwner()) {
+                if (player == property.getOwner()) {
                     netWorth += ((Property) board.getField(i)).getRent();
                 }
             }
@@ -222,8 +223,46 @@ public class GameController {
         System.out.println(player.getName() + "'s net worth: " + netWorth);
         return netWorth;
     }
-    /*
-    public boolean bankrupt() {
+    public Player[] eliminatePlayer() {
+        Player[] newPlayers = new Player[board.amountofPlayers() - 1];
+        int j = 0;
+        for(int i = 0; i < board.amountofPlayers(); i++) {
+            Player currentPlayer = board.getPlayer(i);
+            if(!(bankrupt(currentPlayer, currentPlayer.getPlacement()))) {
+                newPlayers[j] = board.getPlayer(i);
+                j++;
+            }
+        }
+        return newPlayers;
+    }
+    public boolean bankrupt(Player player, int placement) {
+        //Type casting field to Ownable
+        boolean bankrupt = false;
+        if (board.getField(placement) instanceof Ownable) {
+            //Verifying that the current field is of the type Ownable
+            Ownable property = (Ownable) board.getField(placement);
+            if(player != property.getOwner()) {
+                if(player.getPlayerBalance() < ((Property) board.getField(placement)).getRent()) {
+                    if(netWorth(player) < ((Property) board.getField(placement)).getRent()) {
+                        bankrupt = true;
+                        for (int i = 0; i < board.getFieldsTotal(); i++) {
+                            //Type casting field to Ownable
+                            if (board.getField(i) instanceof Ownable) {
+                                //Verifying that the current field is of the type Ownable
+                                Ownable playerProperty = (Ownable) board.getField(i);
+                                if (player == playerProperty.getOwner()) {
+                                    playerProperty = ((Property) board.getField(i)).setOwner(((Property) board.getField(placement)).getOwner());
+                                }
+                            }
+                        }
 
-    }*/
+                        eliminatePlayer();
+                    } else if(netWorth(player) > ((Property) board.getField(placement)).getRent()) {
+
+                    }
+                }
+            }
+            return bankrupt;
+        }
+    }
 }
