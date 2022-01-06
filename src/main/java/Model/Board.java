@@ -83,10 +83,10 @@ public class Board {
                 createPlayer(4);
                 break;
             case "5":
-                createPlayer(4);
+                createPlayer(5);
                 break;
             case "6":
-                createPlayer(4);
+                createPlayer(6);
                 break;
 
         }
