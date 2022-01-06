@@ -1,7 +1,5 @@
 package Model;
 
-import gui_fields.GUI_Tax;
-
 import java.awt.*;
 
 /**
@@ -11,13 +9,13 @@ public class FreeParking extends Field {
 
     public static int balance;
 
-    public FreeParking(GUI_Tax field, int balance,String name, Color color, String description) {
-        field.setTitle(name);
+    public FreeParking(int balance,String name, Color color, String description) {
+        /*field.setTitle(name);
         field.setBackGroundColor(color);
         field.setDescription("Modtag penge ved at lande på dette felt");
         field.setSubText("Modtag: "+String.valueOf(balance));
 
-        this.field = field;
+        this.field = field;*/
         this.name = name;
         this.description = description;
         this.balance=balance;

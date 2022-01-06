@@ -1,6 +1,5 @@
 package Model;
 
-import gui_fields.GUI_Street;
 import java.awt.Color;
 
 /**
@@ -14,21 +13,20 @@ public class Property extends Ownable {
 
     /**
      * Constructor
-     * @param field
      * @param rent
      * @param name
      * @param color
      */
 
     // Constructor
-    public Property (GUI_Street field, int rent, String name, Color color/*, String description*/) {
-        field.setTitle(name);
+    public Property (int rent, String name, Color color/*, String description*/) {
+        /*field.setTitle(name);
         field.setBackGroundColor(color);
         field.setSubText("$" + rent);
         field.setDescription("My description");
 
 
-        this.field = field;
+        this.field = field;*/
         this.rent = rent;
         this.name = name;
         this.color = color;
@@ -47,4 +45,5 @@ public class Property extends Ownable {
     public Color getColor() {
         return color;
     }
+
 }

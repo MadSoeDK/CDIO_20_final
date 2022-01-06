@@ -13,13 +13,13 @@ public class Player {
     // Variables
     private int placement;
     private String name;
-    private GUI_Player player;
+    //private GUI_Player player;
     private Account account;
 
     // Constructor
-    public Player(String name, int balance, Color color) {
+    public Player(String name, int balance/*, Color color*/) {
          account = new Account(balance);
-         this.player = new GUI_Player(name, balance, new GUI_Car(color,color, GUI_Car.Type.CAR, GUI_Car.Pattern.FILL));
+         //this.player = new GUI_Player(name, balance, new GUI_Car(color,color, GUI_Car.Type.CAR, GUI_Car.Pattern.FILL));
          this.name = name;
     }
 
@@ -28,9 +28,9 @@ public class Player {
         return account.getBalance();
     }
     public void setPlayerBalance(int amount) {account.setBalance(amount);}
-    public GUI_Player getPlayer(){
+    /*public GUI_Player getPlayer(){
         return this.player;
-    }
+    }*/
     public int getPlacement() {
         return placement;
     }
@@ -41,8 +41,8 @@ public class Player {
     public String getName() {
         return name;
     }
-    public Color getPlayerColor() {
+    /*public Color getPlayerColor() {
         return player.getPrimaryColor();
-    }
+    }*/
 
 }

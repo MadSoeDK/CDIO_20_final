@@ -1,7 +1,5 @@
 package Model;
 
-import gui_fields.GUI_Chance;
-import gui_fields.GUI_Jail;
 import java.awt.*;
 //import java.awt.Color;
 
@@ -10,11 +8,8 @@ import java.awt.*;
  */
 public class ChanceField extends Field {
 
+    public ChanceField() {
 
-    public ChanceField(GUI_Chance field) {
-        field.setBackGroundColor(Color.white);
-        field.setDescription("Træk et kort");
-        this.field = field;
     }
 
 }
