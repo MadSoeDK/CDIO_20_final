@@ -2,7 +2,6 @@ import Model.*;
 import gui_fields.GUI_Ownable;
 
 public class GameController {
-
     Board board;
     Cup cup;
 
@@ -206,6 +205,19 @@ public class GameController {
         //board.guiMessage(board.getPlayer(board.getWinner()).getName()+" HAS WON THE GAME!");
         if(board.getCurrentPlayer().getPlayerBalance() < 11) {
             board.guiMessage(board.getPlayer(board.getWinner()).getName()+ "WON THE GAME!");
+        }
+    }
+    public int netWorth(Player player) {
+        int netWorth = 0;
+
+        for(int i = 0; i < board.getFieldsTotal(); i++) {
+            //Type casting field to Ownable
+            if(board.getField(i) instanceof Ownable) {
+                Ownable property = (Ownable) board.getField(i);
+                if(player == property.getOwner()) {
+                    netWorth += property.
+                }
+            }
         }
     }
 }
