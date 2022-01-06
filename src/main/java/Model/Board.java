@@ -76,15 +76,19 @@ public class Board {
     }
     public void newGame() {
         switch (gui.getUserSelection("How many players?", "2", "3", "4")) {
-            case "2":
-                createPlayer(2);
-                break;
             case "3":
                 createPlayer(3);
                 break;
             case "4":
                 createPlayer(4);
                 break;
+            case "5":
+                createPlayer(4);
+                break;
+            case "6":
+                createPlayer(4);
+                break;
+
         }
     }
 
