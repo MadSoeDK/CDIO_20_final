@@ -38,9 +38,8 @@ public class GameController {
         Field field = board.getField(placement);
 
         checkFieldType(field, placement, player);
-
         nextTurn();
-
+        netWorth(player);
         checkWinner();
 
     }
@@ -208,16 +207,19 @@ public class GameController {
         }
     }
     public int netWorth(Player player) {
-        int netWorth = 0;
+        int netWorth = player.getPlayerBalance();
 
         for(int i = 0; i < board.getFieldsTotal(); i++) {
             //Type casting field to Ownable
             if(board.getField(i) instanceof Ownable) {
+                //Verifying that the current field is of the type Ownable
                 Ownable property = (Ownable) board.getField(i);
                 if(player == property.getOwner()) {
-                    netWorth += property.
+                    netWorth += ((Property) board.getField(i)).getRent();
                 }
             }
         }
+        System.out.println(player.getName() + "'s net worth: " + netWorth);
+        return netWorth;
     }
 }
