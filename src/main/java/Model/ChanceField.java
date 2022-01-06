@@ -1,8 +1,14 @@
+package Model;
+
 import gui_fields.GUI_Chance;
 import gui_fields.GUI_Jail;
 import java.awt.*;
 //import java.awt.Color;
-public class ChanceField extends Field{
+
+/**
+ * Is used within the Fieldarray, is used to draw a chance card when landed on.
+ */
+public class ChanceField extends Field {
 
 
     public ChanceField(GUI_Chance field) {

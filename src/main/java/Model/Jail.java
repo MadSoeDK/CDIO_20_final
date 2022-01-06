@@ -1,7 +1,12 @@
+package Model;
+
 import gui_fields.GUI_Jail;
 
 import java.awt.Color;
 
+/**
+ * Child of Model.Field, Sends players back and increments Model.FreeParking
+ */
 public class Jail extends Field {
 
     protected int rent;
@@ -21,5 +26,4 @@ public class Jail extends Field {
     public int getRent() {
         return rent;
     }
-
 }

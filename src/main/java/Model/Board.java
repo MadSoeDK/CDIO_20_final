@@ -1,7 +1,11 @@
+package Model;
+
 import gui_fields.*;
 import gui_main.GUI;
 import java.awt.Color;
-
+/**
+ * Handles field-array, Model.Player-array, Gui-information.
+ */
 public class Board {
     private GUI_Field[] GUIfields;
     private GUI gui;
@@ -10,41 +14,61 @@ public class Board {
     private int currentPlayer;
     private ChanceCardDeck chanceCard = new ChanceCardDeck(this);
 
+
     private Field[] fields = {
             new Start(new GUI_Start(),"Start", Color.WHITE, "Startfeltet"),
-            new Property(new GUI_Street(),1, "Burgerbaren", Color.GRAY),
-            new Property(new GUI_Street(),1, "Pizzahuset", Color.GRAY),
+            new Property(new GUI_Street(),1, "Blå", Color.CYAN),
             new ChanceField(new GUI_Chance()),
-            //new Property(new GUI_Street(),1, "Chance", Color.WHITE),
-            new Property(new GUI_Street(),2, "Slikbutik", Color.CYAN),
-            new Property(new GUI_Street(),2, "Iskiosk", Color.CYAN),
+            new Property(new GUI_Street(),1, "Blå", Color.CYAN),
+            new Tax(new GUI_Tax(), 2000),
+            new Ferry(new GUI_Shipping(), 4000, "Færge", Color.white),
+            new Property(new GUI_Street(),1, "Orange", Color.ORANGE),
+            new ChanceField(new GUI_Chance()),
+            new Property(new GUI_Street(),1, "Orange", Color.ORANGE),
+            new Property(new GUI_Street(),1, "Orange", Color.ORANGE),
             new Jail(new GUI_Jail(), 0,"På besøg", Color.WHITE),
-            new Property(new GUI_Street(),2, "Museeum", Color.PINK),
-            new Property(new GUI_Street(),2, "Bibliotek", Color.PINK),
+            new Property(new GUI_Street(),1, "Gul", Color.YELLOW),
+            new Company(new GUI_Brewery(),1, "SQUASH", Color.WHITE),
+            new Property(new GUI_Street(),2, "Gul", Color.YELLOW),
+            new Property(new GUI_Street(),1, "Gul", Color.YELLOW),
+            new Ferry(new GUI_Shipping(), 4000, "Færge", Color.white),
+            new Property(new GUI_Street(),1, "Grå", Color.GRAY),
             new ChanceField(new GUI_Chance()),
-            new Property(new GUI_Street(),2, "Skateparken", Color.ORANGE),
-            new Property(new GUI_Street(),2, "Swimmingpool", Color.ORANGE),
+            new Property(new GUI_Street(),1, "Grå", Color.GRAY),
+            new Property(new GUI_Street(),1, "Grå", Color.GRAY),
             new FreeParking(new GUI_Tax(),0,"Fri Parkering",Color.WHITE,"Modtag Penge"),
-            new Property(new GUI_Street(),3, "Spillehal", Color.RED),
-            new Property(new GUI_Street(),3, "Kinobiograf", Color.RED),
+            new Property(new GUI_Street(),1, "Rød", Color.RED),
             new ChanceField(new GUI_Chance()),
-            new Property(new GUI_Street(),3, "Legetøjsbutik", Color.YELLOW),
-            new Property(new GUI_Street(),3, "Dyrehandel", Color.YELLOW),
+            new Property(new GUI_Street(),1, "Rød", Color.RED),
+            new Property(new GUI_Street(),1, "Rød", Color.RED),
+            new Ferry(new GUI_Shipping(), 4000, "Færge", Color.white),
+            new Property(new GUI_Street(),1, "Hvid", Color.WHITE),
+            new Company(new GUI_Brewery(),1, "COLA", Color.WHITE),
+            new Property(new GUI_Street(),2, "Hvid", Color.WHITE),
+            new Property(new GUI_Street(),1, "HVID", Color.WHITE),
             new Jail(new GUI_Jail(), 3, "Gå i fængsel", Color.WHITE),
-            new Property(new GUI_Street(),4, "Bowlinghal", Color.GREEN),
-            new Property(new GUI_Street(),4, "Zoologisk have", Color.GREEN),
+            new Property(new GUI_Street(),1, "Gul", Color.YELLOW),
+            new Property(new GUI_Street(),1, "GUL", Color.YELLOW),
             new ChanceField(new GUI_Chance()),
-            new Property(new GUI_Street(),5, "Vandland", Color.BLUE),
-            new Property(new GUI_Street(),5, "Strandpromenade", Color.BLUE),
+            new Property(new GUI_Street(),1, "Gul", Color.YELLOW),
+            new Ferry(new GUI_Shipping(), 4000, "Færge", Color.white),
+            new ChanceField(new GUI_Chance()),
+            new Property(new GUI_Street(),1, "Lilla", Color.PINK),
+            new Property(new GUI_Street(),1, "2000 Skat", Color.WHITE),
+            new Property(new GUI_Street(),1, "Lilla", Color.PINK),
     };
 
     public Board() {
         gui = new GUI(converter(fields));
-        //this.chanceCard = new ChanceCardDeck(this);
     }
 
+    /**
+     * Returns an array of the correct GUI_Fields type for the GUI to use
+     * @param fields
+     * @return
+     */
     public GUI_Field[] converter(Field[] fields) {
-        GUIfields = new GUI_Field[24];
+        GUIfields = new GUI_Field[fields.length];
         for(int i = 0; i < GUIfields.length; i++) {
             GUIfields[i] = fields[i].field;
         }
@@ -68,7 +92,7 @@ public class Board {
         player = new Player[n];
         for(int i = 0; i < n; i++) {
             gui.showMessage("Tilføj en spiller: ");
-            player[i] = new Player(gui.getUserString(""), 35, colors[i]);
+            player[i] = new Player(gui.getUserString(""), 30000, colors[i]);
             gui.addPlayer(player[i].getPlayer());
             GUIfields[0].setCar(player[i].getPlayer(), true);
         }
@@ -106,15 +130,6 @@ public class Board {
         return player[number];
         }
 
-
-    public Player[] getPlayers() {
-            return player;
-        }
-
-    public Field[] getFields() {
-            return fields;
-        }
-
     public Field getField(int placement) {
             return fields[placement];
         }
@@ -138,7 +153,9 @@ public class Board {
         }
         return winner;
     }
-
+    public int getFieldsTotal() {
+        return GUIfields.length;
+    }
     public int getWinner(){
         int winner=0;
         int high_score=0;

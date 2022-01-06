@@ -1,3 +1,8 @@
+package Model;
+
+/**
+ * Is used within chancecard-array for multiple effects.
+ */
 public class ChanceCard {
 
     private String description;
@@ -11,11 +16,5 @@ public class ChanceCard {
     }
     public int getNumber() {
         return number;
-    }
-    public String getName() {
-        return name;
-    }
-    public String getDescription() {
-        return description;
     }
 }
