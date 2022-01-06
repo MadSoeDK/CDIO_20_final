@@ -59,7 +59,7 @@ public class GUIController {
         return guiFields;
     }
 
-    public void createPlayers() {
+    public void createPlayers(int STARTBALANCE) {
         int qty = Integer.parseInt(gui.getUserSelection("How many players?", "2", "3", "4"));
 
         guiPlayers = new GUI_Player[qty];
@@ -69,7 +69,7 @@ public class GUIController {
 
             GUI_Car playerCar = new GUI_Car(colors[i], colors[i], GUI_Car.Type.TRACTOR, GUI_Car.Pattern.FILL);
 
-            guiPlayers[i] = new GUI_Player(gui.getUserString(""), 10, playerCar);
+            guiPlayers[i] = new GUI_Player(gui.getUserString(""), STARTBALANCE, playerCar);
 
             gui.addPlayer(guiPlayers[i]);
 

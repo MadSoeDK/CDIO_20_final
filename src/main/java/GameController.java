@@ -15,12 +15,13 @@ public class GameController {
     //int currentPlayer = 0;
     int same_color_owner = 0;
     int rent_mutiplier = 1;
+    final int STARTBALANCE = 30000;
 
     public GameController() {
         board = new Board();
         cup = new Cup();
         gui = new GUIController(board.getFields());
-        gui.createPlayers();
+        gui.createPlayers(STARTBALANCE);
         setupPlayers(gui.getPlayernames());
         playGame();
     }
@@ -38,7 +39,7 @@ public class GameController {
         int from = currentPlayer.getPlacement();
 
         // Roll die, get value, show die
-        gui.Button("Nu er det" + currentPlayer + "'s tur, rul terningen!", "Rul terning");
+        gui.Button("Nu er det" + currentPlayer.getName() + "'s tur, rul terningen!", "Rul terning");
         cup.roll();
         sum = cup.getSum();
         gui.showDie(sum);
@@ -204,7 +205,6 @@ public class GameController {
     }
 
     public void setupPlayers(String[] playerNames) {
-        final int STARTBALANCE = 30000;
         players = new Player[playerNames.length];
 
         for (int i = 0; i < playerNames.length; i++) {
