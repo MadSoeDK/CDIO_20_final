@@ -10,7 +10,7 @@ public class Board {
     private GUI_Field[] GUIfields;
     private GUI gui;
     private Player[] player;
-    private Color[] colors = {Color.RED, Color.WHITE, Color.ORANGE, Color.MAGENTA};
+    private Color[] colors = {Color.RED, Color.WHITE, Color.ORANGE, Color.MAGENTA, Color.green, Color.YELLOW};
     private int currentPlayer;
     private ChanceCardDeck chanceCard = new ChanceCardDeck(this);
 
@@ -75,16 +75,20 @@ public class Board {
         return GUIfields;
     }
     public void newGame() {
-        switch (gui.getUserSelection("How many players?", "2", "3", "4")) {
-            case "2":
-                createPlayer(2);
-                break;
+        switch (gui.getUserSelection("How many players?", "3", "4", "5", "6")) {
             case "3":
                 createPlayer(3);
                 break;
             case "4":
                 createPlayer(4);
                 break;
+            case "5":
+                createPlayer(5);
+                break;
+            case "6":
+                createPlayer(6);
+                break;
+
         }
     }
 
