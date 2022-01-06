@@ -2,6 +2,8 @@ import Model.*;
 import gui_fields.GUI_Ownable;
 import gui_main.GUI;
 
+import java.awt.*;
+
 public class GameController {
 
     Board board;
@@ -132,8 +134,9 @@ public class GameController {
                 // No one owns the Model.Property
                 if (property.getOwner() == null) {
 
+                    int activePlayer = currentPlayer;
                     // Auction/Buy
-                    buyOrSellOption(board.getGui());
+                    player = board.getPlayer(buyOrSellOption(board.getGui(),currentPlayer));
 
                     // Subtract player balance from Model.Property rent
                     player.setPlayerBalance(-property.getRent());
@@ -148,6 +151,9 @@ public class GameController {
                     GUI_Ownable ownable = (GUI_Ownable) board.getField(placement).getGUIField();
                     ownable.setOwnerName(player.getName());
                     ownable.setBorder(player.getPlayerColor());
+
+                    // Continue with the players turn
+                    player = board.getPlayer(activePlayer);
                 }
             }
 
@@ -345,15 +351,19 @@ public class GameController {
         return board.getCurrentPlayer();
     }
 
-    public void buyOrSellOption(GUI gui) {
-        switch (gui.getUserSelection("Buy or Auction Property?", "Buy", "Start Auction")) {
+    public int buyOrSellOption(GUI gui, int curPlayer)
+    {
+        int winnerId=0;
+        switch (gui.getUserSelection("Buy or Auction Property?", "Buy", "Start Auction"))
+        {
             case "Buy":
-                //
+                winnerId=curPlayer;
                 break;
             case "Start Auction":
-                auction(gui);
+                winnerId = auction(gui);
             break;
         }
+        return winnerId;
     }
 
     public int auction(GUI gui) {
