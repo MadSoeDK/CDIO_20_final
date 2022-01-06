@@ -489,6 +489,9 @@ public class GameController {
                 auctionWinner=i;
             }
         }
+
+        // Pay for auction
+        board.getPlayer(auctionWinner).setPlayerBalance(-auctionSum);
         return auctionWinner;
 
         // If only one player left, wins auction
