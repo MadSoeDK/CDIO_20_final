@@ -25,7 +25,7 @@ public class GameController {
             // Roll Model.Cup
             board.button(currentPlayer);
             cup.roll();
-            sum = 5;//cup.getSum();
+            sum = 3;//cup.getSum();
 
             // Get Model.Player pre-turn information
             Player player = board.getPlayer(currentPlayer);
@@ -235,15 +235,33 @@ public class GameController {
 
                 // Typecast to Model.Property
                 Company property = (Company) field;
+                // Typecast other company
+                Company otherCompany = (Company) board.getField(12);
+                if (player.getPlacement() == 12)
+                {
+                    otherCompany = (Company) board.getField(27);
+                }
+                /*
+                else
+                {
+                    otherCompany = (Company) board.getField(37);
+                }
+                */
 
-                // Check Ferry Rent
+
+                // Check Company Rent
                 int company_cost = sum*100;
+                if (property.getOwner() == otherCompany.getOwner())
+                {
+                    company_cost = sum*200;
+                }
 
-                // Noone owns Ferry
+
+                // Noone owns Company
                 if (property.getOwner() == null)
                 {
                     // Subtract player balance from Model.Property rent
-                    player.setPlayerBalance(-500);
+                    player.setPlayerBalance(-property.getRent());
 
                     //Get the GUI-object and display the current player balance
                     player.getPlayer().setBalance(player.getPlayerBalance());
@@ -265,8 +283,8 @@ public class GameController {
                     Player fieldOwner = property.getOwner();
 
                     // 1. Subtract rent from current player 2. add to field owner
-                    //player.setPlayerBalance(-ferry_cost);
-                    //fieldOwner.setPlayerBalance(ferry_cost);
+                    player.setPlayerBalance(-company_cost);
+                    fieldOwner.setPlayerBalance(company_cost);
 
                     //Update GUI-object and display the current player balance
                     board.getPlayer(currentPlayer).getPlayer().setBalance(board.getPlayer(currentPlayer).getPlayerBalance());
