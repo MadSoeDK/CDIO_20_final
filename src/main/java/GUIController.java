@@ -76,4 +76,12 @@ public class GUIController {
             field.setCar(guiPlayers[i], true);
         }
     }
+    public void showDie(int sum) {
+        gui.setDie(sum);
+    }
+
+    public void Button(String msg, String buttonText) {
+        gui.getUserButtonPressed(msg, buttonText);
+    }
+
 }
