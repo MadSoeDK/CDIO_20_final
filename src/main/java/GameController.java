@@ -40,6 +40,7 @@ public class GameController {
         checkFieldType(field, placement, player);
         nextTurn();
         netWorth(player);
+        bankrupt(player, placement);
         checkWinner();
 
     }
@@ -223,27 +224,29 @@ public class GameController {
         System.out.println(player.getName() + "'s net worth: " + netWorth);
         return netWorth;
     }
+
     public Player[] eliminatePlayer() {
         Player[] newPlayers = new Player[board.amountofPlayers() - 1];
         int j = 0;
-        for(int i = 0; i < board.amountofPlayers(); i++) {
+        for (int i = 0; i < board.amountofPlayers(); i++) {
             Player currentPlayer = board.getPlayer(i);
-            if(!(bankrupt(currentPlayer, currentPlayer.getPlacement()))) {
+            if (!(bankrupt(currentPlayer, currentPlayer.getPlacement()))) {
                 newPlayers[j] = board.getPlayer(i);
                 j++;
             }
         }
         return newPlayers;
     }
+
     public boolean bankrupt(Player player, int placement) {
         //Type casting field to Ownable
         boolean bankrupt = false;
-        if (board.getField(placement) instanceof Ownable) {
+        if ((board.getField(placement) instanceof Ownable) && !(board.getField(placement) instanceof Ferry) && !(board.getField(placement) instanceof Tax)) {
             //Verifying that the current field is of the type Ownable
             Ownable property = (Ownable) board.getField(placement);
-            if(player != property.getOwner()) {
-                if(player.getPlayerBalance() < ((Property) board.getField(placement)).getRent()) {
-                    if(netWorth(player) < ((Property) board.getField(placement)).getRent()) {
+            if (player != property.getOwner()) {
+                if (player.getPlayerBalance() < ((Property) board.getField(placement)).getRent()) {
+                    if (netWorth(player) < ((Property) board.getField(placement)).getRent()) {
                         bankrupt = true;
                         for (int i = 0; i < board.getFieldsTotal(); i++) {
                             //Type casting field to Ownable
@@ -251,18 +254,43 @@ public class GameController {
                                 //Verifying that the current field is of the type Ownable
                                 Ownable playerProperty = (Ownable) board.getField(i);
                                 if (player == playerProperty.getOwner()) {
-                                    playerProperty = ((Property) board.getField(i)).setOwner(((Property) board.getField(placement)).getOwner());
+                                    playerProperty.setOwner(((Property) board.getField(placement)).getOwner());
                                 }
                             }
                         }
-
                         eliminatePlayer();
-                    } else if(netWorth(player) > ((Property) board.getField(placement)).getRent()) {
-
+                    } else if (netWorth(player) > ((Property) board.getField(placement)).getRent()) {
+                        /*
+                        Player gets the option to either (drop-down menu):
+                            1) Forfeit all his properties and end the game.
+                            2) To mortgage all the necessary properties to survive and stay in the game.
+                                - If 2) is chosen then the mortgage method will be activated and
+                                  loop through the player's properties and look for houses and hotels
+                                  that can be sold. *If there is no houses or hotels then run through
+                                  a while loop which generates an array with properties, that gets shown
+                                  through a drop-down menu that loops until the players balance is
+                                  higher than the rent.
+                         */
                     }
                 }
             }
-            return bankrupt;
+        }
+        return bankrupt;
+    }
+
+    public void mortage(Player player) {
+        Property[] playerProperties;
+        for (int i = 0; i < board.getFieldsTotal(); i++) {
+            //playerProperties = new Property[0];
+
+            //Type casting field to Ownable
+            if (board.getField(i) instanceof Ownable) {
+                //Verifying that the current field is of the type Ownable
+                Ownable property = (Ownable) board.getField(i);
+                if (player == property.getOwner()) {
+
+                }
+            }
         }
     }
 }
