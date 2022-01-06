@@ -11,6 +11,7 @@ public class GUIController {
 
     private GUI gui;
     private GUI_Player[] guiPlayers;
+    private String[] playernames;
     private GUI_Field[] guiFields;
     private final Color[] colors = {Color.RED, Color.WHITE, Color.ORANGE, Color.MAGENTA};
 
@@ -76,6 +77,26 @@ public class GUIController {
             field.setCar(guiPlayers[i], true);
         }
     }
+
+    public void movePlayer(Player player, int prepos, int pospos) {
+        //guiFields[placement].setCar(guiPlayers[currentPlayer], true);
+
+        GUI_Player playerToMove = new GUI_Player("");
+        GUI_Field to = gui.getFields()[prepos];
+
+        for (int i = 0; i < guiPlayers.length; i++) {
+            if (guiPlayers[i].getName().equals(player.getName())) {
+                playerToMove = guiPlayers[i];
+
+                GUI_Field from = gui.getFields()[pospos];
+
+                from.setCar(playerToMove, false);
+            }
+        }
+        to.setCar(playerToMove, true);
+
+    }
+
     public void showDie(int sum) {
         gui.setDie(sum);
     }
@@ -84,4 +105,47 @@ public class GUIController {
         gui.getUserButtonPressed(msg, buttonText);
     }
 
+    public void guiMessage(String message){
+        gui.showMessage(message);
+    }
+
+    public GUI_Field getGuiField(int placement) {
+        return guiFields[placement];
+    }
+
+    public String[] getPlayernames() {
+        playernames = new String[guiPlayers.length];
+        for (int i = 0; i < guiPlayers.length; i++) {
+            playernames[i] = guiPlayers[i].getName();
+        }
+        return playernames;
+    }
+
+    public GUI_Player getGuiPlayer(Player currentplayer) {
+        GUI_Player guiplayer = null;
+        for (int i = 0; i < guiPlayers.length; i++) {
+            if (currentplayer.getName().equals(playernames[i])) {
+                guiplayer = guiPlayers[i];
+            }
+        }
+        return guiplayer;
+    }
+
+    public void setguiPlayerBalance(Player player, int amount) {
+        for (int i = 0; i < playernames.length; i++) {
+            if(player.getName().equals(playernames[i])) {
+                guiPlayers[i].setBalance(amount);
+            }
+        }
+    }
+
+    public Color getPlayerColor(Player player) {
+        Color color = new Color(0);
+        for (int i = 0; i < playernames.length; i++) {
+            if (player.getName().equals(playernames[i])) {
+                color = guiPlayers[i].getPrimaryColor();
+            }
+        }
+        return color;
+    }
 }
