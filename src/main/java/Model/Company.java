@@ -1,11 +1,11 @@
 package Model;
 
+import gui_fields.GUI_Brewery;
 import gui_fields.GUI_Shipping;
-import gui_fields.GUI_Street;
 
 import java.awt.*;
 
-public class Ferry extends Ownable {
+public class Company extends Ownable {
     int rent=500;
     String name="Scandlines";
     /**
@@ -17,7 +17,7 @@ public class Ferry extends Ownable {
      * @param //color
      */
 
-    public Ferry(GUI_Shipping field, int rent, String name, Color color) {
+    public Company(GUI_Brewery field, int rent, String name, Color color) {
         field.setTitle(name);
         field.setBackGroundColor(color);
         field.setSubText("$" + rent);
