@@ -136,7 +136,7 @@ public class GameController {
 
                     int activePlayer = currentPlayer;
                     // Auction/Buy
-                    player = board.getPlayer(buyOrSellOption(board.getGui(),currentPlayer));
+                    player = board.getPlayer(buyOrSellOption(board.getGui() , currentPlayer, property.getRent()));
 
                     // Subtract player balance from Model.Property rent
                     player.setPlayerBalance(-property.getRent());
@@ -354,7 +354,7 @@ public class GameController {
         return board.getCurrentPlayer();
     }
 
-    public int buyOrSellOption(GUI gui, int curPlayer)
+    public int buyOrSellOption(GUI gui, int curPlayer, int propertyWorth)
     {
         int winnerId=0;
         switch (gui.getUserSelection("Buy or Auction Property?", "Buy", "Start Auction"))
@@ -363,13 +363,13 @@ public class GameController {
                 winnerId=curPlayer;
                 break;
             case "Start Auction":
-                winnerId = auction(gui);
+                winnerId = auction(gui, propertyWorth);
             break;
         }
         return winnerId;
     }
 
-    public int auction(GUI gui) {
+    public int auction(GUI gui, int propertyWorth) {
 
         // Add players to auction array
             Player[] aucPlayers = new Player[board.getPlayerArray().length];
@@ -384,14 +384,6 @@ public class GameController {
             Player curAucPlayer = aucPlayers[curAucIndex];
             int auctionSum = 0;
             int auctionPlayersLeft = aucPlayers.length;
-            boolean playerPassed = false;
-            int edgeCase = 0;
-
-        // Show Participants
-            for (int i=0; i<aucPlayers.length; i++)
-            {
-                System.out.println(aucPlayers[i]);
-            }
 
         // Bid/Pass
         while (auctionPlayersLeft != 1)
@@ -400,7 +392,6 @@ public class GameController {
                 case "Pass":
                     auctionPlayersLeft -= 1;
                     aucPlayers[curAucIndex]=null;
-                    playerPassed = true;
                     break;
                 case "100":
                     auctionSum += 100;
@@ -457,28 +448,11 @@ public class GameController {
                     curAucIndex = 0;
                 }
             }
+            // Loop around
             if (curAucIndex == aucPlayers.length) {
                 curAucIndex = 0;
             }
-            // Skip passed players
-
-            /*
-            curAucIndex++;
-            if (curAucIndex == aucPlayers.length) {edgeCase = 1;}else{edgeCase = 0;}
-            while (aucPlayers[curAucIndex-edgeCase]==null && playerPassed==false)
-            {
-                curAucIndex++;
-                //curAucIndex = 0;
-                if (curAucIndex == aucPlayers.length) {
-                    curAucIndex = 0;
-                }
-            }
-
-            playerPassed=false;
-            if (curAucIndex == aucPlayers.length) {
-                curAucIndex = 0;
-            }
-*/
+            // Set Current Player
             curAucPlayer = aucPlayers[curAucIndex];
         }
         // Return winner of Auction
@@ -491,10 +465,18 @@ public class GameController {
         }
 
         // Pay for auction
-        board.getPlayer(auctionWinner).setPlayerBalance(-auctionSum);
+        if (auctionSum > propertyWorth)
+        {
+            // After the auction you will be charged for the property, here we account for that
+            board.getPlayer(auctionWinner).setPlayerBalance(-auctionSum + propertyWorth);
+        }
+        else
+        {
+            board.getPlayer(auctionWinner).setPlayerBalance(+propertyWorth);
+        }
         return auctionWinner;
 
-        // If only one player left, wins auction
+
     }
 }
 
