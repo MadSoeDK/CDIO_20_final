@@ -172,4 +172,8 @@ public class GUIController {
         }
         return color;
     }
+
+    public void setOwner(Player player, Field field) {
+
+    }
 }
