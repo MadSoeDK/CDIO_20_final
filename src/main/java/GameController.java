@@ -460,7 +460,7 @@ public class GameController {
         // Display Menu for money
         boolean correctPartnerPayAmount=false;
         while (correctPartnerPayAmount==false) {
-            switch (gui.getUserSelection(board.getPlayer(curPlayer).getName() + " Vælg hvor meget " + tradePlayersNames[tradePartnerId] + " skal betale: " + tradePartnerPayed, "Accepter mængde", "+50", "+100", "+200", "+500", "+1000")) {
+            switch (gui.getUserSelection(board.getPlayer(curPlayer).getName() + " Vælg hvor meget " + tradePlayersNames[tradePartnerId] + " skal betale: " + tradePartnerPayed, "Accepter mængde", "+50", "+100", "+200", "+500", "+1000", "+5000", "+10000")) {
                 case "Accepter mængde":
                     correctPartnerPayAmount=true;
                     break;
@@ -479,6 +479,12 @@ public class GameController {
                 case "+1000":
                     tradePartnerPayed+=1000;
                     break;
+                case "+5000":
+                    tradePartnerPayed+=5000;
+                    break;
+                case "+10000":
+                    tradePartnerPayed+=10000;
+                    break;
             }
         }
 
@@ -487,7 +493,7 @@ public class GameController {
         // Display menu for own players money
         boolean correctPlayerPayAmount=false;
         while (correctPlayerPayAmount==false) {
-            switch (gui.getUserSelection(board.getPlayer(curPlayer).getName() + " Vælg hvor meget du skal betale: " + traderPayed, "Accepter mængde", "+50", "+100", "+200", "+500", "+1000")) {
+            switch (gui.getUserSelection(board.getPlayer(curPlayer).getName() + " Vælg hvor meget du skal betale: " + traderPayed, "Accepter mængde", "+50", "+100", "+200", "+500", "+1000", "+5000", "+10000")) {
                 case "Accepter mængde":
                     correctPlayerPayAmount=true;
                     break;
@@ -505,6 +511,12 @@ public class GameController {
                     break;
                 case "+1000":
                     traderPayed+=1000;
+                    break;
+                case "+5000":
+                    traderPayed+=5000;
+                    break;
+                case "+10000":
+                    traderPayed+=10000;
                     break;
             }
         }
@@ -527,6 +539,11 @@ public class GameController {
         if (tradeAccepted == true) {
             tradePlayers[tradePartnerId].setPlayerBalance(traderPayed - tradePartnerPayed);
             board.getPlayer(curPlayer).setPlayerBalance(tradePartnerPayed - traderPayed);
+
+            // Opdate GUI
+            board.getPlayer(curPlayer).getPlayer().setBalance(board.getPlayer(curPlayer).getPlayerBalance());
+            tradePlayers[tradePartnerId].getPlayer().setBalance(tradePlayers[tradePartnerId].getPlayerBalance());
+
         }
     }
 
