@@ -78,10 +78,34 @@ public class GUIController {
         }
     }
 
-    public void movePlayer(Player player, int prepos, int pospos) {
-        //guiFields[placement].setCar(guiPlayers[currentPlayer], true);
+    public void movePlayer(Player player, int placement, int preplacement) {
 
         GUI_Player playerToMove = new GUI_Player("");
+        GUI_Field to = gui.getFields()[placement];
+
+
+        // Get the GUI Player
+        for (int i = 0; i < guiPlayers.length; i++) {
+
+            if (guiPlayers[i].getName().equals(player.getName())) {
+
+                playerToMove = guiPlayers[i];
+
+                //Remove from previus position
+                GUI_Field from = gui.getFields()[preplacement];
+
+                from.setCar(playerToMove, false);
+
+            }
+
+        }
+
+        to.setCar(playerToMove, true);
+
+        //guiFields[placement].setCar(guiPlayers[currentPlayer], true);
+
+        /*GUI_Player playerToMove = new GUI_Player("");
+
         GUI_Field to = gui.getFields()[prepos];
 
         for (int i = 0; i < guiPlayers.length; i++) {
@@ -94,7 +118,7 @@ public class GUIController {
             }
         }
         to.setCar(playerToMove, true);
-
+*/
     }
 
     public void showDie(int sum) {
