@@ -39,7 +39,7 @@ public class GameController {
         // Roll die, get value, show die
         cup.roll();
         sum = cup.getSum();
-        gui.showDie(sum);
+        gui.showDice(cup.getFacevalues()[0], cup.getFacevalues()[1]);
 
         // Move player placement - automatically updates GUI
         moveplayer(currentPlayer, sum);
