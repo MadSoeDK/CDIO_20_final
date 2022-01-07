@@ -9,13 +9,8 @@ public class FreeParking extends Field {
 
     public static int balance;
 
-    public FreeParking(int balance,String name, Color color, String description) {
-        /*field.setTitle(name);
-        field.setBackGroundColor(color);
-        field.setDescription("Modtag penge ved at lande på dette felt");
-        field.setSubText("Modtag: "+String.valueOf(balance));
+    public FreeParking(int balance,String name, String description) {
 
-        this.field = field;*/
         this.name = name;
         this.description = description;
         this.balance=balance;

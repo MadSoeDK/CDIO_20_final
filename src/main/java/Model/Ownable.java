@@ -4,20 +4,20 @@ import java.awt.*;
 
 public abstract class Ownable extends Field {
 
-    protected Player owner;
-    protected Color color;
+    private Player owner;
+
+    private Color color;
+    private int[] rent;
+    private int price;
+
+    public Ownable() {
+
+    }
 
     public void setOwner(Player player) {
         this.owner = player;
     }
     public Player getOwner() {
         return owner;
-    }/*
-    public int getPrice() {
-        return price;
     }
-    public void setPrice(int price) {
-        this.price = price;
-    }
-*/
 }

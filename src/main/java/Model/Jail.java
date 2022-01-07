@@ -11,14 +11,7 @@ public class Jail extends Field {
 
     protected int rent;
 
-    public Jail(int rent, String name, Color color) {
-
-        /*field.setTitle(name);
-        field.setBackGroundColor(color);
-        field.setDescription(name);
-        field.setSubText(name);
-
-        this.field = field;*/
+    public Jail(int rent, String name) {
         this.name = name;
         this.rent = rent;
     }
