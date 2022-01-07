@@ -524,8 +524,10 @@ public class GameController {
         // Transfer Ownership
 
         // Pay for trade
-        tradePlayers[tradePartnerId].setPlayerBalance(traderPayed-tradePartnerPayed);
-        board.getPlayer(curPlayer).setPlayerBalance(tradePartnerPayed-traderPayed);
+        if (tradeAccepted == true) {
+            tradePlayers[tradePartnerId].setPlayerBalance(traderPayed - tradePartnerPayed);
+            board.getPlayer(curPlayer).setPlayerBalance(tradePartnerPayed - traderPayed);
+        }
     }
 
     public int auction(GUI gui, int propertyWorth) {
