@@ -29,6 +29,7 @@ public class GameController {
     public void playGame() {
         do {
             takeTurn();
+            nextTurn();
         } while (true);
     }
 
@@ -36,7 +37,7 @@ public class GameController {
 
         // Get Player pre-turn information
         //Player player = board.getPlayer(currentPlayer);
-        int from = currentPlayer.getPlacement();
+        //currentPlayer.getPlacement();
 
         // Roll die, get value, show die
         gui.Button("Nu er det" + currentPlayer.getName() + "'s tur, rul terningen!", "Rul terning");
@@ -44,24 +45,28 @@ public class GameController {
         sum = cup.getSum();
         gui.showDie(sum);
 
-        // Move player position
-        moveplayer(from, currentPlayer);
+        // Move player placement
+        moveplayer(currentPlayer, sum);
 
+        // Get new placement
         int placement = currentPlayer.getPlacement();
-
-        // Get new position and Update GUI
-        gui.movePlayer(currentPlayer, from, placement);
+        //gui.movePlayer(currentPlayer, placement, placement-sum);
 
         Field field = board.getField(placement);
 
-        checkFieldType(field, placement);
-
-        nextTurn();
+        //checkFieldType(field, placement);
 
         //checkWinner();
-
     }
+    public void setupPlayers(String[] playerNames) {
+        players = new Player[playerNames.length];
 
+        for (int i = 0; i < playerNames.length; i++) {
+            players[i] = new Player(playerNames[i],STARTBALANCE);
+        }
+
+        currentPlayer = players[0];
+    }
     public void nextTurn() {
         // Chance Player Turn/Reset to first player
         int playerindex = java.util.Arrays.asList(players).indexOf(currentPlayer);
@@ -73,7 +78,6 @@ public class GameController {
         }
         //board.updateCurrentPlayer(currentPlayer);
     }
-
     public void checkFieldType(Field field, int placement) {
         // Check field type
         if (field instanceof Property) {
@@ -181,8 +185,11 @@ public class GameController {
             currentPlayer.gotoPlacement(6);
             placement = currentPlayer.getPlacement();
 
+            moveplayer(currentPlayer, placement);
+
             // Update GUI with new placement
-            gui.movePlayer(currentPlayer, 18, placement);
+            //gui.movePlayer(currentPlayer, 18);
+
             //board.movePlayer(currentPlayer, placement);
             //board.removePlayer(currentPlayer, 18);
         }
@@ -203,37 +210,24 @@ public class GameController {
 
         }
     }
-
-    public void setupPlayers(String[] playerNames) {
-        players = new Player[playerNames.length];
-
-        for (int i = 0; i < playerNames.length; i++) {
-            players[i] = new Player(playerNames[i],STARTBALANCE);
-        }
-
-        currentPlayer = players[0];
-    }
-    public void moveplayer(int from, Player player) {
-        // Remove player from board
-        //board.removePlayer(currentPlayer, placement);
+    public void moveplayer(Player player, int amount) {
+        int prePlacement = player.getPlacement();
+        int endPlacement = player.getPlacement() + amount;
+        int newPlacement;
 
         // Check for a complete lap around on board. Then recalibrate player placement
-        if(from + sum >= 40) {
-            player.setPlacement(sum - 40);
-            //board.removePlayer(currentPlayer, from);
-            gui.movePlayer(player, from, player.getPlacement());
-            sum = 0;
+        if(endPlacement >= 40) {
+            newPlacement = endPlacement - 40;
 
-            // Pass Model.Start field and gain $2
+            //Pay lap bonus
             player.setPlayerBalance(2);
+
+        } else {
+            newPlacement = endPlacement;
         }
 
-        // Set new placement incremented by dice. Then get the new placement.
-        player.setPlacement(sum);
-        //placement = player.getPlacement();
-
-        // Update GUI with new placement
-        //board.movePlayer(currentPlayer, placement);
+        player.setPlacement(newPlacement);
+        gui.movePlayer(player,newPlacement, prePlacement);
     }
 
     /*public Player checkWinner() {
