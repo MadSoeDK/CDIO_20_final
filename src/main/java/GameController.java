@@ -24,7 +24,7 @@ public class GameController {
 
         board.newGame();
 
-        while (1==1){//!board.checkWinner()) {
+        while (!board.checkWinner()) {
             // Roll Model.Cup
             board.button(currentPlayer);
             cup.roll();
@@ -33,6 +33,9 @@ public class GameController {
             // Get Model.Player pre-turn information
             Player player = board.getPlayer(currentPlayer);
             int placement = player.getPlacement();
+
+            // Ask if they wish trade?
+            tradeOrNotOption(board.getGui(), currentPlayer);
 
             // Remove player from board
             board.removePlayer(currentPlayer, placement);
@@ -299,13 +302,13 @@ public class GameController {
             }
             board.updateCurrentPlayer(currentPlayer);
         }
-        /*
+
         while (true) {
             // Show Winner - has to be in while loop, or the winner text will be removed
             board.guiMessage(board.getPlayer(board.getWinner()).getName()+" HAS WON THE GAME!");
         }
 
-         */
+
     }
 
     public void moveplayer() {
@@ -354,6 +357,19 @@ public class GameController {
         return board.getCurrentPlayer();
     }
 
+    public void tradeOrNotOption(GUI gui, int curPlayer)
+    {
+        switch (gui.getUserSelection("Do you want to trade?",  "Roll Die","Begin Trade"))
+        {
+            case "Begin Trade":
+                trade(gui, curPlayer);
+                break;
+            case "Roll Die":
+
+                break;
+        }
+    }
+
     public int buyOrSellOption(GUI gui, int curPlayer, int propertyWorth)
     {
         int winnerId=0;
@@ -367,6 +383,149 @@ public class GameController {
             break;
         }
         return winnerId;
+    }
+
+    private void trade(GUI gui, int curPlayer)
+    {
+        // Initialize Trade variables
+        int tradePartnerId=0;
+        int tradePartnerPayed=0;
+        int traderPayed=0;
+
+        // Add possible player to trade options array
+        Player[] tradePlayers = new Player[board.getPlayerArray().length-1];
+        int a=0;
+        for (int i = 0; i<board.getPlayerArray().length-1; i++) {
+
+            if (i == curPlayer){a++;}
+                tradePlayers[i] = board.getPlayerArray()[a];
+                //System.out.println(tradePlayers[i].getName());
+            a++;
+        }
+
+        // Create String array of possible trade partners
+        String[] tradePlayersNames = new String[tradePlayers.length];
+        for (int i = 0; i<board.getPlayerArray().length-1; i++)
+        {
+            tradePlayersNames[i] = tradePlayers[i].getName();
+        }
+
+        // Display array as Dropdown Menu
+        /*
+        for(int i = 0; i<tradePlayers.length; i++){
+            System.out.println(tradePlayers[i].getName());
+        }
+        System.out.println();
+        */
+
+        // Create a dropdown based on tradeable player amount
+        String selectedTradePartner = gui.getUserSelection(board.getPlayer(curPlayer).getName() + " Vælg spiller at handle med", tradePlayersNames);
+        if (tradePlayersNames[0] == selectedTradePartner)
+        {
+            tradePartnerId=0;
+            System.out.println("Tradepartner: "+tradePlayersNames[0]);
+        }
+        if (tradePlayersNames[1] == selectedTradePartner)
+        {
+            tradePartnerId=1;
+            System.out.println("Tradepartner: "+tradePlayersNames[1]);
+        }
+        if (tradePlayersNames.length > 2)
+        {
+            if (tradePlayersNames[2] == selectedTradePartner) {
+                tradePartnerId = 2;
+                System.out.println("Tradepartner: " + tradePlayersNames[2]);
+            }
+        }
+        if (tradePlayersNames.length > 3)
+        {
+            if (tradePlayersNames[3] == selectedTradePartner) {
+                tradePartnerId = 3;
+                System.out.println("Tradepartner: " + tradePlayersNames[3]);
+            }
+        }
+        if (tradePlayersNames.length > 4)
+        {
+            if (tradePlayersNames[4] == selectedTradePartner) {
+                tradePartnerId = 4;
+                System.out.println("Tradepartner: " + tradePlayersNames[4]);
+            }
+        }
+
+
+
+        // Display Chosen players property
+
+
+        // Display Menu for money
+        boolean correctPartnerPayAmount=false;
+        while (correctPartnerPayAmount==false) {
+            switch (gui.getUserSelection(board.getPlayer(curPlayer).getName() + " Vælg hvor meget " + tradePlayersNames[tradePartnerId] + " skal betale: " + tradePartnerPayed, "Accepter mængde", "+50", "+100", "+200", "+500", "+1000")) {
+                case "Accepter mængde":
+                    correctPartnerPayAmount=true;
+                    break;
+                case "+50":
+                    tradePartnerPayed+=50;
+                    break;
+                case "+100":
+                    tradePartnerPayed+=100;
+                    break;
+                case "+200":
+                    tradePartnerPayed+=200;
+                    break;
+                case "+500":
+                    tradePartnerPayed+=500;
+                    break;
+                case "+1000":
+                    tradePartnerPayed+=1000;
+                    break;
+            }
+        }
+
+        // Display own players Property
+
+        // Display menu for own players money
+        boolean correctPlayerPayAmount=false;
+        while (correctPlayerPayAmount==false) {
+            switch (gui.getUserSelection(board.getPlayer(curPlayer).getName() + " Vælg hvor meget du skal betale: " + traderPayed, "Accepter mængde", "+50", "+100", "+200", "+500", "+1000")) {
+                case "Accepter mængde":
+                    correctPlayerPayAmount=true;
+                    break;
+                case "+50":
+                    traderPayed+=50;
+                    break;
+                case "+100":
+                    traderPayed+=100;
+                    break;
+                case "+200":
+                    traderPayed+=200;
+                    break;
+                case "+500":
+                    traderPayed+=500;
+                    break;
+                case "+1000":
+                    traderPayed+=1000;
+                    break;
+            }
+        }
+
+        // Display Yes/No option to recipient
+        boolean tradeAccepted=false;
+        switch (gui.getUserSelection(tradePlayersNames[tradePartnerId] + " Acceptere du denne handel? Du modtager " + (traderPayed-tradePartnerPayed) +" og disse ejendomme: ", "Accepter handel","Accepter IKKE handel")) {
+
+            case "Accepter handel":
+                tradeAccepted=true;
+                break;
+            case "Accepter IKKE handel":
+                tradeAccepted=false;
+                break;
+        }
+
+        // Transfer Ownership
+
+        // Pay for trade
+        tradePlayers[tradePartnerId].setPlayerBalance(traderPayed-tradePartnerPayed);
+        board.getPlayer(curPlayer).setPlayerBalance(tradePartnerPayed-traderPayed);
     }
 
     public int auction(GUI gui, int propertyWorth) {

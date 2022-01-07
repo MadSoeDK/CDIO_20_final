@@ -103,7 +103,7 @@ public class Board {
     }
 
     public void button(int currentPlayer) {
-        gui.getUserButtonPressed("Nu er det " + player[currentPlayer].getName() + "'s tur, rul terningen!", "Rul terning");
+        gui.getUserButtonPressed("Now it is " + player[currentPlayer].getName() + "'s turn, Start your Turn", "Start Turn");
     }
 
     public void guiMessage(String message){
