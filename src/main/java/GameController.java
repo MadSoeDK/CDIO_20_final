@@ -224,7 +224,7 @@ public class GameController {
         System.out.println(player.getName() + "'s net worth: " + netWorth);
         return netWorth;
     }
-
+    //Copies the player array except the bankrupt player
     public Player[] eliminatePlayer() {
         Player[] newPlayers = new Player[board.amountofPlayers() - 1];
         int j = 0;
@@ -246,6 +246,7 @@ public class GameController {
             Ownable property = (Ownable) board.getField(placement);
             if (player != property.getOwner()) {
                 if (player.getPlayerBalance() < ((Property) board.getField(placement)).getRent()) {
+                    //Checks if player is bankrupt
                     if (netWorth(player) < ((Property) board.getField(placement)).getRent()) {
                         bankrupt = true;
                         for (int i = 0; i < board.getFieldsTotal(); i++) {
@@ -253,11 +254,13 @@ public class GameController {
                             if (board.getField(i) instanceof Ownable) {
                                 //Verifying that the current field is of the type Ownable
                                 Ownable playerProperty = (Ownable) board.getField(i);
+                                //Gives players porperties to debt collecter
                                 if (player == playerProperty.getOwner()) {
                                     playerProperty.setOwner(((Property) board.getField(placement)).getOwner());
                                 }
                             }
                         }
+                        //Removes player from the player array, Note: does not work if more players bankrupt same turn
                         eliminatePlayer();
                     } else if (netWorth(player) > ((Property) board.getField(placement)).getRent()) {
                         /*
@@ -277,7 +280,7 @@ public class GameController {
         }
         return bankrupt;
     }
-
+    //Method to mortgage properties when bankrupt
     public void mortage(Player player) {
         Property[] playerProperties;
         for (int i = 0; i < board.getFieldsTotal(); i++) {
