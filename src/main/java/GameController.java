@@ -280,20 +280,45 @@ public class GameController {
         }
         return bankrupt;
     }
+
+    /*
+    - Make an array with the player's properties.
+    - Create drop-down menu (GUI) to select different owned properties for player to sell.
+    - Loop the drop-down menu option until the balance is higher than the rent.
+     */
     //Method to mortgage properties when bankrupt
     public void mortage(Player player) {
-        Property[] playerProperties;
+        //Property[] playerProperties = new Property[4];
+        int numberOfProperties = 0;
         for (int i = 0; i < board.getFieldsTotal(); i++) {
-            //playerProperties = new Property[0];
 
             //Type casting field to Ownable
             if (board.getField(i) instanceof Ownable) {
                 //Verifying that the current field is of the type Ownable
                 Ownable property = (Ownable) board.getField(i);
                 if (player == property.getOwner()) {
-
+                    numberOfProperties++;
                 }
             }
+        }
+        Property[] playerProperties = new Property[numberOfProperties];
+        int currentProperty = 0;
+        for (int i = 0; i < board.getFieldsTotal(); i++) {
+            //Type casting field to Ownable
+            if (board.getField(i) instanceof Ownable) {
+                //Verifying that the current field is of the type Ownable
+                Ownable property = (Ownable) board.getField(i);
+                if (player == property.getOwner()) {
+                    playerProperties[currentProperty] = (Property) property;
+                    currentProperty++;
+                }
+            }
+        }
+        /*
+        While loop that checks if balance is higher than rent
+         */
+        while(player.getPlayerBalance() < ((Property) board.getField(player.getPlacement())).getRent()) {
+            board.guiMessage("");
         }
     }
 }

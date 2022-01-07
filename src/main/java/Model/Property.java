@@ -11,6 +11,7 @@ public class Property extends Ownable {
     // Variables
     protected int rent;
     protected Color color;
+    protected boolean mortgage;
 
     /**
      * Constructor
@@ -32,11 +33,18 @@ public class Property extends Ownable {
         this.rent = rent;
         this.name = name;
         this.color = color;
+        this.mortgage = false;
     }
 
     // Methods
     public int getRent() {
+        if(mortgage) {
+            return 0;
+        }
         return rent;
+    }
+    public void setMortgage(boolean status) {
+        this.mortgage = status;
     }
     /*public void setOwner(Player player) {
         this.owner = player;
