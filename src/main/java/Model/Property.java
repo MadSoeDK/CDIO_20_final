@@ -43,6 +43,9 @@ public class Property extends Ownable {
         }
         return rent;
     }
+    public String getName() {
+        return name;
+    }
     public void setMortgage(boolean status) {
         this.mortgage = status;
     }
