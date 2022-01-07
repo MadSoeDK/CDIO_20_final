@@ -11,8 +11,6 @@ public class GameController {
 
 
     // Initializing Variables
-    int sum = 0;
-    //int currentPlayer = 0;
     int same_color_owner = 0;
     int rent_mutiplier = 1;
     final int STARTBALANCE = 30000;
@@ -30,33 +28,34 @@ public class GameController {
         do {
             takeTurn();
             nextTurn();
-        } while (true);
+        } while (true); //Check winner
     }
 
     public void takeTurn() {
+        int sum = 0;
 
-        // Get Player pre-turn information
-        //Player player = board.getPlayer(currentPlayer);
-        //currentPlayer.getPlacement();
+        gui.Button("Nu er det" + currentPlayer.getName() + "'s tur, rul terningen!", "Rul terning");
 
         // Roll die, get value, show die
-        gui.Button("Nu er det" + currentPlayer.getName() + "'s tur, rul terningen!", "Rul terning");
         cup.roll();
         sum = cup.getSum();
         gui.showDie(sum);
 
-        // Move player placement
+        // Move player placement - automatically updates GUI
         moveplayer(currentPlayer, sum);
 
-        // Get new placement
         int placement = currentPlayer.getPlacement();
-        //gui.movePlayer(currentPlayer, placement, placement-sum);
 
         Field field = board.getField(placement);
 
-        //checkFieldType(field, placement);
+        checkFieldType(field, placement);
 
-        //checkWinner();
+        //Update GUI players balance
+        for (Player p : players) {
+            gui.setguiPlayerBalance(p, p.getPlayerBalance());
+        }
+
+        //checkBankrupt();
     }
     public void setupPlayers(String[] playerNames) {
         players = new Player[playerNames.length];
@@ -76,16 +75,15 @@ public class GameController {
         } else {
             currentPlayer = players[playerindex + 1];
         }
-        //board.updateCurrentPlayer(currentPlayer);
     }
     public void checkFieldType(Field field, int placement) {
         // Check field type
         if (field instanceof Property) {
 
-            // Typecast to Model.Property
+            // Typecast to Property
             Property property = (Property) field;
 
-            // Model.Field is owned by another player and it's not the current player
+            // Field is owned by another player and it's not the current player
             if (property.getOwner() != currentPlayer && property.getOwner() != null) {
 
                 // Get field owner
@@ -132,14 +130,6 @@ public class GameController {
                 currentPlayer.setPlayerBalance(-property.getRent() * rent_mutiplier);
                 fieldOwner.setPlayerBalance(property.getRent() * rent_mutiplier);
 
-                //Update GUI balance from currentplayer and field owner
-                gui.setguiPlayerBalance(currentPlayer, currentPlayer.getPlayerBalance());
-                gui.setguiPlayerBalance(fieldOwner, fieldOwner.getPlayerBalance());
-
-                //gui.getGuiPlayer(currentPlayer).setBalance(board.getPlayer(currentPlayer).getPlayerBalance());
-                //board.getPlayer(currentPlayer).getPlayer().setBalance(board.getPlayer(currentPlayer).getPlayerBalance());
-                //fieldOwner.getPlayer().setBalance(fieldOwner.getPlayerBalance());
-
                 // Reset
                 same_color_owner = 0;
             }
@@ -150,15 +140,11 @@ public class GameController {
                 // Subtract player balance from Model.Property rent
                 currentPlayer.setPlayerBalance(-property.getRent());
 
-                // Update GUI balance
-                gui.setguiPlayerBalance(currentPlayer, currentPlayer.getPlayerBalance());
-                //gui.getGuiPlayer(currentPlayer).setBalance(currentPlayer.getPlayerBalance());
-
                 // Set Property owner
                 property.setOwner(currentPlayer);
 
                 // Set GUI Field
-                GUI_Ownable ownable = (GUI_Ownable) gui.getGuiField(placement);//board.getField(placement).getGUIField();
+                GUI_Ownable ownable = (GUI_Ownable) gui.getGuiField(placement);
                 ownable.setOwnerName(currentPlayer.getName());
                 ownable.setBorder(gui.getPlayerColor(currentPlayer));
             }
@@ -169,9 +155,8 @@ public class GameController {
             // Typecast to Model.Property
             Jail jail = (Jail) field;
 
-            // Subtract player balance from Model.Property rent. 2. Update GUI
+            // Subtract player balance from Property rent
             currentPlayer.setPlayerBalance(-jail.getRent());
-            gui.getGuiPlayer(currentPlayer).setBalance(currentPlayer.getPlayerBalance());
 
             // Add money to Free Parking if landed on "Go To Model.Jail"
             if (placement == 18) {
@@ -187,20 +172,12 @@ public class GameController {
 
             moveplayer(currentPlayer, placement);
 
-            // Update GUI with new placement
-            //gui.movePlayer(currentPlayer, 18);
-
-            //board.movePlayer(currentPlayer, placement);
-            //board.removePlayer(currentPlayer, 18);
         }
 
         if (field instanceof FreeParking) {
 
             // Give money to player
             currentPlayer.setPlayerBalance(FreeParking.getBalance());
-            //gui.getGuiPlayer(currentPlayer).setBalance(player.getPlayerBalance());
-            // Update GUI
-            gui.setguiPlayerBalance(currentPlayer, currentPlayer.getPlayerBalance());
 
             // Reset Free Parking
             FreeParking.resetBalance();
@@ -225,8 +202,9 @@ public class GameController {
         } else {
             newPlacement = endPlacement;
         }
-
         player.setPlacement(newPlacement);
+
+        //Update GUI
         gui.movePlayer(player,newPlacement, prePlacement);
     }
 
