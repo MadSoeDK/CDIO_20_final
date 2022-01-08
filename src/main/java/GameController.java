@@ -215,6 +215,154 @@ public class GameController {
         gui.guiMessage(board.getPlayer(board.getWinner()).getName()+" HAS WON THE GAME!");
         board.getCurrentPlayer().getPlayerBalance();
         return board.getCurrentPlayer();
+    }
+
+}
+    public void checkWinner() {
+        //board.guiMessage(board.getPlayer(board.getWinner()).getName()+" HAS WON THE GAME!");
+        if (board.getCurrentPlayer().getPlayerBalance() < 11) {
+            board.guiMessage(board.getPlayer(board.getWinner()).getName() + "WON THE GAME!");
+        }
+    }
+
+    public int netWorth(Player player) {
+        int netWorth = player.getPlayerBalance();
+
+        for (int i = 0; i < board.getFieldsTotal(); i++) {
+            //Type casting field to Ownable
+            if (board.getField(i) instanceof Ownable) {
+                //Verifying that the current field is of the type Ownable
+                Ownable property = (Ownable) board.getField(i);
+                if (player == property.getOwner()) {
+                    netWorth += ((Property) board.getField(i)).getRent();
+                }
+            }
+        }
+        System.out.println(player.getName() + "'s net worth: " + netWorth);
+        return netWorth;
+    }
+    //Copies the player array except the bankrupt player
+    public Player[] eliminatePlayer() {
+        Player[] newPlayers = new Player[board.amountofPlayers() - 1];
+        int j = 0;
+        for (int i = 0; i < board.amountofPlayers(); i++) {
+            Player currentPlayer = board.getPlayer(i);
+            if (!(bankrupt(currentPlayer, currentPlayer.getPlacement()))) {
+                newPlayers[j] = board.getPlayer(i);
+                j++;
+            }
+        }
+        return newPlayers;
+    }
+
+    public boolean bankrupt(Player player, int placement) {
+        //Type casting field to Ownable
+        boolean bankrupt = false;
+        if ((board.getField(placement) instanceof Ownable) && !(board.getField(placement) instanceof Ferry) && !(board.getField(placement) instanceof Tax)) {
+            //Verifying that the current field is of the type Ownable
+            Ownable property = (Ownable) board.getField(placement);
+            if (player != property.getOwner()) {
+                if (player.getPlayerBalance() < ((Property) board.getField(placement)).getRent()) {
+                    //Checks if player is bankrupt
+                    if (netWorth(player) < ((Property) board.getField(placement)).getRent()) {
+                        bankrupt = true;
+                        for (int i = 0; i < board.getFieldsTotal(); i++) {
+                            //Type casting field to Ownable
+                            if (board.getField(i) instanceof Ownable) {
+                                //Verifying that the current field is of the type Ownable
+                                Ownable playerProperty = (Ownable) board.getField(i);
+                                //Gives players properties to debt collector
+                                if (player == playerProperty.getOwner()) {
+                                    playerProperty.setOwner(((Property) board.getField(placement)).getOwner());
+                                }
+                            }
+                        }
+                        //Removes player from the player array, Note: does not work if more players bankrupt same turn
+                        eliminatePlayer();
+                    } else if (netWorth(player) > ((Property) board.getField(placement)).getRent()) {
+                        /*
+                        Player gets the option to either (drop-down menu):
+                            1) Forfeit all his properties and end the game.
+                            2) To mortgage all the necessary properties to survive and stay in the game.
+                                - If 2) is chosen then the mortgage method will be activated and
+                                  loop through the player's properties and look for houses and hotels
+                                  that can be sold. *If there is no houses or hotels then run through
+                                  a while loop which generates an array with properties, that gets shown
+                                  through a drop-down menu that loops until the players balance is
+                                  higher than the rent.
+
+                    }
+                }
+            }
+        }
+        return bankrupt;
     }*/
 
+    /*
+    - Make an array with the player's properties.
+    - Create drop-down menu (GUI) to select different owned properties for player to sell.
+    - Loop the drop-down menu option until the balance is higher than the rent.
+     */
+    //Method to mortgage properties when bankrupt
+    /*public void mortage(Player player) {
+        //Property[] playerProperties = new Property[4];
+        int numberOfProperties;
+        numberOfProperties = board.countNumbersOfPropertiesForPlayer(player);
+
+        Property[] playerProperties = new Property[numberOfProperties];
+        int currentProperty = 0;
+        for (int i = 0; i < board.getFieldsTotal(); i++) {
+            //Type casting field to Ownable
+            if (board.getField(i) instanceof Ownable) {
+                //Verifying that the current field is of the type Ownable
+                Ownable property = (Ownable) board.getField(i);
+                if (player == property.getOwner()) {
+                    playerProperties[currentProperty] = (Property) property;
+                    currentProperty++;
+                }
+            }
+        }
+
+        While loop that checks if balance is higher than rent
+
+     */
+        /*
+        while(player.getPlayerBalance() < ((Property) board.getField(player.getPlacement())).getRent()) {
+
+            board.getGui().getUserSelection("Bankerot eller pantsæt ejendomme?", "Bankerot", "Pantsæt");
+            switch(board.getGui().getUserSelection("Bankerot eller pantsæt ejendomme?", "Bankerot", "Pantsæt")) {
+                case "Bankerot":
+                    player.setPlayerBalance(1);
+                    eliminatePlayer();
+                    break;
+                case "Pantsæt":
+                    /*
+                    - Make options with properties in an array to choose to mortgage.
+                    - OR make the program automatically sell a players properties
+
+                    numberOfProperties = board.countNumbersOfPropertiesForPlayer(player);
+                    String[] propertyNames = new String[numberOfProperties];
+                    currentProperty = 0;
+
+                    for (int i = 0; i < board.getFieldsTotal(); i++) {
+                        //Type casting field to Ownable
+                        if (board.getField(i) instanceof Ownable) {
+                            //Verifying that the current field is of the type Ownable
+                            Ownable property = (Ownable) board.getField(i);
+                            if (player == property.getOwner()) {
+                                String propertyName = ((Property) property).getName();
+                                propertyNames[currentProperty] = propertyName;
+
+                                currentProperty++;
+                            }
+                        }
+                    }
+                    String guiSelection = board.getGui().getUserSelection("Vælg en ejendom du skal sælge:", propertyNames);
+                    switch (guiSelection) {
+
+                    }
+                    break;
+            }
+        }
+    }*/
 }
