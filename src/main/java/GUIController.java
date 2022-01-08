@@ -1,6 +1,7 @@
 import Model.Field;
 import Model.Player;
-import Model.Property;
+//import Model.Property;
+import Model.Street;
 import gui_fields.*;
 import gui_main.GUI;
 
@@ -27,10 +28,10 @@ public class GUIController {
                 case "Start":
                     guiFields[i] = new GUI_Start();
                     break;
-                case "Property":
+                case "Street":
                     guiFields[i] = new GUI_Street();
-                    ((GUI_Ownable)guiFields[i]).setRent(((Property) fields[i]).getRent() + "$");
-                    guiFields[i].setBackGroundColor(((Property) fields[i]).getColor());
+                    ((GUI_Ownable)guiFields[i]).setRent(((Street) fields[i]).getCurrentRent() + "$");
+                    guiFields[i].setBackGroundColor(convertColor(((Street) fields[i]).getColor()));
                     break;
                 case "ChanceField":
                     guiFields[i] = new GUI_Chance();
@@ -51,9 +52,12 @@ public class GUIController {
                     guiFields[i] = new GUI_Tax();
                     guiFields[i].setBackGroundColor(Color.ORANGE);
                     break;
+                case "Brewery":
+                    guiFields[i] = new GUI_Brewery();
+                    break;
             }
-            //guiFields[i].setTitle(fields[i].getName());
-            //guiFields[i].setDescription(fields[i].getName());
+            guiFields[i].setTitle(fields[i].getName());
+            guiFields[i].setDescription(fields[i].getName());
         }
         return guiFields;
     }
@@ -98,26 +102,7 @@ public class GUIController {
             }
 
         }
-
         to.setCar(playerToMove, true);
-
-        //guiFields[placement].setCar(guiPlayers[currentPlayer], true);
-
-        /*GUI_Player playerToMove = new GUI_Player("");
-
-        GUI_Field to = gui.getFields()[prepos];
-
-        for (int i = 0; i < guiPlayers.length; i++) {
-            if (guiPlayers[i].getName().equals(player.getName())) {
-                playerToMove = guiPlayers[i];
-
-                GUI_Field from = gui.getFields()[pospos];
-
-                from.setCar(playerToMove, false);
-            }
-        }
-        to.setCar(playerToMove, true);
-*/
     }
 
     public void showDice(int fv1, int fv2) {
@@ -195,5 +180,38 @@ public class GUIController {
 
     public void setOwner(Player player, Field field) {
 
+    }
+
+    private static Color convertColor(String color) {
+        Color result = Color.white;
+
+        switch (color.toLowerCase()) {
+            case "red" :
+                result = Color.red;
+                break;
+            case "green" :
+                result = Color.green;
+                break;
+            case "blue" :
+                result = new Color(45, 137, 239);
+                break;
+            case "yellow" :
+                result = Color.yellow;
+                break;
+            case "purple" :
+                result = new Color(255, 90, 255);
+                break;
+            case "turquoise" :
+                result = new Color(0,255,239);
+                break;
+            case "magenta" :
+                result = new Color(255,0,151);
+                break;
+            case "orange" :
+                result = new Color(235,97,35);
+                break;
+        }
+
+        return result;
     }
 }
