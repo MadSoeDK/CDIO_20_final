@@ -7,15 +7,29 @@ package Model;
 public class Cup {
 
     private int sum;
-    Die Die1;
+    Die die1;
+    Die die2;
+
+    int[] facevalues;
 
     public Cup() {
-        Die1 = new Die();
+        die1 = new Die();
+        die2 = new Die();
     }
     public int getSum() {
         return sum;
     }
+    public int[] getFacevalues() {
+        return facevalues;
+    }
     public void roll() {
-        sum = Die1.getFacevalue();
+        int fv1 = die1.roll();
+        int fv2 = die2.roll();
+
+        sum = fv1 + fv2;
+
+        facevalues = new int[2];
+        facevalues[0] = fv1;
+        facevalues[1] = fv2;
     }
 }

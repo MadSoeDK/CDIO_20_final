@@ -46,7 +46,7 @@ public class ChanceCardDeck {
         }
         return card;
     }
-    public void useChanceCard() {
+    /*public void useChanceCard() {
         ChanceCard card = drawCard();
         switch(card.getNumber()) {
             case 0:
@@ -84,6 +84,6 @@ public class ChanceCardDeck {
                 break;
                 }
         }
-    }
+    }*/
 
 }

@@ -1,188 +1,189 @@
 package Model;
 
-import gui_fields.*;
-import gui_main.GUI;
 import java.awt.Color;
-/**
- * Handles field-array, Model.Player-array, Gui-information.
- */
+import java.io.BufferedReader;
+import java.io.FileReader;
+
 public class Board {
-    private GUI_Field[] GUIfields;
-    private GUI gui;
-    private Player[] player;
-    private Color[] colors = {Color.RED, Color.WHITE, Color.ORANGE, Color.MAGENTA, Color.green, Color.YELLOW};
-    private int currentPlayer;
-    private ChanceCardDeck chanceCard = new ChanceCardDeck(this);
+
+    private ChanceCardDeck chanceCard;
 
 
-    private Field[] fields = {
-            new Start(new GUI_Start(),"Start", Color.WHITE, "Startfeltet"),
-            new Property(new GUI_Street(),1, "Blå", Color.CYAN),
-            new ChanceField(new GUI_Chance()),
-            new Property(new GUI_Street(),1, "Blå", Color.CYAN),
-            new Tax(new GUI_Tax(), 2000),
-            new Ferry(new GUI_Shipping(), 4000, "Færge", Color.white),
-            new Property(new GUI_Street(),1, "Orange", Color.ORANGE),
-            new ChanceField(new GUI_Chance()),
-            new Property(new GUI_Street(),1, "Orange", Color.ORANGE),
-            new Property(new GUI_Street(),1, "Orange", Color.ORANGE),
-            new Jail(new GUI_Jail(), 0,"På besøg", Color.WHITE),
-            new Property(new GUI_Street(),1, "Gul", Color.YELLOW),
-            new Company(new GUI_Brewery(),3000, "SQUASH", Color.WHITE),
-            new Property(new GUI_Street(),2, "Gul", Color.YELLOW),
-            new Property(new GUI_Street(),1, "Gul", Color.YELLOW),
-            new Ferry(new GUI_Shipping(), 4000, "Færge", Color.white),
-            new Property(new GUI_Street(),1, "Grå", Color.GRAY),
-            new ChanceField(new GUI_Chance()),
-            new Property(new GUI_Street(),1, "Grå", Color.GRAY),
-            new Property(new GUI_Street(),1, "Grå", Color.GRAY),
-            new FreeParking(new GUI_Tax(),0,"Fri Parkering",Color.WHITE,"Modtag Penge"),
-            new Property(new GUI_Street(),1, "Rød", Color.RED),
-            new ChanceField(new GUI_Chance()),
-            new Property(new GUI_Street(),1, "Rød", Color.RED),
-            new Property(new GUI_Street(),1, "Rød", Color.RED),
-            new Ferry(new GUI_Shipping(), 4000, "Færge", Color.white),
-            new Property(new GUI_Street(),1, "Hvid", Color.WHITE),
-            new Company(new GUI_Brewery(),3000, "COLA", Color.WHITE),
-            new Property(new GUI_Street(),2, "Hvid", Color.WHITE),
-            new Property(new GUI_Street(),1, "HVID", Color.WHITE),
-            new Jail(new GUI_Jail(), 3, "Gå i fængsel", Color.WHITE),
-            new Property(new GUI_Street(),1, "Gul", Color.YELLOW),
-            new Property(new GUI_Street(),1, "GUL", Color.YELLOW),
-            new ChanceField(new GUI_Chance()),
-            new Property(new GUI_Street(),1, "Gul", Color.YELLOW),
-            new Ferry(new GUI_Shipping(), 4000, "Færge", Color.white),
-            new ChanceField(new GUI_Chance()),
-            new Property(new GUI_Street(),1, "Lilla", Color.PINK),
-            new Property(new GUI_Street(),1, "2000 Skat", Color.WHITE),
-            new Property(new GUI_Street(),1, "Lilla", Color.PINK),
-    };
+    private final Field[] fields;
 
     public Board() {
-        gui = new GUI(converter(fields));
-    }
+        BufferedReader CSV;
+        String row = "";
+        String[][] data = new String[40][12];
+        String path = "src/main/resources/da_board.csv";
+        try {
+            CSV = new BufferedReader(new FileReader(path));
 
-    /**
-     * Returns an array of the correct GUI_Fields type for the GUI to use
-     * @param fields
-     * @return
-     */
-    public GUI_Field[] converter(Field[] fields) {
-        GUIfields = new GUI_Field[fields.length];
-        for(int i = 0; i < GUIfields.length; i++) {
-            GUIfields[i] = fields[i].field;
-        }
-        return GUIfields;
-    }
-    public void newGame() {
-        switch (gui.getUserSelection("How many players?", "3", "4", "5", "6")) {
-            case "3":
-                createPlayer(3);
-                break;
-            case "4":
-                createPlayer(4);
-                break;
-            case "5":
-                createPlayer(5);
-                break;
-            case "6":
-                createPlayer(6);
-                break;
+            int i = 0;
+            boolean firstline = true;
+            while ((row = CSV.readLine()) != null) {
 
-        }
-    }
+                if (firstline) {
+                    firstline = false;
+                    continue;
+                }
 
-    public void createPlayer(int n) {
-        player = new Player[n];
-        for(int i = 0; i < n; i++) {
-            gui.showMessage("Tilføj en spiller: ");
-            player[i] = new Player(gui.getUserString(""), 30000, colors[i]);
-            gui.addPlayer(player[i].getPlayer());
-            GUIfields[0].setCar(player[i].getPlayer(), true);
-        }
-    }
+                data[i] = row.split(",");
 
-    public void button(int currentPlayer) {
-        gui.getUserButtonPressed("Now it is " + player[currentPlayer].getName() + "'s turn, Start your Turn", "Start Turn");
-    }
+                i++;
+            }
+            CSV.close();
 
-    public void guiMessage(String message){
-        gui.showMessage(message);
-    }
-
-    public void removePlayer(int currentPlayer, int placement) {
-        GUIfields[placement].setCar(player[currentPlayer].getPlayer(), false);
-    }
-
-    public int getCurrentPlayerVar (){
-        return currentPlayer;
-    }
-
-    public void movePlayer(int currentPlayer, int placement) {
-        GUIfields[placement].setCar(player[currentPlayer].getPlayer(), true);
-    }
-
-    public int amountofPlayers() {
-        return player.length;
-    }
-
-    public void setDice(int sum) {
-            gui.setDie(sum);
+        } catch (Exception e) {
+            System.out.println("Error");
         }
 
-    public Player getPlayer(int number) {
-        return player[number];
+        fields = new Field[40];
+
+        int name = 0, position = 1, type = 2, color = 3, price = 4, housePrice = 5;
+
+        for (int i = 0; i < 40; i++) {
+            String[] field = data[i];
+            switch (field[type]) {
+                case "street":
+                    fields[Integer.parseInt(field[position])] = new Street (
+                            field[name],
+                            Integer.parseInt(field[position]),
+                            field[color],
+                            stringToIntarr(field,field[type]),
+                            Integer.parseInt(field[price]),
+                            Integer.parseInt(field[housePrice])
+                    );
+                    break;
+
+                case "tax":
+                    fields[Integer.parseInt(field[position])] = new Tax(
+                            field[name],
+                            Integer.parseInt(field[position]),
+                            Integer.parseInt(field[price])
+                    );
+                    break;
+
+                case "ferry":
+                    fields[Integer.parseInt(field[position])] = new Ferry(
+                            field[name],
+                            Integer.parseInt(field[position]),
+                            field[color],
+                            stringToIntarr(field,field[type]),
+                            Integer.parseInt(field[price])
+                    );
+                    break;
+
+                case "brewery":
+                    fields[Integer.parseInt(field[position])] = new Brewery(
+                            field[name],
+                            Integer.parseInt(field[position]),
+                            field[color],
+                            stringToIntarr(field,field[type]),
+                            Integer.parseInt(field[price])
+                    );
+                    break;
+
+                case "jail":
+                    fields[Integer.parseInt(field[position])] = new Jail(
+                            field[name],
+                            Integer.parseInt(field[position])
+                    );
+                    break;
+
+                case "chance":
+                    fields[Integer.parseInt(field[position])] = new ChanceField(
+                            field[name],
+                            Integer.parseInt(field[position])
+                    );
+                    break;
+
+                case "start":
+                    fields[Integer.parseInt(field[position])] = new Start(
+                            field[name],
+                            Integer.parseInt(field[position])
+                    );
+                    break;
+
+                case "FreeParking":
+                    fields[Integer.parseInt(field[position])] = new FreeParking(
+                            field[name],
+                            Integer.parseInt(field[position])
+                    );
+                    break;
+                default:
+                    System.out.println("No field type match");
+            }
         }
+
+        chanceCard = new ChanceCardDeck(this);
+
+    }
 
     public Field getField(int placement) {
             return fields[placement];
-        }
-
-    public Player getCurrentPlayer(){
-        return player[currentPlayer];
     }
 
-    public void updateCurrentPlayer(int currentPlayer){
-        this.currentPlayer=currentPlayer;
+    public Field[] getFields() {
+        return fields;
     }
 
-    public boolean checkWinner(){
-        // If no winner
-        boolean winner=false;
-        for (int i=0; i< player.length; i++)
-        {
-            if (player[i].getPlayerBalance()<1){
-                winner=true;
-            }
+    public int[] stringToIntarr(String[] array, String type) {
+        int col = 6;
+        int[] result;
+
+        if (type.equals("street")) {
+            result = new int[6];
+        } else if (type.equals("ferry")) {
+            result = new int[4];
+        } else {
+            result = new int[2];
         }
-        return winner;
-    }
-    public int getFieldsTotal() {
-        return GUIfields.length;
-    }
-    public int getWinner(){
-        int winner=0;
-        int high_score=0;
-        for (int i=0; i< player.length; i++)
-        {
-            if (player[i].getPlayerBalance()>high_score){
-                winner=i;
-                high_score=player[i].getPlayerBalance();
-            }
+        for (int i = 0; i < result.length; i++){
+            result[i] = Integer.parseInt(array[col + i]);
         }
-        return winner;
+        return result;
     }
 
     public ChanceCardDeck getChanceCardDeck(){
         return chanceCard;
     }
 
-    public GUI getGui() {
-        return gui;
-    }
+    /*public boolean hasMonopoly(int placement) {
+        Property property = (Property) getField(placement);
 
-    public Player[] getPlayerArray(){
-        return player;
-    }
+        boolean monopoly = false;
 
+        // Check if both fields of same color is owned by the same player
+        if (placement - 2 < 0) {
+            for (int i = 0; i < (placement + 3); i++) {
+                // Check 2 field in either direction
+                if (getField(i) instanceof Property) {
+
+                    // Typecast to Property
+                    Property property_check = (Property) getField(i);
+
+                    // Check if owner/color is the same
+                    if (property_check.getColor() == property.getColor() && property_check.getOwner() == property.getOwner()) {
+                        monopoly = true;
+                    }
+                }
+            }
+        } else {
+            for (int i = placement - 2; i < placement + 3; i++) {
+                // Check 2 field in either direction
+                if (i < 24) {
+                    if (getField(i) instanceof Property) {
+                        // Typecast to Property
+                        Property property_check = (Property) getField(i);
+                        // Check if owner/color is the same
+                        if (property_check.getColor() == property.getColor() && property_check.getOwner() == property.getOwner()) {
+                            monopoly = true;
+                        }
+                    }
+                }
+            }
+        }
+        return monopoly;
+    }*/
 }
