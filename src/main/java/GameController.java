@@ -254,7 +254,7 @@ public class GameController {
                             if (board.getField(i) instanceof Ownable) {
                                 //Verifying that the current field is of the type Ownable
                                 Ownable playerProperty = (Ownable) board.getField(i);
-                                //Gives players porperties to debt collecter
+                                //Gives players properties to debt collector
                                 if (player == playerProperty.getOwner()) {
                                     playerProperty.setOwner(((Property) board.getField(placement)).getOwner());
                                 }

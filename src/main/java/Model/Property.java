@@ -28,7 +28,6 @@ public class Property extends Ownable {
         field.setSubText("$" + rent);
         field.setDescription("My description");
 
-
         this.field = field;
         this.rent = rent;
         this.name = name;
@@ -38,7 +37,7 @@ public class Property extends Ownable {
 
     // Methods
     public int getRent() {
-        if(mortgage) {
+        if(mortgage == true) {
             return 0;
         }
         return rent;
