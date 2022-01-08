@@ -2,7 +2,7 @@ import Model.*;
 import gui_fields.GUI_Ownable;
 import gui_main.GUI;
 
-import java.awt.*;
+//import java.awt.*;
 
 public class GameController {
 
@@ -17,10 +17,10 @@ public class GameController {
     public void startGame() {
 
         // Initializing Variables
-        int sum = 0;
+        int sum;
         int currentPlayer = 0;
         int same_color_owner=0;
-        int rent_mutiplier=1;
+        int rent_mutiplier;
 
         board.newGame();
 
@@ -175,7 +175,7 @@ public class GameController {
                 }
 
                 // Set GUI Balance
-                board.getField(20).getGUIField().setSubText("Modtag: "+String.valueOf(FreeParking.getBalance()/1000)+"K");
+                board.getField(20).getGUIField().setSubText("Modtag: "+(FreeParking.getBalance()/1000)+"K");
 
                 // Move to Model.Jail field
                 player.gotoPlacement(10);
@@ -196,7 +196,7 @@ public class GameController {
                 FreeParking.resetBalance();
 
                 // Set GUI Balance
-                field.getGUIField().setSubText("Modtag: "+String.valueOf(FreeParking.getBalance()));
+                field.getGUIField().setSubText("Modtag: "+(FreeParking.getBalance()));
 
             }
 
@@ -242,7 +242,6 @@ public class GameController {
                     fieldOwner.getPlayer().setBalance(fieldOwner.getPlayerBalance());
                 }
             }
-
 
             if (field instanceof Company) {
 
@@ -346,7 +345,7 @@ public class GameController {
 
             // Check if owner is the same
             if (property_check.getOwner() == property.getOwner()) {
-                property_check.getGUIField().setSubText("$"+String.valueOf(ferry_cost));
+                property_check.getGUIField().setSubText("$"+(ferry_cost));
             }
         }
     }
@@ -459,7 +458,7 @@ public class GameController {
 
         // Display Menu for money
         boolean correctPartnerPayAmount=false;
-        while (correctPartnerPayAmount==false) {
+        while (!correctPartnerPayAmount) {
             switch (gui.getUserSelection(board.getPlayer(curPlayer).getName() + " Vælg hvor meget " + tradePlayersNames[tradePartnerId] + " skal betale: " + tradePartnerPayed, "Accepter mængde", "+50", "+100", "+200", "+500", "+1000", "+5000", "+10000")) {
                 case "Accepter mængde":
                     correctPartnerPayAmount=true;
@@ -492,7 +491,7 @@ public class GameController {
 
         // Display menu for own players money
         boolean correctPlayerPayAmount=false;
-        while (correctPlayerPayAmount==false) {
+        while (!correctPlayerPayAmount) {
             switch (gui.getUserSelection(board.getPlayer(curPlayer).getName() + " Vælg hvor meget du skal betale: " + traderPayed, "Accepter mængde", "+50", "+100", "+200", "+500", "+1000", "+5000", "+10000")) {
                 case "Accepter mængde":
                     correctPlayerPayAmount=true;
@@ -536,7 +535,7 @@ public class GameController {
         // Transfer Ownership
 
         // Pay for trade
-        if (tradeAccepted == true) {
+        if (tradeAccepted) {
             tradePlayers[tradePartnerId].setPlayerBalance(traderPayed - tradePartnerPayed);
             board.getPlayer(curPlayer).setPlayerBalance(tradePartnerPayed - traderPayed);
 
@@ -566,7 +565,7 @@ public class GameController {
         // Bid/Pass
         while (auctionPlayersLeft != 1)
         {
-            switch (gui.getUserSelection("Current Bid Amount: " + String.valueOf(auctionSum) + " " + curAucPlayer.getName() + ": Select Bid Option", "Pass", "100", "200", "500", "1000", "2000")) {
+            switch (gui.getUserSelection("Current Bid Amount: " + (auctionSum) + " " + curAucPlayer.getName() + ": Select Bid Option", "Pass", "100", "200", "500", "1000", "2000")) {
                 case "Pass":
                     auctionPlayersLeft -= 1;
                     aucPlayers[curAucIndex]=null;
@@ -653,8 +652,6 @@ public class GameController {
             board.getPlayer(auctionWinner).setPlayerBalance(+propertyWorth);
         }
         return auctionWinner;
-
-
     }
 }
 
