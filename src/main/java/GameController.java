@@ -31,7 +31,12 @@ public class GameController {
     public void takeTurn() {
         int sum = 0;
 
-        gui.button("Nu er det " + currentPlayer.getName() + "'s tur, rul terningen!", "Rul terning");
+        gui.message("Nu er det " + currentPlayer.getName() + "'s tur");
+
+        // Ask if they wish trade?
+        playerOptions(currentPlayer);
+
+        gui.button(" ", "Rul terning");
 
         // Roll die, get value, show die
         cup.roll();
@@ -191,6 +196,19 @@ public class GameController {
         }
         player.setPlacement(endplacement);
         gui.movePlayer(player,endplacement,preplacement);
+    }
+    public void playerOptions(Player player) {
+
+        String[] options = {"Roll Die", "Begin Trade"};
+
+        switch (gui.dropdown("What do you want to do?", options)) {
+            case "Begin Trade":
+                //trade(gui, curPlayer);
+                break;
+            case "Roll Die":
+                break;
+        }
+
     }
 
     /*public Player checkWinner() {

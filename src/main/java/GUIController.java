@@ -149,6 +149,10 @@ public class GUIController {
 
     }
 
+    public String dropdown(String msg, String[] option) {
+        return gui.getUserSelection(msg, option);
+    }
+
     public GUI_Field getGuiField(int placement) {
         return guiFields[placement];
     }
