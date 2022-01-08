@@ -126,11 +126,27 @@ public class GUIController {
 
          */
 
-        GUI_Street property = (GUI_Street) getGuiField(placement);
+        switch (getGuiField(placement).getClass().getSimpleName()) {
+            case "GUI_Street":
+                GUI_Street property = (GUI_Street) getGuiField(placement);
+                property.setHouses(1);
+                property.setOwnerName(player.getName());
+                property.setBorder(getPlayerColor(player));
+                break;
+            case "GUI_Shipping":
+                GUI_Shipping ferry = (GUI_Shipping) getGuiField(placement);
+                ferry.setOwnerName(player.getName());
+                ferry.setBorder(getPlayerColor(player));
+                break;
+            case "GUI_Brewery":
+                GUI_Brewery brewery = (GUI_Brewery) getGuiField(placement);
+                brewery.setOwnerName(player.getName());
+                brewery.setBorder(getPlayerColor(player));
+                break;
+            default:
+                System.out.println("Not a ownable");
 
-        property.setHouses(1);
-        property.setOwnerName(player.getName());
-        property.setBorder(getPlayerColor(player));
+        }
 
     }
 
