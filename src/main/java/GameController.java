@@ -222,20 +222,20 @@ public class GameController {
     }
 
     public int netWorth(Player player) {
-        int netWorth = player.getPlayerBalance();
-
         for (int i = 0; i < board.getFields().length; i++) {
             //Type casting field to Ownable
             if (board.getField(i) instanceof Ownable) {
                 //Verifying that the current field is of the type Ownable
                 Ownable property = (Ownable) board.getField(i);
-                if (player == property.getOwner()) {
-                    netWorth += ((Ownable) board.getField(i)).getPrice();
+                if (player == property.getOwner() && board.getField(i) instanceof Street) {
+                    System.out.println(player.getName() + " landte på "
+                            + board.getField(i).getName() + ". Der tilføjes: " + ((Street) board.getField(i)).getPrice());
+                    player.setNetWorth(((Ownable) board.getField(i)).getPrice());
                 }
             }
         }
-        System.out.println(player.getName() + "'s net worth: " + netWorth);
-        return netWorth;
+        System.out.println(player.getName() + "'s net worth: " + player.getNetWorth());
+        return player.getNetWorth();
     }
     //Copies the player array except the bankrupt player
     public Player[] eliminatePlayer() {
@@ -243,7 +243,7 @@ public class GameController {
         int j = 0;
         for (int i = 0; i < gui.getPlayers(); i++) {
             Player currentPlayer = players[i];
-            if (!(bankrupt(currentPlayer, currentPlayer.getPlacement()))) {
+            if (currentPlayer.getBankruptStatus() == false) {
                 newPlayers[j] = players[i];
                 j++;
             }
@@ -261,7 +261,7 @@ public class GameController {
                 if (player.getPlayerBalance() < ((Street) board.getField(placement)).getCurrentRent()) {
                     //Checks if player is bankrupt
                     if (netWorth(player) < ((Street) board.getField(placement)).getCurrentRent()) {
-                        bankrupt = true;
+                        player.setBankruptStatus(true);
                         for (int i = 0; i < board.getFields().length; i++) {
                             //Type casting field to Ownable
                             if (board.getField(i) instanceof Ownable) {
@@ -270,6 +270,7 @@ public class GameController {
                                 //Gives players properties to debt collector
                                 if (player == playerProperty.getOwner()) {
                                     playerProperty.setOwner(((Street) board.getField(placement)).getOwner());
+                                    player.setNetWorth(-((Ownable) board.getField(i)).getPrice());
                                 }
                             }
                         }
