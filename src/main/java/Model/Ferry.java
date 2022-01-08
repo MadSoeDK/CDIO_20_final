@@ -1,9 +1,7 @@
 package Model;
 
-import java.awt.*;
-
 public class Ferry extends Ownable {
-    public Ferry() {
-
+    public Ferry(String name, int placement, String color, int[] rent, int price) {
+        super(name,placement,color,rent,price);
     }
 }

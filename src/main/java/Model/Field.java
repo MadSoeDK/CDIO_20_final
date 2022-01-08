@@ -4,10 +4,20 @@ package Model;
  * Parent Model.Field Class
  */
 public abstract class Field {
-    protected String name;
-    protected String description;
+    private final String NAME;
+    private final int PLACEMENT;
+
+    //protected String description;
+
+    public Field(String name,int placement) {
+        this.NAME = name;
+        this.PLACEMENT = placement;
+    }
 
     public String getName() {
-        return name;
+        return NAME;
+    }
+    public int getPlacement() {
+        return PLACEMENT;
     }
 }

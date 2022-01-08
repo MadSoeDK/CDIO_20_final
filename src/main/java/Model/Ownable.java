@@ -4,14 +4,19 @@ import java.awt.*;
 
 public abstract class Ownable extends Field {
 
+    private final String COLOR;
+    private final int[] RENT;
+    private final int PRICE;
+
     private Player owner;
 
-    private Color color;
-    private int[] rent;
-    private int price;
+    private int houses = 0;
 
-    public Ownable() {
-
+    public Ownable(String name, int placement, String color, int[] rent, int price) {
+        super(name, placement);
+        this.COLOR = color;
+        this.RENT = rent;
+        this.PRICE = price;
     }
 
     public void setOwner(Player player) {
@@ -19,5 +24,26 @@ public abstract class Ownable extends Field {
     }
     public Player getOwner() {
         return owner;
+    }
+    public String getColor() {
+        return COLOR;
+    }
+    public int[] getRent() {
+        return RENT;
+    }
+    public int getCurrentRent() {
+        int rent;
+        if (owner != null) {
+            rent = RENT[houses];
+        } else {
+            rent = PRICE;
+        }
+        return rent;
+    }
+    public int getPrice() {
+        return PRICE;
+    }
+    public int getHouses() {
+        return houses;
     }
 }

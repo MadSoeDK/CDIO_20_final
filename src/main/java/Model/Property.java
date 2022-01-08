@@ -2,7 +2,7 @@ package Model;
 
 import java.awt.Color;
 
-public class Property extends Ownable {
+/*public class Property extends Ownable {
 
     protected int rent;
     protected Color color;
@@ -20,4 +20,4 @@ public class Property extends Ownable {
         return color;
     }
 
-}
+}*/
