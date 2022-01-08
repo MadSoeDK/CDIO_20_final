@@ -65,5 +65,42 @@ public class Board {
     public ChanceCardDeck getChanceCardDeck(){
         return chanceCard;
     }
-    
+
+    public boolean hasMonopoly(int placement) {
+        Property property = (Property) getField(placement);
+
+        boolean monopoly = false;
+
+        // Check if both fields of same color is owned by the same player
+        if (placement - 2 < 0) {
+            for (int i = 0; i < (placement + 3); i++) {
+                // Check 2 field in either direction
+                if (getField(i) instanceof Property) {
+
+                    // Typecast to Property
+                    Property property_check = (Property) getField(i);
+
+                    // Check if owner/color is the same
+                    if (property_check.getColor() == property.getColor() && property_check.getOwner() == property.getOwner()) {
+                        monopoly = true;
+                    }
+                }
+            }
+        } else {
+            for (int i = placement - 2; i < placement + 3; i++) {
+                // Check 2 field in either direction
+                if (i < 24) {
+                    if (getField(i) instanceof Property) {
+                        // Typecast to Property
+                        Property property_check = (Property) getField(i);
+                        // Check if owner/color is the same
+                        if (property_check.getColor() == property.getColor() && property_check.getOwner() == property.getOwner()) {
+                            monopoly = true;
+                        }
+                    }
+                }
+            }
+        }
+        return monopoly;
+    }
 }

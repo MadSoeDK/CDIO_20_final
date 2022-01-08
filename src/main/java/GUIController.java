@@ -1,4 +1,3 @@
-import Model.ChanceField;
 import Model.Field;
 import Model.Player;
 import Model.Property;
@@ -121,16 +120,33 @@ public class GUIController {
 */
     }
 
-    public void showDie(int sum) {
-        gui.setDie(sum);
+    public void showDice(int fv1, int fv2) {
+        //gui.setDie(sum);
+        gui.setDice(fv1, fv2);
     }
 
-    public void Button(String msg, String buttonText) {
+    public void button(String msg, String buttonText) {
         gui.getUserButtonPressed(msg, buttonText);
     }
 
-    public void guiMessage(String message){
+    public void message(String message){
         gui.showMessage(message);
+    }
+
+    public void showOwner(Player player, int placement) {
+        /*GUI_Ownable ownable = (GUI_Ownable) getGuiField(placement);
+
+        ownable.setOwnerName(player.getName());
+        ownable.setBorder(getPlayerColor(player));
+
+         */
+
+        GUI_Street property = (GUI_Street) getGuiField(placement);
+
+        property.setHouses(1);
+        property.setOwnerName(player.getName());
+        property.setBorder(getPlayerColor(player));
+
     }
 
     public GUI_Field getGuiField(int placement) {

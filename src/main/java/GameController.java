@@ -9,10 +9,7 @@ public class GameController {
     private Player[] players;
     private Player currentPlayer;
 
-
-    // Initializing Variables
-    int same_color_owner = 0;
-    int rent_mutiplier = 1;
+    // Game Constants
     final int STARTBALANCE = 30000;
 
     public GameController() {
@@ -34,11 +31,11 @@ public class GameController {
     public void takeTurn() {
         int sum = 0;
 
-        gui.Button("Nu er det" + currentPlayer.getName() + "'s tur, rul terningen!", "Rul terning");
+        gui.button("Nu er det " + currentPlayer.getName() + "'s tur, rul terningen!", "Rul terning");
 
         // Roll die, get value, show die
         cup.roll();
-        sum = cup.getSum();
+        sum = 10;//cup.getSum();
         gui.showDice(cup.getFacevalues()[0], cup.getFacevalues()[1]);
 
         // Move player placement - automatically updates GUI
@@ -47,6 +44,8 @@ public class GameController {
         int placement = currentPlayer.getPlacement();
 
         Field field = board.getField(placement);
+
+        gui.message(currentPlayer.getName() + " landede på " + field.getName());
 
         checkFieldType(field, placement);
 
@@ -77,114 +76,90 @@ public class GameController {
         }
     }
     public void checkFieldType(Field field, int placement) {
-        // Check field type
-        if (field instanceof Property) {
 
-            // Typecast to Property
-            Property property = (Property) field;
+        String fieldType = board.getField(placement).getClass().getSimpleName();
 
-            // Field is owned by another player and it's not the current player
-            if (property.getOwner() != currentPlayer && property.getOwner() != null) {
+        switch (fieldType) {
+            case "Property":
 
-                // Get field owner
-                Player fieldOwner = property.getOwner();
+                // Typecast to Property
+                Property property = (Property) field;
 
-                // Check if both fields of same color is owned by the same player
-                if (placement - 2 < 0) {
-                    for (int i = 0; i < (placement + 3); i++) {
-                        // Check 2 field in either direction
-                        if (board.getField(i) instanceof Property) {
-                            // Typecast to Model.Property
-                            Property property_check = (Property) board.getField(i);
+                // Check if Field is owned by another player and it's not the current player
+                if (property.getOwner() != currentPlayer && property.getOwner() != null) { //There is a Field owner and it's not owned by the current Player
 
-                            // Check if owner/color is the same
-                            if (property_check.getColor() == property.getColor() && property_check.getOwner() == property.getOwner()) {
-                                same_color_owner++;
-                            }
-                        }
+                    // Get field owner
+                    Player fieldOwner = property.getOwner();
+
+                    // Check if Owner owns all colors
+                    if (board.hasMonopoly(placement)) {
+                        // 1. Subtract rent from current player 2. add to field owner
+                        currentPlayer.setPlayerBalance(-property.getRent() * 2);
+                        fieldOwner.setPlayerBalance(property.getRent() * 2);
                     }
-                } else {
-                    for (int i = placement - 2; i < placement + 3; i++) {
-                        // Check 2 field in either direction
-                        if (i < 24) {
-                            if (board.getField(i) instanceof Property) {
-                                // Typecast to Model.Property
-                                Property property_check = (Property) board.getField(i);
-                                // Check if owner/color is the same
-                                if (property_check.getColor() == property.getColor() && property_check.getOwner() == property.getOwner()) {
-                                    same_color_owner++;
-                                }
-                            }
-                        }
-                    }
+
+                } else { // No one owns the Property, buy it.
+
+                    // Subtract player balance from Property rent
+                    currentPlayer.setPlayerBalance(-property.getRent());
+
+                    // Set Property owner
+                    property.setOwner(currentPlayer);
+
+                    // Set GUI Field
+                    gui.showOwner(currentPlayer, placement);
                 }
+                break;
 
-                // Increase rent if owner owns entire color
-                if (same_color_owner == 2) {
-                    rent_mutiplier = 2;
-                } else {
-                    rent_mutiplier = 1;
+            case "Jail":
+
+                // Typecast to Jail
+                Jail jail = (Jail) field;
+
+                // Add money to Free Parking if landed on "Go To Jail"
+                if (placement == 30) {
+                    gui.message(currentPlayer.getName() + " rykker til fængsel og betaler $3");
+
+                    // Subtract player balance from Property rent
+                    currentPlayer.setPlayerBalance(-jail.getRent());
+
+                    FreeParking.setBalance(3);
+
+                    // Move to Jail field
+                    //currentPlayer.setPlacement(6);
+                    setPlayerPlacement(currentPlayer, 10, false);
+
                 }
+                // Set GUI Balance
+                gui.getGuiField(placement).setSubText("Modtag: " + String.valueOf(FreeParking.getBalance()));
+                break;
 
-                // 1. Subtract rent from current player 2. add to field owner
-                currentPlayer.setPlayerBalance(-property.getRent() * rent_mutiplier);
-                fieldOwner.setPlayerBalance(property.getRent() * rent_mutiplier);
+            case "FreeParking":
+                // Give money to player
+                currentPlayer.setPlayerBalance(FreeParking.getBalance());
 
-                // Reset
-                same_color_owner = 0;
-            }
+                // Reset Free Parking
+                FreeParking.resetBalance();
 
-            // No one owns the Model.Property
-            if (property.getOwner() == null) {
+                // Set GUI Balance
+                gui.getGuiField(placement).setSubText("Modtag: " + String.valueOf(FreeParking.getBalance()));
+                break;
 
-                // Subtract player balance from Model.Property rent
-                currentPlayer.setPlayerBalance(-property.getRent());
+            case "Tax":
+                //do something
+                break;
 
-                // Set Property owner
-                property.setOwner(currentPlayer);
+            case "Ferry":
+                //do something
+                break;
 
-                // Set GUI Field
-                GUI_Ownable ownable = (GUI_Ownable) gui.getGuiField(placement);
-                ownable.setOwnerName(currentPlayer.getName());
-                ownable.setBorder(gui.getPlayerColor(currentPlayer));
-            }
-        }
-
-        if (field instanceof Jail) {
-
-            // Typecast to Model.Property
-            Jail jail = (Jail) field;
-
-            // Subtract player balance from Property rent
-            currentPlayer.setPlayerBalance(-jail.getRent());
-
-            // Add money to Free Parking if landed on "Go To Model.Jail"
-            if (placement == 18) {
-                FreeParking.setBalance(3);
-            }
-
-            // Set GUI Balance
-            gui.getGuiField(placement).setSubText("Modtag: " + String.valueOf(FreeParking.getBalance()));
-
-            // Move to Model.Jail field
-            currentPlayer.gotoPlacement(6);
-            placement = currentPlayer.getPlacement();
-
-            moveplayer(currentPlayer, placement);
-
-        }
-
-        if (field instanceof FreeParking) {
-
-            // Give money to player
-            currentPlayer.setPlayerBalance(FreeParking.getBalance());
-
-            // Reset Free Parking
-            FreeParking.resetBalance();
-
-            // Set GUI Balance
-            gui.getGuiField(placement).setSubText("Modtag: " + String.valueOf(FreeParking.getBalance()));
-
+            case "ChanceField":
+                //do something
+                break;
+            case "Start":
+                //do something
+            default:
+                System.out.println("Fieldtype unknown" + fieldType);
         }
     }
     public void moveplayer(Player player, int amount) {
@@ -206,6 +181,16 @@ public class GameController {
 
         //Update GUI
         gui.movePlayer(player,newPlacement, prePlacement);
+    }
+    public void setPlayerPlacement(Player player, int endplacement, boolean passStart) {
+        int preplacement = player.getPlacement();
+
+        //Check if Starts is passed
+        if (passStart && endplacement < preplacement) {
+            player.setPlayerBalance(5);
+        }
+        player.setPlacement(endplacement);
+        gui.movePlayer(player,endplacement,preplacement);
     }
 
     /*public Player checkWinner() {
