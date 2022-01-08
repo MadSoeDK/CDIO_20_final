@@ -218,30 +218,16 @@ public class GameController {
 
     }
 
-    /*public Player checkWinner() {
-        gui.guiMessage(board.getPlayer(board.getWinner()).getName()+" HAS WON THE GAME!");
-        board.getCurrentPlayer().getPlayerBalance();
-        return board.getCurrentPlayer();
-    }
-
-}
-    public void checkWinner() {
-        //board.guiMessage(board.getPlayer(board.getWinner()).getName()+" HAS WON THE GAME!");
-        if (board.getCurrentPlayer().getPlayerBalance() < 11) {
-            board.guiMessage(board.getPlayer(board.getWinner()).getName() + "WON THE GAME!");
-        }
-    }
-
     public int netWorth(Player player) {
         int netWorth = player.getPlayerBalance();
 
-        for (int i = 0; i < board.getFieldsTotal(); i++) {
+        for (int i = 0; i < board.getFields().length; i++) {
             //Type casting field to Ownable
             if (board.getField(i) instanceof Ownable) {
                 //Verifying that the current field is of the type Ownable
                 Ownable property = (Ownable) board.getField(i);
                 if (player == property.getOwner()) {
-                    netWorth += ((Property) board.getField(i)).getRent();
+                    netWorth += ((Street) board.getField(i)).getCurrentRent();
                 }
             }
         }
@@ -250,12 +236,12 @@ public class GameController {
     }
     //Copies the player array except the bankrupt player
     public Player[] eliminatePlayer() {
-        Player[] newPlayers = new Player[board.amountofPlayers() - 1];
+        Player[] newPlayers = new Player[gui.getPlayers() - 1];
         int j = 0;
-        for (int i = 0; i < board.amountofPlayers(); i++) {
-            Player currentPlayer = board.getPlayer(i);
+        for (int i = 0; i < gui.getPlayers(); i++) {
+            Player currentPlayer = players[i];
             if (!(bankrupt(currentPlayer, currentPlayer.getPlacement()))) {
-                newPlayers[j] = board.getPlayer(i);
+                newPlayers[j] = players[i];
                 j++;
             }
         }
@@ -269,24 +255,25 @@ public class GameController {
             //Verifying that the current field is of the type Ownable
             Ownable property = (Ownable) board.getField(placement);
             if (player != property.getOwner()) {
-                if (player.getPlayerBalance() < ((Property) board.getField(placement)).getRent()) {
+                if (player.getPlayerBalance() < ((Street) board.getField(placement)).getCurrentRent()) {
                     //Checks if player is bankrupt
-                    if (netWorth(player) < ((Property) board.getField(placement)).getRent()) {
+                    if (netWorth(player) < ((Street) board.getField(placement)).getCurrentRent()) {
                         bankrupt = true;
-                        for (int i = 0; i < board.getFieldsTotal(); i++) {
+                        for (int i = 0; i < board.getFields().length; i++) {
                             //Type casting field to Ownable
                             if (board.getField(i) instanceof Ownable) {
                                 //Verifying that the current field is of the type Ownable
                                 Ownable playerProperty = (Ownable) board.getField(i);
                                 //Gives players properties to debt collector
                                 if (player == playerProperty.getOwner()) {
-                                    playerProperty.setOwner(((Property) board.getField(placement)).getOwner());
+                                    playerProperty.setOwner(((Street) board.getField(placement)).getOwner());
                                 }
                             }
                         }
                         //Removes player from the player array, Note: does not work if more players bankrupt same turn
                         eliminatePlayer();
-                    } else if (netWorth(player) > ((Property) board.getField(placement)).getRent()) {
+                    } else if (netWorth(player) > ((Street) board.getField(placement)).getCurrentRent()) {
+
                         /*
                         Player gets the option to either (drop-down menu):
                             1) Forfeit all his properties and end the game.
@@ -297,13 +284,14 @@ public class GameController {
                                   a while loop which generates an array with properties, that gets shown
                                   through a drop-down menu that loops until the players balance is
                                   higher than the rent.
+                                  */
 
                     }
                 }
             }
         }
         return bankrupt;
-    }*/
+    }
 
     /*
     - Make an array with the player's properties.
@@ -311,30 +299,29 @@ public class GameController {
     - Loop the drop-down menu option until the balance is higher than the rent.
      */
     //Method to mortgage properties when bankrupt
-    /*public void mortage(Player player) {
+    public void mortage(Player player) {
         //Property[] playerProperties = new Property[4];
         int numberOfProperties;
         numberOfProperties = board.countNumbersOfPropertiesForPlayer(player);
 
-        Property[] playerProperties = new Property[numberOfProperties];
+        Street[] playerProperties = new Street[numberOfProperties];
         int currentProperty = 0;
-        for (int i = 0; i < board.getFieldsTotal(); i++) {
+        for (int i = 0; i < board.getFields().length; i++) {
             //Type casting field to Ownable
             if (board.getField(i) instanceof Ownable) {
                 //Verifying that the current field is of the type Ownable
                 Ownable property = (Ownable) board.getField(i);
                 if (player == property.getOwner()) {
-                    playerProperties[currentProperty] = (Property) property;
+                    playerProperties[currentProperty] = (Street) property;
                     currentProperty++;
                 }
             }
         }
 
-        While loop that checks if balance is higher than rent
+        //While loop that checks if balance is higher than rent
 
-     */
-        /*
-        while(player.getPlayerBalance() < ((Property) board.getField(player.getPlacement())).getRent()) {
+
+        while(player.getPlayerBalance() < ((Street) board.getField(player.getPlacement())).getCurrentRent()) {
 
             board.getGui().getUserSelection("Bankerot eller pantsæt ejendomme?", "Bankerot", "Pantsæt");
             switch(board.getGui().getUserSelection("Bankerot eller pantsæt ejendomme?", "Bankerot", "Pantsæt")) {
