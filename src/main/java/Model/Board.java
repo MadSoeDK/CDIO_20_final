@@ -144,6 +144,21 @@ public class Board {
         }
         return result;
     }
+    public int countNumbersOfPropertiesForPlayer(Player player) {
+        int numberOfProperties = 0;
+        for (int i = 0; i < getFields().length; i++) {
+
+            //Type casting field to Ownable
+            if (getField(i) instanceof Ownable) {
+                //Verifying that the current field is of the type Ownable
+                Ownable property = (Ownable) getField(i);
+                if (player == property.getOwner()) {
+                    numberOfProperties++;
+                }
+            }
+        }
+        return numberOfProperties;
+    }
 
     public ChanceCardDeck getChanceCardDeck(){
         return chanceCard;

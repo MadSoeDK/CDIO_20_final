@@ -320,43 +320,49 @@ public class GameController {
 
         //While loop that checks if balance is higher than rent
 
+        String[] optionsBankruptOrMortage = new String[2];
+        optionsBankruptOrMortage[0] = "Bankerot";
+        optionsBankruptOrMortage[1] = "Pantsæt";
 
         while(player.getPlayerBalance() < ((Street) board.getField(player.getPlacement())).getCurrentRent()) {
 
-            board.getGui().getUserSelection("Bankerot eller pantsæt ejendomme?", "Bankerot", "Pantsæt");
-            switch(board.getGui().getUserSelection("Bankerot eller pantsæt ejendomme?", "Bankerot", "Pantsæt")) {
+            gui.dropdown("Gå bankerot eller pantsæt ejendomme?", optionsBankruptOrMortage);
+            switch(gui.dropdown("Gå bankerot eller pantsæt ejendomme?", optionsBankruptOrMortage)) {
                 case "Bankerot":
                     player.setPlayerBalance(1);
                     eliminatePlayer();
                     break;
                 case "Pantsæt":
+
+
                     /*
                     - Make options with properties in an array to choose to mortgage.
                     - OR make the program automatically sell a players properties
-
+                    */
                     numberOfProperties = board.countNumbersOfPropertiesForPlayer(player);
                     String[] propertyNames = new String[numberOfProperties];
                     currentProperty = 0;
 
-                    for (int i = 0; i < board.getFieldsTotal(); i++) {
+                    for (int i = 0; i < board.getFields().length; i++) {
                         //Type casting field to Ownable
                         if (board.getField(i) instanceof Ownable) {
                             //Verifying that the current field is of the type Ownable
                             Ownable property = (Ownable) board.getField(i);
                             if (player == property.getOwner()) {
-                                String propertyName = ((Property) property).getName();
+                                String propertyName = ((Street) property).getName();
                                 propertyNames[currentProperty] = propertyName;
 
                                 currentProperty++;
                             }
                         }
                     }
-                    String guiSelection = board.getGui().getUserSelection("Vælg en ejendom du skal sælge:", propertyNames);
+
+                    String guiSelection = gui.dropdown("Vælg en ejendom du skal sælge:", propertyNames);
                     switch (guiSelection) {
 
                     }
                     break;
             }
         }
-    }*/
+    }
 }
