@@ -158,11 +158,18 @@ public class GameController {
                 //do something
                 break;
 
+            case "Brewery":
+                //do something
+                break;
+
             case "ChanceField":
                 //do something
                 break;
+
             case "Start":
                 //do something
+                break;
+
             default:
                 System.out.println("Fieldtype unknown" + fieldType);
         }
