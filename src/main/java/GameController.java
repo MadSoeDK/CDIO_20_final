@@ -40,7 +40,7 @@ public class GameController {
 
         // Roll die, get value, show die
         cup.roll();
-        sum = 10;//cup.getSum();
+        sum = cup.getSum();
         gui.showDice(cup.getFacevalues()[0], cup.getFacevalues()[1]);
 
         // Move player placement - automatically updates GUI
@@ -85,10 +85,10 @@ public class GameController {
         String fieldType = board.getField(placement).getClass().getSimpleName();
 
         switch (fieldType) {
-            case "Property":
+            case "Street":
 
                 // Typecast to Property
-                Property property = (Property) field;
+                Street property = (Street) field;
 
                 // Check if Field is owned by another player and it's not the current player
                 if (property.getOwner() != currentPlayer && property.getOwner() != null) { //There is a Field owner and it's not owned by the current Player
@@ -97,16 +97,16 @@ public class GameController {
                     Player fieldOwner = property.getOwner();
 
                     // Check if Owner owns all colors
-                    if (board.hasMonopoly(placement)) {
+                    if (false /*board.hasMonopoly(placement)*/) {
                         // 1. Subtract rent from current player 2. add to field owner
-                        currentPlayer.setPlayerBalance(-property.getRent() * 2);
-                        fieldOwner.setPlayerBalance(property.getRent() * 2);
+                        currentPlayer.setPlayerBalance(-property.getCurrentRent() * 2);
+                        fieldOwner.setPlayerBalance(property.getCurrentRent() * 2);
                     }
 
                 } else { // No one owns the Property, buy it.
 
                     // Subtract player balance from Property rent
-                    currentPlayer.setPlayerBalance(-property.getRent());
+                    currentPlayer.setPlayerBalance(-property.getCurrentRent());
 
                     // Set Property owner
                     property.setOwner(currentPlayer);
@@ -126,7 +126,7 @@ public class GameController {
                     gui.message(currentPlayer.getName() + " rykker til fængsel og betaler $3");
 
                     // Subtract player balance from Property rent
-                    currentPlayer.setPlayerBalance(-jail.getRent());
+                    //currentPlayer.setPlayerBalance(-jail.getRent());
 
                     FreeParking.setBalance(3);
 
