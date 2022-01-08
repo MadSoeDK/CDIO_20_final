@@ -1,57 +1,123 @@
 package Model;
 
 import java.awt.Color;
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 public class Board {
 
-    private ChanceCardDeck chanceCard = new ChanceCardDeck(this);
+    private ChanceCardDeck chanceCard;
 
 
-    private Field[] fields = {
-            new Start("Start", "Startfeltet"),
-            new Property(1, "Blå", Color.CYAN),
-            new ChanceField(),
-            new Property(1, "Blå", Color.CYAN),
-            new Tax(2000),
-            new Ferry(),
-            new Property(1, "Orange", Color.ORANGE),
-            new ChanceField(),
-            new Property(1, "Orange", Color.ORANGE),
-            new Property(1, "Orange", Color.ORANGE),
-            new Jail(0,"På besøg"),
-            new Property(1, "Gul", Color.YELLOW),
-            new Property(1, "SQUASH", Color.WHITE),
-            new Property(2, "Gul", Color.YELLOW),
-            new Property(1, "Gul", Color.YELLOW),
-            new Ferry(),
-            new Property(1, "Grå", Color.GRAY),
-            new ChanceField(),
-            new Property(1, "Grå", Color.GRAY),
-            new Property(1, "Grå", Color.GRAY),
-            new FreeParking(0,"Fri Parkering","Modtag Penge"),
-            new Property(1, "Rød", Color.RED),
-            new ChanceField(),
-            new Property(1, "Rød", Color.RED),
-            new Property(1, "Rød", Color.RED),
-            new Ferry(),
-            new Property(1, "Hvid", Color.WHITE),
-            new Property(1, "COLA", Color.WHITE),
-            new Property(2, "Hvid", Color.WHITE),
-            new Property(1, "HVID", Color.WHITE),
-            new Jail(3, "Gå i fængsel"),
-            new Property(1, "Gul", Color.YELLOW),
-            new Property(1, "GUL", Color.YELLOW),
-            new ChanceField(),
-            new Property(1, "Gul", Color.YELLOW),
-            new Ferry(),
-            new ChanceField(),
-            new Property(1, "Lilla", Color.PINK),
-            new Property(1, "2000 Skat", Color.WHITE),
-            new Property(1, "Lilla", Color.PINK),
-    };
+    private final Field[] fields;
 
     public Board() {
-        //gui = new GUI(converter(fields));
+        BufferedReader CSV;
+        String row = "";
+        String[][] data = new String[40][12];
+        String path = "src/main/resources/da_board.csv";
+        try {
+            CSV = new BufferedReader(new FileReader(path));
+
+            int i = 0;
+            boolean firstline = true;
+            while ((row = CSV.readLine()) != null) {
+
+                if (firstline) {
+                    firstline = false;
+                    continue;
+                }
+
+                data[i] = row.split(",");
+
+                i++;
+            }
+            CSV.close();
+
+        } catch (Exception e) {
+            System.out.println("Error");
+        }
+
+        fields = new Field[40];
+
+        int name = 0, position = 1, type = 2, color = 3, price = 4, housePrice = 5;
+
+        for (int i = 0; i < 40; i++) {
+            String[] field = data[i];
+            switch (field[type]) {
+                case "street":
+                    fields[Integer.parseInt(field[position])] = new Street (
+                            field[name],
+                            Integer.parseInt(field[position]),
+                            field[color],
+                            stringToIntarr(field,field[type]),
+                            Integer.parseInt(field[price]),
+                            Integer.parseInt(field[housePrice])
+                    );
+                    break;
+
+                case "tax":
+                    fields[Integer.parseInt(field[position])] = new Tax(
+                            field[name],
+                            Integer.parseInt(field[position]),
+                            Integer.parseInt(field[price])
+                    );
+                    break;
+
+                case "ferry":
+                    fields[Integer.parseInt(field[position])] = new Ferry(
+                            field[name],
+                            Integer.parseInt(field[position]),
+                            field[color],
+                            stringToIntarr(field,field[type]),
+                            Integer.parseInt(field[price])
+                    );
+                    break;
+
+                case "brewery":
+                    fields[Integer.parseInt(field[position])] = new Brewery(
+                            field[name],
+                            Integer.parseInt(field[position]),
+                            field[color],
+                            stringToIntarr(field,field[type]),
+                            Integer.parseInt(field[price])
+                    );
+                    break;
+
+                case "jail":
+                    fields[Integer.parseInt(field[position])] = new Jail(
+                            field[name],
+                            Integer.parseInt(field[position])
+                    );
+                    break;
+
+                case "chance":
+                    fields[Integer.parseInt(field[position])] = new ChanceField(
+                            field[name],
+                            Integer.parseInt(field[position])
+                    );
+                    break;
+
+                case "start":
+                    fields[Integer.parseInt(field[position])] = new Start(
+                            field[name],
+                            Integer.parseInt(field[position])
+                    );
+                    break;
+
+                case "FreeParking":
+                    fields[Integer.parseInt(field[position])] = new FreeParking(
+                            field[name],
+                            Integer.parseInt(field[position])
+                    );
+                    break;
+                default:
+                    System.out.println("No field type match");
+            }
+        }
+
+        chanceCard = new ChanceCardDeck(this);
+
     }
 
     public Field getField(int placement) {
@@ -62,11 +128,28 @@ public class Board {
         return fields;
     }
 
+    public int[] stringToIntarr(String[] array, String type) {
+        int col = 6;
+        int[] result;
+
+        if (type.equals("street")) {
+            result = new int[6];
+        } else if (type.equals("ferry")) {
+            result = new int[4];
+        } else {
+            result = new int[2];
+        }
+        for (int i = 0; i < result.length; i++){
+            result[i] = Integer.parseInt(array[col + i]);
+        }
+        return result;
+    }
+
     public ChanceCardDeck getChanceCardDeck(){
         return chanceCard;
     }
 
-    public boolean hasMonopoly(int placement) {
+    /*public boolean hasMonopoly(int placement) {
         Property property = (Property) getField(placement);
 
         boolean monopoly = false;
@@ -102,5 +185,5 @@ public class Board {
             }
         }
         return monopoly;
-    }
+    }*/
 }
