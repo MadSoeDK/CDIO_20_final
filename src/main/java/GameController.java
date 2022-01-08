@@ -156,7 +156,7 @@ public class GameController {
                 break;
 
             case "Ferry":
-                if (field instanceof Ferry) {
+                /*if (field instanceof Ferry) {
 
                     // Typecast to Model.Property
                     Ferry property = (Ferry) field;
@@ -197,11 +197,11 @@ public class GameController {
                         board.getPlayer(currentPlayer).getPlayer().setBalance(board.getPlayer(currentPlayer).getPlayerBalance());
                         fieldOwner.getPlayer().setBalance(fieldOwner.getPlayerBalance());
                     }
-                }
+                }*/
                 break;
 
             case "Brewery":
-                if (field instanceof Company) {
+                /*if (field instanceof Company) {
 
                     // Typecast to Model.Property
                     Company property = (Company) field;
@@ -249,7 +249,7 @@ public class GameController {
                         board.getPlayer(currentPlayer).getPlayer().setBalance(board.getPlayer(currentPlayer).getPlayerBalance());
                         fieldOwner.getPlayer().setBalance(fieldOwner.getPlayerBalance());
                     }
-                }
+                }*/
                 break;
 
             case "ChanceField":
