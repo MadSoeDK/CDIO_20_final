@@ -60,6 +60,9 @@ public class GameController {
         }
 
         //checkBankrupt();
+        netWorth(currentPlayer);
+        bankrupt(currentPlayer, placement);
+
     }
     public void setupPlayers(String[] playerNames) {
         players = new Player[playerNames.length];
@@ -227,7 +230,7 @@ public class GameController {
                 //Verifying that the current field is of the type Ownable
                 Ownable property = (Ownable) board.getField(i);
                 if (player == property.getOwner()) {
-                    netWorth += ((Street) board.getField(i)).getCurrentRent();
+                    netWorth += ((Ownable) board.getField(i)).getPrice();
                 }
             }
         }
