@@ -182,29 +182,28 @@ public class GUIController {
         return color;
     }
 
-    public void setOwner(Player player, Field field) {
+    public void setOwner(Player player, Ownable field) {
 
         int placement = field.getPlacement();
 
         switch (field.getClass().getSimpleName()) {
             case "Street":
-                GUI_Street property = (GUI_Street) getGuiField(placement);
-                //property.setHouses(1);
-                property.setOwnerName(player.getName());
-                property.setBorder(getPlayerColor(player));
-                property.setRent(((Ownable) field).getCurrentRent() + " kr.");
+                GUI_Street street = (GUI_Street) getGuiField(placement);
+                street.setOwnerName(player.getName());
+                street.setBorder(getPlayerColor(player));
+                street.setRent((field.getCurrentRent() + " kr."));
                 break;
             case "Ferry":
                 GUI_Shipping ferry = (GUI_Shipping) getGuiField(placement);
                 ferry.setOwnerName(player.getName());
                 ferry.setBorder(getPlayerColor(player));
-                ferry.setRent(((Ownable) field).getCurrentRent() + " kr.");
+                ferry.setRent((field.getCurrentRent() + " kr."));
                 break;
             case "Brewery":
                 GUI_Brewery brewery = (GUI_Brewery) getGuiField(placement);
                 brewery.setOwnerName(player.getName());
                 brewery.setBorder(getPlayerColor(player));
-                brewery.setRent(((Ownable) field).getCurrentRent() + " kr.");
+                brewery.setRent((field.getCurrentRent() + " kr."));
                 break;
             default:
                 //((GUI_Ownable) getGuiField(field.getPlacement())).setRent(((Ownable) field).getCurrentRent() + "kr.");
