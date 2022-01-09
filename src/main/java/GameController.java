@@ -328,8 +328,6 @@ public class GameController {
         optionsBankruptOrMortage[0] = "Bankerot";
         optionsBankruptOrMortage[1] = "Pantsæt";
 
-        while(player.getPlayerBalance() < ((Street) board.getField(player.getPlacement())).getCurrentRent()) {
-
             gui.dropdown("Gå bankerot eller pantsæt ejendomme?", optionsBankruptOrMortage);
             switch(gui.dropdown("Gå bankerot eller pantsæt ejendomme?", optionsBankruptOrMortage)) {
                 case "Bankerot":
@@ -337,7 +335,7 @@ public class GameController {
                     eliminatePlayer();
                     break;
                 case "Pantsæt":
-
+                    while(player.getPlayerBalance() < ((Street) board.getField(player.getPlacement())).getCurrentRent()) {
 
                     /*
                     - Make options with properties in an array to choose to mortgage.
