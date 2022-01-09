@@ -1,4 +1,5 @@
 import Model.Field;
+import Model.Ownable;
 import Model.Player;
 //import Model.Property;
 import Model.Street;
@@ -17,7 +18,7 @@ public class GUIController {
 
     public GUIController(Field[] fields) {
         GUI_Field[] guiBoard = createBoard(fields);
-        gui = new GUI(guiBoard);
+        gui = new GUI(guiBoard,Color.orange);
     }
 
     public GUI_Field[] createBoard(Field[] fields) {
@@ -30,30 +31,39 @@ public class GUIController {
                     break;
                 case "Street":
                     guiFields[i] = new GUI_Street();
-                    ((GUI_Ownable)guiFields[i]).setRent(((Street) fields[i]).getCurrentRent() + "$");
+                    ((GUI_Ownable)guiFields[i]).setRent(((Ownable) fields[i]).getCurrentRent() + "$");
+                    //((GUI_Ownable)guiFields[i]).rentLable(((Ownable) fields[i]).getCurrentRent() + "$");
                     guiFields[i].setBackGroundColor(convertColor(((Street) fields[i]).getColor()));
+                    guiFields[i].setSubText("Pris: " + ((Ownable) fields[i]).getPrice() + " kr.");
                     break;
                 case "ChanceField":
                     guiFields[i] = new GUI_Chance();
-                    guiFields[i].setBackGroundColor(Color.WHITE);
+                    guiFields[i].setSubText("");
+                    guiFields[i].setBackGroundColor(Color.BLACK);
+                    guiFields[i].setForeGroundColor(Color.GREEN);
                     break;
                 case "Jail":
                     guiFields[i] = new GUI_Jail();
+                    guiFields[i].setSubText("");
                     break;
                 case "Ferry":
                     guiFields[i] = new GUI_Shipping();
                     guiFields[i].setBackGroundColor(Color.WHITE);
+                    guiFields[i].setSubText("Pris: " + ((Ownable) fields[i]).getPrice() + " kr.");
                     break;
                 case "FreeParking":
                     guiFields[i] = new GUI_Tax();
                     guiFields[i].setBackGroundColor(Color.WHITE);
+                    guiFields[i].setSubText("");
                     break;
                 case "Tax":
                     guiFields[i] = new GUI_Tax();
-                    guiFields[i].setBackGroundColor(Color.ORANGE);
+                    guiFields[i].setBackGroundColor(Color.GRAY);
+                    guiFields[i].setSubText("");
                     break;
                 case "Brewery":
                     guiFields[i] = new GUI_Brewery();
+                    guiFields[i].setSubText("Pris: " + ((Ownable) fields[i]).getPrice() + " kr.");
                     break;
             }
             guiFields[i].setTitle(fields[i].getName());
@@ -118,38 +128,6 @@ public class GUIController {
         gui.showMessage(message);
     }
 
-    public void showOwner(Player player, int placement) {
-        /*GUI_Ownable ownable = (GUI_Ownable) getGuiField(placement);
-
-        ownable.setOwnerName(player.getName());
-        ownable.setBorder(getPlayerColor(player));
-
-         */
-
-        switch (getGuiField(placement).getClass().getSimpleName()) {
-            case "GUI_Street":
-                GUI_Street property = (GUI_Street) getGuiField(placement);
-                property.setHouses(1);
-                property.setOwnerName(player.getName());
-                property.setBorder(getPlayerColor(player));
-                break;
-            case "GUI_Shipping":
-                GUI_Shipping ferry = (GUI_Shipping) getGuiField(placement);
-                ferry.setOwnerName(player.getName());
-                ferry.setBorder(getPlayerColor(player));
-                break;
-            case "GUI_Brewery":
-                GUI_Brewery brewery = (GUI_Brewery) getGuiField(placement);
-                brewery.setOwnerName(player.getName());
-                brewery.setBorder(getPlayerColor(player));
-                break;
-            default:
-                System.out.println("Not a ownable");
-
-        }
-
-    }
-
     public String dropdown(String msg, String[] option) {
         return gui.getUserSelection(msg, option);
     }
@@ -196,6 +174,29 @@ public class GUIController {
 
     public void setOwner(Player player, Field field) {
 
+        int placement = field.getPlacement();
+
+        switch (field.getClass().getSimpleName()) {
+            case "Street":
+                GUI_Street property = (GUI_Street) getGuiField(placement);
+                //property.setHouses(1);
+                property.setOwnerName(player.getName());
+                property.setBorder(getPlayerColor(player));
+                break;
+            case "Shipping":
+                GUI_Shipping ferry = (GUI_Shipping) getGuiField(placement);
+                ferry.setOwnerName(player.getName());
+                ferry.setBorder(getPlayerColor(player));
+                break;
+            case "Brewery":
+                GUI_Brewery brewery = (GUI_Brewery) getGuiField(placement);
+                brewery.setOwnerName(player.getName());
+                brewery.setBorder(getPlayerColor(player));
+                break;
+            default:
+                System.out.println("Not a ownable");
+
+        }
     }
 
     private static Color convertColor(String color) {
