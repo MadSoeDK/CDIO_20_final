@@ -194,7 +194,7 @@ public class GUIController {
                 property.setBorder(getPlayerColor(player));
                 property.setRent(((Ownable) field).getCurrentRent() + " kr.");
                 break;
-            case "Shipping":
+            case "Ferry":
                 GUI_Shipping ferry = (GUI_Shipping) getGuiField(placement);
                 ferry.setOwnerName(player.getName());
                 ferry.setBorder(getPlayerColor(player));
