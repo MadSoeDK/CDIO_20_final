@@ -1,5 +1,6 @@
 import Model.*;
 import gui_fields.GUI_Ownable;
+import gui_main.GUI;
 
 public class GameController {
 
@@ -8,6 +9,7 @@ public class GameController {
     private GUIController gui;
     private Player[] players;
     private Player currentPlayer;
+    private int playerindex=0;
 
     // Game Constants
     final int STARTBALANCE = 30000;
@@ -71,7 +73,7 @@ public class GameController {
     }
     public void nextTurn() {
         // Chance Player Turn/Reset to first player
-        int playerindex = java.util.Arrays.asList(players).indexOf(currentPlayer);
+        playerindex = java.util.Arrays.asList(players).indexOf(currentPlayer);
 
         if (playerindex == players.length-1) {
             currentPlayer = players[0];
@@ -369,7 +371,7 @@ public class GameController {
 
         switch (gui.dropdown("What do you want to do?", options)) {
             case "Begin Trade":
-                //trade(gui, curPlayer);
+                trade(gui, playerindex);
                 break;
             case "Roll Die":
                 break;
@@ -441,8 +443,8 @@ public class GameController {
         }
         return winnerId;
     }
-
-    private void trade(GUI gui, int curPlayer)
+*/
+    private void trade(GUIController gui, int curPlayer)
     {
         // Initialize Trade variables
         int tradePartnerId=0;
@@ -450,30 +452,28 @@ public class GameController {
         int traderPayed=0;
 
         // Add possible player to trade options array
-        Player[] tradePlayers = new Player[board.getPlayerArray().length-1];
+        Player[] tradePlayers = new Player[ players.length -1];
         int a=0;
-        for (int i = 0; i<board.getPlayerArray().length-1; i++) {
+        for (int i = 0; i< players.length-1; i++) {
 
             if (i == curPlayer){a++;}
-                tradePlayers[i] = board.getPlayerArray()[a];
+                tradePlayers[i] = players[a];
                 //System.out.println(tradePlayers[i].getName());
             a++;
         }
 
         // Create String array of possible trade partners
         String[] tradePlayersNames = new String[tradePlayers.length];
-        for (int i = 0; i<board.getPlayerArray().length-1; i++)
+        for (int i = 0; i<players.length-1; i++)
         {
             tradePlayersNames[i] = tradePlayers[i].getName();
         }
 
         // Display array as Dropdown Menu
-        /*
         for(int i = 0; i<tradePlayers.length; i++){
             System.out.println(tradePlayers[i].getName());
         }
         System.out.println();
-        */
 
         // Create a dropdown based on tradeable player amount
         /*String selectedTradePartner = gui.getUserSelection(board.getPlayer(curPlayer).getName() + " Vælg spiller at handle med", tradePlayersNames);
@@ -603,7 +603,7 @@ public class GameController {
 
         }
     }
-
+*/}
     /*public int auction(GUI gui, int propertyWorth) {
 
         // Add players to auction array

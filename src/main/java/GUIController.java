@@ -75,7 +75,7 @@ public class GUIController {
     }
 
     public void createPlayers(int STARTBALANCE) {
-        int qty = Integer.parseInt(gui.getUserSelection("How many players?", "2", "3", "4"));
+        int qty = Integer.parseInt(gui.getUserSelection("Hvor mange spillere?", "2", "3", "4"));
 
         guiPlayers = new GUI_Player[qty];
 
