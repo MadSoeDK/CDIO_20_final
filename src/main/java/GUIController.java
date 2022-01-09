@@ -44,7 +44,7 @@ public class GUIController {
                     break;
                 case "Jail":
                     guiFields[i] = new GUI_Jail();
-                    guiFields[i].setSubText("");
+                    //guiFields[i].setSubText("");
                     break;
                 case "Ferry":
                     guiFields[i] = new GUI_Shipping();
@@ -69,6 +69,8 @@ public class GUIController {
             guiFields[i].setTitle(fields[i].getName());
             guiFields[i].setDescription(fields[i].getName());
         }
+        guiFields[10].setSubText("Besøg");
+        guiFields[30].setSubText("Gå i fængsel");
         return guiFields;
     }
 
