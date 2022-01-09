@@ -31,8 +31,7 @@ public class GUIController {
                     break;
                 case "Street":
                     guiFields[i] = new GUI_Street();
-                    ((GUI_Ownable)guiFields[i]).setRent(((Ownable) fields[i]).getCurrentRent() + "$");
-                    //((GUI_Ownable)guiFields[i]).rentLable(((Ownable) fields[i]).getCurrentRent() + "$");
+                    //((GUI_Ownable)guiFields[i]).setRent(((Ownable) fields[i]).getCurrentRent() + "kr.");
                     guiFields[i].setBackGroundColor(convertColor(((Street) fields[i]).getColor()));
                     guiFields[i].setSubText("Pris: " + ((Ownable) fields[i]).getPrice() + " kr.");
                     break;
@@ -126,6 +125,15 @@ public class GUIController {
         gui.getUserButtonPressed(msg, buttonText);
     }
 
+    public boolean getUserBool(String msg, String left, String right) {
+        boolean answer = gui.getUserLeftButtonPressed(msg, left, right);
+        if (answer) {
+            return answer;
+        } else {
+            return answer;
+        }
+    }
+
     public void message(String message){
         gui.showMessage(message);
     }
@@ -184,20 +192,23 @@ public class GUIController {
                 //property.setHouses(1);
                 property.setOwnerName(player.getName());
                 property.setBorder(getPlayerColor(player));
+                property.setRent(((Ownable) field).getCurrentRent() + " kr.");
                 break;
             case "Shipping":
                 GUI_Shipping ferry = (GUI_Shipping) getGuiField(placement);
                 ferry.setOwnerName(player.getName());
                 ferry.setBorder(getPlayerColor(player));
+                ferry.setRent(((Ownable) field).getCurrentRent() + " kr.");
                 break;
             case "Brewery":
                 GUI_Brewery brewery = (GUI_Brewery) getGuiField(placement);
                 brewery.setOwnerName(player.getName());
                 brewery.setBorder(getPlayerColor(player));
+                brewery.setRent(((Ownable) field).getCurrentRent() + " kr.");
                 break;
             default:
+                //((GUI_Ownable) getGuiField(field.getPlacement())).setRent(((Ownable) field).getCurrentRent() + "kr.");
                 System.out.println("Not a ownable");
-
         }
     }
 
