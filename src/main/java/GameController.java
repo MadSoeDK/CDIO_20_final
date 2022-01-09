@@ -156,6 +156,38 @@ public class GameController {
                 break;
 
             case "Ferry":
+
+                // Typecast to Model.Property
+                Ferry ferry = (Ferry) field;
+
+                // Check Ferry Rent
+                int ferry_cost = ferry.getCurrentRent(); //getFerryRent()
+
+                if (ferry.getOwner() == null) { // Noone owns Ferry
+                    // Subtract player balance from Model.Property rent
+                    currentPlayer.setPlayerBalance(-4000);
+
+                    // Set Model.Property owner
+                    ferry.setOwner(currentPlayer);
+
+                    // Set GUI Field
+                    gui.showOwner(currentPlayer, placement);
+
+                    //ferry_cost = getFerryRent(property);
+                    //updateFerryGUI(property, ferry_cost);
+                } else {
+                    // Get field owner
+                    Player fieldOwner = ferry.getOwner();
+
+                    // 1. Subtract rent from current player 2. add to field owner
+                    currentPlayer.setPlayerBalance(-ferry_cost);
+                    fieldOwner.setPlayerBalance(ferry_cost);
+
+                    //Update GUI-object and display the current player balance
+                    //board.getPlayer(currentPlayer).getPlayer().setBalance(board.getPlayer(currentPlayer).getPlayerBalance());
+                    //fieldOwner.getPlayer().setBalance(fieldOwner.getPlayerBalance());
+                }
+
                 /*if (field instanceof Ferry) {
 
                     // Typecast to Model.Property
