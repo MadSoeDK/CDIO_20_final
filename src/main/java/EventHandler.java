@@ -9,6 +9,19 @@ public class EventHandler {
         this.gui = gui;
     }
 
+    public void playerOptions(Player player) {
+
+        String[] options = {"Roll Die", "Begin Trade"};
+
+        switch (gui.dropdown("What do you want to do?", options)) {
+            case "Begin Trade":
+                //trade(gui, player);
+                break;
+            case "Roll Die":
+                break;
+        }
+
+    }
     public void fieldEffect(Player player, Street street) {
         if (street.getOwner() == null) { // No owner - ask to buy it
             buyField(player, street);

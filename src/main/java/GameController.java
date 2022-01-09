@@ -35,7 +35,7 @@ public class GameController {
 
     public void takeTurn() {
         // Ask if currentplayer wish to trade?
-        playerOptions(currentPlayer);
+        event.playerOptions(currentPlayer);
 
         gui.button(" ", "Rul terning");
 
@@ -153,19 +153,6 @@ public class GameController {
         }
         player.setPlacement(endplacement);
         gui.movePlayer(player,endplacement,preplacement);
-    }
-    public void playerOptions(Player player) {
-
-        String[] options = {"Roll Die", "Begin Trade"};
-
-        switch (gui.dropdown("What do you want to do?", options)) {
-            case "Begin Trade":
-                //trade(gui, curPlayer);
-                break;
-            case "Roll Die":
-                break;
-        }
-
     }
 
     /*private int getFerryRent(Ferry property){
