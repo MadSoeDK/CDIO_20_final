@@ -1,7 +1,5 @@
 package Model;
 
-import Model.Ownable;
-
 import java.awt.*;
 
 public class Tax extends Field {
