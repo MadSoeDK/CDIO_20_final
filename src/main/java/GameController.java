@@ -569,7 +569,7 @@ public class GameController {
                                   a while loop which generates an array with properties, that gets shown
                                   through a drop-down menu that loops until the players balance is
                                   higher than the rent.
-                                  */
+
 
                     }
                 }
@@ -578,13 +578,15 @@ public class GameController {
         return bankrupt;
     }
 
+     */
 
+/*
     - Make an array with the player's properties.
     - Create drop-down menu (GUI) to select different owned properties for player to sell.
     - Loop the drop-down menu option until the balance is higher than the rent.
-     */
+
     //Method to mortgage properties when bankrupt
-   /* public void mortage(Player player) {
+    public void mortage(Player player) {
         //Property[] playerProperties = new Property[4];
         int numberOfProperties;
         numberOfProperties = board.countNumbersOfPropertiesForPlayer(player);
