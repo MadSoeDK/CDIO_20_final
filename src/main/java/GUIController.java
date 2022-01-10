@@ -92,6 +92,26 @@ public class GUIController {
         }
     }
 
+    public void removePlayer(Player player, int placement, Player[] players) {
+        /*
+        - Remove one GUI_Player from GUI_Player array
+        - Make new GUI_Player array with new players who are still playing
+         */
+        /*GUI_Player[] tempguiPlayers = getGuiPlayers();
+        GUI_Player[] guiPlayers = new GUI_Player[players.length];
+        int j = 0;
+        for (int i = 0; i < guiPlayers.length; i++) {
+            if(!players[i].getBankruptStatus()) {
+                guiPlayers[j] = tempguiPlayers[i];
+                j++;
+            }
+        }
+        if(player.getBankruptStatus()) {
+            GUI_Field field = gui.getFields()[placement];
+            field.setCar(getGuiPlayer(player), false);
+        }*/
+    }
+
     public void movePlayer(Player player, int placement, int preplacement) {
 
         GUI_Player playerToMove = new GUI_Player("");
@@ -166,6 +186,9 @@ public class GUIController {
             }
         }
         return guiplayer;
+    }
+    public GUI_Player[] getGuiPlayers() {
+        return guiPlayers;
     }
     public int getPlayers() {
         return guiPlayers.length;
