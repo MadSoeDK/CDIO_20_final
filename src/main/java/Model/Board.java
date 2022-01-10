@@ -177,6 +177,32 @@ public class Board {
         return result;
     }
 
+    public Brewery[] getBreweryFields() {
+        Brewery[] breweryFields = new Brewery[2];
+
+        for (int i = 0; i < fields.length; i++) {
+            if (fields[i] instanceof Brewery) {
+                breweryFields[i] = (Brewery) fields[i];
+            }
+        }
+        return breweryFields;
+    }
+
+    public Ferry[] getFerryFields() {
+        Ferry[] ferryFields = new Ferry[4];
+
+        for (int i = 0; i < fields.length; i++) {
+            if (fields[i] instanceof Brewery) {
+                ferryFields[i] = (Ferry) fields[i];
+            }
+        }
+        return ferryFields;
+    }
+
+    /*public Brewery[] addBreweryToField() {
+
+    }*/
+
     /*public boolean hasMonopoly(int placement) {
 
 
