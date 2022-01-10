@@ -8,10 +8,14 @@ public class Player {
     private int placement;
     private final String name;
     int balance;
+    int netWorth;
+    boolean bankrupt;
 
     public Player(String name, int balance) {
          this.balance = balance;
          this.name = name;
+         this.netWorth = getPlayerBalance();
+         this.bankrupt = false;
     }
 
     public int getPlayerBalance() {
@@ -28,5 +32,17 @@ public class Player {
     }
     public String getName() {
         return name;
+    }
+    public void setNetWorth(int addValue) {
+        netWorth += addValue;
+    }
+    public int getNetWorth() {
+        return netWorth;
+    }
+    public void setBankruptStatus(boolean bankrupt) {
+        this.bankrupt = bankrupt;
+    }
+    public boolean getBankruptStatus() {
+        return bankrupt;
     }
 }
