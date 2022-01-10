@@ -44,7 +44,7 @@ public class GameController {
 
         // Roll die, get value, show die
         cup.roll();
-        sum = 3; //cup.getSum();
+        sum = 12; //cup.getSum();
         gui.showDice(cup.getFacevalues()[0], cup.getFacevalues()[1]);
 
         // Move player placement - automatically updates GUI
@@ -101,14 +101,17 @@ public class GameController {
 
         switch (fieldType) {
             case "Street":
-                Ownable street = (Ownable) field;
+                Street street = (Street) field;
                 event.fieldEffect(currentPlayer, street, players);
                 break;
             case "Jail":
                 Jail jail = (Jail) field;
-                event.fieldEffect(currentPlayer, jail);
-                // Move to Jail field
-                setPlayerPlacement(currentPlayer, 10, false);
+                if (jail.getPlacement() == 30) {
+                    gui.message(currentPlayer.getName() + " rykker til fængsel.");
+
+                    // Move to Jail field
+                    setPlayerPlacement(currentPlayer, 10, false);
+                }
                 break;
             case "FreeParking":
                 // Give money to player
@@ -121,12 +124,12 @@ public class GameController {
                 event.fieldEffect(currentPlayer, tax);
                 break;
             case "Ferry":
-                Ownable ferry = (Ownable) field;
+                Ferry ferry = (Ferry) field;
                 event.fieldEffect(currentPlayer, ferry, players);
                 break;
             case "Brewery":
-                Brewery brewery = (Brewery) field;
-                event.fieldEffect(currentPlayer, brewery, sum);
+                Ownable brewery = (Ownable) field;
+                event.fieldEffect(currentPlayer, brewery, players, sum);
                 break;
             case "ChanceField":
                 //do something
