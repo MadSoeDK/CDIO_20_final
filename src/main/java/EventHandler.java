@@ -124,13 +124,13 @@ public class EventHandler {
 
     }
 
-    public void fieldEffect(Player player, Tax tax) {
+    public void fieldEffect(Player player, Tax tax, int netWorth) {
         if (tax.getPlacement() == 4) { // first tax field
             boolean answer = gui.getUserBool("Betal 10% eller 4000 kr?", "4000 kr.", "10%");
             if (answer) {
                 player.setPlayerBalance(-4000);
             } else {
-                //Pay 10%
+                player.setPlayerBalance(-(int)(netWorth*(10.0f/100.0f)));
             }
         } else { // last tax field
             player.setPlayerBalance(-2000);
