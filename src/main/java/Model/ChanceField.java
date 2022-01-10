@@ -1,5 +1,7 @@
 package Model;
 
+import Model.Field;
+
 import java.awt.*;
 
 /**

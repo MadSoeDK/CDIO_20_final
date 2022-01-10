@@ -10,12 +10,14 @@ public class Player {
     int balance;
     int netWorth;
     boolean bankrupt;
+    boolean hasJailFreeCard;
 
     public Player(String name, int balance) {
          this.balance = balance;
          this.name = name;
          this.netWorth = getPlayerBalance();
          this.bankrupt = false;
+         hasJailFreeCard = false;
     }
 
     public int getPlayerBalance() {
@@ -44,5 +46,11 @@ public class Player {
     }
     public boolean getBankruptStatus() {
         return bankrupt;
+    }
+    public void setHasJailFreeCard(boolean value) {
+        hasJailFreeCard = value;
+    }
+    public boolean gethasJailFreecard() {
+        return hasJailFreeCard;
     }
 }

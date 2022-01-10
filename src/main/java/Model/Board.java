@@ -1,6 +1,7 @@
 package Model;
 
-import java.awt.Color;
+import Model.Cards.ChanceCardDeck;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 

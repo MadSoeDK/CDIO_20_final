@@ -1,5 +1,5 @@
 import Model.*;
-import gui_main.GUI;
+import Model.ChanceField;
 
 public class EventHandler {
 
