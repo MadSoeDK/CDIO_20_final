@@ -12,11 +12,15 @@ public abstract class Ownable extends Field {
 
     private int houses = 0;
 
+    private boolean mortgage;
+    private int mortgageRent = 0;
+
     public Ownable(String name, int placement, String color, int[] rent, int price) {
         super(name, placement);
         this.COLOR = color;
         this.RENT = rent;
         this.PRICE = price;
+        this.mortgage = false;
     }
 
     public void setOwner(Player player) {
@@ -34,6 +38,9 @@ public abstract class Ownable extends Field {
     public int getCurrentRent() {
         int rent;
         if (owner != null) {
+            if (mortgage){
+                return mortgageRent;
+            }
             rent = RENT[houses];
         } else {
             rent = PRICE;

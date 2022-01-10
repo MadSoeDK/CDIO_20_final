@@ -167,6 +167,9 @@ public class GUIController {
         }
         return guiplayer;
     }
+    public int getPlayers() {
+        return guiPlayers.length;
+    }
 
     public void setguiPlayerBalance(Player player, int amount) {
         for (int i = 0; i < playernames.length; i++) {
