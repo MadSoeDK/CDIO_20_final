@@ -38,7 +38,7 @@ public class GameController {
 
     public void takeTurn() {
         // Ask if currentplayer wish to trade?
-        event.playerOptions(currentPlayer);
+        event.playerOptions(currentPlayer, players);
 
         gui.button(" ", "Rul terning");
 
