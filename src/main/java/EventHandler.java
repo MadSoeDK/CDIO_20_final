@@ -36,6 +36,21 @@ public class EventHandler {
             }
         }
     }
+    public void fieldEffect(Player player, Ownable ownable, Player[] players, int sum) {
+        if (ownable.getOwner() == null) {
+            buyField(player, ownable, players);
+        } else {
+            Player fieldOwner = ownable.getOwner();
+
+            if (ownable.getOwner() == ownable.getOwner()) {
+                player.setPlayerBalance(-ownable.getRent()[1] * sum);
+                fieldOwner.setPlayerBalance(ownable.getRent()[1] * sum);
+            } else {
+                player.setPlayerBalance(-ownable.getRent()[0] * sum);
+                fieldOwner.setPlayerBalance(ownable.getRent()[0] * sum);
+            }
+        }
+    }
 
     public void fieldEffect(Player player, Street street) {
         if (street.getOwner() == null) { // No owner - ask to buy it
@@ -106,14 +121,6 @@ public class EventHandler {
 
     public void fieldEffect(Player player, Jail jail) {
         // Add money to Free Parking if landed on "Go To Jail"
-        if (jail.getPlacement() == 30) {
-            gui.message(player.getName() + " rykker til fængsel og betaler $3");
-
-            //FreeParking.setBalance(3);
-        }
-    }
-
-    public void fieldEffect(Player player, Start start, int sum) {
 
     }
 
@@ -312,8 +319,6 @@ public class EventHandler {
                 System.out.println("Tradepartner: " + tradePlayersNames[4]);
             }
         }
-
-
 
         // Display Chosen players property
         Ownable[] tradePartProperties = board.getPlayerProperties(tradePlayers[tradePartnerId]);
