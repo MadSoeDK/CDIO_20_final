@@ -92,6 +92,11 @@ public class GUIController {
         }
     }
 
+    public void removePlayer(Player player, int placement) {
+        GUI_Field field = gui.getFields()[placement];
+        field.setCar(getGuiPlayer(player), false);
+    }
+
     public void movePlayer(Player player, int placement, int preplacement) {
 
         GUI_Player playerToMove = new GUI_Player("");
