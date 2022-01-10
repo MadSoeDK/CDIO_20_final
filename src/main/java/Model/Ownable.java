@@ -56,7 +56,7 @@ public abstract class Ownable extends Field {
     public void changeOwner(Player player) {
         owner = null;
     }
-    public void setMortage(Player player) {
+    public void setMortage() {
         this.mortgage = true;
     }
 }
