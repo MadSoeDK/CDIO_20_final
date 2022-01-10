@@ -199,7 +199,7 @@ public class Board {
         int numberOfProperties;
         numberOfProperties = countNumbersOfPropertiesForPlayer(player);
 
-        Ownable[] playerProperties = new Street[numberOfProperties];
+        Ownable[] playerProperties = new Ownable[numberOfProperties];
         int currentProperty = 0;
         for (int i = 0; i < getFields().length; i++) {
             //Type casting field to Ownable
