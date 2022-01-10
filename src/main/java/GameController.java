@@ -14,7 +14,7 @@ public class GameController {
     private int playerindex = 0;
 
     // Game Constants
-    final int STARTBALANCE = 0;
+    final int STARTBALANCE = 30000;
 
     int sum;
 
@@ -242,7 +242,7 @@ public class GameController {
                     newPlayers[j] = players[i];
                     j++;
                 } else if (currentPlayer.getBankruptStatus() == true) {
-                    gui.removePlayer(player, placement, newPlayers);
+                    gui.removePlayer(player, placement, currentPlayer.getBankruptStatus(), newPlayers);
                 }
             }
         }
