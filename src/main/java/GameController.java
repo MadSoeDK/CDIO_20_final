@@ -53,9 +53,9 @@ public class GameController {
 
         gui.message(currentPlayer.getName() + " landede på " + field.getName());
 
-        checkFieldType(field, placement);
+        checkFieldType(field, placement, players);
 
-        event.auction(2000, players);
+        //event.auction(2000, players);
 
         //Update GUI players balance
         for (Player p : players) {
