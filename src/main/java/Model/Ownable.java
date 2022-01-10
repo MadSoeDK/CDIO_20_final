@@ -10,6 +10,8 @@ public abstract class Ownable extends Field {
 
     private Player owner;
 
+    private int houses = 0;
+
     private boolean mortgage;
     private int mortgageRent = 0;
 
@@ -39,8 +41,7 @@ public abstract class Ownable extends Field {
             if (mortgage){
                 return mortgageRent;
             }
-            /*(typecast Street).getHouses() i RENT*/
-            rent = RENT[0];
+            rent = RENT[houses];
         } else {
             rent = PRICE;
         }
@@ -48,5 +49,8 @@ public abstract class Ownable extends Field {
     }
     public int getPrice() {
         return PRICE;
+    }
+    public int getHouses() {
+        return houses;
     }
 }
