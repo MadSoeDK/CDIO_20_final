@@ -11,13 +11,12 @@ public class EventHandler {
 
     public void playerOptions(Player player, Player [] players, Board board) {
         int playerIndex = java.util.Arrays.asList(players).indexOf(player);
-        String[] options = {"Jeg vil ikke handle", "Jeg vil handle"};
-        boolean answer = gui.getUserBool("Vil du handle?", "Ja", "Nej");
+        boolean answer = gui.getUserBool("Vil du handle?", "Ja", "Nej, rul terning");
 
         if (answer) {
                 trade(playerIndex, players, board);
         }
-
+        // Roll dice
     }
 
     public void fieldEffect(Player player, Ownable ownable, Player[] players) {
