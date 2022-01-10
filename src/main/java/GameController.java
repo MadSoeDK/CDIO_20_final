@@ -65,9 +65,8 @@ public class GameController {
             gui.setguiPlayerBalance(p, p.getPlayerBalance());
         }
 
-        //checkBankrupt();
-        //netWorth(currentPlayer);
-        //bankrupt(currentPlayer, placement);
+        netWorth(currentPlayer);
+        bankrupt(currentPlayer, placement);
 
     }
 
