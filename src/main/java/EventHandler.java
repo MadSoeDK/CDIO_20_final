@@ -9,16 +9,13 @@ public class EventHandler {
         this.gui = gui;
     }
 
-    public void playerOptions(Player player) {
+    public void playerOptions(Player player, Player [] players) {
+        int playerIndex = java.util.Arrays.asList(players).indexOf(player);
+        String[] options = {"Jeg vil ikke handle", "Jeg vil handle"};
+        boolean answer = gui.getUserBool("Vil du handle?", "Ja", "Nej");
 
-        String[] options = {"Roll Die", "Begin Trade"};
-
-        switch (gui.dropdown("What do you want to do?", options)) {
-            case "Begin Trade":
-                //trade(gui, player);
-                break;
-            case "Roll Die":
-                break;
+        if (answer) {
+                trade(playerIndex, players);
         }
 
     }
@@ -249,5 +246,178 @@ public class EventHandler {
 
          */
     }
+
+    private void trade(int curPlayer, Player[] players)
+    {
+
+        Player currentPlayer = players[curPlayer];
+
+        // Initialize Trade variables
+        int tradePartnerId=0;
+        int tradePartnerPayed=0;
+        int traderPayed=0;
+
+        // Add possible player to trade options array
+        Player[] tradePlayers = new Player[ players.length -1];
+        int a=0;
+        for (int i = 0; i< players.length-1; i++) {
+
+            if (i == curPlayer){a++;}
+            tradePlayers[i] = players[a];
+            a++;
+        }
+
+        // Create String array of possible trade partners
+        String[] tradePlayersNames = new String[tradePlayers.length];
+        for (int i = 0; i<players.length-1; i++)
+        {
+            tradePlayersNames[i] = tradePlayers[i].getName();
+        }
+
+        // Display array as Dropdown Menu
+        for(int i = 0; i<tradePlayers.length; i++){
+            System.out.println(tradePlayers[i].getName());
+        }
+
+        // Create a dropdown based on tradeable player amount
+        String selectedTradePartner = gui.getUserSelection(currentPlayer.getName() + " Vælg spiller at handle med", tradePlayersNames);
+        if (tradePlayersNames[0] == selectedTradePartner)
+        {
+            tradePartnerId=0;
+            System.out.println("Tradepartner: "+tradePlayersNames[0]);
+        }
+        if (tradePlayersNames[1] == selectedTradePartner)
+        {
+            tradePartnerId=1;
+            System.out.println("Tradepartner: "+tradePlayersNames[1]);
+        }
+        if (tradePlayersNames.length > 2)
+        {
+            if (tradePlayersNames[2] == selectedTradePartner) {
+                tradePartnerId = 2;
+                System.out.println("Tradepartner: " + tradePlayersNames[2]);
+            }
+        }
+        if (tradePlayersNames.length > 3)
+        {
+            if (tradePlayersNames[3] == selectedTradePartner) {
+                tradePartnerId = 3;
+                System.out.println("Tradepartner: " + tradePlayersNames[3]);
+            }
+        }
+        if (tradePlayersNames.length > 4)
+        {
+            if (tradePlayersNames[4] == selectedTradePartner) {
+                tradePartnerId = 4;
+                System.out.println("Tradepartner: " + tradePlayersNames[4]);
+            }
+        }
+
+
+
+        // Display Chosen players property
+
+
+        // Display Menu for money
+        boolean correctPartnerPayAmount=false;
+        String[] options = {"Accepter mængde", "+50", "+100", "+200", "+500", "+1000", "+5000", "+10000"};
+        while (!correctPartnerPayAmount) {
+
+            switch (gui.getUserSelection(currentPlayer.getName() + " Vælg hvor meget " + tradePlayersNames[tradePartnerId] + " skal betale: " + tradePartnerPayed, options)) {
+                case "Accepter mængde":
+                    correctPartnerPayAmount=true;
+                    break;
+                case "+50":
+                    tradePartnerPayed+=50;
+                    break;
+                case "+100":
+                    tradePartnerPayed+=100;
+                    break;
+                case "+200":
+                    tradePartnerPayed+=200;
+                    break;
+                case "+500":
+                    tradePartnerPayed+=500;
+                    break;
+                case "+1000":
+                    tradePartnerPayed+=1000;
+                    break;
+                case "+5000":
+                    tradePartnerPayed+=5000;
+                    break;
+                case "+10000":
+                    tradePartnerPayed+=10000;
+                    break;
+            }
+        }
+
+        // Display own players Property
+
+        // Display menu for own players money
+        boolean correctPlayerPayAmount=false;
+        while (!correctPlayerPayAmount) {
+            switch (gui.getUserSelection(currentPlayer.getName() + " Vælg hvor meget du skal betale: " + traderPayed, options)) {
+                case "Accepter mængde":
+                    correctPlayerPayAmount=true;
+                    break;
+                case "+50":
+                    traderPayed+=50;
+                    break;
+                case "+100":
+                    traderPayed+=100;
+                    break;
+                case "+200":
+                    traderPayed+=200;
+                    break;
+                case "+500":
+                    traderPayed+=500;
+                    break;
+                case "+1000":
+                    traderPayed+=1000;
+                    break;
+                case "+5000":
+                    traderPayed+=5000;
+                    break;
+                case "+10000":
+                    traderPayed+=10000;
+                    break;
+            }
+        }
+
+        // Display Yes/No option to recipient
+        boolean tradeAccepted=false;
+        String[] optionsAccept = {};
+        boolean answer =gui.getUserBool(tradePlayersNames[tradePartnerId] + " Acceptere du denne handel? Du modtager " + (traderPayed-tradePartnerPayed) +" og disse ejendomme: ", "Accepter handel","Accepter IKKE handel");
+
+        if(answer)
+        {
+            tradeAccepted=true;
+        }
+        else
+        {
+            tradeAccepted=false;
+        }
+
+        // Transfer Ownership
+
+        // Pay for trade
+        if (tradeAccepted) {
+            tradePlayers[tradePartnerId].setPlayerBalance(traderPayed - tradePartnerPayed);
+            currentPlayer.setPlayerBalance(tradePartnerPayed - traderPayed);
+
+            // Opdate GUI
+            //board.getPlayer(curPlayer).getPlayer().setBalance(board.getPlayer(curPlayer).getPlayerBalance());
+            //tradePlayers[tradePartnerId].getPlayer().setBalance(tradePlayers[tradePartnerId].getPlayerBalance());
+
+            gui.setguiPlayerBalance(currentPlayer,currentPlayer.getPlayerBalance());
+            gui.setguiPlayerBalance(tradePlayers[tradePartnerId],tradePlayers[tradePartnerId].getPlayerBalance());
+        }
+
+
+    }
+
+
+
+
 }
 
