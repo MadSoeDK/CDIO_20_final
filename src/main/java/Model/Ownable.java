@@ -53,4 +53,7 @@ public abstract class Ownable extends Field {
     public int getHouses() {
         return houses;
     }
+    public void changeOwner(Player player) {
+        owner = null;
+    }
 }

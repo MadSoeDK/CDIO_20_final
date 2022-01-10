@@ -11,7 +11,7 @@ public class GameController {
     private EventHandler event;
     private Player[] players;
     private Player currentPlayer;
-    private int playerindex=0;
+    private int playerindex = 0;
 
     // Game Constants
     final int STARTBALANCE = 30000;
@@ -70,25 +70,28 @@ public class GameController {
         //bankrupt(currentPlayer, placement);
 
     }
+
     public void setupPlayers(String[] playerNames) {
         players = new Player[playerNames.length];
 
         for (int i = 0; i < playerNames.length; i++) {
-            players[i] = new Player(playerNames[i],STARTBALANCE);
+            players[i] = new Player(playerNames[i], STARTBALANCE);
         }
 
         currentPlayer = players[0];
     }
+
     public void nextTurn() {
         // Chance Player Turn/Reset to first player
         playerindex = java.util.Arrays.asList(players).indexOf(currentPlayer);
 
-        if (playerindex == players.length-1) {
+        if (playerindex == players.length - 1) {
             currentPlayer = players[0];
         } else {
             currentPlayer = players[playerindex + 1];
         }
     }
+
     public void checkFieldType(Field field, int placement) {
 
         String fieldType = board.getField(placement).getClass().getSimpleName();
@@ -139,7 +142,7 @@ public class GameController {
         int newPlacement;
 
         // Check for a complete lap around on board. Then recalibrate player placement
-        if(endPlacement >= 40) {
+        if (endPlacement >= 40) {
             newPlacement = endPlacement - 40;
 
             //Pay lap bonus
@@ -151,8 +154,9 @@ public class GameController {
         player.setPlacement(newPlacement);
 
         //Update GUI
-        gui.movePlayer(player,newPlacement, prePlacement);
+        gui.movePlayer(player, newPlacement, prePlacement);
     }
+
     public void setPlayerPlacement(Player player, int endplacement, boolean passStart) {
         int preplacement = player.getPlacement();
 
@@ -161,7 +165,7 @@ public class GameController {
             player.setPlayerBalance(5);
         }
         player.setPlacement(endplacement);
-        gui.movePlayer(player,endplacement,preplacement);
+        gui.movePlayer(player, endplacement, preplacement);
     }
 
     /*private int getFerryRent(Ferry property){
@@ -198,29 +202,34 @@ public class GameController {
                 property_check.getGUIField().setSubText("$"+(ferry_cost));
             }
         }
-    }
+    }*/
 
 
-    /*public int netWorth(Player player) {
-        int netWorth = player.getPlayerBalance();
-
-        for (int i = 0; i < board.getFieldsTotal(); i++) {
     public int netWorth(Player player) {
+        int netWorth = player.getPlayerBalance();
         for (int i = 0; i < board.getFields().length; i++) {
+            //switch(board.getFields()[i].getClass().getSimpleName()) {
+
             //Type casting field to Ownable
             if (board.getField(i) instanceof Ownable) {
                 //Verifying that the current field is of the type Ownable
                 Ownable property = (Ownable) board.getField(i);
-                if (player == property.getOwner() && board.getField(i) instanceof Street) {
-                    System.out.println(player.getName() + " landte på "
-                            + board.getField(i).getName() + ". Der tilføjes: " + ((Street) board.getField(i)).getPrice());
-                    player.setNetWorth(((Ownable) board.getField(i)).getPrice());
+                //Checking if field is of type Ferry, Brewery or Street.
+                if (player == property.getOwner() && property instanceof Ferry) {
+                    netWorth += property.getPrice();
+                }
+                if (player == property.getOwner() && property instanceof Brewery) {
+                    netWorth += property.getPrice();
+                } else if (player == property.getOwner() && property instanceof Street) {
+                    netWorth += property.getPrice();
                 }
             }
         }
-        System.out.println(player.getName() + "'s net worth: " + player.getNetWorth());
-        return player.getNetWorth();
+        System.out.println(player.getName() + "'s net worth: " + netWorth);
+        player.setNetWorth(netWorth);
+        return netWorth;
     }
+
     //Copies the player array except the bankrupt player
     public Player[] eliminatePlayer() {
         Player[] newPlayers = new Player[gui.getPlayers() - 1];
@@ -235,10 +244,9 @@ public class GameController {
         return newPlayers;
     }
 
-    /*public boolean bankrupt(Player player, int placement) {
+    public boolean bankrupt(Player player, int placement) {
         //Type casting field to Ownable
-        boolean bankrupt = false;
-        if ((board.getField(placement) instanceof Ownable) && !(board.getField(placement) instanceof Ferry) && !(board.getField(placement) instanceof Tax)) {
+        if ((board.getField(placement) instanceof Ownable)) {
             //Verifying that the current field is of the type Ownable
             Ownable property = (Ownable) board.getField(placement);
             if (player != property.getOwner()) {
@@ -253,6 +261,7 @@ public class GameController {
                                 Ownable playerProperty = (Ownable) board.getField(i);
                                 //Gives players properties to debt collector
                                 if (player == playerProperty.getOwner()) {
+                                    playerProperty.changeOwner(player);
                                     playerProperty.setOwner(((Street) board.getField(placement)).getOwner());
                                     player.setNetWorth(-((Ownable) board.getField(i)).getPrice());
                                 }
@@ -272,22 +281,22 @@ public class GameController {
                                   a while loop which generates an array with properties, that gets shown
                                   through a drop-down menu that loops until the players balance is
                                   higher than the rent.
-
+                                  */
 
                     }
                 }
             }
         }
-        return bankrupt;
+        return player.getBankruptStatus();
     }
 
-/*
+    /*
     - Make an array with the player's properties.
     - Create drop-down menu (GUI) to select different owned properties for player to sell.
     - Loop the drop-down menu option until the balance is higher than the rent.
      */
     //Method to mortgage properties when bankrupt
-   /* public void mortage(Player player) {
+    public void mortage(Player player) {
         //Property[] playerProperties = new Property[4];
         int numberOfProperties;
         numberOfProperties = board.countNumbersOfPropertiesForPlayer(player);
@@ -312,61 +321,59 @@ public class GameController {
         optionsBankruptOrMortage[0] = "Bankerot";
         optionsBankruptOrMortage[1] = "Pantsæt";
 
+        while (player.getPlayerBalance() < ((Street) board.getField(player.getPlacement())).getCurrentRent()) {
+
             gui.dropdown("Gå bankerot eller pantsæt ejendomme?", optionsBankruptOrMortage);
-            switch(gui.dropdown("Gå bankerot eller pantsæt ejendomme?", optionsBankruptOrMortage)) {
+            switch (gui.dropdown("Gå bankerot eller pantsæt ejendomme?", optionsBankruptOrMortage)) {
                 case "Bankerot":
                     player.setPlayerBalance(1);
                     eliminatePlayer();
                     break;
                 case "Pantsæt":
-                    while(player.getPlayerBalance() < ((Street) board.getField(player.getPlacement())).getCurrentRent()) {
+                    while (player.getPlayerBalance() < ((Street) board.getField(player.getPlacement())).getCurrentRent()) {
 
+                        /*
+                        - Make options with properties in an array to choose to mortgage.
+                        - OR make the program automatically sell a players properties
+                         */
+                        numberOfProperties = board.countNumbersOfPropertiesForPlayer(player);
+                        String[] propertyNames = new String[numberOfProperties];
+                        currentProperty = 0;
 
-                    - Make options with properties in an array to choose to mortgage.
-                    - OR make the program automatically sell a players properties
+                        for (int i = 0; i < board.getFields().length; i++) {
+                            //Type casting field to Ownable
+                            if (board.getField(i) instanceof Ownable) {
+                                //Verifying that the current field is of the type Ownable
+                                Ownable property = (Ownable) board.getField(i);
+                                if (player == property.getOwner()) {
+                                    String propertyName = ((Street) property).getName();
+                                    propertyNames[currentProperty] = propertyName;
 
-                    numberOfProperties = board.countNumbersOfPropertiesForPlayer(player);
-                    String[] propertyNames = new String[numberOfProperties];
-                    currentProperty = 0;
-
-                    for (int i = 0; i < board.getFields().length; i++) {
-                        //Type casting field to Ownable
-                        if (board.getField(i) instanceof Ownable) {
-                            //Verifying that the current field is of the type Ownable
-                            Ownable property = (Ownable) board.getField(i);
-                            if (player == property.getOwner()) {
-                                String propertyName = ((Street) property).getName();
-                                propertyNames[currentProperty] = propertyName;
-
-                                currentProperty++;
-                            }
-                        }
-                    }
-
-                    String guiSelection = gui.dropdown("Vælg en ejendom du skal sælge:", propertyNames);
-                    for (int i = 0; i < board.getFields().length; i++) {
-                        if (board.getField(i) instanceof Ownable) {
-                            //Verifying that the current field is of the type Ownable
-                            Ownable property = (Ownable) board.getField(i);
-                            if (Objects.equals(guiSelection, property.getName())) {
-                                if (board.getField(i) instanceof Street) {
-
-
-                                }
-                                else if (board.getField(i) instanceof Ferry) {
-
-                                }
-                                else if (board.getField(i) instanceof Brewery) {
-
+                                    currentProperty++;
                                 }
                             }
                         }
 
+                        String guiSelection = gui.dropdown("Vælg en ejendom du skal sælge:", propertyNames);
+                        for (int i = 0; i < board.getFields().length; i++) {
+                            if (board.getField(i) instanceof Ownable) {
+                                //Verifying that the current field is of the type Ownable
+                                Ownable property = (Ownable) board.getField(i);
+                                if (Objects.equals(guiSelection, property.getName())) {
+                                    if (board.getField(i) instanceof Street) {
+
+
+                                    } else if (board.getField(i) instanceof Ferry) {
+
+                                    } else if (board.getField(i) instanceof Brewery) {
+
+                                    }
+                                }
+                            }
+
+                        }
                     }
-                    break;
             }
         }
     }
-
-    */
 }
