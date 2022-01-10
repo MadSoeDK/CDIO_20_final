@@ -6,9 +6,6 @@ import java.io.FileReader;
 
 public class Board {
 
-    private ChanceCardDeck chanceCard;
-
-
     private final Field[] fields;
 
     public Board() {
@@ -115,9 +112,6 @@ public class Board {
                     System.out.println("No field type match");
             }
         }
-
-        chanceCard = new ChanceCardDeck(this);
-
     }
 
     public Field getField(int placement) {
@@ -158,10 +152,6 @@ public class Board {
             }
         }
         return numberOfProperties;
-    }
-
-    public ChanceCardDeck getChanceCardDeck(){
-        return chanceCard;
     }
 
     public int getFieldsByColor(int placement) {
