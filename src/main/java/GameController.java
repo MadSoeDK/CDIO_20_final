@@ -360,17 +360,20 @@ public class GameController {
                                 //Verifying that the current field is of the type Ownable
                                 Ownable property = (Ownable) board.getField(i);
                                 if (Objects.equals(guiSelection, property.getName())) {
-                                    if (board.getField(i) instanceof Street) {
-                                        /*
+                                    /*
                                         - Rent should be equals 0 if mortgage is true
                                         - Remove name from string array of properties
                                         - Update player balance
                                          */
-
-                                    } else if (board.getField(i) instanceof Ferry) {
-
-                                    } else if (board.getField(i) instanceof Brewery) {
-
+                                    property.setMortage();
+                                    player.setPlayerBalance((property.getPrice())/2);
+                                    String[] newPropertyNames = new String[propertyNames.length - 1];
+                                    int j = 0;
+                                    for (int m = 0; i < propertyNames.length; m++) {
+                                        if (property.getOwner() == player && !(Objects.equals(property.getName(), guiSelection))) {
+                                            newPropertyNames[j] = propertyNames[m];
+                                            j++;
+                                        }
                                     }
                                 }
                             }
