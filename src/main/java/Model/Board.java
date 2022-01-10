@@ -177,6 +177,26 @@ public class Board {
         return result;
     }
 
+    public Ownable[] getPlayerProperties(Player player){
+        int numberOfProperties;
+        numberOfProperties = countNumbersOfPropertiesForPlayer(player);
+
+        Ownable[] playerProperties = new Street[numberOfProperties];
+        int currentProperty = 0;
+        for (int i = 0; i < getFields().length; i++) {
+            //Type casting field to Ownable
+            if (getField(i) instanceof Ownable) {
+                //Verifying that the current field is of the type Ownable
+                Ownable property = (Ownable) getField(i);
+                if (player == property.getOwner()) {
+                    playerProperties[currentProperty] = property;
+                    currentProperty++;
+                }
+            }
+        }
+
+        return playerProperties;
+    }
     /*public boolean hasMonopoly(int placement) {
 
 

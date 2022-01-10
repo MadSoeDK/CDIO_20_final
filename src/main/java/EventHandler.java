@@ -9,13 +9,13 @@ public class EventHandler {
         this.gui = gui;
     }
 
-    public void playerOptions(Player player, Player [] players) {
+    public void playerOptions(Player player, Player [] players, Board board) {
         int playerIndex = java.util.Arrays.asList(players).indexOf(player);
         String[] options = {"Jeg vil ikke handle", "Jeg vil handle"};
         boolean answer = gui.getUserBool("Vil du handle?", "Ja", "Nej");
 
         if (answer) {
-                trade(playerIndex, players);
+                trade(playerIndex, players, board);
         }
 
     }
@@ -247,7 +247,7 @@ public class EventHandler {
          */
     }
 
-    private void trade(int curPlayer, Player[] players)
+    public void trade(int curPlayer, Player[] players, Board board)
     {
 
         Player currentPlayer = players[curPlayer];
@@ -316,14 +316,26 @@ public class EventHandler {
 
 
         // Display Chosen players property
+        Ownable[] tradePartProperties = board.getPlayerProperties(tradePlayers[tradePartnerId]);
+        String[] fieldNames = new String[tradePartProperties.length];
+        for (int i = 0; i <  tradePartProperties.length; i++) {
+            fieldNames[i] =  tradePartProperties[i].getName();
+        }
+        String[] options = fieldNames;
+        Ownable chosenProp = tradePartProperties[0];
+        String fieldName = gui.getUserSelection(currentPlayer.getName() + " Vælg hvilke ejendomme du vil købe", options);
+        for (int i=0; i<fieldNames.length; i++){
+            if (fieldNames[i].equals(fieldName)){
+                chosenProp = tradePartProperties[i];
+            }
+        }
 
-
-        // Display Menu for money
+            // Display Menu for money
         boolean correctPartnerPayAmount=false;
-        String[] options = {"Accepter mængde", "+50", "+100", "+200", "+500", "+1000", "+5000", "+10000"};
+        String[] optionsMoney = {"Accepter mængde", "+50", "+100", "+200", "+500", "+1000", "+5000", "+10000"};
         while (!correctPartnerPayAmount) {
 
-            switch (gui.getUserSelection(currentPlayer.getName() + " Vælg hvor meget " + tradePlayersNames[tradePartnerId] + " skal betale: " + tradePartnerPayed, options)) {
+            switch (gui.getUserSelection(currentPlayer.getName() + " Vælg hvor meget " + tradePlayersNames[tradePartnerId] + " skal betale: " + tradePartnerPayed, optionsMoney)) {
                 case "Accepter mængde":
                     correctPartnerPayAmount=true;
                     break;
@@ -352,11 +364,24 @@ public class EventHandler {
         }
 
         // Display own players Property
+        Ownable[] traderProperties = board.getPlayerProperties(currentPlayer);
+        fieldNames = new String[traderProperties.length];
+        for (int i = 0; i <  traderProperties.length; i++) {
+            fieldNames[i] =  traderProperties[i].getName();
+        }
+        String[] playerOptions = fieldNames;
+        Ownable chosenSoldProp = null;//tradePartProperties[0];
+        fieldName = gui.getUserSelection(currentPlayer.getName() + " Vælg hvilke ejendomme du vil sælge", playerOptions);
+        for (int i=0; i<fieldNames.length; i++){
+            if (fieldNames[i].equals(fieldName)){
+                chosenSoldProp = tradePartProperties[i];
+            }
+        }
 
         // Display menu for own players money
         boolean correctPlayerPayAmount=false;
         while (!correctPlayerPayAmount) {
-            switch (gui.getUserSelection(currentPlayer.getName() + " Vælg hvor meget du skal betale: " + traderPayed, options)) {
+            switch (gui.getUserSelection(currentPlayer.getName() + " Vælg hvor meget du skal betale: " + traderPayed, optionsMoney)) {
                 case "Accepter mængde":
                     correctPlayerPayAmount=true;
                     break;
@@ -404,6 +429,14 @@ public class EventHandler {
         if (tradeAccepted) {
             tradePlayers[tradePartnerId].setPlayerBalance(traderPayed - tradePartnerPayed);
             currentPlayer.setPlayerBalance(tradePartnerPayed - traderPayed);
+            if (chosenProp != null){
+                chosenProp.setOwner(currentPlayer);
+                gui.setOwner(currentPlayer, chosenProp);
+            }
+            if (chosenSoldProp != null){
+                chosenSoldProp.setOwner(tradePlayers[tradePartnerId]);
+                gui.setOwner(currentPlayer, chosenProp);
+            }
 
             // Opdate GUI
             //board.getPlayer(curPlayer).getPlayer().setBalance(board.getPlayer(curPlayer).getPlayerBalance());
