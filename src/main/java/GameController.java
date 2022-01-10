@@ -132,6 +132,7 @@ public class GameController {
                 System.out.println("Fieldtype unknown" + fieldType);
         }
     }
+
     public void moveplayer(Player player, int amount) {
         int prePlacement = player.getPlacement();
         int endPlacement = player.getPlacement() + amount;
