@@ -149,7 +149,22 @@ public class Board {
         return chanceCard;
     }
 
+    public int getFieldsByColor(int placement) {
+        Ownable ownable = (Ownable) fields[placement];
+        String color = ownable.getColor();
+        int result = 0;
+        for (Field field : fields) {
+            Ownable property = (Ownable) field;
+            if (property.getColor().equals(color)) {
+                result++;
+            }
+        }
+        return result;
+    }
+
     /*public boolean hasMonopoly(int placement) {
+
+
         Property property = (Property) getField(placement);
 
         boolean monopoly = false;

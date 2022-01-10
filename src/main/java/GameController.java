@@ -1,12 +1,12 @@
 import Model.*;
 import gui_fields.GUI_Ownable;
-import gui_main.GUI;
 
 public class GameController {
 
     private Board board;
     private Cup cup;
     private GUIController gui;
+    private EventHandler event;
     private Player[] players;
     private Player currentPlayer;
     private int playerindex=0;
@@ -20,6 +20,7 @@ public class GameController {
         board = new Board();
         cup = new Cup();
         gui = new GUIController(board.getFields());
+        event = new EventHandler(gui);
         gui.createPlayers(STARTBALANCE);
         setupPlayers(gui.getPlayernames());
         playGame();
@@ -35,13 +36,13 @@ public class GameController {
 
     public void takeTurn() {
         // Ask if currentplayer wish to trade?
-        playerOptions(currentPlayer);
+        event.playerOptions(currentPlayer);
 
         gui.button(" ", "Rul terning");
 
         // Roll die, get value, show die
         cup.roll();
-        sum = 12;//cup.getSum();
+        sum = cup.getSum();
         gui.showDice(cup.getFacevalues()[0], cup.getFacevalues()[1]);
 
         // Move player placement - automatically updates GUI
@@ -87,250 +88,39 @@ public class GameController {
 
         switch (fieldType) {
             case "Street":
-
-                // Typecast to Property
                 Street street = (Street) field;
-
-                // Check if Field is owned by another player and it's not the current player
-                if (street.getOwner() != currentPlayer && street.getOwner() != null) { //There is a Field owner and it's not owned by the current Player
-
-                    // Get field owner
-                    Player fieldOwner = street.getOwner();
-
-                    // Check if Owner owns all colors
-                    if (false /*board.hasMonopoly(placement)*/) {
-                        // 1. Subtract rent from current player 2. add to field owner
-                        currentPlayer.setPlayerBalance(-street.getCurrentRent() * 2);
-                        fieldOwner.setPlayerBalance(street.getCurrentRent() * 2);
-                    }
-
-                } else { // No one owns the Property, buy it.
-
-                    // Subtract player balance from Property rent
-                    currentPlayer.setPlayerBalance(-street.getCurrentRent());
-
-                    // Set Property owner
-                    street.setOwner(currentPlayer);
-
-                    // Set GUI Field
-                    gui.setOwner(currentPlayer, field);
-                }
+                event.fieldEffect(currentPlayer, street);
                 break;
-
             case "Jail":
-
-                // Typecast to Jail
                 Jail jail = (Jail) field;
-
-                // Add money to Free Parking if landed on "Go To Jail"
-                if (placement == 30) {
-                    gui.message(currentPlayer.getName() + " rykker til fængsel og betaler $3");
-
-                    // Subtract player balance from Property rent
-                    //currentPlayer.setPlayerBalance(-jail.getRent());
-
-                    FreeParking.setBalance(3);
-
-                    // Move to Jail field
-                    //currentPlayer.setPlacement(6);
-                    setPlayerPlacement(currentPlayer, 10, false);
-
-                }
-                // Set GUI Balance
-                //gui.getGuiField(placement).setSubText("Modtag: " + String.valueOf(FreeParking.getBalance()));
+                event.fieldEffect(currentPlayer, jail);
+                // Move to Jail field
+                setPlayerPlacement(currentPlayer, 10, false);
                 break;
-
             case "FreeParking":
                 // Give money to player
                 currentPlayer.setPlayerBalance(FreeParking.getBalance());
-
                 // Reset Free Parking
                 FreeParking.resetBalance();
-
-                // Set GUI Balance
-                //gui.getGuiField(placement).setSubText("Modtag: " + String.valueOf(FreeParking.getBalance()));
                 break;
-
             case "Tax":
-                //do something
-
+                Tax tax = (Tax) field;
+                event.fieldEffect(currentPlayer, tax);
                 break;
-
             case "Ferry":
-
-                // Typecast to Model.Property
                 Ferry ferry = (Ferry) field;
-
-                // Check Ferry Rent
-                int ferry_cost = ferry.getCurrentRent(); //getFerryRent()
-
-                if (ferry.getOwner() == null) { // Noone owns Ferry
-                    // Subtract player balance from Model.Property rent
-                    currentPlayer.setPlayerBalance(-4000);
-
-                    // Set Model.Property owner
-                    ferry.setOwner(currentPlayer);
-
-                    // Set GUI Field
-                    gui.setOwner(currentPlayer, ferry);
-
-                    //ferry_cost = getFerryRent(property);
-                    //updateFerryGUI(property, ferry_cost);
-                } else {
-                    // Get field owner
-                    Player fieldOwner = ferry.getOwner();
-
-                    // 1. Subtract rent from current player 2. add to field owner
-                    currentPlayer.setPlayerBalance(-ferry_cost);
-                    fieldOwner.setPlayerBalance(ferry_cost);
-
-                    //Update GUI-object and display the current player balance
-                    //board.getPlayer(currentPlayer).getPlayer().setBalance(board.getPlayer(currentPlayer).getPlayerBalance());
-                    //fieldOwner.getPlayer().setBalance(fieldOwner.getPlayerBalance());
-                }
-
-                /*if (field instanceof Ferry) {
-
-                    // Typecast to Model.Property
-                    Ferry property = (Ferry) field;
-
-                    // Check Ferry Rent
-                    int ferry_cost = getFerryRent(property);
-
-                    // Noone owns Ferry
-                    if (property.getOwner() == null)
-                    {
-                        // Subtract player balance from Model.Property rent
-                        player.setPlayerBalance(-4000);
-
-                        //Get the GUI-object and display the current player balance
-                        player.getPlayer().setBalance(player.getPlayerBalance());
-
-                        // Set Model.Property owner
-                        property.setOwner(player);
-
-                        // Set GUI Model.Field
-                        GUI_Ownable ownable = (GUI_Ownable) board.getField(placement).getGUIField();
-                        ownable.setOwnerName(player.getName());
-                        ownable.setBorder(player.getPlayerColor());
-
-                        ferry_cost = getFerryRent(property);
-                        updateFerryGUI(property, ferry_cost);
-                    }
-                    else // Other player Owns Ferry
-                    {
-                        // Get field owner
-                        Player fieldOwner = property.getOwner();
-
-                        // 1. Subtract rent from current player 2. add to field owner
-                        player.setPlayerBalance(-ferry_cost);
-                        fieldOwner.setPlayerBalance(ferry_cost);
-
-                        //Update GUI-object and display the current player balance
-                        board.getPlayer(currentPlayer).getPlayer().setBalance(board.getPlayer(currentPlayer).getPlayerBalance());
-                        fieldOwner.getPlayer().setBalance(fieldOwner.getPlayerBalance());
-                    }
-                }*/
+                event.fieldEffect(currentPlayer, ferry);
                 break;
-
             case "Brewery":
-
-                // Typecast to Model.Property
                 Brewery brewery = (Brewery) field;
-
-                // Typecast other company
-                Ownable otherBrewery;
-
-                // No one owns Company
-                if (brewery.getOwner() == null) {
-
-                    // Subtract player balance from Model.Property rent
-                    currentPlayer.setPlayerBalance(-brewery.getPrice());
-
-                    // Set Brewery owner and display on GUI
-                    brewery.setOwner(currentPlayer);
-                    gui.setOwner(currentPlayer, field);
-
-                }  else { // Other player Owns Company
-
-                    // Get field owner
-                    Player fieldOwner = brewery.getOwner();
-
-                    if (currentPlayer.getPlacement() == 12) {
-                        otherBrewery = (Ownable) board.getField(27);
-                    } else {
-                        otherBrewery = (Ownable) board.getField(12);
-                    }
-
-                    // 1. Subtract rent from current player 2. add to field owner
-                    if (brewery.getOwner() == otherBrewery.getOwner()) {
-                        currentPlayer.setPlayerBalance(-brewery.getRent()[1] * sum);
-                        fieldOwner.setPlayerBalance(brewery.getRent()[1] * sum);
-                    } else {
-                        currentPlayer.setPlayerBalance(-brewery.getRent()[0] * sum);
-                        fieldOwner.setPlayerBalance(brewery.getRent()[0] * sum);
-                    }
-                }
-
-                /*if (field instanceof Company) {
-
-                    // Typecast to Model.Property
-                    Company property = (Company) field;
-                    // Typecast other company
-                    Company otherCompany = (Company) board.getField(12);
-                    if (player.getPlacement() == 12)
-                    {
-                        otherCompany = (Company) board.getField(27);
-                    }
-
-                    // Check Company Rent
-                    int company_cost = sum*100;
-                    if (property.getOwner() == otherCompany.getOwner())
-                    {
-                        company_cost = sum*200;
-                    }
-
-                    // Noone owns Company
-                    if (property.getOwner() == null)
-                    {
-                        // Subtract player balance from Model.Property rent
-                        player.setPlayerBalance(-property.getRent());
-
-                        //Get the GUI-object and display the current player balance
-                        player.getPlayer().setBalance(player.getPlayerBalance());
-
-                        // Set Model.Property owner
-                        property.setOwner(player);
-
-                        // Set GUI Model.Field
-                        GUI_Ownable ownable = (GUI_Ownable) board.getField(placement).getGUIField();
-                        ownable.setOwnerName(player.getName());
-                        ownable.setBorder(player.getPlayerColor());
-                    }
-                    else // Other player Owns Company
-                    {
-                        // Get field owner
-                        Player fieldOwner = property.getOwner();
-
-                        // 1. Subtract rent from current player 2. add to field owner
-                        player.setPlayerBalance(-company_cost);
-                        fieldOwner.setPlayerBalance(company_cost);
-
-                        //Update GUI-object and display the current player balance
-                        board.getPlayer(currentPlayer).getPlayer().setBalance(board.getPlayer(currentPlayer).getPlayerBalance());
-                        fieldOwner.getPlayer().setBalance(fieldOwner.getPlayerBalance());
-                    }
-                }*/
+                event.fieldEffect(currentPlayer, brewery, sum);
                 break;
-
             case "ChanceField":
                 //do something
                 break;
-
             case "Start":
                 //do something
                 break;
-
             default:
                 System.out.println("Fieldtype unknown" + fieldType);
         }
@@ -364,19 +154,6 @@ public class GameController {
         }
         player.setPlacement(endplacement);
         gui.movePlayer(player,endplacement,preplacement);
-    }
-    public void playerOptions(Player player) {
-
-        String[] options = {"Roll Die", "Begin Trade"};
-
-        switch (gui.dropdown("What do you want to do?", options)) {
-            case "Begin Trade":
-                trade(gui, playerindex);
-                break;
-            case "Roll Die":
-                break;
-        }
-
     }
 
     /*private int getFerryRent(Ferry property){
@@ -603,7 +380,7 @@ public class GameController {
 
         }
     }
-*/}
+
     /*public int auction(GUI gui, int propertyWorth) {
 
         // Add players to auction array
