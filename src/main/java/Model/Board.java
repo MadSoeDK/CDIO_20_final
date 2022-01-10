@@ -7,9 +7,19 @@ import java.io.FileReader;
 public class Board {
 
     private ChanceCardDeck chanceCard;
-
-
     private final Field[] fields;
+
+    private Monopoly monopolies[] = {
+            new Monopoly(Color.blue, this),
+            new Monopoly(Color.orange, this),
+            new Monopoly(Color.green, this),
+            new Monopoly(Color.gray, this),
+            new Monopoly(Color.red, this),
+            new Monopoly(Color.white, this),
+            new Monopoly(Color.yellow, this),
+            new Monopoly(Color.red, this),
+            new Monopoly(Color.red, this)
+    };
 
     public Board() {
         BufferedReader CSV;
@@ -117,6 +127,7 @@ public class Board {
         }
 
         chanceCard = new ChanceCardDeck(this);
+
 
     }
 

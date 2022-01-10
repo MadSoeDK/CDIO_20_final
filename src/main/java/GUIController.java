@@ -18,7 +18,7 @@ public class GUIController {
 
     public GUIController(Field[] fields) {
         GUI_Field[] guiBoard = createBoard(fields);
-        gui = new GUI(guiBoard,Color.orange);
+        gui = new GUI(guiBoard,Color.white);
     }
 
     public GUI_Field[] createBoard(Field[] fields) {
