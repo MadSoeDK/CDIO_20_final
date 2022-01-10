@@ -66,7 +66,7 @@ public class GameController {
         }
 
         netWorth(currentPlayer);
-        //bankrupt(currentPlayer, placement);
+        bankrupt(currentPlayer, placement);
         //eliminatePlayer(currentPlayer, placement);
         //updatePlayers();
 
@@ -221,13 +221,13 @@ public class GameController {
                 }
                 if (player == property.getOwner() && property instanceof Brewery) {
                     netWorth += property.getPrice();
-                } else  {
+                } else if (player == property.getOwner() && property instanceof Brewery) {
                     netWorth += property.getPrice();
                 }
             }
         }
-        System.out.println(player.getName() + "'s net worth: " + netWorth);
         player.setNetWorth(netWorth);
+        System.out.println(player.getName() + "'s net worth: " + player.getNetWorth());
         return netWorth;
     }
 
@@ -251,7 +251,6 @@ public class GameController {
 
     public boolean bankrupt(Player player, int placement) {
         //Type casting field to Ownable
-        player.setNetWorth(0);
         if ((board.getField(placement) instanceof Ownable)) {
             //Verifying that the current field is of the type Ownable
             Ownable property = (Ownable) board.getField(placement);
