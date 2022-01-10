@@ -67,7 +67,8 @@ public class GameController {
 
         netWorth(currentPlayer);
         //bankrupt(currentPlayer, placement);
-        eliminatePlayer();
+        //eliminatePlayer(currentPlayer, placement);
+        //updatePlayers();
 
     }
 
@@ -220,7 +221,7 @@ public class GameController {
                 }
                 if (player == property.getOwner() && property instanceof Brewery) {
                     netWorth += property.getPrice();
-                } else if (player == property.getOwner() && property instanceof Street) {
+                } else  {
                     netWorth += property.getPrice();
                 }
             }
@@ -231,26 +232,30 @@ public class GameController {
     }
 
     //Copies the player array except the bankrupt player
-    public Player[] eliminatePlayer() {
-        Player[] newPlayers = new Player[gui.getPlayers() - 1];
-        int j = 0;
-        for (int i = 0; i < gui.getPlayers(); i++) {
-            Player currentPlayer = players[i];
-            if (currentPlayer.getBankruptStatus() == false) {
-                newPlayers[j] = players[i];
-                j++;
+    public Player[] eliminatePlayer(Player player, int placement) {
+        Player[] newPlayers = new Player[gui.getPlayers() - 1];;
+        if (player.getBankruptStatus() == true) {
+            int j = 0;
+            for (int i = 0; i < gui.getPlayers(); i++) {
+                Player currentPlayer = players[i];
+                if (currentPlayer.getBankruptStatus() == false) {
+                    newPlayers[j] = players[i];
+                    j++;
+                } else if (currentPlayer.getBankruptStatus() == true) {
+                    gui.removePlayer(player, placement, newPlayers);
+                }
             }
         }
-
         return newPlayers;
     }
 
     public boolean bankrupt(Player player, int placement) {
         //Type casting field to Ownable
+        player.setNetWorth(0);
         if ((board.getField(placement) instanceof Ownable)) {
             //Verifying that the current field is of the type Ownable
             Ownable property = (Ownable) board.getField(placement);
-            if (player != property.getOwner()) {
+            //if (player != property.getOwner()) {
                 if (player.getPlayerBalance() < property.getCurrentRent()) {
                     //Checks if player is bankrupt
                     if (player.getNetWorth() < property.getCurrentRent()) {
@@ -263,15 +268,15 @@ public class GameController {
                                 //Gives players properties to debt collector
                                 if (player == playerProperty.getOwner()) {
                                     playerProperty.changeOwner(player);
-                                    playerProperty.setOwner(((Street) board.getField(placement)).getOwner());
+                                    playerProperty.setOwner(((Ownable) board.getField(placement)).getOwner());
                                     player.setNetWorth(-((Ownable) board.getField(i)).getPrice());
                                 }
                             }
                         }
                         //Removes player from the player array, Note: does not work if more players bankrupt same turn
-                        eliminatePlayer();
+                        eliminatePlayer(player, placement);
                         System.out.println(player.getName() + " IS BANKRUPT");
-                    } else if (netWorth(player) > ((Street) board.getField(placement)).getCurrentRent()) {
+                    } else if (player.getNetWorth() > ((Ownable) board.getField(placement)).getCurrentRent()) {
 
                         /*
                         Player gets the option to either (drop-down menu):
@@ -288,7 +293,6 @@ public class GameController {
                     }
                 }
             }
-        }
         return player.getBankruptStatus();
     }
 
@@ -327,7 +331,7 @@ public class GameController {
             switch (gui.dropdown("Gå bankerot eller pantsæt ejendomme?", optionsBankruptOrMortage)) {
                 case "Bankerot":
                     player.setPlayerBalance(1);
-                    eliminatePlayer();
+                    eliminatePlayer(player, player.getPlacement());
                     break;
                 case "Pantsæt":
                     while (player.getPlayerBalance() < ((Street) board.getField(player.getPlacement())).getCurrentRent()) {

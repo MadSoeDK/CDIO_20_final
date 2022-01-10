@@ -34,7 +34,7 @@ public class Player {
         return name;
     }
     public void setNetWorth(int addValue) {
-        netWorth += addValue;
+        netWorth = addValue;
     }
     public int getNetWorth() {
         return netWorth;
