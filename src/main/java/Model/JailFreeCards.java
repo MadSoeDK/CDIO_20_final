@@ -1,4 +1,5 @@
 package Model;
 
-public class JailFreeCards {
+public class JailFreeCards extends ChanceCard {
+
 }

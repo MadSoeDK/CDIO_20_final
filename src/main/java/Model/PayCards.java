@@ -1,4 +1,5 @@
 package Model;
 
-public class PayCards {
+public class PayCards extends ChanceCard {
+
 }
