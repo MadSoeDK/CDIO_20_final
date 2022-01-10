@@ -134,6 +134,10 @@ public class GUIController {
         }
     }
 
+    public String getUserSelection(String msg, String[] options){
+        return gui.getUserSelection(msg, options);
+    }
+
     public void message(String message){
         gui.showMessage(message);
     }
