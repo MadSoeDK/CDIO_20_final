@@ -119,8 +119,6 @@ public class EventHandler {
     }
 
     public void fieldEffect(Player player, Jail jail) {
-        // Add money to Free Parking if landed on "Go To Jail"
-
     }
 
     public void fieldEffect(Player player, Tax tax, int netWorth) {
@@ -253,8 +251,7 @@ public class EventHandler {
          */
     }
 
-    public void trade(int curPlayer, Player[] players, Board board)
-    {
+    public void trade(int curPlayer, Player[] players, Board board) {
 
         Player currentPlayer = players[curPlayer];
 

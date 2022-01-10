@@ -40,11 +40,9 @@ public class GameController {
         // Ask if currentplayer wish to trade?
         event.playerOptions(currentPlayer, players, board);
 
-        gui.button(" ", "Rul terning");
-
         // Roll die, get value, show die
         cup.roll();
-        sum = 12; //cup.getSum();
+        sum = 4; //cup.getSum();
         gui.showDice(cup.getFacevalues()[0], cup.getFacevalues()[1]);
 
         // Move player placement - automatically updates GUI
@@ -67,7 +65,6 @@ public class GameController {
 
         netWorth(currentPlayer);
         bankrupt(currentPlayer, placement);
-        //eliminatePlayer(currentPlayer, placement);
 
     }
 
@@ -121,7 +118,7 @@ public class GameController {
                 break;
             case "Tax":
                 Tax tax = (Tax) field;
-                event.fieldEffect(currentPlayer, tax);
+                event.fieldEffect(currentPlayer, tax, netWorth(currentPlayer));
                 break;
             case "Ferry":
                 Ferry ferry = (Ferry) field;
@@ -174,48 +171,9 @@ public class GameController {
         gui.movePlayer(player, endplacement, preplacement);
     }
 
-    /*private int getFerryRent(Ferry property){
-
-        // Check amounts of other ferries owned
-        int same_ferry_owner=0;
-        int ferry_cost=500;
-
-        for (var i=5; i<35; i+=10) {
-            // Typecast
-            Ferry property_check = (Ferry) board.getField(i);
-
-            // Check if owner is the same
-            if (property_check.getOwner() == property.getOwner()) {
-                same_ferry_owner++;
-                if (same_ferry_owner>1)
-                {
-                    ferry_cost=ferry_cost*2;
-                }
-            }
-        }
-
-        return ferry_cost;
-    }
-
-    private void updateFerryGUI(Ferry property, int ferry_cost){
-        // Update Cost
-        for (var i=5; i<35; i+=10) {
-            // Typecast
-            Ferry property_check = (Ferry) board.getField(i);
-
-            // Check if owner is the same
-            if (property_check.getOwner() == property.getOwner()) {
-                property_check.getGUIField().setSubText("$"+(ferry_cost));
-            }
-        }
-    }*/
-
-
     public int netWorth(Player player) {
         int netWorth = player.getPlayerBalance();
         for (int i = 0; i < board.getFields().length; i++) {
-            //switch(board.getFields()[i].getClass().getSimpleName()) {
-
             //Type casting field to Ownable
             if (board.getField(i) instanceof Ownable) {
                 //Verifying that the current field is of the type Ownable
@@ -241,15 +199,15 @@ public class GameController {
         Player[] newPlayers = new Player[gui.getPlayers() - 1];
             int j = 0;
             for (int i = 0; i < gui.getPlayers(); i++) {
-                if (players[i].getBankruptStatus() == false) {
-                    newPlayers[j] = players[i];
-                    j++;
-                } else if (players[i].getBankruptStatus() == true) {
+                if (players[i].getBankruptStatus()) {
                     gui.removePlayer(player, placement);
                     gui.getGuiPlayer(players[i]).setName(players[i].getName() + "\n[BANKEROT]");
                     gui.getGuiPlayer(players[i]).setBalance(0);
+                } else {
+                    newPlayers[j] = players[i];
+                    j++;
                 }
-        }
+            }
             players = newPlayers;
     }
 
