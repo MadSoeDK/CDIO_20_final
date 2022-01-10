@@ -54,7 +54,7 @@ public class GameController {
 
         gui.message(currentPlayer.getName() + " landede på " + field.getName());
 
-        checkFieldType(field, placement, players);
+        checkFieldType(field, placement);
 
         //event.auction(2000, players);
 
@@ -90,8 +90,8 @@ public class GameController {
 
         switch (fieldType) {
             case "Street":
-                Street street = (Street) field;
-                event.fieldEffect(currentPlayer, street);
+                Ownable street = (Ownable) field;
+                event.fieldEffect(currentPlayer, street, players);
                 break;
             case "Jail":
                 Jail jail = (Jail) field;

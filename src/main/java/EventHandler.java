@@ -23,9 +23,26 @@ public class EventHandler {
 
     }
 
+    public void fieldEffect(Player player, Ownable ownable, Player[] players) {
+        if (ownable.getOwner() == null) {
+            buyField(player, ownable, players);
+        } else {
+            Player fieldOwner = ownable.getOwner();
+
+            if (false /*board.hasMonopoly(placement)*/) {
+                // 1. Subtract rent from current player 2. add to field owner
+                player.setPlayerBalance(-ownable.getCurrentRent() * 2);
+                fieldOwner.setPlayerBalance(ownable.getCurrentRent() * 2);
+            } else {
+                player.setPlayerBalance(-ownable.getCurrentRent());
+                fieldOwner.setPlayerBalance(ownable.getCurrentRent());
+            }
+        }
+    }
+
     public void fieldEffect(Player player, Street street) {
         if (street.getOwner() == null) { // No owner - ask to buy it
-            buyField(player, street);
+            //buyField(player, street);
         } else { //Pay rent to owner
             Player fieldOwner = street.getOwner();
 
@@ -46,7 +63,7 @@ public class EventHandler {
         int ferry_cost = ferry.getCurrentRent(); //getFerryRent()
 
         if (ferry.getOwner() == null) { // Noone owns Ferry
-            buyField(player, ferry);
+            //buyField(player, ferry);
 
             //ferry_cost = getFerryRent(property);
             //updateFerryGUI(property, ferry_cost);
@@ -67,7 +84,7 @@ public class EventHandler {
 
         // No one owns Company
         if (brewery.getOwner() == null) {
-            buyField(player, brewery);
+            //buyField(player, brewery);
         } else { // Other player Owns Company
 
             // Get field owner
@@ -130,12 +147,11 @@ public class EventHandler {
             field.setOwner(player);
             gui.setOwner(player, field);
         } else {
-            auction(players);
+            auction(players, field);
         }
     }
 
-    public void auction(Player[] players) {
-
+    public void auction(Player[] players, Ownable field) {
         // Add players to auction array
         Player[] aucPlayers = new Player[players.length];
         for (int q = 0; q < players.length; q++) {
@@ -220,6 +236,8 @@ public class EventHandler {
 
         // Pay for auction
         players[auctionWinner].setPlayerBalance(-auctionSum);
+        field.setOwner(players[auctionWinner]);
+        gui.setOwner(players[auctionWinner], field);
         /*
         if (auctionSum > propertyWorth) {
             // After the auction you will be charged for the property, here we account for that
