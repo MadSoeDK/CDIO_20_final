@@ -222,7 +222,7 @@ public class GameController {
         }
         return winnerId;
     }
-*/
+
     private void trade(GUIController gui, int curPlayer)
     {
         // Initialize Trade variables

@@ -121,7 +121,7 @@ public class EventHandler {
     }
 
     public void buyField(Player player, Ownable field) {
-        boolean answer = gui.getUserBool("Buy this field?", "Yes", "No");
+        boolean answer = gui.getUserBool("Køb dette felt?", "Køb", "Auktioner");
 
         // Buy if yes
         if (answer) {
@@ -129,9 +129,14 @@ public class EventHandler {
             field.setOwner(player);
             gui.setOwner(player, field);
         }
+        else
+        {
+            auction();
+
+        };
     }
 
-    public int auction(int propertyWorth, Player[] players) {
+    public void auction(Player[] players) {
 
         // Add players to auction array
         Player[] aucPlayers = new Player[players.length];
@@ -216,6 +221,8 @@ public class EventHandler {
         }
 
         // Pay for auction
+        players[auctionWinner].setPlayerBalance(-auctionSum);
+        /*
         if (auctionSum > propertyWorth) {
             // After the auction you will be charged for the property, here we account for that
             players[auctionWinner].setPlayerBalance(-auctionSum + propertyWorth);
@@ -223,6 +230,8 @@ public class EventHandler {
             players[auctionWinner].setPlayerBalance(+propertyWorth);
         }
         return auctionWinner;
+
+         */
     }
 }
 
