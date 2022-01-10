@@ -38,13 +38,13 @@ public class GameController {
 
     public void takeTurn() {
         // Ask if currentplayer wish to trade?
-        event.playerOptions(currentPlayer, players);
+        event.playerOptions(currentPlayer, players, board);
 
         gui.button(" ", "Rul terning");
 
         // Roll die, get value, show die
         cup.roll();
-        sum = 5;//cup.getSum();
+        sum = 3; //cup.getSum();
         gui.showDice(cup.getFacevalues()[0], cup.getFacevalues()[1]);
 
         // Move player placement - automatically updates GUI
@@ -385,3 +385,6 @@ public class GameController {
             }
         }
     }
+
+
+
