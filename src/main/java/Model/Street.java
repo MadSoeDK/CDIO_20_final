@@ -2,6 +2,7 @@ package Model;
 
 public class Street extends Ownable {
 
+    protected int houses = 0;
     protected int HOUSEPRICE;
 
     public Street (String name, int placement, String color, int[] rent, int price, int housePrice) {
@@ -11,4 +12,5 @@ public class Street extends Ownable {
     public int getHousePrice() {
         return HOUSEPRICE;
     }
+    public int getHouses() {return houses;}
 }
