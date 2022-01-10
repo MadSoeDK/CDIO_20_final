@@ -14,7 +14,7 @@ public class GUIController {
     private GUI_Player[] guiPlayers;
     private String[] playernames;
     private GUI_Field[] guiFields;
-    private final Color[] colors = {Color.RED, Color.WHITE, Color.ORANGE, Color.MAGENTA};
+    private final Color[] colors = {Color.RED, Color.WHITE, Color.ORANGE, Color.MAGENTA, Color.BLACK, Color.BLUE};
 
     public GUIController(Field[] fields) {
         GUI_Field[] guiBoard = createBoard(fields);
@@ -74,14 +74,14 @@ public class GUIController {
     }
 
     public void createPlayers(int STARTBALANCE) {
-        int qty = Integer.parseInt(gui.getUserSelection("How many players?", "2", "3", "4"));
+        int qty = Integer.parseInt(gui.getUserSelection("How many players?", "3", "4", "5", "6"));
 
         guiPlayers = new GUI_Player[qty];
 
         for (int i = 0; i < qty; i++) {
             gui.showMessage("Indtast spiller navn: ");
 
-            GUI_Car playerCar = new GUI_Car(colors[i], colors[i], GUI_Car.Type.TRACTOR, GUI_Car.Pattern.FILL);
+            GUI_Car playerCar = new GUI_Car(colors[i], colors[i], GUI_Car.Type.UFO, GUI_Car.Pattern.FILL);
 
             guiPlayers[i] = new GUI_Player(gui.getUserString(""), STARTBALANCE, playerCar);
 
