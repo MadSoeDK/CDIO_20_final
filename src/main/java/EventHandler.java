@@ -267,7 +267,6 @@ public class EventHandler {
         Player[] tradePlayers = new Player[ players.length -1];
         int a=0;
         for (int i = 0; i< players.length-1; i++) {
-
             if (i == curPlayer){a++;}
             tradePlayers[i] = players[a];
             a++;
@@ -275,49 +274,50 @@ public class EventHandler {
 
         // Create String array of possible trade partners
         String[] tradePlayersNames = new String[tradePlayers.length];
-        for (int i = 0; i<players.length-1; i++)
-        {
+        for (int i = 0; i<players.length-1; i++) {
             tradePlayersNames[i] = tradePlayers[i].getName();
         }
 
         // Display array as Dropdown Menu
-        for(int i = 0; i<tradePlayers.length; i++){
+        /*for(int i = 0; i<tradePlayers.length; i++){
             System.out.println(tradePlayers[i].getName());
-        }
+        }*/
 
         // Create a dropdown based on tradeable player amount
         String selectedTradePartner = gui.getUserSelection(currentPlayer.getName() + " Vælg spiller at handle med", tradePlayersNames);
-        if (tradePlayersNames[0] == selectedTradePartner)
-        {
+
+        for (int i = 0; i < tradePlayersNames.length; i++) {
+            if (tradePlayersNames[i] == selectedTradePartner) {
+                tradePartnerId = i;
+            }
+        }
+
+        /*if (tradePlayersNames[0] == selectedTradePartner) {
             tradePartnerId=0;
             System.out.println("Tradepartner: "+tradePlayersNames[0]);
         }
-        if (tradePlayersNames[1] == selectedTradePartner)
-        {
+        if (tradePlayersNames[1] == selectedTradePartner) {
             tradePartnerId=1;
             System.out.println("Tradepartner: "+tradePlayersNames[1]);
         }
-        if (tradePlayersNames.length > 2)
-        {
+        if (tradePlayersNames.length > 2) {
             if (tradePlayersNames[2] == selectedTradePartner) {
                 tradePartnerId = 2;
                 System.out.println("Tradepartner: " + tradePlayersNames[2]);
             }
         }
-        if (tradePlayersNames.length > 3)
-        {
+        if (tradePlayersNames.length > 3) {
             if (tradePlayersNames[3] == selectedTradePartner) {
                 tradePartnerId = 3;
                 System.out.println("Tradepartner: " + tradePlayersNames[3]);
             }
         }
-        if (tradePlayersNames.length > 4)
-        {
+        if (tradePlayersNames.length > 4) {
             if (tradePlayersNames[4] == selectedTradePartner) {
                 tradePartnerId = 4;
                 System.out.println("Tradepartner: " + tradePlayersNames[4]);
             }
-        }
+        }*/
 
         // Display Chosen players property
         Ownable[] tradePartProperties = board.getPlayerProperties(tradePlayers[tradePartnerId]);
