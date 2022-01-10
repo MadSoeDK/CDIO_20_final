@@ -11,12 +11,12 @@ public class ChanceCardDeck {
 
     public ChanceCardDeck(Board owner) {
         // Initialize Model.ChanceCard Array
-        deck = new ChanceCard[5];
-        deck[0] = new ChanceCard("Du har spist for meget slik. Betal $2 til banken", "Chancekort 1", 0);
-        deck[1] = new ChanceCard("Ryk frem til START. Modtag $2 fra banken.", "Chancekort 2", 1);
-        deck[2] = new ChanceCard("Du har lavet alle dine lektier. Modtag $2 fra banken", "Chancekort 3", 2);
-        deck[3] = new ChanceCard("Ryk frem til Strandpromenaden", "Chancekort 4", 3);
-        deck[4] = new ChanceCard("Du har fødselsdag, Modtag $1 fra hver spiller", "Chancekort 5", 4);
+        deck = new ChanceCard[4];
+        deck[0] = new ChanceCard("Betal 200kr for levering af 2 kasser øl", "Chancekort 1", 0, "pay");
+        deck[1] = new ChanceCard("Værdien af egen avl fra nyttehaven udgør 200 som de modtager af banken", "Chancekort 2", 1, "receive");
+        deck[2] = new ChanceCard("Ryk frem til START", "Chancekort 3", 2,"move");
+        deck[3] = new ChanceCard("I anledning af kongens fødselsdag benådes De herved for fængsel. Dette kort kan \n" +
+                "opbevares indtil De får brug for det.", "Chancekort 4", 3,"jail");
         this.board = owner;
         shuffleCard();
     }
