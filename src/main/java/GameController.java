@@ -68,7 +68,6 @@ public class GameController {
         netWorth(currentPlayer);
         bankrupt(currentPlayer, placement);
         //eliminatePlayer(currentPlayer, placement);
-        //updatePlayers();
 
     }
 
@@ -77,6 +76,7 @@ public class GameController {
 
         for (int i = 0; i < playerNames.length; i++) {
             players[i] = new Player(playerNames[i], STARTBALANCE);
+            players[2] = new Player(playerNames[i], 0);
         }
 
         currentPlayer = players[0];
@@ -221,7 +221,7 @@ public class GameController {
                 }
                 if (player == property.getOwner() && property instanceof Brewery) {
                     netWorth += property.getPrice();
-                } else if (player == property.getOwner() && property instanceof Brewery) {
+                } else if (player == property.getOwner() && property instanceof Street) {
                     netWorth += property.getPrice();
                 }
             }
@@ -232,21 +232,20 @@ public class GameController {
     }
 
     //Copies the player array except the bankrupt player
-    public Player[] eliminatePlayer(Player player, int placement) {
-        Player[] newPlayers = new Player[gui.getPlayers() - 1];;
-        if (player.getBankruptStatus() == true) {
+    public void eliminatePlayer(Player player, int placement) {
+        Player[] newPlayers = new Player[gui.getPlayers() - 1];
             int j = 0;
             for (int i = 0; i < gui.getPlayers(); i++) {
-                Player currentPlayer = players[i];
-                if (currentPlayer.getBankruptStatus() == false) {
+                if (players[i].getBankruptStatus() == false) {
                     newPlayers[j] = players[i];
                     j++;
-                } else if (currentPlayer.getBankruptStatus() == true) {
-                    gui.removePlayer(player, placement, currentPlayer.getBankruptStatus(), newPlayers);
+                } else if (players[i].getBankruptStatus() == true) {
+                    gui.removePlayer(player, placement);
+                    gui.getGuiPlayer(players[i]).setName(players[i].getName() + "\n[BANKEROT]");
+                    gui.getGuiPlayer(players[i]).setBalance(0);
                 }
-            }
         }
-        return newPlayers;
+            players = newPlayers;
     }
 
     public boolean bankrupt(Player player, int placement) {
@@ -274,6 +273,7 @@ public class GameController {
                         }
                         //Removes player from the player array, Note: does not work if more players bankrupt same turn
                         eliminatePlayer(player, placement);
+                        gui.message(player.getName() + " IS BANKRUPT! \nThank you for playing " + player.getName() + ".");
                         System.out.println(player.getName() + " IS BANKRUPT");
                     } else if (player.getNetWorth() > ((Ownable) board.getField(placement)).getCurrentRent()) {
 
