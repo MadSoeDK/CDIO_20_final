@@ -1,6 +1,8 @@
 import Model.*;
 import gui_fields.GUI_Ownable;
 
+import java.util.Objects;
+
 public class GameController {
 
     private Board board;
@@ -303,7 +305,7 @@ public class GameController {
     - Loop the drop-down menu option until the balance is higher than the rent.
      */
     //Method to mortgage properties when bankrupt
-    public void mortage(Player player) {
+   /* public void mortage(Player player) {
         //Property[] playerProperties = new Property[4];
         int numberOfProperties;
         numberOfProperties = board.countNumbersOfPropertiesForPlayer(player);
@@ -337,10 +339,10 @@ public class GameController {
                 case "Pantsæt":
                     while(player.getPlayerBalance() < ((Street) board.getField(player.getPlacement())).getCurrentRent()) {
 
-                    /*
+
                     - Make options with properties in an array to choose to mortgage.
                     - OR make the program automatically sell a players properties
-                    */
+
                     numberOfProperties = board.countNumbersOfPropertiesForPlayer(player);
                     String[] propertyNames = new String[numberOfProperties];
                     currentProperty = 0;
@@ -360,11 +362,28 @@ public class GameController {
                     }
 
                     String guiSelection = gui.dropdown("Vælg en ejendom du skal sælge:", propertyNames);
-                    switch (guiSelection) {
+                    for (int i = 0; i < board.getFields().length; i++) {
+                        if (board.getField(i) instanceof Ownable) {
+                            //Verifying that the current field is of the type Ownable
+                            Ownable property = (Ownable) board.getField(i);
+                            if (Objects.equals(guiSelection, property.getName())) {
+                                if (board.getField(i) instanceof Street) {
+
+
+                                }
+                                else if (board.getField(i) instanceof Ferry) {
+
+                                }
+                                else if (board.getField(i) instanceof Brewery) {
+
+                                }
+                            }
+                        }
 
                     }
-                    break;
             }
         }
     }
+
+    */
 }
