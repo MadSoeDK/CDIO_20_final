@@ -201,20 +201,6 @@ public class GameController {
     }
 
 
-    public void tradeOrNotOption(GUI gui, int curPlayer)
-    {
-        switch (gui.getUserSelection("Do you want to trade?",  "Roll Die","Begin Trade"))
-        {
-            case "Begin Trade":
-                trade(gui, curPlayer);
-                break;
-            case "Roll Die":
-
-                break;
-        }
-    }
-
-
     /*public int netWorth(Player player) {
         int netWorth = player.getPlayerBalance();
 
