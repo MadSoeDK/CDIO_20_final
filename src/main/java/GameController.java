@@ -56,6 +56,8 @@ public class GameController {
 
         checkFieldType(field, placement);
 
+        event.auction(2000, players);
+
         //Update GUI players balance
         for (Player p : players) {
             gui.setguiPlayerBalance(p, p.getPlayerBalance());
