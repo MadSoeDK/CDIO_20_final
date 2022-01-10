@@ -14,7 +14,7 @@ public class GameController {
     private int playerindex = 0;
 
     // Game Constants
-    final int STARTBALANCE = 30000;
+    final int STARTBALANCE = 0;
 
     int sum;
 
@@ -66,7 +66,8 @@ public class GameController {
         }
 
         netWorth(currentPlayer);
-        bankrupt(currentPlayer, placement);
+        //bankrupt(currentPlayer, placement);
+        eliminatePlayer();
 
     }
 
@@ -240,6 +241,7 @@ public class GameController {
                 j++;
             }
         }
+
         return newPlayers;
     }
 
@@ -249,9 +251,9 @@ public class GameController {
             //Verifying that the current field is of the type Ownable
             Ownable property = (Ownable) board.getField(placement);
             if (player != property.getOwner()) {
-                if (player.getPlayerBalance() < ((Street) board.getField(placement)).getCurrentRent()) {
+                if (player.getPlayerBalance() < property.getCurrentRent()) {
                     //Checks if player is bankrupt
-                    if (netWorth(player) < ((Street) board.getField(placement)).getCurrentRent()) {
+                    if (player.getNetWorth() < property.getCurrentRent()) {
                         player.setBankruptStatus(true);
                         for (int i = 0; i < board.getFields().length; i++) {
                             //Type casting field to Ownable
@@ -268,6 +270,7 @@ public class GameController {
                         }
                         //Removes player from the player array, Note: does not work if more players bankrupt same turn
                         eliminatePlayer();
+                        System.out.println(player.getName() + " IS BANKRUPT");
                     } else if (netWorth(player) > ((Street) board.getField(placement)).getCurrentRent()) {
 
                         /*
@@ -358,7 +361,11 @@ public class GameController {
                                 Ownable property = (Ownable) board.getField(i);
                                 if (Objects.equals(guiSelection, property.getName())) {
                                     if (board.getField(i) instanceof Street) {
-
+                                        /*
+                                        - Rent should be equals 0 if mortgage is true
+                                        - Remove name from string array of properties
+                                        - Update player balance
+                                         */
 
                                     } else if (board.getField(i) instanceof Ferry) {
 
