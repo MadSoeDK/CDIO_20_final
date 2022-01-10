@@ -1,5 +1,7 @@
 package Model;
 
+import Model.Board.Board;
+
 import java.util.Random;
 
 /**

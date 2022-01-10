@@ -1,8 +1,8 @@
-import Model.Field;
-import Model.Ownable;
+import Model.Board.Field;
+import Model.Board.Ownable;
 import Model.Player;
 //import Model.Property;
-import Model.Street;
+import Model.Board.Street;
 import gui_fields.*;
 import gui_main.GUI;
 

@@ -1,5 +1,5 @@
 import Model.*;
-import gui_main.GUI;
+import Model.Board.*;
 
 public class EventHandler {
 

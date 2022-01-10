@@ -1,6 +1,8 @@
-package Model;
+package Model.Board;
 
-import java.awt.Color;
+import Model.ChanceCardDeck;
+import Model.Player;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 

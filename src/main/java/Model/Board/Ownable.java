@@ -1,6 +1,6 @@
-package Model;
+package Model.Board;
 
-import java.awt.*;
+import Model.Player;
 
 public abstract class Ownable extends Field {
 

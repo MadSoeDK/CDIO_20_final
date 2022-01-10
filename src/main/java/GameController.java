@@ -1,5 +1,5 @@
 import Model.*;
-import gui_fields.GUI_Ownable;
+import Model.Board.*;
 
 import java.util.Objects;
 

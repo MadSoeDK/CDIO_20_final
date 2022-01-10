@@ -1,4 +1,4 @@
-package Model;
+package Model.Board;
 
 public class Brewery extends Ownable {
     public Brewery(String name, int placement, String color, int[] rent, int price) {
