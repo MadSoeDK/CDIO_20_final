@@ -418,9 +418,14 @@ public class EventHandler {
         }
 
         // Display Yes/No option to recipient
+        String soldPropString = " Og ingen ejendomme: ";
+        String propString = " For ingen ejendomme: ";
         boolean tradeAccepted=false;
         String[] optionsAccept = {};
-        boolean answer =gui.getUserBool(tradePlayersNames[tradePartnerId] + " Acceptere du denne handel? Du modtager " + (traderPayed-tradePartnerPayed) +" og disse ejendomme: ", "Accepter handel","Accepter IKKE handel");
+        if (chosenProp != null) {propString = " For denne egendom: "+chosenProp.getName();}
+        if (chosenSoldProp != null) {soldPropString = " og denne egendom "+chosenSoldProp.getName();}
+        String msg = tradePlayersNames[tradePartnerId] + " Acceptere du denne handel? Du modtager " + (traderPayed-tradePartnerPayed) + soldPropString + propString;
+        boolean answer =gui.getUserBool(msg, "Accepter handel","Accepter IKKE handel");
 
         if(answer)
         {
