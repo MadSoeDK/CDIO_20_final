@@ -1,4 +1,5 @@
 import Model.*;
+import Model.Cards.*;
 import Model.ChanceField;
 
 public class EventHandler {
@@ -131,7 +132,18 @@ public class EventHandler {
     }
 
     public void fieldEffect(Player player, ChanceField chanceField, int sum) {
+        ChanceCardDeck card = new ChanceCardDeck(board);
+        card.drawCard();
+        if(card instanceof PayCards) {
+            ((PayCards) card).pay();
+        } else if(card instanceof MoveCards) {
 
+        } else if(card instanceof JailFreeCards) {
+
+        } else if(card instanceof ReceiveCards) {
+
+        }
+        deck.shuffleCard();
     }
 
     public void buyField(Player player, Ownable field, Player[] players) {

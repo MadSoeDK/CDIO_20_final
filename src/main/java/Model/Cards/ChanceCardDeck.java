@@ -48,6 +48,9 @@ public class ChanceCardDeck {
         }
         return card;
     }
+    public void getType() {
+
+    }
     /*public void useChanceCard() {
         ChanceCard card = drawCard();
         switch(card.getNumber()) {

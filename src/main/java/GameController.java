@@ -1,4 +1,5 @@
 import Model.*;
+import Model.Cards.ChanceCardDeck;
 import gui_fields.GUI_Ownable;
 
 import java.util.Objects;
@@ -9,6 +10,7 @@ public class GameController {
     private Cup cup;
     private GUIController gui;
     private EventHandler event;
+    private ChanceCardDeck deck;
     private Player[] players;
     private Player currentPlayer;
     private int playerindex = 0;
@@ -23,6 +25,7 @@ public class GameController {
         cup = new Cup();
         gui = new GUIController(board.getFields());
         event = new EventHandler(gui);
+        deck = new ChanceCardDeck(this);
         gui.createPlayers(STARTBALANCE);
         setupPlayers(gui.getPlayernames());
         playGame();

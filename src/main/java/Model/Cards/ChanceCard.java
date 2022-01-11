@@ -3,7 +3,7 @@ package Model.Cards;
 /**
  * Is used within chancecard-array for multiple effects.
  */
-public abstract class ChanceCard {
+public abstract class ChanceCard extends ChanceCardDeck{
 
     private String description;
     private String name;

@@ -15,6 +15,7 @@ public class PayCards extends ChanceCard {
         player.setPlayerBalance(-amount);
     }
 
+
     /*
     public int payAmount() {
         int value = 0;
