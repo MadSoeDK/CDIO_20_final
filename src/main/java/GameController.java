@@ -1,5 +1,5 @@
 import Model.*;
-import gui_fields.GUI_Ownable;
+import Model.Board.*;
 
 import java.util.Objects;
 
@@ -14,7 +14,7 @@ public class GameController {
     private int playerindex = 0;
 
     // Game Constants
-    final int STARTBALANCE = 0;
+    final int STARTBALANCE = 30000;
 
     int sum;
 
@@ -40,11 +40,9 @@ public class GameController {
         // Ask if currentplayer wish to trade?
         event.playerOptions(currentPlayer, players, board);
 
-        gui.button(" ", "Rul terning");
-
         // Roll die, get value, show die
         cup.roll();
-        sum = 3; //cup.getSum();
+        sum = 4; //cup.getSum();
         gui.showDice(cup.getFacevalues()[0], cup.getFacevalues()[1]);
 
         // Move player placement - automatically updates GUI
@@ -69,8 +67,6 @@ public class GameController {
 
         netWorth(currentPlayer);
         bankrupt(currentPlayer, placement);
-        //eliminatePlayer(currentPlayer, placement);
-        //updatePlayers();
 
     }
 
@@ -79,6 +75,9 @@ public class GameController {
 
         for (int i = 0; i < playerNames.length; i++) {
             players[i] = new Player(playerNames[i], STARTBALANCE);
+            if(i==2) {
+                players[i] = new Player(playerNames[i], 0);
+            }
         }
 
         currentPlayer = players[0];
@@ -101,14 +100,17 @@ public class GameController {
 
         switch (fieldType) {
             case "Street":
-                Ownable street = (Ownable) field;
+                Street street = (Street) field;
                 event.fieldEffect(currentPlayer, street, players);
                 break;
             case "Jail":
                 Jail jail = (Jail) field;
-                event.fieldEffect(currentPlayer, jail);
-                // Move to Jail field
-                setPlayerPlacement(currentPlayer, 10, false);
+                if (jail.getPlacement() == 30) {
+                    gui.message(currentPlayer.getName() + " rykker til fængsel.");
+
+                    // Move to Jail field
+                    setPlayerPlacement(currentPlayer, 10, false);
+                }
                 break;
             case "FreeParking":
                 // Give money to player
@@ -118,15 +120,15 @@ public class GameController {
                 break;
             case "Tax":
                 Tax tax = (Tax) field;
-                event.fieldEffect(currentPlayer, tax);
+                event.fieldEffect(currentPlayer, tax, netWorth(currentPlayer));
                 break;
             case "Ferry":
-                Ownable ferry = (Ownable) field;
+                Ferry ferry = (Ferry) field;
                 event.fieldEffect(currentPlayer, ferry, players);
                 break;
             case "Brewery":
-                Brewery brewery = (Brewery) field;
-                event.fieldEffect(currentPlayer, brewery, sum);
+                Ownable brewery = (Ownable) field;
+                event.fieldEffect(currentPlayer, brewery, players, sum);
                 break;
             case "ChanceField":
                 //do something
@@ -171,48 +173,9 @@ public class GameController {
         gui.movePlayer(player, endplacement, preplacement);
     }
 
-    /*private int getFerryRent(Ferry property){
-
-        // Check amounts of other ferries owned
-        int same_ferry_owner=0;
-        int ferry_cost=500;
-
-        for (var i=5; i<35; i+=10) {
-            // Typecast
-            Ferry property_check = (Ferry) board.getField(i);
-
-            // Check if owner is the same
-            if (property_check.getOwner() == property.getOwner()) {
-                same_ferry_owner++;
-                if (same_ferry_owner>1)
-                {
-                    ferry_cost=ferry_cost*2;
-                }
-            }
-        }
-
-        return ferry_cost;
-    }
-
-    private void updateFerryGUI(Ferry property, int ferry_cost){
-        // Update Cost
-        for (var i=5; i<35; i+=10) {
-            // Typecast
-            Ferry property_check = (Ferry) board.getField(i);
-
-            // Check if owner is the same
-            if (property_check.getOwner() == property.getOwner()) {
-                property_check.getGUIField().setSubText("$"+(ferry_cost));
-            }
-        }
-    }*/
-
-
     public int netWorth(Player player) {
         int netWorth = player.getPlayerBalance();
         for (int i = 0; i < board.getFields().length; i++) {
-            //switch(board.getFields()[i].getClass().getSimpleName()) {
-
             //Type casting field to Ownable
             if (board.getField(i) instanceof Ownable) {
                 //Verifying that the current field is of the type Ownable
@@ -223,7 +186,7 @@ public class GameController {
                 }
                 if (player == property.getOwner() && property instanceof Brewery) {
                     netWorth += property.getPrice();
-                } else if (player == property.getOwner() && property instanceof Brewery) {
+                } else if (player == property.getOwner() && property instanceof Street) {
                     netWorth += property.getPrice();
                 }
             }
@@ -234,21 +197,20 @@ public class GameController {
     }
 
     //Copies the player array except the bankrupt player
-    public Player[] eliminatePlayer(Player player, int placement) {
-        Player[] newPlayers = new Player[gui.getPlayers() - 1];;
-        if (player.getBankruptStatus() == true) {
+    public void eliminatePlayer(Player player, int placement) {
+        Player[] newPlayers = new Player[gui.getPlayers() - 1];
             int j = 0;
             for (int i = 0; i < gui.getPlayers(); i++) {
-                Player currentPlayer = players[i];
-                if (currentPlayer.getBankruptStatus() == false) {
+                if (players[i].getBankruptStatus()) {
+                    gui.removePlayer(player, placement);
+                    gui.getGuiPlayer(players[i]).setName(players[i].getName() + "\n[BANKEROT]");
+                    gui.getGuiPlayer(players[i]).setBalance(0);
+                } else {
                     newPlayers[j] = players[i];
                     j++;
-                } else if (currentPlayer.getBankruptStatus() == true) {
-                    gui.removePlayer(player, placement, newPlayers);
                 }
             }
-        }
-        return newPlayers;
+            players = newPlayers;
     }
 
     public boolean bankrupt(Player player, int placement) {
@@ -276,6 +238,7 @@ public class GameController {
                         }
                         //Removes player from the player array, Note: does not work if more players bankrupt same turn
                         eliminatePlayer(player, placement);
+                        gui.message(player.getName() + " IS BANKRUPT! \nThank you for playing " + player.getName() + ".");
                         System.out.println(player.getName() + " IS BANKRUPT");
                     } else if (player.getNetWorth() > ((Ownable) board.getField(placement)).getCurrentRent()) {
 

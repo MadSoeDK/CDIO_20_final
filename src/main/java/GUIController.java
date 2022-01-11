@@ -1,8 +1,8 @@
-import Model.Field;
-import Model.Ownable;
+import Model.Board.Field;
+import Model.Board.Ownable;
 import Model.Player;
 //import Model.Property;
-import Model.Street;
+import Model.Board.Street;
 import gui_fields.*;
 import gui_main.GUI;
 
@@ -91,25 +91,11 @@ public class GUIController {
             field.setCar(guiPlayers[i], true);
         }
     }
-
-    public void removePlayer(Player player, int placement, Player[] players) {
-        /*
-        - Remove one GUI_Player from GUI_Player array
-        - Make new GUI_Player array with new players who are still playing
-         */
-        /*GUI_Player[] tempguiPlayers = getGuiPlayers();
-        GUI_Player[] guiPlayers = new GUI_Player[players.length];
-        int j = 0;
-        for (int i = 0; i < guiPlayers.length; i++) {
-            if(!players[i].getBankruptStatus()) {
-                guiPlayers[j] = tempguiPlayers[i];
-                j++;
-            }
-        }
+    public void removePlayer(Player player, int placement) {
         if(player.getBankruptStatus()) {
             GUI_Field field = gui.getFields()[placement];
             field.setCar(getGuiPlayer(player), false);
-        }*/
+        }
     }
 
     public void movePlayer(Player player, int placement, int preplacement) {

@@ -1,7 +1,7 @@
-package Model;
+package Model.Board;
 
 /**
- * Parent Model.Field Class
+ * Parent Model.Board.Field Class
  */
 public abstract class Field {
     private final String NAME;

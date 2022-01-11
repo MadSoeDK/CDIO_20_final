@@ -1,12 +1,13 @@
-package Model;
+package Model.Board;
 
-import java.awt.Color;
+import Model.ChanceCardDeck;
+import Model.Player;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 
 public class Board {
 
-    private ChanceCardDeck chanceCard;
     private final Field[] fields;
     private Monopoly monopolies[];
 
@@ -115,8 +116,6 @@ public class Board {
             }
         }
 
-        chanceCard = new ChanceCardDeck(this);
-
         // Initialize Monopoly Array
         Monopoly monopolies[] = {
                 new Monopoly(Color.blue, this, 1,3,0),
@@ -171,10 +170,6 @@ public class Board {
         return numberOfProperties;
     }
 
-    public ChanceCardDeck getChanceCardDeck(){
-        return chanceCard;
-    }
-
     public int getFieldsByColor(int placement) {
         Ownable ownable = (Ownable) fields[placement];
         String color = ownable.getColor();
@@ -218,7 +213,7 @@ public class Board {
         int numberOfProperties;
         numberOfProperties = countNumbersOfPropertiesForPlayer(player);
 
-        Ownable[] playerProperties = new Street[numberOfProperties];
+        Ownable[] playerProperties = new Ownable[numberOfProperties];
         int currentProperty = 0;
         for (int i = 0; i < getFields().length; i++) {
             //Type casting field to Ownable

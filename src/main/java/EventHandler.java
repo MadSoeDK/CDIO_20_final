@@ -1,5 +1,5 @@
 import Model.*;
-import gui_main.GUI;
+import Model.Board.*;
 
 public class EventHandler {
 
@@ -11,13 +11,12 @@ public class EventHandler {
 
     public void playerOptions(Player player, Player [] players, Board board) {
         int playerIndex = java.util.Arrays.asList(players).indexOf(player);
-        String[] options = {"Jeg vil ikke handle", "Jeg vil handle"};
-        boolean answer = gui.getUserBool("Vil du handle?", "Ja", "Nej");
+        boolean answer = gui.getUserBool("Vil du handle?", "Ja", "Nej, rul terning");
 
         if (answer) {
                 trade(playerIndex, players, board);
         }
-
+        // Roll dice
     }
 
     public void fieldEffect(Player player, Ownable ownable, Player[] players) {
@@ -33,6 +32,21 @@ public class EventHandler {
             } else {
                 player.setPlayerBalance(-ownable.getCurrentRent());
                 fieldOwner.setPlayerBalance(ownable.getCurrentRent());
+            }
+        }
+    }
+    public void fieldEffect(Player player, Ownable ownable, Player[] players, int sum) {
+        if (ownable.getOwner() == null) {
+            buyField(player, ownable, players);
+        } else {
+            Player fieldOwner = ownable.getOwner();
+
+            if (ownable.getOwner() == ownable.getOwner()) {
+                player.setPlayerBalance(-ownable.getRent()[1] * sum);
+                fieldOwner.setPlayerBalance(ownable.getRent()[1] * sum);
+            } else {
+                player.setPlayerBalance(-ownable.getRent()[0] * sum);
+                fieldOwner.setPlayerBalance(ownable.getRent()[0] * sum);
             }
         }
     }
@@ -105,25 +119,15 @@ public class EventHandler {
     }
 
     public void fieldEffect(Player player, Jail jail) {
-        // Add money to Free Parking if landed on "Go To Jail"
-        if (jail.getPlacement() == 30) {
-            gui.message(player.getName() + " rykker til fængsel og betaler $3");
-
-            //FreeParking.setBalance(3);
-        }
     }
 
-    public void fieldEffect(Player player, Start start, int sum) {
-
-    }
-
-    public void fieldEffect(Player player, Tax tax) {
+    public void fieldEffect(Player player, Tax tax, int netWorth) {
         if (tax.getPlacement() == 4) { // first tax field
             boolean answer = gui.getUserBool("Betal 10% eller 4000 kr?", "4000 kr.", "10%");
             if (answer) {
                 player.setPlayerBalance(-4000);
             } else {
-                //Pay 10%
+                player.setPlayerBalance(-(int)(netWorth*(10.0f/100.0f)));
             }
         } else { // last tax field
             player.setPlayerBalance(-2000);
@@ -247,8 +251,7 @@ public class EventHandler {
          */
     }
 
-    public void trade(int curPlayer, Player[] players, Board board)
-    {
+    public void trade(int curPlayer, Player[] players, Board board) {
 
         Player currentPlayer = players[curPlayer];
 
@@ -261,7 +264,6 @@ public class EventHandler {
         Player[] tradePlayers = new Player[ players.length -1];
         int a=0;
         for (int i = 0; i< players.length-1; i++) {
-
             if (i == curPlayer){a++;}
             tradePlayers[i] = players[a];
             a++;
@@ -269,51 +271,50 @@ public class EventHandler {
 
         // Create String array of possible trade partners
         String[] tradePlayersNames = new String[tradePlayers.length];
-        for (int i = 0; i<players.length-1; i++)
-        {
+        for (int i = 0; i<players.length-1; i++) {
             tradePlayersNames[i] = tradePlayers[i].getName();
         }
 
         // Display array as Dropdown Menu
-        for(int i = 0; i<tradePlayers.length; i++){
+        /*for(int i = 0; i<tradePlayers.length; i++){
             System.out.println(tradePlayers[i].getName());
-        }
+        }*/
 
         // Create a dropdown based on tradeable player amount
         String selectedTradePartner = gui.getUserSelection(currentPlayer.getName() + " Vælg spiller at handle med", tradePlayersNames);
-        if (tradePlayersNames[0] == selectedTradePartner)
-        {
+
+        for (int i = 0; i < tradePlayersNames.length; i++) {
+            if (tradePlayersNames[i] == selectedTradePartner) {
+                tradePartnerId = i;
+            }
+        }
+
+        /*if (tradePlayersNames[0] == selectedTradePartner) {
             tradePartnerId=0;
             System.out.println("Tradepartner: "+tradePlayersNames[0]);
         }
-        if (tradePlayersNames[1] == selectedTradePartner)
-        {
+        if (tradePlayersNames[1] == selectedTradePartner) {
             tradePartnerId=1;
             System.out.println("Tradepartner: "+tradePlayersNames[1]);
         }
-        if (tradePlayersNames.length > 2)
-        {
+        if (tradePlayersNames.length > 2) {
             if (tradePlayersNames[2] == selectedTradePartner) {
                 tradePartnerId = 2;
                 System.out.println("Tradepartner: " + tradePlayersNames[2]);
             }
         }
-        if (tradePlayersNames.length > 3)
-        {
+        if (tradePlayersNames.length > 3) {
             if (tradePlayersNames[3] == selectedTradePartner) {
                 tradePartnerId = 3;
                 System.out.println("Tradepartner: " + tradePlayersNames[3]);
             }
         }
-        if (tradePlayersNames.length > 4)
-        {
+        if (tradePlayersNames.length > 4) {
             if (tradePlayersNames[4] == selectedTradePartner) {
                 tradePartnerId = 4;
                 System.out.println("Tradepartner: " + tradePlayersNames[4]);
             }
-        }
-
-
+        }*/
 
         // Display Chosen players property
         Ownable[] tradePartProperties = board.getPlayerProperties(tradePlayers[tradePartnerId]);

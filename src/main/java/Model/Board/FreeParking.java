@@ -1,4 +1,4 @@
-package Model;
+package Model.Board;
 
 public class FreeParking extends Field {
 
