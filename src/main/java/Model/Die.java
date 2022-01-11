@@ -8,12 +8,14 @@ import java.util.Random;
 public class Die {
 
     // Initialize Random Object
-    Random rand = new Random();
-
-    // Initialize Variables
+    private Random rand = new Random();
+    private int facevalue;
     private final int MAXVALUE = 6;
 
+    public int roll() {
+        return facevalue = rand.nextInt(MAXVALUE) + 1;
+    }
     public int getFacevalue() {
-        return rand.nextInt(MAXVALUE) + 1;
+        return facevalue;
     }
 }

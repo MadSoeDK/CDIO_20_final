@@ -1,48 +1,48 @@
 package Model;
 
-import Model.Account;
-import gui_fields.GUI_Car;
-import gui_fields.GUI_Player;
-import java.awt.Color;
-
 /**
  * Used in Model.Player Array, Controls Model.Account-class, used to move, earn & lose money.
  */
 public class Player {
 
-    // Variables
     private int placement;
-    private String name;
-    private GUI_Player player;
-    private Account account;
+    private final String name;
+    int balance;
+    int netWorth;
+    boolean bankrupt;
 
-    // Constructor
-    public Player(String name, int balance, Color color) {
-         account = new Account(balance);
-         this.player = new GUI_Player(name, balance, new GUI_Car(color,color, GUI_Car.Type.CAR, GUI_Car.Pattern.FILL));
+    public Player(String name, int balance) {
+         this.balance = balance;
          this.name = name;
+         this.netWorth = getPlayerBalance();
+         this.bankrupt = false;
     }
 
-    // Methods
     public int getPlayerBalance() {
-        return account.getBalance();
+        return balance;
     }
-    public void setPlayerBalance(int amount) {account.setBalance(amount);}
-    public GUI_Player getPlayer(){
-        return this.player;
-    }
+    public void setPlayerBalance(int amount) { balance += amount; }
     public int getPlacement() {
         return placement;
     }
     public void gotoPlacement(int placement) { this.placement = placement; }
     public void setPlacement(int sum) {
-        placement += sum;
+        //placement += sum;
+        placement = sum;
     }
     public String getName() {
         return name;
     }
-    public Color getPlayerColor() {
-        return player.getPrimaryColor();
+    public void setNetWorth(int addValue) {
+        netWorth = addValue;
     }
-
+    public int getNetWorth() {
+        return netWorth;
+    }
+    public void setBankruptStatus(boolean bankrupt) {
+        this.bankrupt = bankrupt;
+    }
+    public boolean getBankruptStatus() {
+        return bankrupt;
+    }
 }
