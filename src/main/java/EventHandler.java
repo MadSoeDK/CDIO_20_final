@@ -445,16 +445,19 @@ public class EventHandler {
             currentPlayer.setPlayerBalance(tradePartnerPayed - traderPayed);
             if (chosenProp != null){
                 chosenProp.setOwner(currentPlayer);
+                //gui.setOwner(currentPlayer, chosenProp);
                 gui.setOwner(currentPlayer, chosenProp);
             }
             if (chosenSoldProp != null){
                 chosenSoldProp.setOwner(tradePlayers[tradePartnerId]);
-                gui.setOwner(currentPlayer, chosenProp);
+                //gui.setOwner(tradePlayers[tradePartnerId], chosenProp);
+                gui.setOwner(tradePlayers[tradePartnerId], chosenSoldProp);
             }
 
             // Opdate GUI
             //board.getPlayer(curPlayer).getPlayer().setBalance(board.getPlayer(curPlayer).getPlayerBalance());
             //tradePlayers[tradePartnerId].getPlayer().setBalance(tradePlayers[tradePartnerId].getPlayerBalance());
+            // Update Ownership
 
             gui.setguiPlayerBalance(currentPlayer,currentPlayer.getPlayerBalance());
             gui.setguiPlayerBalance(tradePlayers[tradePartnerId],tradePlayers[tradePartnerId].getPlayerBalance());
