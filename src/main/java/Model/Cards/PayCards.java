@@ -6,16 +6,14 @@ public class PayCards extends ChanceCard {
     private String name;
     private String type;
     private int amount;
-    private Player player;
 
     public PayCards(String description, String name, String type, int amount) {
         super(description, name, type, amount);
-        this.player = player;
+        this.amount = amount;
     }
-    public void pay() {
+    public void pay(Player player) {
         player.setPlayerBalance(-amount);
     }
-
 
     /*
     public int payAmount() {

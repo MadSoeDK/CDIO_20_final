@@ -1,4 +1,5 @@
 package Model.Cards;
+import Model.Player;
 
 import Model.Board;
 
@@ -9,7 +10,6 @@ import java.util.Random;
  */
 public class ChanceCardDeck {
     private ChanceCard[] deck;
-
     public ChanceCardDeck() {
         // Initialize Model.ChanceCard Array
         deck = new ChanceCard[4];
@@ -18,7 +18,6 @@ public class ChanceCardDeck {
         deck[2] = new MoveCards("Ryk frem til START", "Chancekort 3", "move", 0);
         deck[3] = new JailFreeCards("I anledning af kongens fødselsdag benådes De herved for fængsel. Dette kort kan \n" +
                 "opbevares indtil De får brug for det.", "Chancekort 4", "jail", 0);
-        shuffleCard();
     }
     public void shuffleCard() {
         //Method that shuffles cards.

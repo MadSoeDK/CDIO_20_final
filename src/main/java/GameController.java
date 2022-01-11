@@ -26,6 +26,7 @@ public class GameController {
         gui = new GUIController(board.getFields());
         event = new EventHandler(gui);
         deck = new ChanceCardDeck();
+        deck.shuffleCard();
         gui.createPlayers(STARTBALANCE);
         setupPlayers(gui.getPlayernames());
         playGame();
@@ -47,7 +48,7 @@ public class GameController {
 
         // Roll die, get value, show die
         cup.roll();
-        sum = 3; //cup.getSum();
+        sum = 2; //cup.getSum();
         gui.showDice(cup.getFacevalues()[0], cup.getFacevalues()[1]);
 
         // Move player placement - automatically updates GUI
@@ -132,6 +133,8 @@ public class GameController {
                 event.fieldEffect(currentPlayer, brewery, sum);
                 break;
             case "ChanceField":
+                ChanceField chanceField = (ChanceField) field;
+                event.fieldEffect(currentPlayer, deck.drawCard());
                 //do something
                 break;
             case "Start":

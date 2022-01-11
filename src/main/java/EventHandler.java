@@ -131,19 +131,21 @@ public class EventHandler {
         }
     }
 
-    public void fieldEffect(Player player, ChanceField chanceField, int sum) {
-        ChanceCardDeck card = new ChanceCardDeck();
-        card = card.drawCard();
+    public void fieldEffect(Player player, ChanceCard card) {
+        int value = 0;
         if(card instanceof PayCards) {
-            ((PayCards) card).pay();
+            ((PayCards) card).pay(player);
+            System.out.println(player.getName() + " had to pay");
         } else if(card instanceof MoveCards) {
-            ((MoveCards) card).move();
+            ((MoveCards) card).move(player);
+            System.out.println(player.getName() + " had to move" );
         } else if(card instanceof JailFreeCards) {
             ((JailFreeCards) card).setPlayerFree(player);
+            System.out.println(player.getName() + " got out of jail card" );
         } else if(card instanceof ReceiveCards) {
-            ((ReceiveCards) card).receive();
+            ((ReceiveCards) card).receive(player);
+            System.out.println(player.getName() + " received money");
         }
-        card.shuffleCard();
     }
 
     public void buyField(Player player, Ownable field, Player[] players) {
@@ -470,12 +472,6 @@ public class EventHandler {
             gui.setguiPlayerBalance(currentPlayer,currentPlayer.getPlayerBalance());
             gui.setguiPlayerBalance(tradePlayers[tradePartnerId],tradePlayers[tradePartnerId].getPlayerBalance());
         }
-
-
+        }
     }
-
-
-
-
-}
 

@@ -6,12 +6,12 @@ public class ReceiveCards extends ChanceCard {
     private String name;
     private String type;
     private int amount;
-    private Player player;
 
     public ReceiveCards(String description, String name, String type, int amount) {
         super(description, name, type, amount);
+        this.amount = amount;
     }
-    public void receive() {
+    public void receive(Player player) {
         player.setPlayerBalance(amount);
     }
 }
