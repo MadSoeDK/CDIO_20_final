@@ -10,6 +10,9 @@ public class ReceiveCards extends ChanceCard {
     public ReceiveCards(String description, String name, String type, int amount) {
         super(description, name, type, amount);
         this.amount = amount;
+        this.description = description;
+        this.name = name;
+        this.type = type;
     }
     public int receive(Player player) {
         player.setPlayerBalance(amount);
@@ -17,5 +20,8 @@ public class ReceiveCards extends ChanceCard {
     }
     public String getName() {
         return name;
+    }
+    public String getDescription() {
+        return description;
     }
 }

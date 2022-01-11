@@ -80,9 +80,6 @@ public class GameController {
 
         for (int i = 0; i < playerNames.length; i++) {
             players[i] = new Player(playerNames[i], STARTBALANCE);
-            if(i==2) {
-                players[i] = new Player(playerNames[i], 0);
-            }
         }
 
         currentPlayer = players[0];

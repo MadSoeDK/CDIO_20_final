@@ -16,7 +16,7 @@ public class ChanceCardDeck {
         deck[0] = new PayCards("Betal 200kr for levering af 2 kasser øl", "Chancekort 1", "pay", 200);
         deck[1] = new ReceiveCards("Værdien af egen avl fra nyttehaven udgør 200 som de modtager af banken", "Chancekort 2",  "receive", 200);
         deck[2] = new MoveCards("Ryk frem til START", "Chancekort 3", "move", 0);
-        deck[3] = new JailFreeCards("I anledning af kongens fødselsdag benådes De herved for fængsel. Dette kort kan \n" +
+        deck[3] = new JailFreeCards("I anledning af kongens fødselsdag benådes De herved for fængsel. Dette kort kan " +
                 "opbevares indtil De får brug for det.", "Chancekort 4", "jail", 0);
     }
     public void shuffleCard() {

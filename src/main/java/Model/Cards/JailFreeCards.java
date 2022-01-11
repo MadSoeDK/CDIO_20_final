@@ -10,6 +10,9 @@ public class JailFreeCards extends ChanceCard {
     public JailFreeCards(String description, String name, String type, int value) {
         super(description, name, type, value);
         this.value = value;
+        this.description = description;
+        this.name = name;
+        this.type = type;
     }
     /*
     We store this in a boolean 'hasJailFreeCard'
@@ -20,5 +23,8 @@ public class JailFreeCards extends ChanceCard {
     }
     public String getName() {
         return name;
+    }
+    public String getDescription() {
+        return description;
     }
 }

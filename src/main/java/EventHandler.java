@@ -134,19 +134,18 @@ public class EventHandler {
     public void fieldEffect(Player player, ChanceCard card) {
         if(card instanceof PayCards) {
             ((PayCards) card).pay(player);
-            gui.setguiPlayerBalance(player, ((PayCards) card).pay(player));
-            System.out.println(player.getName() + " had to pay " + ((PayCards) card).pay(player));
+            gui.message(player.getName() + " trak prøv-lykken kortet: " + ((PayCards) card).getDescription());
         } else if(card instanceof MoveCards) {
             gui.removePlayer(player, player.getPlacement());
             gui.movePlayer(player, ((MoveCards) card).move(player), player.getPlacement());
             ((MoveCards) card).move(player);
-            gui.message(player.getName() + " had to move to " + ((MoveCards) card).move(player));
+            gui.message(player.getName() + " trak prøv-lykken kortet: " + ((MoveCards) card).getDescription());
         } else if(card instanceof JailFreeCards) {
             ((JailFreeCards) card).setPlayerFree(player);
-            System.out.println(player.getName() + " got out of jail card" );
+            gui.message(player.getName() + " trak prøv-lykken kortet: " + ((JailFreeCards) card).getDescription());
         } else if(card instanceof ReceiveCards) {
             ((ReceiveCards) card).receive(player);
-            System.out.println(player.getName() + " received money");
+            gui.message(player.getName() + " trak prøv-lykken kortet: " + ((ReceiveCards) card).getDescription());
         }
     }
 
