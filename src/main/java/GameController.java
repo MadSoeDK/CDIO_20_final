@@ -84,6 +84,7 @@ public class GameController {
         for (int i = 0; i < playerNames.length; i++) {
             players[i] = new Player(playerNames[i], STARTBALANCE);
         }
+        players[0].setPlacement(31);
 
         currentPlayer = players[0];
     }

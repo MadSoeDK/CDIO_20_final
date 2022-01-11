@@ -155,6 +155,10 @@ public class EventHandler {
                 //((ReceiveCards) card).receiveFromPlayers(player, );
                 gui.setChanceCard(card);
                 gui.message(player.getName() + " trak prøv-lykken kortet: " + card.getDescription());
+            } else {
+                ((ReceiveCards) card).receive(player);
+                gui.setChanceCard(card);
+                gui.message(player.getName() + " trak prøv-lykken kortet: " + card.getDescription());
             }
         }
     }

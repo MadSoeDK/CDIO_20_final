@@ -15,9 +15,33 @@ public class MoveCards extends ChanceCard {
         this.type = type;
     }
     public int move(Player player) {
-        if(type.equals("frederiksberg")) {
+        int money = 4000;
+        if(type.equals("vimmelskaftet") && (player.getPlacement() > 32)) {
             player.setPlacement(value);
-        } else if(value > -1 && value != 0) {
+            player.setPlayerBalance(money);
+        } else if(type.equals("vimmelskaftet") && (player.getPlacement() < 27)) {
+            player.setPlacement(value);
+        }
+        else if(type.equals("gronningen") && (player.getPlacement() > 27)) {
+            player.setPlacement(value);
+            player.setPlayerBalance(money);
+        } else if(type.equals("gronningen") && (player.getPlacement() < 27)) {
+            player.setPlacement(value);
+        }
+        else if(type.equals("molslinien") && (player.getPlacement() > 16)) {
+            player.setPlacement(value);
+            player.setPlayerBalance(money);
+        } else if(type.equals("molslinien") && (player.getPlacement() < 16)) {
+            player.setPlacement(value);
+        }
+        else if(type.equals("frederiksberg") && (player.getPlacement() > 11)) {
+            player.setPlacement(value);
+            player.setPlayerBalance(money);
+        }
+        else if(type.equals("frederiksberg") && (player.getPlacement() < 11)) {
+            player.setPlacement(value);
+        }
+        else if(value > -1 && value != 0) {
             value = player.getPlacement() + value;
             player.setPlacement(value);
         }

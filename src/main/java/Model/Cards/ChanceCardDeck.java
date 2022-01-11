@@ -12,7 +12,7 @@ public class ChanceCardDeck {
     private ChanceCard[] deck;
     public ChanceCardDeck() {
         // Initialize Model.ChanceCard Array
-        deck = new ChanceCard[29];
+        deck = new ChanceCard[35];
         //All PayCards
         deck[0] = new PayCards("Betal 200 kroner for levering af 2 kasser øl.", "paycard 1", "pay", 200);
         deck[1] = new PayCards("De har kørt frem for 'fuldt stop', " +
@@ -54,13 +54,23 @@ public class ChanceCardDeck {
 
         deck[25] = new MoveCards("Ryk tre felter frem.", "movecard 3", "move", 3);
         deck[26] = new MoveCards("Ryk tre felter tilbage.", "movecard 4", "move", -3);
-        deck[27] = new MoveCards("Ryk frem til Frederiksberg Allé.", "movecard 5", "frederiksberg", 11);
+        deck[27] = new MoveCards("Ryk tre felter tilbage.", "movecard 5", "move", -3);
+        deck[28] = new MoveCards("Ryk frem til Frederiksberg Allé.", "movecard 6", "frederiksberg", 11);
+            //All move and receive cards
+        deck[29] = new MoveCards("Ryk frem til Frederiksberg Allé. Hvis De passere START, indkasser da 4000 kroner.",
+                "movecard 7", "frederiksberg", 11);
+
+        deck[30] = new MoveCards("Tag med Mols-Linien, flyt brikken frem og hvis De passerer START indkassér da " +
+                "4000 kroner.",
+                "movecard 8", "molslinien", 15);
+
+        deck[32] = new MoveCards("Ryk frem til Grønningen, hvis De passerer start indkasser da 4000 kroner.", "movecard 9", "gronningen", 24);
+        deck[33] = new MoveCards("Ryk frem til Vimmelskaftet, hvis de passerer start indkasser da 4000 kroner", "movecard 10", "vimmelskaftet", 32);
 
 
 
         //All JailFreeCards
-        deck[28] = new JailFreeCards("I anledning af kongens fødselsdag benådes De herved for fængsel. Dette kort kan " +
-                "opbevares indtil De får brug for det.", "Jailfreecard 1", "jail", 0);
+        deck[34] = new JailFreeCards("Gå i fængsel, De indkasserer ikke 4000 kr for at passere start.", "Jailfreecard 1", "jail", 30);
     }
     public void shuffleCard() {
         //Method that shuffles cards.
@@ -78,7 +88,7 @@ public class ChanceCardDeck {
     public ChanceCard drawCard() {
         // Method that draws and returns the top card in the deck and afterwards places the card in the bottom of the deck
         ChanceCard card;
-        card = deck[27];
+        card = deck[33];
 
         for(int i = 0; i < deck.length; i++) {
             if(i > 0) {
