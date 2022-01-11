@@ -35,6 +35,7 @@ public class EventHandler {
             }
         }
     }
+
     public void fieldEffect(Player player, Ownable ownable, Player[] players, int sum) {
         if (ownable.getOwner() == null) {
             buyField(player, ownable, players);
@@ -42,11 +43,11 @@ public class EventHandler {
             Player fieldOwner = ownable.getOwner();
 
             if (ownable.getOwner() == ownable.getOwner()) {
-                player.setPlayerBalance(-ownable.getRent()[1] * sum);
-                fieldOwner.setPlayerBalance(ownable.getRent()[1] * sum);
+                player.setPlayerBalance(-ownable.getCurrentRent() * sum);
+                fieldOwner.setPlayerBalance(ownable.getCurrentRent() * sum);
             } else {
-                player.setPlayerBalance(-ownable.getRent()[0] * sum);
-                fieldOwner.setPlayerBalance(ownable.getRent()[0] * sum);
+                player.setPlayerBalance(-ownable.getCurrentRent() * sum);
+                fieldOwner.setPlayerBalance(ownable.getCurrentRent() * sum);
             }
         }
     }
@@ -336,8 +337,8 @@ public class EventHandler {
             }
         }
 
-            // Display Menu for money
-        boolean correctPartnerPayAmount=false;
+        // Display Menu for money
+        boolean correctPartnerPayAmount = false;
         String[] optionsMoney = {"Accepter mængde", "+50", "+100", "+200", "+500", "+1000", "+5000", "+10000"};
         while (!correctPartnerPayAmount) {
 
@@ -462,9 +463,6 @@ public class EventHandler {
 
 
     }
-
-
-
 
 }
 
