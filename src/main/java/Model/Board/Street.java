@@ -16,7 +16,18 @@ public class Street extends Ownable {
 
     }
     public void incrementHouseAmount(){
-        houseAmount++;
+        if (houseAmount < 5){
+            houseAmount++;
+        }
         System.out.println(houseAmount);
+    }
+
+    @Override
+    public int getCurrentRent(){
+        return super.getRent()[houseAmount];
+    }
+
+    public int getHouseAmount(){
+        return houseAmount;
     }
 }

@@ -156,6 +156,16 @@ public class GUIController {
         return guiFields[placement];
     }
 
+    public void setGuiHouseAmount(int placement, int houseAmount){
+
+        // Typecast to Street
+        GUI_Field field = gui.getFields()[placement];
+        GUI_Street street = (GUI_Street) field;
+
+        street.setHouses(houseAmount);
+
+    }
+
     public String[] getPlayernames() {
         playernames = new String[guiPlayers.length];
         for (int i = 0; i < guiPlayers.length; i++) {
