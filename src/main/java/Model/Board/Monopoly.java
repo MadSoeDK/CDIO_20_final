@@ -8,6 +8,7 @@ import java.awt.*;
 
 public class Monopoly {
 
+    String name;
     private Color color;
     private boolean monopolyTrue = false;
     private Player monopolyOwner;
@@ -15,26 +16,27 @@ public class Monopoly {
     private Board board;
     private Street[] streets;
 
-    public Monopoly(Color color, Board board, int firstHouse, int secHouse, int thirdHouse)
+    public Monopoly(String name, Color color, Board board, int firstHouse, int secHouse, int thirdHouse)
     {
+        this.name = name;
         this.color = color;
         this.board = board;
 
         // Set Size Exception
         if (color == Color.MAGENTA || color == Color.BLUE){
-            monopolySize = 2;
+            this.monopolySize = 2;
         }
         //Street[] streets = new Street[monopolySize-1];
         streets = new Street[monopolySize];
         // Create Street array
         if (color == Color.blue || color == Color.magenta)
         {
-            streets[0] = (Street) board.getField(1);
-            streets[1] = (Street) board.getField(3);
+            streets[0] = (Street) board.getField(firstHouse);
+            streets[1] = (Street) board.getField(secHouse);
 
             for (int p=0; p<streets.length; p++)
             {
-                System.out.println(color.toString()+streets[p].getName());
+                //System.out.println(color.toString()+streets[p].getName());
             }
             System.out.println();
         }
@@ -46,7 +48,7 @@ public class Monopoly {
 
             for (int p=0; p<streets.length; p++)
             {
-                System.out.println(color.toString()+streets[p].getName());
+                //System.out.println(color.toString()+streets[p].getName());
             }
             System.out.println();
         }
@@ -71,7 +73,7 @@ public class Monopoly {
     {
         if (streets.length == 2) // If the monopoly is Blue or Magenta
         {
-            if (streets[0].getOwner() == streets[1].getOwner())
+            if (streets[0].getOwner() == streets[1].getOwner() && streets[0].getOwner() != null)
             {
                 monopolyTrue=true;
                 monopolyOwner=streets[0].getOwner();
@@ -83,7 +85,7 @@ public class Monopoly {
         }
         else{
 
-            if (streets[0].getOwner() == streets[1].getOwner() && streets[1].getOwner() == streets[2].getOwner())
+            if (streets[0].getOwner() == streets[1].getOwner() && streets[1].getOwner() == streets[2].getOwner() && streets[0].getOwner() != null)
             {
                 monopolyTrue=true;
                 monopolyOwner=streets[0].getOwner();
@@ -93,5 +95,9 @@ public class Monopoly {
                 monopolyOwner=null;
             }
         }
+    }
+
+    public String getName(){
+        return name;
     }
 }

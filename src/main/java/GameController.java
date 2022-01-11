@@ -59,7 +59,11 @@ public class GameController {
         // Ask about building houses?
         if (board.getPlayerOwnsMonopoly(currentPlayer))
         {
-            gui.getUserBool("Vil du bygge på din grund","Jeg vil bygge","Jeg vil IKKE bygge");
+            if (gui.getUserBool("Vil du bygge på din grund","Jeg vil bygge","Jeg vil IKKE bygge")){
+                // Give player option over monopolies
+                board.getOwnedPlayerMonopolyList(currentPlayer);
+                //gui.dropdown("Hvilke grunde vil du bygge på?","Blå");
+            }
         }
 
         //event.auction(2000, players);
