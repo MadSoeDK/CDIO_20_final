@@ -175,19 +175,49 @@ public class EventHandler {
                     aucPlayers[curAucIndex] = null;
                     break;
                 case "100":
-                    auctionSum += 100;
+                    if (curAucPlayer.getPlayerBalance() >= auctionSum+100) {
+                        auctionSum += 100;
+                    }
+                    else{
+                        auctionPlayersLeft -= 1;
+                        aucPlayers[curAucIndex] = null;
+                    }
                     break;
                 case "200":
-                    auctionSum += 200;
+                    if (curAucPlayer.getPlayerBalance() >= auctionSum+200) {
+                        auctionSum += 200;
+                    }
+                    else{
+                        auctionPlayersLeft -= 1;
+                        aucPlayers[curAucIndex] = null;
+                    }
                     break;
                 case "500":
-                    auctionSum += 500;
+                    if (curAucPlayer.getPlayerBalance() >= auctionSum+500) {
+                        auctionSum += 500;
+                    }
+                    else{
+                        auctionPlayersLeft -= 1;
+                        aucPlayers[curAucIndex] = null;
+                    }
                     break;
                 case "1000":
-                    auctionSum += 1000;
+                    if (curAucPlayer.getPlayerBalance() >= auctionSum+1000) {
+                        auctionSum += 1000;
+                    }
+                    else{
+                        auctionPlayersLeft -= 1;
+                        aucPlayers[curAucIndex] = null;
+                    }
                     break;
                 case "2000":
-                    auctionSum += 2000;
+                    if (curAucPlayer.getPlayerBalance() >= auctionSum+2000) {
+                        auctionSum += 2000;
+                    }
+                    else{
+                        auctionPlayersLeft -= 1;
+                        aucPlayers[curAucIndex] = null;
+                    }
                     break;
             }
             // Next Player
