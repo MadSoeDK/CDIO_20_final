@@ -66,7 +66,32 @@ public class GameController {
                 for (int i=0; i < playerMonopolyOptions.length; i++){
                     PlayerMonopolyOptionsString[i] = playerMonopolyOptions[i].getName();
                 }
-                gui.dropdown("Hvilke grunde vil du bygge på?",PlayerMonopolyOptionsString);
+                String selectedMonopolyName = gui.dropdown("Hvilken farve vil du bygge på?",PlayerMonopolyOptionsString);
+                Monopoly selectedMonopoly = null;// = new Monopoly();
+
+                // Display fields of selected Monopoly in string format
+                for (int i=0; i<playerMonopolyOptions.length; i++){
+
+                    if (playerMonopolyOptions[i].getName() == selectedMonopolyName)
+                    {
+                        selectedMonopoly = playerMonopolyOptions[i];
+                    }
+                }
+
+                // Chose specific street
+                Street selectedStreet = null;
+                String[] selectedMonopolyStreetStringArray = selectedMonopoly.getStringArray();
+                String selectedStreetString = gui.dropdown("Hvilken Bygning vil du bygge på?",selectedMonopolyStreetStringArray);
+                for (int i=0; i < selectedMonopoly.getStreetArray().length; i++)
+                {
+                    if (selectedStreetString == selectedMonopolyStreetStringArray[i]){
+                        selectedStreet = selectedMonopoly.getStreetArray()[i];
+                    }
+                }
+
+                // Add house to selected Street, pay for it
+                selectedStreet.incrementHouseAmount();
+                currentPlayer.setPlayerBalance(-selectedStreet.getHousePrice());
             }
         }
 
