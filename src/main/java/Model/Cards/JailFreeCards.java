@@ -18,4 +18,7 @@ public class JailFreeCards extends ChanceCard {
     public void setPlayerFree(Player player) {
         player.setHasJailFreeCard(true);
     }
+    public String getName() {
+        return name;
+    }
 }

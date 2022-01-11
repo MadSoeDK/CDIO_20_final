@@ -92,10 +92,8 @@ public class GUIController {
         }
     }
     public void removePlayer(Player player, int placement) {
-        if(player.getBankruptStatus()) {
             GUI_Field field = gui.getFields()[placement];
             field.setCar(getGuiPlayer(player), false);
-        }
     }
 
     public void movePlayer(Player player, int placement, int preplacement) {

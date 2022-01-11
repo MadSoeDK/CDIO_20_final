@@ -132,13 +132,15 @@ public class EventHandler {
     }
 
     public void fieldEffect(Player player, ChanceCard card) {
-        int value = 0;
         if(card instanceof PayCards) {
             ((PayCards) card).pay(player);
-            System.out.println(player.getName() + " had to pay");
+            gui.setguiPlayerBalance(player, ((PayCards) card).pay(player));
+            System.out.println(player.getName() + " had to pay " + ((PayCards) card).pay(player));
         } else if(card instanceof MoveCards) {
+            gui.removePlayer(player, player.getPlacement());
+            gui.movePlayer(player, ((MoveCards) card).move(player), player.getPlacement());
             ((MoveCards) card).move(player);
-            System.out.println(player.getName() + " had to move" );
+            gui.message(player.getName() + " had to move to " + ((MoveCards) card).move(player));
         } else if(card instanceof JailFreeCards) {
             ((JailFreeCards) card).setPlayerFree(player);
             System.out.println(player.getName() + " got out of jail card" );

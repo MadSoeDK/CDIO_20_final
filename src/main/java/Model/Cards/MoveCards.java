@@ -11,7 +11,11 @@ public class MoveCards extends ChanceCard {
         super(description, name, type, value);
         this.value = value;
     }
-    public void move(Player player) {
+    public String getName() {
+        return name;
+    }
+    public int move(Player player) {
         player.setPlacement(value);
+        return value;
     }
 }
