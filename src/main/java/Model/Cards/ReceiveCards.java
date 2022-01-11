@@ -18,6 +18,12 @@ public class ReceiveCards extends ChanceCard {
         player.setPlayerBalance(value);
         return value;
     }
+    public int receiveLegation(Player player) {
+        if(player.getNetWorth() < 15000) {
+            player.setPlayerBalance(value);
+        }
+        return value;
+    }
     public String getName() {
         return name;
     }

@@ -147,9 +147,16 @@ public class EventHandler {
             gui.setChanceCard(card);
             gui.message(player.getName() + " trak prøv-lykken kortet: " + ((JailFreeCards) card).getDescription());
         } else if(card instanceof ReceiveCards) {
-            ((ReceiveCards) card).receive(player);
-            gui.setChanceCard(card);
-            gui.message(player.getName() + " trak prøv-lykken kortet: " + ((ReceiveCards) card).getDescription());
+            if(card.getType().equals("receivelegation")) {
+                ((ReceiveCards) card).receiveLegation(player);
+                gui.setChanceCard(card);
+                gui.message(player.getName() + " trak prøv-lykken kortet: " + ((ReceiveCards) card).getDescription());
+            } else {
+                ((ReceiveCards) card).receive(player);
+                gui.setChanceCard(card);
+                gui.message(player.getName() + " trak prøv-lykken kortet: " + ((ReceiveCards) card).getDescription());
+            }
+
         }
     }
 
