@@ -56,6 +56,8 @@ public class GameController {
 
         checkFieldType(field, placement);
 
+        // Ask about building houses?
+
         //event.auction(2000, players);
 
         //Update GUI players balance

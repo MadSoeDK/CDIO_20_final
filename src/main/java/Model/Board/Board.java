@@ -9,6 +9,7 @@ import java.io.FileReader;
 public class Board {
 
     private final Field[] fields;
+    private Monopoly monopolies[];
 
     public Board() {
         BufferedReader CSV;
@@ -114,6 +115,19 @@ public class Board {
                     System.out.println("No field type match");
             }
         }
+
+        // Initialize Monopoly Array
+        Monopoly monopolies[] = {
+                new Monopoly(Color.blue, this, 1,3,0),
+                new Monopoly(Color.orange, this, 6,8,9),
+                new Monopoly(Color.green, this,11,13,14),
+                new Monopoly(Color.gray, this,16,18,19),
+                new Monopoly(Color.red, this, 21,23,24),
+                new Monopoly(Color.white, this, 26,27,29),
+                new Monopoly(Color.yellow, this, 31,32,34),
+                new Monopoly(Color.magenta, this, 37,39, 0)
+        };
+
     }
 
     public Field getField(int placement) {
