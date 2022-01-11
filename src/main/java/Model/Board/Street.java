@@ -17,5 +17,6 @@ public class Street extends Ownable {
     }
     public void incrementHouseAmount(){
         houseAmount++;
+        System.out.println(houseAmount);
     }
 }
