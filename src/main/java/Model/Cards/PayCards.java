@@ -10,6 +10,7 @@ public class PayCards extends ChanceCard {
 
     public PayCards(String description, String name, String type, int amount) {
         super(description, name, type, amount);
+        this.player = player;
     }
     public void pay() {
         player.setPlayerBalance(-amount);

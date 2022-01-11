@@ -133,15 +133,15 @@ public class EventHandler {
 
     public void fieldEffect(Player player, ChanceField chanceField, int sum) {
         ChanceCardDeck card = new ChanceCardDeck();
-        card.drawCard();
+        card = card.drawCard();
         if(card instanceof PayCards) {
             ((PayCards) card).pay();
         } else if(card instanceof MoveCards) {
             ((MoveCards) card).move();
         } else if(card instanceof JailFreeCards) {
-
+            ((JailFreeCards) card).setPlayerFree(player);
         } else if(card instanceof ReceiveCards) {
-
+            ((ReceiveCards) card).receive();
         }
         card.shuffleCard();
     }
