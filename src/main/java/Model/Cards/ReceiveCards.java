@@ -19,9 +19,21 @@ public class ReceiveCards extends ChanceCard {
         return value;
     }
     public int receiveLegation(Player player) {
+        type = "receivelegation";
         if(player.getNetWorth() < 15000) {
             player.setPlayerBalance(value);
         }
+        return value;
+    }
+    public int receiveFromPlayers(Player player, Player[] players) {
+        type = "receiveplayers";
+        for(int i = 0; i < players.length; i++) {
+            if(players[i] != player) {
+                players[i].setPlayerBalance(-value);
+            }
+        }
+        value = value * players.length;
+        player.setPlayerBalance(value);
         return value;
     }
     public String getName() {

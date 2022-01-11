@@ -26,10 +26,13 @@ public class GameController {
         gui = new GUIController(board.getFields());
         event = new EventHandler(gui);
         deck = new ChanceCardDeck();
-        deck.shuffleCard();
+        //deck.shuffleCard();
         gui.createPlayers(STARTBALANCE);
         setupPlayers(gui.getPlayernames());
         playGame();
+    }
+    public Player[] getPlayers() {
+        return players;
     }
 
     public void playGame() {

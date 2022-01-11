@@ -151,12 +151,11 @@ public class EventHandler {
                 ((ReceiveCards) card).receiveLegation(player);
                 gui.setChanceCard(card);
                 gui.message(player.getName() + " trak prøv-lykken kortet: " + ((ReceiveCards) card).getDescription());
-            } else {
-                ((ReceiveCards) card).receive(player);
+            } else if(card.getType().equals("receiveplayers")){
+                //((ReceiveCards) card).receiveFromPlayers(player, );
                 gui.setChanceCard(card);
                 gui.message(player.getName() + " trak prøv-lykken kortet: " + ((ReceiveCards) card).getDescription());
             }
-
         }
     }
 

@@ -15,7 +15,17 @@ public class MoveCards extends ChanceCard {
         this.type = type;
     }
     public int move(Player player) {
-        player.setPlacement(value);
+        type = "move";
+        if(value > -1) {
+            player.setPlacement(+value);
+        } else if (value < 0) {
+            if(player.getPlacement() < 0) {
+                value = player.getPlacement() - value;
+                player.setPlacement(value);
+            } else {
+                player.setPlayerBalance(-value);
+            }
+        }
         return value;
     }
     public String getName() {
