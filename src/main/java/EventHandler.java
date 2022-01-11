@@ -382,7 +382,7 @@ public class EventHandler {
             fieldName = gui.getUserSelection(currentPlayer.getName() + " Vælg hvilke ejendomme du vil sælge", playerOptions);
             for (int i = 0; i < fieldNames.length; i++) {
                 if (fieldNames[i].equals(fieldName)) {
-                    chosenSoldProp = tradePartProperties[i];
+                    chosenSoldProp = traderProperties[i];
                 }
             }
         }

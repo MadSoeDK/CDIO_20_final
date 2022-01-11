@@ -297,7 +297,9 @@ public class GameController {
 
                     // Add house to selected Street, pay for it & add GUI element
                     selectedStreet.incrementHouseAmount();
+                    // Build house/hotel
                     gui.setGuiHouseAmount(selectedStreet.getPlacement(),selectedStreet.getHouseAmount());
+                    gui.updateFieldRent(selectedStreet.getPlacement(),selectedStreet.getCurrentRent());
                     currentPlayer.setPlayerBalance(-selectedStreet.getHousePrice());
                 }
                 else{

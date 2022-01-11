@@ -162,7 +162,16 @@ public class GUIController {
         GUI_Field field = gui.getFields()[placement];
         GUI_Street street = (GUI_Street) field;
 
-        street.setHouses(houseAmount);
+        if (houseAmount == 5)
+        {
+            street.setHouses(0);
+            street.setHotel(true);
+        }
+        else
+        {
+            street.setHouses(houseAmount);
+            //street.setHotel(false);
+        }
 
     }
 
@@ -268,5 +277,14 @@ public class GUIController {
         }
 
         return result;
+    }
+
+    public void updateFieldRent (int placement, int rent){
+
+        // Typecast to Street
+        GUI_Field field = gui.getFields()[placement];
+        GUI_Street street = (GUI_Street) field;
+
+        street.setSubText("Pris: "+rent);
     }
 }
