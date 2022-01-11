@@ -61,8 +61,12 @@ public class GameController {
         {
             if (gui.getUserBool("Vil du bygge på din grund","Jeg vil bygge","Jeg vil IKKE bygge")){
                 // Give player option over monopolies
-                board.getOwnedPlayerMonopolyList(currentPlayer);
-                //gui.dropdown("Hvilke grunde vil du bygge på?","Blå");
+                Monopoly[] playerMonopolyOptions = board.getOwnedPlayerMonopolyList(currentPlayer);
+                String[] PlayerMonopolyOptionsString = new String[playerMonopolyOptions.length];
+                for (int i=0; i < playerMonopolyOptions.length; i++){
+                    PlayerMonopolyOptionsString[i] = playerMonopolyOptions[i].getName();
+                }
+                gui.dropdown("Hvilke grunde vil du bygge på?",PlayerMonopolyOptionsString);
             }
         }
 
