@@ -14,14 +14,20 @@ public class MoveCards extends ChanceCard {
         this.name = name;
         this.type = type;
     }
-    public String getName() {
-        return name;
-    }
     public int move(Player player) {
         player.setPlacement(value);
         return value;
     }
+    public String getName() {
+        return name;
+    }
     public String getDescription() {
         return description;
+    }
+    public String getType() {
+        return description;
+    }
+    public int getValue() {
+        return value;
     }
 }

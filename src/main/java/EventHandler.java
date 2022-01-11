@@ -134,17 +134,21 @@ public class EventHandler {
     public void fieldEffect(Player player, ChanceCard card) {
         if(card instanceof PayCards) {
             ((PayCards) card).pay(player);
+            gui.setChanceCard(card);
             gui.message(player.getName() + " trak prøv-lykken kortet: " + ((PayCards) card).getDescription());
         } else if(card instanceof MoveCards) {
             gui.removePlayer(player, player.getPlacement());
             gui.movePlayer(player, ((MoveCards) card).move(player), player.getPlacement());
             ((MoveCards) card).move(player);
+            gui.setChanceCard(card);
             gui.message(player.getName() + " trak prøv-lykken kortet: " + ((MoveCards) card).getDescription());
         } else if(card instanceof JailFreeCards) {
             ((JailFreeCards) card).setPlayerFree(player);
+            gui.setChanceCard(card);
             gui.message(player.getName() + " trak prøv-lykken kortet: " + ((JailFreeCards) card).getDescription());
         } else if(card instanceof ReceiveCards) {
             ((ReceiveCards) card).receive(player);
+            gui.setChanceCard(card);
             gui.message(player.getName() + " trak prøv-lykken kortet: " + ((ReceiveCards) card).getDescription());
         }
     }

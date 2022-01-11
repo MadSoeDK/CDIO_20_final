@@ -16,4 +16,8 @@ public abstract class ChanceCard {
         this.type = type;
         this.value = value;
     }
+    public abstract String getDescription();
+    public abstract String getName();
+    public abstract String getType();
+    public abstract int getValue();
 }

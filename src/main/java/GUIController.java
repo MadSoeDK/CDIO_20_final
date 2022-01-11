@@ -1,3 +1,4 @@
+import Model.Cards.ChanceCard;
 import Model.Field;
 import Model.Ownable;
 import Model.Player;
@@ -256,5 +257,8 @@ public class GUIController {
         }
 
         return result;
+    }
+    public void setChanceCard(ChanceCard card) {
+        gui.displayChanceCard(card.getDescription());
     }
 }

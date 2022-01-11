@@ -27,4 +27,10 @@ public class JailFreeCards extends ChanceCard {
     public String getDescription() {
         return description;
     }
+    public String getType() {
+        return description;
+    }
+    public int getValue() {
+        return value;
+    }
 }
