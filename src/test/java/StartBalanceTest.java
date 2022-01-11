@@ -8,6 +8,7 @@ import java.awt.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class startBalanceTest {
+    //creates new board and player to acces methods
     Board board = new Board();
     private GUI_BoardController gui;
     private Color[] colors = {Color.RED, Color.WHITE, Color.ORANGE, Color.MAGENTA};
@@ -15,6 +16,7 @@ class startBalanceTest {
     Player player = new Player("", 30000);
 
     @Test
+    //checks if start balance is 30000kr
     public void startField() {
         assertTrue(player.getPlayerBalance() == 30000);
     }
