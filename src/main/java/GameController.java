@@ -42,7 +42,7 @@ public class GameController {
 
         // Roll die, get value, show die
         cup.roll();
-        sum = 4; //cup.getSum();
+        sum = 1; //cup.getSum();
         gui.showDice(cup.getFacevalues()[0], cup.getFacevalues()[1]);
 
         // Move player placement - automatically updates GUI
@@ -57,6 +57,10 @@ public class GameController {
         checkFieldType(field, placement);
 
         // Ask about building houses?
+        if (board.getPlayerOwnsMonopoly(currentPlayer))
+        {
+            gui.getUserBool("Vil du bygge på din grund","Jeg vil bygge","Jeg vil IKKE bygge");
+        }
 
         //event.auction(2000, players);
 

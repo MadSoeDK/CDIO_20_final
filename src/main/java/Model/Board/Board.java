@@ -3,6 +3,7 @@ package Model.Board;
 import Model.ChanceCardDeck;
 import Model.Player;
 
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 
@@ -127,6 +128,8 @@ public class Board {
                 new Monopoly(Color.yellow, this, 31,32,34),
                 new Monopoly(Color.magenta, this, 37,39, 0)
         };
+
+        this.monopolies = monopolies;
 
     }
 
@@ -268,4 +271,20 @@ public class Board {
         }
         return monopoly;
     }*/
+
+    public Monopoly[] getMonopolies() {
+        return monopolies;
+    }
+
+    public boolean getPlayerOwnsMonopoly (Player player){
+        boolean playerOwnsMonopoly = false;
+
+        for(int i=0; i<monopolies.length; i++){
+            monopolies[i].updateMonopoly();
+            if (monopolies[i].getOwner() == player){
+                playerOwnsMonopoly = true;
+            }
+        }
+        return playerOwnsMonopoly;
+    }
 }
