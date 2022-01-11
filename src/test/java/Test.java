@@ -1,4 +1,5 @@
-import Model.Board;
+import Model.Board.*;
+import Model.*;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -7,7 +8,7 @@ class FieldAmountTest {
 
     @Test
     public void fieldAmount() {
-        assertTrue(board.getFieldsTotal() == 40);
+        assertTrue(board.getFields().length == 40);
     }
 
 }

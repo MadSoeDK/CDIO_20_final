@@ -9,7 +9,7 @@ import java.io.FileReader;
 public class Board {
 
     private final Field[] fields;
-    private Monopoly monopolies[];
+    //private Monopoly monopolies[];
 
     public Board() {
         BufferedReader CSV;
@@ -117,6 +117,7 @@ public class Board {
         }
 
         // Initialize Monopoly Array
+        /*
         Monopoly monopolies[] = {
                 new Monopoly(Color.blue, this, 1,3,0),
                 new Monopoly(Color.orange, this, 6,8,9),
@@ -126,7 +127,7 @@ public class Board {
                 new Monopoly(Color.white, this, 26,27,29),
                 new Monopoly(Color.yellow, this, 31,32,34),
                 new Monopoly(Color.magenta, this, 37,39, 0)
-        };
+        };*/
 
     }
 
