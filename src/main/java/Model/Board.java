@@ -116,9 +116,6 @@ public class Board {
                     System.out.println("No field type match");
             }
         }
-
-        chanceCard = new ChanceCardDeck(this);
-
     }
 
     public Field getField(int placement) {

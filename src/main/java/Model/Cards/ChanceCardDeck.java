@@ -9,9 +9,8 @@ import java.util.Random;
  */
 public class ChanceCardDeck {
     private ChanceCard[] deck;
-    private Board board;
 
-    public ChanceCardDeck(Board owner) {
+    public ChanceCardDeck() {
         // Initialize Model.ChanceCard Array
         deck = new ChanceCard[4];
         deck[0] = new PayCards("Betal 200kr for levering af 2 kasser øl", "Chancekort 1", "pay", 200);
@@ -19,7 +18,6 @@ public class ChanceCardDeck {
         deck[2] = new MoveCards("Ryk frem til START", "Chancekort 3", "move", 0);
         deck[3] = new JailFreeCards("I anledning af kongens fødselsdag benådes De herved for fængsel. Dette kort kan \n" +
                 "opbevares indtil De får brug for det.", "Chancekort 4", "jail", 0);
-        this.board = owner;
         shuffleCard();
     }
     public void shuffleCard() {
