@@ -53,8 +53,8 @@ public class ChanceCardDeck {
         deck[24] = new MoveCards("Ryk frem til START.", "movecard 2", "move", 0);
 
         deck[25] = new MoveCards("Ryk tre felter frem.", "movecard 3", "move", 3);
-        deck[26] = new MoveCards("Ryk tre felter tilbage.", "movecard 4", "move", 3);
-        deck[27] = new MoveCards("Ryk frem til Frederiksberg Allé.", "movecard 5", "move", 0);
+        deck[26] = new MoveCards("Ryk tre felter tilbage.", "movecard 4", "move", -3);
+        deck[27] = new MoveCards("Ryk frem til Frederiksberg Allé.", "movecard 5", "frederiksberg", 11);
 
 
 
@@ -78,7 +78,7 @@ public class ChanceCardDeck {
     public ChanceCard drawCard() {
         // Method that draws and returns the top card in the deck and afterwards places the card in the bottom of the deck
         ChanceCard card;
-        card = deck[25];
+        card = deck[27];
 
         for(int i = 0; i < deck.length; i++) {
             if(i > 0) {
