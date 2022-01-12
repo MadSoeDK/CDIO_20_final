@@ -28,6 +28,7 @@ public class GameController {
         cup = new Cup();
         gui = new GUIController(board.getFields());
         deck = new ChanceCardDeck();
+        deck.shuffleCard();
         event = new EventHandler(gui);
         gui.createPlayers(STARTBALANCE);
         setupPlayers(gui.getPlayernames());

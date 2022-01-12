@@ -1,13 +1,13 @@
 package Model.Cards;
 import Model.*;
 
-public class JailFreeCards extends ChanceCard {
+public class JailFreeCard extends ChanceCard {
     private String description;
     private String name;
     private String type;
     private int value;
 
-    public JailFreeCards(String description, String name, String type, int value) {
+    public JailFreeCard(String description, String name, String type, int value) {
         super(description, name, type, value);
         this.value = value;
         this.description = description;

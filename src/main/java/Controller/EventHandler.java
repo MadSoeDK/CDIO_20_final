@@ -147,23 +147,23 @@ public class EventHandler {
     }
 
     public void fieldEffect(Player player, ChanceCard card) {
-        if(card instanceof PayCards) {
-            ((PayCards) card).pay(player);
+        if(card instanceof PayCard) {
+            ((PayCard) card).pay(player);
             gui.setChanceCard(card);
             gui.message(player.getName() + " trak prøv-lykken kortet: " + card.getDescription());
-        } else if(card instanceof MoveCards) {
+        } else if(card instanceof MoveCard) {
             gui.setChanceCard(card);
             gui.message(player.getName() + " trak prøv-lykken kortet: " + card.getDescription());
             gui.removePlayer(player, player.getPlacement());
-            gui.movePlayer(player, ((MoveCards) card).move(player), player.getPlacement());
+            gui.movePlayer(player, ((MoveCard) card).move(player), player.getPlacement());
             //((MoveCards) card).move(player);
-        } else if(card instanceof JailFreeCards) {
-            ((JailFreeCards) card).setPlayerFree(player);
+        } else if(card instanceof JailFreeCard) {
+            ((JailFreeCard) card).setPlayerFree(player);
             gui.setChanceCard(card);
             gui.message(player.getName() + " trak prøv-lykken kortet: " + card.getDescription());
-        } else if(card instanceof ReceiveCards) {
+        } else if(card instanceof ReceiveCard) {
             if(card.getName().equals("receivecard 14")) {
-                ((ReceiveCards) card).receiveLegation(player);
+                ((ReceiveCard) card).receiveLegation(player);
                 gui.setChanceCard(card);
                 gui.message(player.getName() + " trak prøv-lykken kortet: " + card.getDescription());
             } else if(card.getName().equals("receiveplayers")) {
@@ -171,7 +171,7 @@ public class EventHandler {
                 gui.setChanceCard(card);
                 gui.message(player.getName() + " trak prøv-lykken kortet: " + card.getDescription());
             } else {
-                ((ReceiveCards) card).receive(player);
+                ((ReceiveCard) card).receive(player);
                 gui.setChanceCard(card);
                 gui.message(player.getName() + " trak prøv-lykken kortet: " + card.getDescription());
             }

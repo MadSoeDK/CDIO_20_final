@@ -1,13 +1,13 @@
 package Model.Cards;
 import Model.*;
 
-public class MoveCards extends ChanceCard {
+public class MoveCard extends ChanceCard {
     private String description;
     private String name;
     private String type;
     private int value;
 
-    public MoveCards(String description, String name, String type, int value) {
+    public MoveCard(String description, String name, String type, int value) {
         super(description, name, type, value);
         this.value = value;
         this.description = description;
@@ -34,28 +34,28 @@ public class MoveCards extends ChanceCard {
         } else if(type.equals("molslinien") && player.getPlacement() < 15) {
             player.setPlacement(value);
         }
+        else if(type.equals("frederiksberg") && player.getPlacement() < 11) {
+            player.setPlacement(value);
+        }
         else if(type.equals("frederiksberg") && player.getPlacement() > 11) {
             player.setPlacement(value);
             player.setPlayerBalance(money);
         }
-        else if(type.equals("frederiksberg") && (player.getPlacement() < 11)) {
-            player.setPlacement(value);
-        }
         else if(value > 0 && player.getPlacement() > 35) {
-            System.out.println("Spillerens placering er: " + player.getPlacement());
             value = player.getPlacement() + value;
             player.setPlacement(value);
         }
         else if(value > -1 && value != 0) {
-            System.out.println("KØRER DENNE IF SÆTNING");
             value = player.getPlacement() + value;
             player.setPlacement(value);
         }
         else if(value == 0) {
             player.setPlacement(0);
         }
-        else if(value < 0 && player.getPlacement() > 5) {
 
+        else if(value < 0 && player.getPlacement() > 5) {
+            value = player.getPlacement() + value;
+            player.setPlacement(value);
         }
         else if(value < 0 && player.getPlacement() < 5) {
             value = player.getPlacement() + 40 + value;

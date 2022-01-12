@@ -1,7 +1,4 @@
 package Model.Cards;
-import Model.Player;
-
-import Model.Board.*;
 
 import java.util.Random;
 
@@ -14,62 +11,61 @@ public class ChanceCardDeck {
         // Initialize Model.ChanceCard Array
         deck = new ChanceCard[35];
         //All PayCards
-        deck[0] = new PayCards("Betal 200 kroner for levering af 2 kasser øl.", "paycard 1", "pay", 200);
-        deck[1] = new PayCards("De har kørt frem for 'fuldt stop', " +
+        deck[0] = new PayCard("Betal 200 kroner for levering af 2 kasser øl.", "paycard 1", "pay", 200);
+        deck[1] = new PayCard("De har kørt frem for 'fuldt stop', " +
                 "betal 1000 kroner i bøde.", "paycard 2", "pay", 1000);
-        deck[2] = new PayCards("Betal for vognvask og smøring 300 kroner.", "paycard 3", "pay", 300);
-        deck[3] = new PayCards("Betal 3000 kroner for reparation af deres vogn.", "paycard 4", "pay", 3000);
-        deck[4] = new PayCards("Betal 3000 kroner for reparation af deres vogn.", "paycard 5", "pay", 3000);
-        deck[5] = new PayCards("De har købt 4 nye dæk til Deres vogn, betal 1000 kroner.", "paycard 6", "pay", 1000);
-        deck[6] = new PayCards("De har fået en parkeringsbøde, betal 200 kroner i bøde.", "paycard 7", "pay", 200);
-        deck[7] = new PayCards("Betal deres bilforsikring, 1000 kroner.", "paycard 8", "pay", 1000);
-        deck[8] = new PayCards("De har været udenlands og købt for mange smøger, betal 200 kroner i told.", "paycard 9", "pay", 200);
-        deck[9] = new PayCards("Tandlægeregning, betal 2000 kroner.", "paycard 10", "pay", 2000);
+        deck[2] = new PayCard("Betal for vognvask og smøring 300 kroner.", "paycard 3", "pay", 300);
+        deck[3] = new PayCard("Betal 3000 kroner for reparation af deres vogn.", "paycard 4", "pay", 3000);
+        deck[4] = new PayCard("Betal 3000 kroner for reparation af deres vogn.", "paycard 5", "pay", 3000);
+        deck[5] = new PayCard("De har købt 4 nye dæk til Deres vogn, betal 1000 kroner.", "paycard 6", "pay", 1000);
+        deck[6] = new PayCard("De har fået en parkeringsbøde, betal 200 kroner i bøde.", "paycard 7", "pay", 200);
+        deck[7] = new PayCard("Betal deres bilforsikring, 1000 kroner.", "paycard 8", "pay", 1000);
+        deck[8] = new PayCard("De har været udenlands og købt for mange smøger, betal 200 kroner i told.", "paycard 9", "pay", 200);
+        deck[9] = new PayCard("Tandlægeregning, betal 2000 kroner.", "paycard 10", "pay", 2000);
 
         //All ReceiveCards
-        deck[10] = new ReceiveCards("De har vundet i klasselotteriet. Modtag 500 kroner.", "receivecard 2",  "receive", 500);
-        deck[11] = new ReceiveCards("De har vundet i klasselotteriet. Modtag 500 kroner.", "receivecard 3",  "receive", 500);
-        deck[12] = new ReceiveCards("De modtager Deres aktieudbytte. Modtag 1000 kroner af banken.", "receivecard 4",  "receive", 1000);
-        deck[13] = new ReceiveCards("De modtager Deres aktieudbytte. Modtag 1000 kroner af banken.", "receivecard 5",  "receive", 1000);
-        deck[14] = new ReceiveCards("De modtager Deres aktieudbytte. Modtag 1000 kroner af banken.", "receivecard 6",  "receive", 1000);
-        deck[15] = new ReceiveCards("Kommunen har eftergivet et kvartals skat. Hæv i banken 3000 kroner.", "receivecard 7",  "receive", 3000);
-        deck[16] = new ReceiveCards("De have en række med elleve rigtige i tipning, modtag 1000 kroner.", "receivecard 8",  "receive", 1000);
-        deck[17] = new ReceiveCards("Grundet dyrtiden har De fået gageforhøjelse, modtag 1000 kroner.", "receivecard 9",  "receive", 1000);
-        deck[18] = new ReceiveCards("Deres præmieobligation er udtrykket. De modtager 1000 kroner af banken.", "receivecard 10",  "receive", 1000);
-        deck[19] = new ReceiveCards("Deres præmieobligation er udtrykket. De modtager 1000 kroner af banken.", "receivecard 11",  "receive", 1000);
-        deck[20] = new ReceiveCards("De har solgt nogle gamle møbler på auktion. Modtag 1000 kroner af banken.", "receivecard 12",  "receive", 1000);
-        deck[21] = new ReceiveCards("Værdien af egen avl fra nyttehaven udgør 200 kroner" +
+        deck[10] = new ReceiveCard("De har vundet i klasselotteriet. Modtag 500 kroner.", "receivecard 2",  "receive", 500);
+        deck[11] = new ReceiveCard("De har vundet i klasselotteriet. Modtag 500 kroner.", "receivecard 3",  "receive", 500);
+        deck[12] = new ReceiveCard("De modtager Deres aktieudbytte. Modtag 1000 kroner af banken.", "receivecard 4",  "receive", 1000);
+        deck[13] = new ReceiveCard("De modtager Deres aktieudbytte. Modtag 1000 kroner af banken.", "receivecard 5",  "receive", 1000);
+        deck[14] = new ReceiveCard("De modtager Deres aktieudbytte. Modtag 1000 kroner af banken.", "receivecard 6",  "receive", 1000);
+        deck[15] = new ReceiveCard("Kommunen har eftergivet et kvartals skat. Hæv i banken 3000 kroner.", "receivecard 7",  "receive", 3000);
+        deck[16] = new ReceiveCard("De have en række med elleve rigtige i tipning, modtag 1000 kroner.", "receivecard 8",  "receive", 1000);
+        deck[17] = new ReceiveCard("Grundet dyrtiden har De fået gageforhøjelse, modtag 1000 kroner.", "receivecard 9",  "receive", 1000);
+        deck[18] = new ReceiveCard("Deres præmieobligation er udtrykket. De modtager 1000 kroner af banken.", "receivecard 10",  "receive", 1000);
+        deck[19] = new ReceiveCard("Deres præmieobligation er udtrykket. De modtager 1000 kroner af banken.", "receivecard 11",  "receive", 1000);
+        deck[20] = new ReceiveCard("De har solgt nogle gamle møbler på auktion. Modtag 1000 kroner af banken.", "receivecard 12",  "receive", 1000);
+        deck[21] = new ReceiveCard("Værdien af egen avl fra nyttehaven udgør 200 kroner" +
                 " som de modtager af banken", "receivecard 13",  "receive", 200);
 
         //Receive legation
-        deck[22] = new ReceiveCards("De modtager “Matador-legatet” på kr 40.000, men kun hvis værdier ikke overstiger " +
+        deck[22] = new ReceiveCard("De modtager “Matador-legatet” på kr 40.000, men kun hvis værdier ikke overstiger " +
                 "15.000 kroner.", "receivecard 14",  "receivelegation", 40000);
 
         //Receive money from other players
-        deck[23] = new ReceiveCards("Det er deres fødselsdag. Modtag af hver medspiller 200 kr.", "receiveplayers",  "receiveplayers", 200);
+        deck[23] = new ReceiveCard("Det er deres fødselsdag. Modtag af hver medspiller 200 kr.", "receiveplayers",  "receiveplayers", 200);
 
         //All MoveCards
-        deck[24] = new MoveCards("Ryk frem til START.", "movecard 1", "move", 0);
-        deck[25] = new MoveCards("Ryk frem til START.", "movecard 2", "move", 0);
+        deck[24] = new MoveCard("Ryk frem til START.", "movecard 1", "move", 0);
+        deck[25] = new MoveCard("Ryk frem til START.", "movecard 2", "move", 0);
 
-        deck[26] = new MoveCards("Ryk tre felter frem.", "movecard 3", "move", 3);
-        deck[27] = new MoveCards("Ryk tre felter tilbage.", "movecard 4", "move", -3);
-        deck[28] = new MoveCards("Ryk tre felter tilbage.", "movecard 5", "move", -3);
-        deck[29] = new MoveCards("Ryk frem til Frederiksberg Allé.", "movecard 6", "frederiksberg", 11);
+        deck[26] = new MoveCard("Ryk tre felter frem.", "movecard 3", "move", 3);
+        deck[27] = new MoveCard("Ryk tre felter tilbage.", "movecard 4", "move", -3);
+        deck[28] = new MoveCard("Ryk tre felter tilbage.", "movecard 5", "move", -3);
             //All move and receive cards
-        deck[30] = new MoveCards("Ryk frem til Frederiksberg Allé. Hvis De passere START, indkasser da 4000 kroner.",
+        deck[29] = new MoveCard("Ryk frem til Frederiksberg Allé. Hvis De passere START, indkasser da 4000 kroner.",
                 "movecard 7", "frederiksberg", 11);
 
-        deck[31] = new MoveCards("Tag med Mols-Linien, flyt brikken frem og hvis De passerer START indkassér da " +
+        deck[30] = new MoveCard("Tag med Mols-Linien, flyt brikken frem og hvis De passerer START indkassér da " +
                 "4000 kroner.", "movecard 8", "molslinien", 15);
 
-        deck[32] = new MoveCards("Ryk frem til Grønningen, hvis De passerer start indkasser da 4000 kroner.", "movecard 9", "gronningen", 24);
-        deck[33] = new MoveCards("Ryk frem til Vimmelskaftet, hvis de passerer start indkasser da 4000 kroner", "movecard 10", "vimmelskaftet", 32);
+        deck[31] = new MoveCard("Ryk frem til Grønningen, hvis De passerer start indkasser da 4000 kroner.", "movecard 9", "gronningen", 24);
+        deck[32] = new MoveCard("Ryk frem til Vimmelskaftet, hvis de passerer start indkasser da 4000 kroner", "movecard 10", "vimmelskaftet", 32);
 
 
 
         //All JailFreeCards
-        deck[34] = new JailFreeCards("Gå i fængsel, De indkasserer ikke 4000 kr for at passere start.", "Jailfreecard 1", "jail", 30);
+        deck[34] = new JailFreeCard("Gå i fængsel, De indkasserer ikke 4000 kr for at passere start.", "Jailfreecard 1", "jail", 30);
     }
     public void shuffleCard() {
         //Method that shuffles cards.
@@ -87,7 +83,7 @@ public class ChanceCardDeck {
     public ChanceCard drawCard() {
         // Method that draws and returns the top card in the deck and afterwards places the card in the bottom of the deck
         ChanceCard card;
-        card = deck[26];
+        card = deck[0];
 
         for(int i = 0; i < deck.length; i++) {
             if(i > 0) {
