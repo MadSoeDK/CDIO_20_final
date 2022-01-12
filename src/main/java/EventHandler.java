@@ -178,7 +178,7 @@ public class EventHandler {
                     if (curAucPlayer.getPlayerBalance() >= auctionSum+100) {
                         auctionSum += 100;
                     }
-                    else{
+                    else {
                         auctionPlayersLeft -= 1;
                         aucPlayers[curAucIndex] = null;
                     }
