@@ -57,6 +57,7 @@ public class GameController {
         checkFieldType(field, placement);
 
         // Ask about building houses?
+        build();
 
         //event.auction(2000, players);
 
@@ -250,6 +251,54 @@ public class GameController {
             }
         }
         return player.getBankruptStatus();
+    }
+
+    public void build(){
+        if (board.getPlayerOwnsMonopoly(currentPlayer))
+        {
+            boolean stopBuilding = false;
+            while (!stopBuilding) {
+                if (gui.getUserBool("Vil du bygge på din grund", "Jeg vil bygge", "Jeg vil IKKE bygge")) {
+
+                    // Give player option over monopolies
+                    Monopoly[] playerMonopolyOptions = board.getOwnedPlayerMonopolyList(currentPlayer);
+                    String[] PlayerMonopolyOptionsString = new String[playerMonopolyOptions.length];
+                    for (int i = 0; i < playerMonopolyOptions.length; i++) {
+                        PlayerMonopolyOptionsString[i] = playerMonopolyOptions[i].getName();
+                    }
+                    String selectedMonopolyName = gui.dropdown("Hvilken farve vil du bygge på?", PlayerMonopolyOptionsString);
+                    Monopoly selectedMonopoly = null;// = new Monopoly();
+
+                    // Match the string array to the object referance array
+                    for (int i = 0; i < playerMonopolyOptions.length; i++) {
+
+                        if (playerMonopolyOptions[i].getName() == selectedMonopolyName) {
+                            selectedMonopoly = playerMonopolyOptions[i];
+                        }
+                    }
+
+                    // Chose specific street
+                    Street selectedStreet = null;
+                    String[] selectedMonopolyStreetStringArray = selectedMonopoly.getStringArray();
+                    String selectedStreetString = gui.dropdown("Hvilken Bygning vil du bygge på? Et hus koster: "+selectedMonopoly.getStreetArray()[0].getHousePrice(), selectedMonopolyStreetStringArray);
+                    for (int i = 0; i < selectedMonopoly.getStreetArray().length; i++) {
+                        if (selectedStreetString == selectedMonopolyStreetStringArray[i]) {
+                            selectedStreet = selectedMonopoly.getStreetArray()[i];
+                        }
+                    }
+
+                    // Add house to selected Street, pay for it & add GUI element
+                    selectedStreet.incrementHouseAmount();
+                    // Build house/hotel
+                    gui.setGuiHouseAmount(selectedStreet.getPlacement(),selectedStreet.getHouseAmount());
+                    gui.updateFieldRent(selectedStreet.getPlacement(),selectedStreet.getCurrentRent());
+                    currentPlayer.setPlayerBalance(-selectedStreet.getHousePrice());
+                }
+                else{
+                    stopBuilding = true;
+                }
+            }
+        }
     }
 
     /*

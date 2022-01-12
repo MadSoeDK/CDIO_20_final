@@ -3,6 +3,7 @@ package Model.Board;
 import Model.ChanceCardDeck;
 import Model.Player;
 
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 
@@ -118,15 +119,17 @@ public class Board {
 
         // Initialize Monopoly Array
         Monopoly monopolies[] = {
-                new Monopoly(Color.blue, this, 1,3,0),
-                new Monopoly(Color.orange, this, 6,8,9),
-                new Monopoly(Color.green, this,11,13,14),
-                new Monopoly(Color.gray, this,16,18,19),
-                new Monopoly(Color.red, this, 21,23,24),
-                new Monopoly(Color.white, this, 26,27,29),
-                new Monopoly(Color.yellow, this, 31,32,34),
-                new Monopoly(Color.magenta, this, 37,39, 0)
+                new Monopoly("Blå",Color.blue, this, 1,3,0),
+                new Monopoly("Orange",Color.orange, this, 6,8,9),
+                new Monopoly("Grøn",Color.green, this,11,13,14),
+                new Monopoly("Grå",Color.gray, this,16,18,19),
+                new Monopoly("Rød",Color.red, this, 21,23,24),
+                new Monopoly("Hvid",Color.white, this, 26,27,29),
+                new Monopoly("Gul",Color.yellow, this, 31,32,34),
+                new Monopoly("Lilla",Color.magenta, this, 37,39, 0)
         };
+
+        this.monopolies = monopolies;
 
     }
 
@@ -268,4 +271,49 @@ public class Board {
         }
         return monopoly;
     }*/
+
+    public Monopoly[] getMonopolies() {
+        return monopolies;
+    }
+
+    public boolean getPlayerOwnsMonopoly (Player player){
+        boolean playerOwnsMonopoly = false;
+
+        for(int i=0; i<monopolies.length; i++){
+            monopolies[i].updateMonopoly();
+            if (monopolies[i].getOwner() == player){
+                playerOwnsMonopoly = true;
+            }
+        }
+        return playerOwnsMonopoly;
+    }
+
+    public Monopoly[] getOwnedPlayerMonopolyList(Player player) {
+        int playerMonopolyAmount=0;
+
+        // Check amount of Monopolies owned
+        for (int i=0; i< monopolies.length; i++){
+            monopolies[i].updateMonopoly();
+            if (monopolies[i].getOwner() == player)
+            {
+                playerMonopolyAmount++;
+            }
+        }
+
+        // Create array with owned arrays
+        Monopoly[] playerOwnedMonopolyList = new Monopoly[playerMonopolyAmount];
+        int playerOwnedIndex=0;
+        for (int i=0; i< monopolies.length; i++)
+        {
+            monopolies[i].updateMonopoly();
+            if (monopolies[i].getOwner() == player)
+            {
+                playerOwnedMonopolyList[playerOwnedIndex] = monopolies[i];
+                System.out.println(playerOwnedMonopolyList[playerOwnedIndex].getName());
+                playerOwnedIndex++;
+            }
+        }
+
+        return playerOwnedMonopolyList;
+    }
 }

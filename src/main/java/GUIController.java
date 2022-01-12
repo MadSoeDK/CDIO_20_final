@@ -156,6 +156,25 @@ public class GUIController {
         return guiFields[placement];
     }
 
+    public void setGuiHouseAmount(int placement, int houseAmount){
+
+        // Typecast to Street
+        GUI_Field field = gui.getFields()[placement];
+        GUI_Street street = (GUI_Street) field;
+
+        if (houseAmount == 5)
+        {
+            street.setHouses(0);
+            street.setHotel(true);
+        }
+        else
+        {
+            street.setHouses(houseAmount);
+            //street.setHotel(false);
+        }
+
+    }
+
     public String[] getPlayernames() {
         playernames = new String[guiPlayers.length];
         for (int i = 0; i < guiPlayers.length; i++) {
@@ -258,5 +277,14 @@ public class GUIController {
         }
 
         return result;
+    }
+
+    public void updateFieldRent (int placement, int rent){
+
+        // Typecast to Street
+        GUI_Field field = gui.getFields()[placement];
+        GUI_Street street = (GUI_Street) field;
+
+        street.setSubText("Pris: "+rent);
     }
 }

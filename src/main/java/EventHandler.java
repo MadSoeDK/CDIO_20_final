@@ -35,7 +35,6 @@ public class EventHandler {
             }
         }
     }
-
     public void fieldEffect(Player player, Ownable ownable, Player[] players, int sum) {
         if (ownable.getOwner() == null) {
             buyField(player, ownable, players);
@@ -176,19 +175,49 @@ public class EventHandler {
                     aucPlayers[curAucIndex] = null;
                     break;
                 case "100":
-                    auctionSum += 100;
+                    if (curAucPlayer.getPlayerBalance() >= auctionSum+100) {
+                        auctionSum += 100;
+                    }
+                    else{
+                        auctionPlayersLeft -= 1;
+                        aucPlayers[curAucIndex] = null;
+                    }
                     break;
                 case "200":
-                    auctionSum += 200;
+                    if (curAucPlayer.getPlayerBalance() >= auctionSum+200) {
+                        auctionSum += 200;
+                    }
+                    else{
+                        auctionPlayersLeft -= 1;
+                        aucPlayers[curAucIndex] = null;
+                    }
                     break;
                 case "500":
-                    auctionSum += 500;
+                    if (curAucPlayer.getPlayerBalance() >= auctionSum+500) {
+                        auctionSum += 500;
+                    }
+                    else{
+                        auctionPlayersLeft -= 1;
+                        aucPlayers[curAucIndex] = null;
+                    }
                     break;
                 case "1000":
-                    auctionSum += 1000;
+                    if (curAucPlayer.getPlayerBalance() >= auctionSum+1000) {
+                        auctionSum += 1000;
+                    }
+                    else{
+                        auctionPlayersLeft -= 1;
+                        aucPlayers[curAucIndex] = null;
+                    }
                     break;
                 case "2000":
-                    auctionSum += 2000;
+                    if (curAucPlayer.getPlayerBalance() >= auctionSum+2000) {
+                        auctionSum += 2000;
+                    }
+                    else{
+                        auctionPlayersLeft -= 1;
+                        aucPlayers[curAucIndex] = null;
+                    }
                     break;
             }
             // Next Player
@@ -276,11 +305,6 @@ public class EventHandler {
             tradePlayersNames[i] = tradePlayers[i].getName();
         }
 
-        // Display array as Dropdown Menu
-        /*for(int i = 0; i<tradePlayers.length; i++){
-            System.out.println(tradePlayers[i].getName());
-        }*/
-
         // Create a dropdown based on tradeable player amount
         String selectedTradePartner = gui.getUserSelection(currentPlayer.getName() + " Vælg spiller at handle med", tradePlayersNames);
 
@@ -289,33 +313,6 @@ public class EventHandler {
                 tradePartnerId = i;
             }
         }
-
-        /*if (tradePlayersNames[0] == selectedTradePartner) {
-            tradePartnerId=0;
-            System.out.println("Tradepartner: "+tradePlayersNames[0]);
-        }
-        if (tradePlayersNames[1] == selectedTradePartner) {
-            tradePartnerId=1;
-            System.out.println("Tradepartner: "+tradePlayersNames[1]);
-        }
-        if (tradePlayersNames.length > 2) {
-            if (tradePlayersNames[2] == selectedTradePartner) {
-                tradePartnerId = 2;
-                System.out.println("Tradepartner: " + tradePlayersNames[2]);
-            }
-        }
-        if (tradePlayersNames.length > 3) {
-            if (tradePlayersNames[3] == selectedTradePartner) {
-                tradePartnerId = 3;
-                System.out.println("Tradepartner: " + tradePlayersNames[3]);
-            }
-        }
-        if (tradePlayersNames.length > 4) {
-            if (tradePlayersNames[4] == selectedTradePartner) {
-                tradePartnerId = 4;
-                System.out.println("Tradepartner: " + tradePlayersNames[4]);
-            }
-        }*/
 
         // Display Chosen players property
         Ownable[] tradePartProperties = board.getPlayerProperties(tradePlayers[tradePartnerId]);
@@ -338,7 +335,7 @@ public class EventHandler {
         }
 
         // Display Menu for money
-        boolean correctPartnerPayAmount = false;
+        boolean correctPartnerPayAmount=false;
         String[] optionsMoney = {"Accepter mængde", "+50", "+100", "+200", "+500", "+1000", "+5000", "+10000"};
         while (!correctPartnerPayAmount) {
 
@@ -347,25 +344,39 @@ public class EventHandler {
                     correctPartnerPayAmount=true;
                     break;
                 case "+50":
-                    tradePartnerPayed+=50;
+                    if (tradePlayers[tradePartnerId].getPlayerBalance() >= tradePartnerPayed+50) {
+                        tradePartnerPayed += 50;
+                    }
                     break;
                 case "+100":
-                    tradePartnerPayed+=100;
+                    if (tradePlayers[tradePartnerId].getPlayerBalance() >= tradePartnerPayed+100) {
+                        tradePartnerPayed += 100;
+                    }
                     break;
                 case "+200":
-                    tradePartnerPayed+=200;
+                    if (tradePlayers[tradePartnerId].getPlayerBalance() >= tradePartnerPayed+200) {
+                        tradePartnerPayed += 200;
+                    }
                     break;
                 case "+500":
-                    tradePartnerPayed+=500;
+                    if (tradePlayers[tradePartnerId].getPlayerBalance() >= tradePartnerPayed+500) {
+                        tradePartnerPayed += 500;
+                    }
                     break;
                 case "+1000":
-                    tradePartnerPayed+=1000;
+                    if (tradePlayers[tradePartnerId].getPlayerBalance() >= tradePartnerPayed+1000) {
+                        tradePartnerPayed += 1000;
+                    }
                     break;
                 case "+5000":
-                    tradePartnerPayed+=5000;
+                    if (tradePlayers[tradePartnerId].getPlayerBalance() >= tradePartnerPayed+5000) {
+                        tradePartnerPayed += 5000;
+                    }
                     break;
                 case "+10000":
-                    tradePartnerPayed+=10000;
+                    if (tradePlayers[tradePartnerId].getPlayerBalance() >= tradePartnerPayed+10000){
+                        tradePartnerPayed+=10000;
+                    }
                     break;
             }
         }
@@ -383,7 +394,7 @@ public class EventHandler {
             fieldName = gui.getUserSelection(currentPlayer.getName() + " Vælg hvilke ejendomme du vil sælge", playerOptions);
             for (int i = 0; i < fieldNames.length; i++) {
                 if (fieldNames[i].equals(fieldName)) {
-                    chosenSoldProp = tradePartProperties[i];
+                    chosenSoldProp = traderProperties[i];
                 }
             }
         }
@@ -396,25 +407,39 @@ public class EventHandler {
                     correctPlayerPayAmount=true;
                     break;
                 case "+50":
-                    traderPayed+=50;
+                    if (currentPlayer.getPlayerBalance() >= traderPayed+50) {
+                        traderPayed += 50;
+                    }
                     break;
                 case "+100":
-                    traderPayed+=100;
+                    if (currentPlayer.getPlayerBalance() >= traderPayed+100) {
+                        traderPayed += 100;
+                    }
                     break;
                 case "+200":
-                    traderPayed+=200;
+                    if (currentPlayer.getPlayerBalance() >= traderPayed+200) {
+                        traderPayed += 200;
+                    }
                     break;
                 case "+500":
-                    traderPayed+=500;
+                    if (currentPlayer.getPlayerBalance() >= traderPayed+500) {
+                        traderPayed += 500;
+                    }
                     break;
                 case "+1000":
-                    traderPayed+=1000;
+                    if (currentPlayer.getPlayerBalance() >= traderPayed+1000) {
+                        traderPayed += 1000;
+                    }
                     break;
                 case "+5000":
-                    traderPayed+=5000;
+                    if (currentPlayer.getPlayerBalance() >= traderPayed+5000) {
+                        traderPayed += 5000;
+                    }
                     break;
                 case "+10000":
-                    traderPayed+=10000;
+                    if (currentPlayer.getPlayerBalance() >= traderPayed+10000) {
+                        traderPayed += 10000;
+                    }
                     break;
             }
         }
@@ -446,16 +471,19 @@ public class EventHandler {
             currentPlayer.setPlayerBalance(tradePartnerPayed - traderPayed);
             if (chosenProp != null){
                 chosenProp.setOwner(currentPlayer);
+                //gui.setOwner(currentPlayer, chosenProp);
                 gui.setOwner(currentPlayer, chosenProp);
             }
             if (chosenSoldProp != null){
                 chosenSoldProp.setOwner(tradePlayers[tradePartnerId]);
-                gui.setOwner(currentPlayer, chosenProp);
+                //gui.setOwner(tradePlayers[tradePartnerId], chosenProp);
+                gui.setOwner(tradePlayers[tradePartnerId], chosenSoldProp);
             }
 
             // Opdate GUI
             //board.getPlayer(curPlayer).getPlayer().setBalance(board.getPlayer(curPlayer).getPlayerBalance());
             //tradePlayers[tradePartnerId].getPlayer().setBalance(tradePlayers[tradePartnerId].getPlayerBalance());
+            // Update Ownership
 
             gui.setguiPlayerBalance(currentPlayer,currentPlayer.getPlayerBalance());
             gui.setguiPlayerBalance(tradePlayers[tradePartnerId],tradePlayers[tradePartnerId].getPlayerBalance());
@@ -463,6 +491,9 @@ public class EventHandler {
 
 
     }
+
+
+
 
 }
 
