@@ -331,16 +331,18 @@ public class EventHandler {
         String[] options = fieldNames;
         String fieldName = "";
         Ownable chosenProp = null;
-        if (tradePartProperties.length > 0) {
-            for (int i = 0; i < tradePartProperties.length; i++) {
-                fieldNames[i] = tradePartProperties[i].getName();
-            }
-            options = fieldNames;
-            chosenProp = tradePartProperties[0];
-            fieldName = gui.getUserSelection(currentPlayer.getName() + " Vælg hvilke ejendomme du vil købe", options);
-            for (int i = 0; i < fieldNames.length; i++) {
-                if (fieldNames[i].equals(fieldName)) {
-                    chosenProp = tradePartProperties[i];
+        if (gui.getUserBool("Vil du købe en af spillerens ejendomme?", "Ja, Køb ejendom", "Køb ikke ejendom")) {
+            if (tradePartProperties.length > 0) {
+                for (int i = 0; i < tradePartProperties.length; i++) {
+                    fieldNames[i] = tradePartProperties[i].getName();
+                }
+                options = fieldNames;
+                chosenProp = tradePartProperties[0];
+                fieldName = gui.getUserSelection(currentPlayer.getName() + " Vælg hvilke ejendomme du vil købe", options);
+                for (int i = 0; i < fieldNames.length; i++) {
+                    if (fieldNames[i].equals(fieldName)) {
+                        chosenProp = tradePartProperties[i];
+                    }
                 }
             }
         }
@@ -396,16 +398,18 @@ public class EventHandler {
         Ownable[] traderProperties = board.getPlayerProperties(currentPlayer);
         fieldNames = new String[traderProperties.length];
         Ownable chosenSoldProp = null;
-        if (traderProperties.length > 0) {
-            for (int i = 0; i < traderProperties.length; i++) {
-                fieldNames[i] = traderProperties[i].getName();
-            }
-            String[] playerOptions = fieldNames;
-            chosenSoldProp = null;
-            fieldName = gui.getUserSelection(currentPlayer.getName() + " Vælg hvilke ejendomme du vil sælge", playerOptions);
-            for (int i = 0; i < fieldNames.length; i++) {
-                if (fieldNames[i].equals(fieldName)) {
-                    chosenSoldProp = traderProperties[i];
+        if (gui.getUserBool("Vil du sælge en af dine ejendomme?", "Ja, Sælg en ejendom", "Sælg ikke ejendom")) {
+            if (traderProperties.length > 0) {
+                for (int i = 0; i < traderProperties.length; i++) {
+                    fieldNames[i] = traderProperties[i].getName();
+                }
+                String[] playerOptions = fieldNames;
+                chosenSoldProp = null;
+                fieldName = gui.getUserSelection(currentPlayer.getName() + " Vælg hvilke ejendomme du vil sælge", playerOptions);
+                for (int i = 0; i < fieldNames.length; i++) {
+                    if (fieldNames[i].equals(fieldName)) {
+                        chosenSoldProp = traderProperties[i];
+                    }
                 }
             }
         }

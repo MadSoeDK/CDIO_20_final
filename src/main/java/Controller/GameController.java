@@ -55,11 +55,12 @@ public class GameController {
             }
         }
 
+        // Check jail status
         if (currentPlayer.getInJailStatus() == false)
         {
             // Roll die, get value, show die
             cup.roll();
-            sum = 1;//cup.getSum();
+            sum = 3;//cup.getSum();
             gui.showDice(cup.getFacevalues()[0], cup.getFacevalues()[1]);
             moveplayer(currentPlayer, sum);
         }
