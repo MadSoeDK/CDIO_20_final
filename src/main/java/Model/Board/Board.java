@@ -1,16 +1,16 @@
-package Model;
+package Model.Board;
 
-import Model.Cards.ChanceCardDeck;
+import Model.ChanceCardDeck;
+import Model.Player;
 
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 
 public class Board {
 
-    private ChanceCardDeck chanceCard;
-
-
     private final Field[] fields;
+    private Monopoly monopolies[];
 
     public Board() {
         BufferedReader CSV;
@@ -116,6 +116,21 @@ public class Board {
                     System.out.println("No field type match");
             }
         }
+
+        // Initialize Monopoly Array
+        Monopoly monopolies[] = {
+                new Monopoly("Blå",Color.blue, this, 1,3,0),
+                new Monopoly("Orange",Color.orange, this, 6,8,9),
+                new Monopoly("Grøn",Color.green, this,11,13,14),
+                new Monopoly("Grå",Color.gray, this,16,18,19),
+                new Monopoly("Rød",Color.red, this, 21,23,24),
+                new Monopoly("Hvid",Color.white, this, 26,27,29),
+                new Monopoly("Gul",Color.yellow, this, 31,32,34),
+                new Monopoly("Lilla",Color.magenta, this, 37,39, 0)
+        };
+
+        this.monopolies = monopolies;
+
     }
 
     public Field getField(int placement) {
@@ -157,9 +172,22 @@ public class Board {
         }
         return numberOfProperties;
     }
-
-    public ChanceCardDeck getChanceCardDeck(){
-        return chanceCard;
+    public int countNumberOfMortgagedPropertiesForPlayer(Player player) {
+        int numberOfMortgagedProperties = 0;
+        for (int i = 0; i < getFields().length; i++) {
+            //Type casting field to Ownable
+            if (getField(i) instanceof Ownable) {
+                //Verifying that the current field is of the type Ownable
+                Ownable property = (Ownable) getField(i);
+                if (player == property.getOwner()) {
+                    //if property is mortgaged count++
+                    if (property.getMortgage()) {
+                        numberOfMortgagedProperties++;
+                    }
+                }
+            }
+        }
+        return numberOfMortgagedProperties;
     }
 
     public int getFieldsByColor(int placement) {
@@ -205,7 +233,7 @@ public class Board {
         int numberOfProperties;
         numberOfProperties = countNumbersOfPropertiesForPlayer(player);
 
-        Ownable[] playerProperties = new Street[numberOfProperties];
+        Ownable[] playerProperties = new Ownable[numberOfProperties];
         int currentProperty = 0;
         for (int i = 0; i < getFields().length; i++) {
             //Type casting field to Ownable
@@ -260,4 +288,49 @@ public class Board {
         }
         return monopoly;
     }*/
+
+    public Monopoly[] getMonopolies() {
+        return monopolies;
+    }
+
+    public boolean getPlayerOwnsMonopoly (Player player){
+        boolean playerOwnsMonopoly = false;
+
+        for(int i=0; i<monopolies.length; i++){
+            monopolies[i].updateMonopoly();
+            if (monopolies[i].getOwner() == player){
+                playerOwnsMonopoly = true;
+            }
+        }
+        return playerOwnsMonopoly;
+    }
+
+    public Monopoly[] getOwnedPlayerMonopolyList(Player player) {
+        int playerMonopolyAmount=0;
+
+        // Check amount of Monopolies owned
+        for (int i=0; i< monopolies.length; i++){
+            monopolies[i].updateMonopoly();
+            if (monopolies[i].getOwner() == player)
+            {
+                playerMonopolyAmount++;
+            }
+        }
+
+        // Create array with owned arrays
+        Monopoly[] playerOwnedMonopolyList = new Monopoly[playerMonopolyAmount];
+        int playerOwnedIndex=0;
+        for (int i=0; i< monopolies.length; i++)
+        {
+            monopolies[i].updateMonopoly();
+            if (monopolies[i].getOwner() == player)
+            {
+                playerOwnedMonopolyList[playerOwnedIndex] = monopolies[i];
+                System.out.println(playerOwnedMonopolyList[playerOwnedIndex].getName());
+                playerOwnedIndex++;
+            }
+        }
+
+        return playerOwnedMonopolyList;
+    }
 }

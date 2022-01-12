@@ -1,9 +1,9 @@
-import Model.Cards.ChanceCard;
-import Model.Field;
-import Model.Ownable;
+package Controller;
+
+import Model.Board.Field;
+import Model.Board.Ownable;
 import Model.Player;
-//import Model.Property;
-import Model.Street;
+import Model.Board.Street;
 import gui_fields.*;
 import gui_main.GUI;
 
@@ -19,7 +19,7 @@ public class GUIController {
 
     public GUIController(Field[] fields) {
         GUI_Field[] guiBoard = createBoard(fields);
-        gui = new GUI(guiBoard,Color.orange);
+        gui = new GUI(guiBoard, new Color(112, 171, 79));
     }
 
     public GUI_Field[] createBoard(Field[] fields) {
@@ -93,8 +93,10 @@ public class GUIController {
         }
     }
     public void removePlayer(Player player, int placement) {
+        if(player.getBankruptStatus()) {
             GUI_Field field = gui.getFields()[placement];
             field.setCar(getGuiPlayer(player), false);
+        }
     }
 
     public void movePlayer(Player player, int placement, int preplacement) {
@@ -153,6 +155,25 @@ public class GUIController {
 
     public GUI_Field getGuiField(int placement) {
         return guiFields[placement];
+    }
+
+    public void setGuiHouseAmount(int placement, int houseAmount){
+
+        // Typecast to Street
+        GUI_Field field = gui.getFields()[placement];
+        GUI_Street street = (GUI_Street) field;
+
+        if (houseAmount == 5)
+        {
+            street.setHouses(0);
+            street.setHotel(true);
+        }
+        else
+        {
+            street.setHouses(houseAmount);
+            //street.setHotel(false);
+        }
+
     }
 
     public String[] getPlayernames() {
@@ -257,6 +278,15 @@ public class GUIController {
         }
 
         return result;
+    }
+
+    public void updateFieldRent (int placement, int rent){
+
+        // Typecast to Street
+        GUI_Field field = gui.getFields()[placement];
+        GUI_Street street = (GUI_Street) field;
+
+        street.setSubText("Pris: "+rent);
     }
     public void setChanceCard(ChanceCard card) {
         gui.displayChanceCard(card.getDescription());

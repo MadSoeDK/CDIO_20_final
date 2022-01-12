@@ -1,5 +1,5 @@
-import Model.Board;
-import Model.Field;
+import Model.Board.Board;
+import Model.Board.Field;
 
 public class Board_Test {
     public static void main(String[] args) {

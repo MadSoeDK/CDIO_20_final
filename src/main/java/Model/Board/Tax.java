@@ -1,6 +1,4 @@
-package Model;
-
-import java.awt.*;
+package Model.Board;
 
 public class Tax extends Field {
     private final int TAX;

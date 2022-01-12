@@ -1,6 +1,6 @@
-package Model;
+package Model.Board;
 
-import java.awt.*;
+import Model.Player;
 
 public abstract class Ownable extends Field {
 
@@ -56,7 +56,10 @@ public abstract class Ownable extends Field {
     public void changeOwner(Player player) {
         owner = null;
     }
-    public void setMortage() {
-        this.mortgage = true;
+    public void setMortgage(boolean value) {
+        this.mortgage = value;
+    }
+    public boolean getMortgage() {
+        return mortgage;
     }
 }
