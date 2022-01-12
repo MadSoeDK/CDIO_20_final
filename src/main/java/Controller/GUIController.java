@@ -38,6 +38,7 @@ public class GUIController {
             switch (fields[i].getClass().getSimpleName()) {
                 case "Start":
                     guiFields[i] = new GUI_Start();
+                    guiFields[i].setBackGroundColor(Color.WHITE);
                     break;
                 case "Street":
                     guiFields[i] = new GUI_Street();
@@ -53,6 +54,7 @@ public class GUIController {
                     break;
                 case "Jail":
                     guiFields[i] = new GUI_Jail();
+                    guiFields[i].setBackGroundColor(Color.LIGHT_GRAY);
                     //guiFields[i].setSubText("");
                     break;
                 case "Ferry":
@@ -67,7 +69,7 @@ public class GUIController {
                     break;
                 case "Tax":
                     guiFields[i] = new GUI_Tax();
-                    guiFields[i].setBackGroundColor(new Color(56,142,53));
+                    guiFields[i].setBackGroundColor(Color.GRAY);
                     guiFields[i].setSubText("");
                     break;
                 case "Brewery":
@@ -308,6 +310,9 @@ public class GUIController {
                 break;
             case "grey" :
                 result = new Color(107, 107, 107);
+                break;
+            case "teal" :
+                result = new Color(8, 230, 216);
                 break;
         }
 
