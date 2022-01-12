@@ -1,6 +1,6 @@
 package Model;
 
-import Model.Field;
+import Model.Board.*;
 
 import java.awt.*;
 

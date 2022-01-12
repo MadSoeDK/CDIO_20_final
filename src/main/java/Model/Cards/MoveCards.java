@@ -54,6 +54,9 @@ public class MoveCards extends ChanceCard {
         else if(value == 0) {
             player.setPlacement(0);
         }
+        else if(value < 0 && player.getPlacement() > 5) {
+
+        }
         else if(value < 0 && player.getPlacement() < 5) {
             value = player.getPlacement() + 40 + value;
             player.setPlacement(value);

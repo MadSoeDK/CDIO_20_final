@@ -6,6 +6,7 @@ import Model.Player;
 import Model.Board.Street;
 import gui_fields.*;
 import gui_main.GUI;
+import Model.Cards.*;
 
 import java.awt.*;
 
@@ -93,10 +94,8 @@ public class GUIController {
         }
     }
     public void removePlayer(Player player, int placement) {
-        if(player.getBankruptStatus()) {
             GUI_Field field = gui.getFields()[placement];
             field.setCar(getGuiPlayer(player), false);
-        }
     }
 
     public void movePlayer(Player player, int placement, int preplacement) {

@@ -2,6 +2,9 @@ package Controller;
 
 import Model.*;
 import Model.Board.*;
+import Model.Cards.ChanceCard;
+import Model.Cards.ChanceCardDeck;
+import Model.ChanceField;
 
 public class GameController {
 
@@ -9,9 +12,11 @@ public class GameController {
     private Cup cup;
     private GUIController gui;
     private EventHandler event;
+    private ChanceCardDeck deck;
     private Player[] players;
     private Player currentPlayer;
     private int playerindex = 0;
+
 
     // Game Constants
     final int STARTBALANCE = 30000;
@@ -22,6 +27,7 @@ public class GameController {
         board = new Board();
         cup = new Cup();
         gui = new GUIController(board.getFields());
+        deck = new ChanceCardDeck();
         event = new EventHandler(gui);
         gui.createPlayers(STARTBALANCE);
         setupPlayers(gui.getPlayernames());
@@ -33,12 +39,14 @@ public class GameController {
             gui.message("Nu er det " + currentPlayer.getName() + "'s tur");
             takeTurn();
             nextTurn();
-        } while (true); //Check winner
+        } while (players.length > 1);
+        gui.message(currentPlayer.getName() + " VANDT SPILLET.");
+        //Check winner
     }
 
     public void takeTurn() {
         // Ask if currentplayer wish to trade?
-        event.playerOptionsTrade(currentPlayer, players, board);
+        event.playerOptions(currentPlayer, players, board);
 
         //ask if currentplayer wants to buy mortgaged properties
         event.playerOptionsBuyMortgaged(currentPlayer, board);
@@ -84,8 +92,10 @@ public class GameController {
     public void nextTurn() {
         // Chance Player Turn/Reset to first player
         playerindex = java.util.Arrays.asList(players).indexOf(currentPlayer);
-
-        if (playerindex == players.length - 1) {
+        if(cup.getPair() == true) {
+            gui.message(currentPlayer.getName() + " slog par og får en ekstra tur.");
+            currentPlayer = players[playerindex];
+        } else if (playerindex == players.length - 1) {
             currentPlayer = players[0];
         } else {
             currentPlayer = players[playerindex + 1];
@@ -130,6 +140,7 @@ public class GameController {
                 break;
             case "ChanceField":
                 //do something
+                event.fieldEffect(currentPlayer, deck.drawCard());
                 break;
             case "Start":
                 //do something

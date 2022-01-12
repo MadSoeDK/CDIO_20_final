@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Cards.*;
 import Model.*;
 import Model.Board.*;
 
@@ -165,7 +166,7 @@ public class EventHandler {
                 ((ReceiveCards) card).receiveLegation(player);
                 gui.setChanceCard(card);
                 gui.message(player.getName() + " trak prøv-lykken kortet: " + card.getDescription());
-            } else if(card.getName().equals("receiveplayers")){
+            } else if(card.getName().equals("receiveplayers")) {
                 //((ReceiveCards) card).receiveFromPlayers(player, );
                 gui.setChanceCard(card);
                 gui.message(player.getName() + " trak prøv-lykken kortet: " + card.getDescription());
@@ -576,11 +577,5 @@ public class EventHandler {
             }
         }
     }
-
-
-
-
 }
-        }
-    }
 

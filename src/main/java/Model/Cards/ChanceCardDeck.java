@@ -1,7 +1,7 @@
 package Model.Cards;
 import Model.Player;
 
-import Model.Board;
+import Model.Board.*;
 
 import java.util.Random;
 
