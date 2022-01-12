@@ -23,13 +23,20 @@ public class Cup {
         return facevalues;
     }
     public void roll() {
-        int fv1 = die1.roll();
-        int fv2 = die2.roll();
+        int fv1 = 4;//die1.roll();
+        int fv2 = 4;//die2.roll();
 
         sum = fv1 + fv2;
 
         facevalues = new int[2];
         facevalues[0] = fv1;
         facevalues[1] = fv2;
+    }
+    public boolean getPair() {
+        if(facevalues[0] == facevalues[1]) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

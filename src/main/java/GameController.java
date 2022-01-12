@@ -133,8 +133,9 @@ public class GameController {
                 event.fieldEffect(currentPlayer, brewery, sum);
                 break;
             case "ChanceField":
-                ChanceField chanceField = (ChanceField) field;
+                //ChanceField chanceField = (ChanceField) field;
                 event.fieldEffect(currentPlayer, deck.drawCard());
+
                 //do something
                 break;
             case "Start":
@@ -171,7 +172,7 @@ public class GameController {
 
         //Check if Starts is passed
         if (passStart && endplacement < preplacement) {
-            player.setPlayerBalance(5);
+            player.setPlayerBalance(4000);
         }
         player.setPlacement(endplacement);
         gui.movePlayer(player, endplacement, preplacement);
@@ -238,7 +239,11 @@ public class GameController {
         System.out.println(player.getName() + "'s net worth: " + player.getNetWorth());
         return netWorth;
     }
-
+    public void extraTurn(Player player) {
+        if(!(cup.getPair() == true)) {
+            nextTurn();
+        }
+    }
     //Copies the player array except the bankrupt player
     public void eliminatePlayer(Player player, int placement) {
         Player[] newPlayers = new Player[gui.getPlayers() - 1];

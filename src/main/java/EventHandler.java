@@ -137,11 +137,11 @@ public class EventHandler {
             gui.setChanceCard(card);
             gui.message(player.getName() + " trak prøv-lykken kortet: " + card.getDescription());
         } else if(card instanceof MoveCards) {
+            gui.setChanceCard(card);
+            gui.message(player.getName() + " trak prøv-lykken kortet: " + card.getDescription());
             gui.removePlayer(player, player.getPlacement());
             gui.movePlayer(player, ((MoveCards) card).move(player), player.getPlacement());
             //((MoveCards) card).move(player);
-            gui.setChanceCard(card);
-            gui.message(player.getName() + " trak prøv-lykken kortet: " + card.getDescription());
         } else if(card instanceof JailFreeCards) {
             ((JailFreeCards) card).setPlayerFree(player);
             gui.setChanceCard(card);

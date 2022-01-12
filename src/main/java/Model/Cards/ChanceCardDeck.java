@@ -87,7 +87,7 @@ public class ChanceCardDeck {
     public ChanceCard drawCard() {
         // Method that draws and returns the top card in the deck and afterwards places the card in the bottom of the deck
         ChanceCard card;
-        card = deck[24];
+        card = deck[26];
 
         for(int i = 0; i < deck.length; i++) {
             if(i > 0) {

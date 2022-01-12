@@ -41,7 +41,13 @@ public class MoveCards extends ChanceCard {
         else if(type.equals("frederiksberg") && (player.getPlacement() < 11)) {
             player.setPlacement(value);
         }
+        else if(value > 0 && player.getPlacement() > 35) {
+            System.out.println("Spillerens placering er: " + player.getPlacement());
+            value = player.getPlacement() + value;
+            player.setPlacement(value);
+        }
         else if(value > -1 && value != 0) {
+            System.out.println("KØRER DENNE IF SÆTNING");
             value = player.getPlacement() + value;
             player.setPlacement(value);
         }
@@ -51,10 +57,6 @@ public class MoveCards extends ChanceCard {
         else if(value < 0 && player.getPlacement() < 5) {
             value = player.getPlacement() + 40 + value;
             player.setPlacement(value);
-        }
-        else {
-            //value = player.getPlacement() + value;
-            player.setPlayerBalance(value);
         }
         return value;
     }
