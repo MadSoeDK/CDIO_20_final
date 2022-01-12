@@ -121,6 +121,7 @@ public class EventHandler {
     }
 
     public void fieldEffect(Player player, Jail jail) {
+
     }
 
     public void fieldEffect(Player player, Tax tax, int netWorth) {
