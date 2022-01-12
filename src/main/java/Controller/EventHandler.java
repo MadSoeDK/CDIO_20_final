@@ -13,7 +13,7 @@ public class EventHandler {
 
     public void playerOptionsTrade(Player player, Player [] players, Board board) {
         int playerIndex = java.util.Arrays.asList(players).indexOf(player);
-        boolean answer = gui.getUserBool("Vil du handle?", "Ja", "Nej, rul terning");
+        boolean answer = gui.getUserBool("Vil du handle?", "Ja", "Nej, gå tilbage");
 
         if (answer) {
                 trade(playerIndex, players, board);
@@ -22,7 +22,7 @@ public class EventHandler {
     }
 
     public void playerOptionsBuyMortgaged(Player player, Board board) {
-        boolean answer = gui.getUserBool("Vil du købe pantsatte ejendomme tilbage", "Ja", "Nej, rul terning");
+        boolean answer = gui.getUserBool("Vil du købe pantsatte ejendomme tilbage", "Ja", "Nej, gå tilbage");
         if (answer) {
             buyMortgage(player, board);
         }

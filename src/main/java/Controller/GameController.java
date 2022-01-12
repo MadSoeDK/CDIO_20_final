@@ -37,10 +37,24 @@ public class GameController {
     }
 
     public void takeTurn() {
-        // Ask if currentplayer wishes to trade?
-        event.playerOptionsTrade(currentPlayer, players, board);
-        //ask if currentplayer wants to buy mortgaged properties
-        event.playerOptionsBuyMortgaged(currentPlayer, board);
+        boolean playerHasRolledDice=false;
+        while (!playerHasRolledDice) {
+            String[] playerStartOptions = {"Slå med terningerne", "Handle med Spiller", "Betal Pantsætning"};
+            String playerStartChoice = gui.getUserSelection("Hvilken handling vil du tage?", playerStartOptions);
+            // Run actions
+            if (playerStartOptions[0] == playerStartChoice) { // Roll dice
+                playerHasRolledDice=true;
+            }
+            if (playerStartOptions[1] == playerStartChoice) { // Trade
+                // Ask if currentplayer wishes to trade?
+                event.playerOptionsTrade(currentPlayer, players, board);
+            }
+            if (playerStartOptions[2] == playerStartChoice) { // Pay Mortgage
+                //ask if currentplayer wants to buy mortgaged properties
+                event.playerOptionsBuyMortgaged(currentPlayer, board);
+            }
+        }
+
         if (currentPlayer.getInJailStatus() == false)
         {
             // Roll die, get value, show die

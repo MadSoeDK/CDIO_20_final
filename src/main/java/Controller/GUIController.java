@@ -9,6 +9,7 @@ import gui_fields.*;
 import gui_main.GUI;
 
 import java.awt.*;
+import java.util.Random;
 
 public class GUIController {
 
@@ -16,7 +17,7 @@ public class GUIController {
     private GUI_Player[] guiPlayers;
     private String[] playernames;
     private GUI_Field[] guiFields;
-    private final Color[] colors = {new Color(180,0,0), new Color(0,180,0), new Color(0,0,180), new Color(210,9,214), new Color(0,209,206), new Color(255,106,0)};
+    private final Color[] colors = {new Color(180,0,0), new Color(0,90,0), new Color(0,0,180), new Color(210,9,214), new Color(0,209,206), new Color(255,106,0)};
 
     public GUIController(Field[] fields) {
         GUI_Field[] guiBoard = createBoard(fields);
@@ -90,7 +91,26 @@ public class GUIController {
         for (int i = 0; i < qty; i++) {
             gui.showMessage("Indtast spiller navn: ");
 
-            GUI_Car playerCar = new GUI_Car(colors[i], colors[i], GUI_Car.Type.UFO, GUI_Car.Pattern.FILL);
+            // Get random car type
+            Random rand = new Random();
+            int carOptions = rand.nextInt(4);
+            GUI_Car.Type carOptionChosen = GUI_Car.Type.TRACTOR;
+            switch(carOptions){
+                case 0:
+                    carOptionChosen = GUI_Car.Type.CAR;
+                    break;
+                case 1:
+                    carOptionChosen = GUI_Car.Type.RACECAR;
+                    break;
+                case 2:
+                    carOptionChosen = GUI_Car.Type.TRACTOR;
+                    break;
+                case 3:
+                    carOptionChosen = GUI_Car.Type.UFO;
+                    break;
+            }
+
+            GUI_Car playerCar = new GUI_Car(colors[i], colors[i], carOptionChosen, GUI_Car.Pattern.FILL);
 
             guiPlayers[i] = new GUI_Player(gui.getUserString(""), STARTBALANCE, playerCar);
 
