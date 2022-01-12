@@ -23,8 +23,8 @@ public class Cup {
         return facevalues;
     }
     public void roll() {
-        int fv1 = 4;//die1.roll();
-        int fv2 = 4;//die2.roll();
+        int fv1 = die1.roll();
+        int fv2 = die2.roll();
 
         sum = fv1 + fv2;
 

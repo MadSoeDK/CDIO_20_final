@@ -40,7 +40,8 @@ public class GameController {
             gui.message("Nu er det " + currentPlayer.getName() + "'s tur");
             takeTurn();
             nextTurn();
-        } while (true); //Check winner
+        } while (players.length > 1); //Check winner
+        gui.message(currentPlayer.getName() + " VANDT SPILLET.");
     }
 
     public void takeTurn() {
@@ -51,7 +52,7 @@ public class GameController {
 
         // Roll die, get value, show die
         cup.roll();
-        sum = 2; //cup.getSum();
+        sum = cup.getSum(); //cup.getSum();
         gui.showDice(cup.getFacevalues()[0], cup.getFacevalues()[1]);
 
         // Move player placement - automatically updates GUI
@@ -74,7 +75,6 @@ public class GameController {
 
         netWorth(currentPlayer);
         bankrupt(currentPlayer, placement);
-        //eliminatePlayer(currentPlayer, placement);
 
     }
 
@@ -91,10 +91,14 @@ public class GameController {
     public void nextTurn() {
         // Chance Player Turn/Reset to first player
         playerindex = java.util.Arrays.asList(players).indexOf(currentPlayer);
-
-        if (playerindex == players.length - 1) {
+        if(cup.getPair() == true) {
+            gui.message(currentPlayer.getName() + " slog par og får en ekstra tur.");
+            currentPlayer = players[playerindex];
+        }
+        else if (playerindex == players.length - 1) {
             currentPlayer = players[0];
-        } else {
+        }
+        else {
             currentPlayer = players[playerindex + 1];
         }
     }
@@ -238,11 +242,6 @@ public class GameController {
         player.setNetWorth(netWorth);
         System.out.println(player.getName() + "'s net worth: " + player.getNetWorth());
         return netWorth;
-    }
-    public void extraTurn(Player player) {
-        if(!(cup.getPair() == true)) {
-            nextTurn();
-        }
     }
     //Copies the player array except the bankrupt player
     public void eliminatePlayer(Player player, int placement) {
