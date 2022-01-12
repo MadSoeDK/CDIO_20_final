@@ -53,9 +53,13 @@ public class GameController {
                 //ask if currentplayer wants to buy mortgaged properties
                 event.playerOptionsBuyMortgaged(currentPlayer, board);
             }
-            if (playerStartOptions[3] == playerStartChoice) { // Debug Sell houses
-                //Debug Sell houses
-                sellHouse();
+            if (playerStartOptions[3] == playerStartChoice) { // Sell houses
+                //Sell houses
+                if (board.getPlayerOwnsMonopoly(currentPlayer)) {
+                    sellHouse();
+                } else{
+                    gui.message("Du ejer ikke nogle huse");
+                }
             }
         }
 
