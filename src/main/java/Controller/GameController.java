@@ -38,7 +38,9 @@ public class GameController {
 
     public void takeTurn() {
         // Ask if currentplayer wishes to trade?
-        event.playerOptions(currentPlayer, players, board);
+        event.playerOptionsTrade(currentPlayer, players, board);
+        //ask if currentplayer wants to buy mortgaged properties
+        event.playerOptionsBuyMortgaged(currentPlayer, board);
         if (currentPlayer.getInJailStatus() == false)
         {
             // Roll die, get value, show die
@@ -142,7 +144,6 @@ public class GameController {
 
                     // Move to Jail field
                     setPlayerPlacement(currentPlayer, 10, false);
-                    currentPlayer.setInJailStatus(true);
                 }
                 break;
             case "FreeParking":

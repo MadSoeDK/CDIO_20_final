@@ -11,12 +11,20 @@ public class EventHandler {
         this.gui = gui;
     }
 
-    public void playerOptions(Player player, Player [] players, Board board) {
+    public void playerOptionsTrade(Player player, Player [] players, Board board) {
         int playerIndex = java.util.Arrays.asList(players).indexOf(player);
         boolean answer = gui.getUserBool("Vil du handle?", "Ja", "Nej, rul terning");
 
         if (answer) {
                 trade(playerIndex, players, board);
+        }
+        // Roll dice
+    }
+
+    public void playerOptionsBuyMortgaged(Player player, Board board) {
+        boolean answer = gui.getUserBool("Vil du købe pantsatte ejendomme tilbage", "Ja", "Nej, rul terning");
+        if (answer) {
+            buyMortgage(player, board);
         }
         // Roll dice
     }
@@ -493,6 +501,53 @@ public class EventHandler {
         }
 
 
+    }
+    public void buyMortgage(Player player, Board board) {
+        boolean value = true;
+        int numberOfMortgagedProperties;
+        numberOfMortgagedProperties = board.countNumberOfMortgagedPropertiesForPlayer(player);
+        Ownable[] playerMortgagedProperties = new Ownable[numberOfMortgagedProperties];
+        String[] mortgagedPropertyNames = new String[numberOfMortgagedProperties];
+        int currentMortgagedProperty = 0;
+        for (int i = 0; i < board.getFields().length; i++) {
+            //Type casting field to Ownable
+            if (board.getField(i) instanceof Ownable) {
+                //Verifying that the current field is of the type Ownable
+                Ownable property = (Ownable) board.getField(i);
+                if (player == property.getOwner()) {
+                    if (property.getMortgage()) {
+                        playerMortgagedProperties[currentMortgagedProperty] = property;
+                        mortgagedPropertyNames[currentMortgagedProperty] = property.getName();
+                        currentMortgagedProperty++;
+                    }
+                }
+            }
+        }
+        while (value) {
+            //stops while loop if no mortgaged properties
+            if (numberOfMortgagedProperties == 0) {
+                gui.button("Du har ikke nogen pantsatte ejendomme","ok");
+                value = false;
+            }
+            else {
+                String guiSelection = gui.dropdown("Vælg en pantsat ejendom du skal købe:", mortgagedPropertyNames);
+                for (int i = 0; i < mortgagedPropertyNames.length; i++) {
+                    //Verifying that the current field is of the type Ownable
+                    Ownable property = playerMortgagedProperties[i];
+                    if (property.getName().equals(guiSelection)) {
+                        property.setMortgage(false);
+                        //set GUI mortgage
+                        player.setPlayerBalance(-((property.getPrice()) / 2)+(((property.getPrice()) / 2) * 10/100));
+                        String[] newMortgagedPropertyNames = new String[mortgagedPropertyNames.length - 1];
+                        int j = 0;
+                        if (property.getOwner() == player && (property.getName().equals(guiSelection))) {
+                            mortgagedPropertyNames[i] = newMortgagedPropertyNames[j];
+                            j++;
+                        }
+                    }
+                }
+            }
+        }
     }
 
 
