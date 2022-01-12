@@ -38,7 +38,10 @@ public class GameController {
 
     public void takeTurn() {
         // Ask if currentplayer wish to trade?
-        event.playerOptions(currentPlayer, players, board);
+        event.playerOptionsTrade(currentPlayer, players, board);
+
+        //ask if currentplayer wants to buy mortgaged properties
+        event.playerOptionsBuyMortgaged(currentPlayer, board);
 
         // Roll die, get value, show die
         cup.roll();
@@ -65,10 +68,8 @@ public class GameController {
         for (Player p : players) {
             gui.setguiPlayerBalance(p, p.getPlayerBalance());
         }
-
         netWorth(currentPlayer);
         bankrupt(currentPlayer, placement);
-
     }
 
     public void setupPlayers(String[] playerNames) {
