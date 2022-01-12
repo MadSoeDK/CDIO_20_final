@@ -46,23 +46,22 @@ public class ChanceCardDeck {
                 "15.000 kroner.", "receivecard 14",  "receivelegation", 40000);
 
         //Receive money from other players
-        deck[22] = new ReceiveCards("Det er deres fødselsdag. Modtag af hver medspiller 200 kr.", "receiveplayers",  "receiveplayers", 200);
+        deck[23] = new ReceiveCards("Det er deres fødselsdag. Modtag af hver medspiller 200 kr.", "receiveplayers",  "receiveplayers", 200);
 
         //All MoveCards
-        deck[23] = new MoveCards("Ryk frem til START.", "movecard 1", "move", 0);
-        deck[24] = new MoveCards("Ryk frem til START.", "movecard 2", "move", 0);
+        deck[24] = new MoveCards("Ryk frem til START.", "movecard 1", "move", 0);
+        deck[25] = new MoveCards("Ryk frem til START.", "movecard 2", "move", 0);
 
-        deck[25] = new MoveCards("Ryk tre felter frem.", "movecard 3", "move", 3);
-        deck[26] = new MoveCards("Ryk tre felter tilbage.", "movecard 4", "move", -3);
-        deck[27] = new MoveCards("Ryk tre felter tilbage.", "movecard 5", "move", -3);
-        deck[28] = new MoveCards("Ryk frem til Frederiksberg Allé.", "movecard 6", "frederiksberg", 11);
+        deck[26] = new MoveCards("Ryk tre felter frem.", "movecard 3", "move", 3);
+        deck[27] = new MoveCards("Ryk tre felter tilbage.", "movecard 4", "move", -3);
+        deck[28] = new MoveCards("Ryk tre felter tilbage.", "movecard 5", "move", -3);
+        deck[29] = new MoveCards("Ryk frem til Frederiksberg Allé.", "movecard 6", "frederiksberg", 11);
             //All move and receive cards
-        deck[29] = new MoveCards("Ryk frem til Frederiksberg Allé. Hvis De passere START, indkasser da 4000 kroner.",
+        deck[30] = new MoveCards("Ryk frem til Frederiksberg Allé. Hvis De passere START, indkasser da 4000 kroner.",
                 "movecard 7", "frederiksberg", 11);
 
-        deck[30] = new MoveCards("Tag med Mols-Linien, flyt brikken frem og hvis De passerer START indkassér da " +
-                "4000 kroner.",
-                "movecard 8", "molslinien", 15);
+        deck[31] = new MoveCards("Tag med Mols-Linien, flyt brikken frem og hvis De passerer START indkassér da " +
+                "4000 kroner.", "movecard 8", "molslinien", 15);
 
         deck[32] = new MoveCards("Ryk frem til Grønningen, hvis De passerer start indkasser da 4000 kroner.", "movecard 9", "gronningen", 24);
         deck[33] = new MoveCards("Ryk frem til Vimmelskaftet, hvis de passerer start indkasser da 4000 kroner", "movecard 10", "vimmelskaftet", 32);
@@ -88,7 +87,7 @@ public class ChanceCardDeck {
     public ChanceCard drawCard() {
         // Method that draws and returns the top card in the deck and afterwards places the card in the bottom of the deck
         ChanceCard card;
-        card = deck[33];
+        card = deck[24];
 
         for(int i = 0; i < deck.length; i++) {
             if(i > 0) {

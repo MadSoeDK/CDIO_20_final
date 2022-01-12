@@ -139,7 +139,7 @@ public class EventHandler {
         } else if(card instanceof MoveCards) {
             gui.removePlayer(player, player.getPlacement());
             gui.movePlayer(player, ((MoveCards) card).move(player), player.getPlacement());
-            ((MoveCards) card).move(player);
+            //((MoveCards) card).move(player);
             gui.setChanceCard(card);
             gui.message(player.getName() + " trak prøv-lykken kortet: " + card.getDescription());
         } else if(card instanceof JailFreeCards) {
@@ -147,11 +147,11 @@ public class EventHandler {
             gui.setChanceCard(card);
             gui.message(player.getName() + " trak prøv-lykken kortet: " + card.getDescription());
         } else if(card instanceof ReceiveCards) {
-            if(card.getType().equals("receivelegation")) {
+            if(card.getName().equals("receivecard 14")) {
                 ((ReceiveCards) card).receiveLegation(player);
                 gui.setChanceCard(card);
                 gui.message(player.getName() + " trak prøv-lykken kortet: " + card.getDescription());
-            } else if(card.getType().equals("receiveplayers")){
+            } else if(card.getName().equals("receiveplayers")){
                 //((ReceiveCards) card).receiveFromPlayers(player, );
                 gui.setChanceCard(card);
                 gui.message(player.getName() + " trak prøv-lykken kortet: " + card.getDescription());

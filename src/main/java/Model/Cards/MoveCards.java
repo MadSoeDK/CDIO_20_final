@@ -19,22 +19,22 @@ public class MoveCards extends ChanceCard {
         if(type.equals("vimmelskaftet") && (player.getPlacement() > 32)) {
             player.setPlacement(value);
             player.setPlayerBalance(money);
-        } else if(type.equals("vimmelskaftet") && (player.getPlacement() < 27)) {
+        } else if(type.equals("vimmelskaftet") && (player.getPlacement() < 32)) {
             player.setPlacement(value);
         }
-        else if(type.equals("gronningen") && (player.getPlacement() > 27)) {
+        else if(type.equals("gronningen") && (player.getPlacement() > 24)) {
             player.setPlacement(value);
             player.setPlayerBalance(money);
-        } else if(type.equals("gronningen") && (player.getPlacement() < 27)) {
+        } else if(type.equals("gronningen") && (player.getPlacement() < 24)) {
             player.setPlacement(value);
         }
-        else if(type.equals("molslinien") && (player.getPlacement() > 16)) {
+        else if(type.equals("molslinien") && (player.getPlacement() > 15)) {
             player.setPlacement(value);
             player.setPlayerBalance(money);
-        } else if(type.equals("molslinien") && (player.getPlacement() < 16)) {
+        } else if(type.equals("molslinien") && player.getPlacement() < 15) {
             player.setPlacement(value);
         }
-        else if(type.equals("frederiksberg") && (player.getPlacement() > 11)) {
+        else if(type.equals("frederiksberg") && player.getPlacement() > 11) {
             player.setPlacement(value);
             player.setPlayerBalance(money);
         }
@@ -53,7 +53,7 @@ public class MoveCards extends ChanceCard {
             player.setPlacement(value);
         }
         else {
-            value = player.getPlacement() + value;
+            //value = player.getPlacement() + value;
             player.setPlayerBalance(value);
         }
         return value;
