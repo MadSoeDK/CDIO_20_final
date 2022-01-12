@@ -13,7 +13,7 @@ public class Street extends Ownable {
         return HOUSEPRICE;
     }
     public void setHouseAmount(int newHouseAmount) {
-
+        houseAmount=newHouseAmount;
     }
     public void incrementHouseAmount(){
         if (houseAmount < 5){
