@@ -67,7 +67,7 @@ public class GUIController {
                     break;
                 case "Tax":
                     guiFields[i] = new GUI_Tax();
-                    guiFields[i].setBackGroundColor(Color.GRAY);
+                    guiFields[i].setBackGroundColor(new Color(56,142,53));
                     guiFields[i].setSubText("");
                     break;
                 case "Brewery":
@@ -283,19 +283,19 @@ public class GUIController {
 
         switch (color.toLowerCase()) {
             case "red" :
-                result = Color.red;
+                result = new Color(255,80,80);
                 break;
             case "green" :
-                result = Color.green;
+                result = new Color(94,255,110);
                 break;
             case "blue" :
                 result = new Color(45, 137, 239);
                 break;
             case "yellow" :
-                result = Color.yellow;
+                result = new Color(242,236,51);
                 break;
             case "purple" :
-                result = new Color(255, 90, 255);
+                result = new Color(185, 105, 200);
                 break;
             case "turquoise" :
                 result = new Color(0,255,239);
