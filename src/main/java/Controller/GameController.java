@@ -37,17 +37,34 @@ public class GameController {
     }
 
     public void takeTurn() {
-        // Ask if currentplayer wish to trade?
-        event.playerOptions(currentPlayer, players, board);
+        // Ask if currentplayer wishes to trade?
+        event.playerOptionsTrade(currentPlayer, players, board);
+        //ask if currentplayer wants to buy mortgaged properties
+        event.playerOptionsBuyMortgaged(currentPlayer, board);
+        if (currentPlayer.getInJailStatus() == false)
+        {
+            // Roll die, get value, show die
+            cup.roll();
+            sum = cup.getSum();
+            gui.showDice(cup.getFacevalues()[0], cup.getFacevalues()[1]);
+            moveplayer(currentPlayer, sum);
+        }
+        else
+        {
+            escapeJail();
+        }
+
+
 
         // Roll die, get value, show die
+        /*
         cup.roll();
-        sum = cup.getSum();
+        sum = 30; //cup.getSum();
         gui.showDice(cup.getFacevalues()[0], cup.getFacevalues()[1]);
 
-        // Move player placement - automatically updates GUI
-        moveplayer(currentPlayer, sum);
+         */
 
+        // Move player placement - automatically updates GUI
         int placement = currentPlayer.getPlacement();
 
         Field field = board.getField(placement);
@@ -84,10 +101,30 @@ public class GameController {
         // Chance Player Turn/Reset to first player
         playerindex = java.util.Arrays.asList(players).indexOf(currentPlayer);
 
-        if (playerindex == players.length - 1) {
-            currentPlayer = players[0];
-        } else {
-            currentPlayer = players[playerindex + 1];
+        if (cup.getFacevalues()[0] != cup.getFacevalues()[1])
+        {
+            // If there a pair wasn't rolled
+            if (playerindex == players.length - 1) {
+                currentPlayer = players[0];
+            } else {
+                currentPlayer = players[playerindex + 1];
+            }
+        }
+        else
+        {
+            if (currentPlayer.getTurnsInRow() != 2)
+            {
+                gui.message(currentPlayer.getName() + " tager en ekstra tur fordi der blev slået par!");
+                currentPlayer.incrementTurnsInRow();
+            }
+            else
+            {
+                // Go to jail
+                currentPlayer.setTurnsInRow(0);
+                currentPlayer.setInJailStatus(true);
+                gui.message(currentPlayer.getName() + " rykker til fængsel.");
+                setPlayerPlacement(currentPlayer, 10, false);
+            }
         }
     }
 
@@ -356,6 +393,60 @@ public class GameController {
                 }
             }
         }
+    }
+
+    public void escapeJail(){
+        // Make string array based on jailcard
+        String[] escapeOption = {"Slå et par", "Betal 1000"};
+        String[] allEscapeOption = {"Slå et par", "Betal 1000", "Brug Chance Kort"};
+        String[] oneEscapeOption = {"Betal 1000"};
+        // If you have jailcard
+        if (false)
+        {
+            escapeOption = allEscapeOption;
+        }
+        if (currentPlayer.getEscapeAttempts() == 3)
+        {
+            escapeOption = oneEscapeOption;
+        }
+        switch(gui.dropdown("Hvordan vil du undslippe fængsel",escapeOption)){
+
+            case "Slå et par":
+                cup.roll();
+                sum = cup.getSum();
+                gui.showDice(cup.getFacevalues()[0],cup.getFacevalues()[1]);
+                // If pair
+                if (cup.getFacevalues()[0] == cup.getFacevalues()[1])
+                {
+                    currentPlayer.setInJailStatus(false);
+                    moveplayer(currentPlayer,sum);
+                    currentPlayer.setEscapeAttempts(0);
+                }
+                else
+                {
+                    currentPlayer.incrementEscapeAttempts();
+                }
+                break;
+
+            case "Betal 1000":
+                currentPlayer.setPlayerBalance(-1000);
+                hasEscapedJail();
+                break;
+
+            case "Brug Chance Kort":
+                hasEscapedJail();
+                break;
+
+        }
+    }
+
+    private void hasEscapedJail(){
+        cup.roll();
+        sum = cup.getSum();
+        currentPlayer.setInJailStatus(false);
+        currentPlayer.setEscapeAttempts(0);
+        moveplayer(currentPlayer,sum);
+        gui.showDice(cup.getFacevalues()[0],cup.getFacevalues()[1]);
     }
 }
 

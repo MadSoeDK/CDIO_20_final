@@ -9,13 +9,19 @@ public class Player {
     private final String name;
     int balance;
     int netWorth;
+    int escapeAttempt;
+    int turnsInRow;
     boolean bankrupt;
+    boolean inJail;
 
     public Player(String name, int balance) {
          this.balance = balance;
          this.name = name;
          this.netWorth = getPlayerBalance();
          this.bankrupt = false;
+         this.escapeAttempt = 0;
+         this.inJail=false;
+         this.turnsInRow=0;
     }
 
     public int getPlayerBalance() {
@@ -45,4 +51,12 @@ public class Player {
     public boolean getBankruptStatus() {
         return bankrupt;
     }
+    public boolean getInJailStatus(){return inJail; }
+    public void setInJailStatus(boolean status){inJail = status;}
+    public int getEscapeAttempts(){return escapeAttempt;}
+    public void setEscapeAttempts(int amount){escapeAttempt=amount;}
+    public void incrementEscapeAttempts(){escapeAttempt++;}
+    public int getTurnsInRow(){return turnsInRow;}
+    public void setTurnsInRow(int amount){turnsInRow = amount;}
+    public void incrementTurnsInRow(){turnsInRow++;}
 }
