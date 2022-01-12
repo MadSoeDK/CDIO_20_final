@@ -4,6 +4,7 @@ import Model.Board.Field;
 import Model.Board.Ownable;
 import Model.Player;
 import Model.Board.Street;
+import Utility.Language;
 import gui_fields.*;
 import gui_main.GUI;
 
@@ -20,6 +21,13 @@ public class GUIController {
     public GUIController(Field[] fields) {
         GUI_Field[] guiBoard = createBoard(fields);
         gui = new GUI(guiBoard, new Color(112, 171, 79));
+        chooseLanguage();
+    }
+
+    public void chooseLanguage() {
+        String language = gui.getUserSelection("Select Language", "Danish", "English");
+        Language.read();
+        Language.setLanguage(language);
     }
 
     public GUI_Field[] createBoard(Field[] fields) {
@@ -75,7 +83,7 @@ public class GUIController {
     }
 
     public void createPlayers(int STARTBALANCE) {
-        int qty = Integer.parseInt(gui.getUserSelection("How many players?", "3", "4", "5", "6"));
+        int qty = Integer.parseInt(gui.getUserSelection(Language.getText("players?"), "3", "4", "5", "6"));
 
         guiPlayers = new GUI_Player[qty];
 
@@ -194,9 +202,11 @@ public class GUIController {
         }
         return guiplayer;
     }
+
     public GUI_Player[] getGuiPlayers() {
         return guiPlayers;
     }
+
     public int getPlayers() {
         return guiPlayers.length;
     }
