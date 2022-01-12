@@ -101,7 +101,7 @@ public class GameController {
         // Chance Player Turn/Reset to first player
         playerindex = java.util.Arrays.asList(players).indexOf(currentPlayer);
 
-        if (false)//cup.getFacevalues()[0] != cup.getFacevalues()[1])
+        if (cup.getFacevalues()[0] != cup.getFacevalues()[1])
         {
             // If there a pair wasn't rolled
             if (playerindex == players.length - 1) {
