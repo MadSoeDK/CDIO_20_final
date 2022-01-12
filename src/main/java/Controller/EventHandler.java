@@ -281,7 +281,7 @@ public class EventHandler {
         players[auctionWinner].setPlayerBalance(-auctionSum);
         field.setOwner(players[auctionWinner]);
         gui.setOwner(players[auctionWinner], field);
-        gui.getGuiField(curAucPlayer.getPlacement()).setSubText("Leje: "+field.getCurrentRent());
+        gui.getGuiField(field.getPlacement()).setSubText("Leje: "+field.getCurrentRent());
         /*
         if (auctionSum > propertyWorth) {
             // After the auction you will be charged for the property, here we account for that

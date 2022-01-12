@@ -68,12 +68,11 @@ public class GameController {
         {
             // Roll die, get value, show die
             cup.roll();
-            sum = 1;//cup.getSum();
+            sum = cup.getSum();
             gui.showDice(cup.getFacevalues()[0], cup.getFacevalues()[1]);
             moveplayer(currentPlayer, sum);
         }
-        else
-        {
+        else {
             escapeJail();
         }
 
