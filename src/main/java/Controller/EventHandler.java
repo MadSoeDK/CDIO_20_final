@@ -1,3 +1,5 @@
+package Controller;
+
 import Model.*;
 import Model.Board.*;
 

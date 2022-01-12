@@ -1,7 +1,7 @@
+package Controller;
+
 import Model.*;
 import Model.Board.*;
-
-import java.util.Objects;
 
 public class GameController {
 
