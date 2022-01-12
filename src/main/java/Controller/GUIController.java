@@ -3,7 +3,6 @@ package Controller;
 import Model.Board.Field;
 import Model.Board.Ownable;
 import Model.Player;
-//import Model.Property;
 import Model.Board.Street;
 import gui_fields.*;
 import gui_main.GUI;
@@ -20,7 +19,7 @@ public class GUIController {
 
     public GUIController(Field[] fields) {
         GUI_Field[] guiBoard = createBoard(fields);
-        gui = new GUI(guiBoard,Color.white);
+        gui = new GUI(guiBoard, new Color(112, 171, 79));
     }
 
     public GUI_Field[] createBoard(Field[] fields) {
@@ -93,6 +92,7 @@ public class GUIController {
             field.setCar(guiPlayers[i], true);
         }
     }
+
     public void removePlayer(Player player, int placement) {
         if(player.getBankruptStatus()) {
             GUI_Field field = gui.getFields()[placement];
