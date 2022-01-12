@@ -45,7 +45,7 @@ public class GameController {
         {
             // Roll die, get value, show die
             cup.roll();
-            sum = cup.getSum();
+            sum = 1;//cup.getSum();
             gui.showDice(cup.getFacevalues()[0], cup.getFacevalues()[1]);
             moveplayer(currentPlayer, sum);
         }
@@ -315,21 +315,31 @@ public class GameController {
                     }
 
                     // Chose specific street
+                    int lowestHouseAmount=5;
                     Street selectedStreet = null;
                     String[] selectedMonopolyStreetStringArray = selectedMonopoly.getStringArray();
                     String selectedStreetString = gui.dropdown("Hvilken Bygning vil du bygge på? Et hus koster: "+selectedMonopoly.getStreetArray()[0].getHousePrice(), selectedMonopolyStreetStringArray);
                     for (int i = 0; i < selectedMonopoly.getStreetArray().length; i++) {
+                        // Check highest house amount
+                        if (selectedMonopoly.getStreetArray()[i].getHouseAmount() < lowestHouseAmount){lowestHouseAmount = selectedMonopoly.getStreetArray()[i].getHouseAmount();}
+                        // Match player selection with string array number
                         if (selectedStreetString == selectedMonopolyStreetStringArray[i]) {
                             selectedStreet = selectedMonopoly.getStreetArray()[i];
                         }
                     }
-
-                    // Add house to selected Street, pay for it & add GUI element
-                    selectedStreet.incrementHouseAmount();
-                    // Build house/hotel
-                    gui.setGuiHouseAmount(selectedStreet.getPlacement(),selectedStreet.getHouseAmount());
-                    gui.updateFieldRent(selectedStreet.getPlacement(),selectedStreet.getCurrentRent());
-                    currentPlayer.setPlayerBalance(-selectedStreet.getHousePrice());
+                    // Check for uneven house amounts
+                    if (selectedStreet.getHouseAmount() == lowestHouseAmount)
+                    {
+                        // Add house to selected Street, pay for it & add GUI element
+                        selectedStreet.incrementHouseAmount();
+                        // Build house/hotel
+                        gui.setGuiHouseAmount(selectedStreet.getPlacement(), selectedStreet.getHouseAmount());
+                        gui.updateFieldRent(selectedStreet.getPlacement(), selectedStreet.getCurrentRent());
+                        currentPlayer.setPlayerBalance(-selectedStreet.getHousePrice());
+                    }
+                    else{
+                        gui.message("Du skal bygge jævnt, forskelle i husmængder på farven må maksimalt være 1");
+                    }
                 }
                 else{
                     stopBuilding = true;
