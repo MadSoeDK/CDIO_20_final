@@ -323,7 +323,6 @@ public class GameController {
 
                     // Match the string array to the object referance array
                     for (int i = 0; i < playerMonopolyOptions.length; i++) {
-
                         if (playerMonopolyOptions[i].getName() == selectedMonopolyName) {
                             selectedMonopoly = playerMonopolyOptions[i];
                         }
@@ -362,6 +361,72 @@ public class GameController {
             }
         }
     }
+
+    public void sellHouse(){
+
+        boolean stopBuilding = false;
+        while (!stopBuilding)
+        {
+            if (gui.getUserBool("Vil sælge et hus?", "Jeg vil sælge huse", "Jeg vil IKKE sælge huse")) {
+
+                // Sell Houses
+                    // Give player option over monopolies
+                    Monopoly[] playerMonopolyOptions = board.getOwnedPlayerMonopolyList(currentPlayer);
+                    String[] PlayerMonopolyOptionsString = new String[playerMonopolyOptions.length];
+                    for (int i = 0; i < playerMonopolyOptions.length; i++) {
+                        PlayerMonopolyOptionsString[i] = playerMonopolyOptions[i].getName();
+                    }
+                    String selectedMonopolyName = gui.dropdown("Hvilken farve vil du sælge Fra?", PlayerMonopolyOptionsString);
+                    Monopoly selectedMonopoly = null;// = new Monopoly();
+
+                    // Match the string array to the object referance array
+                    for (int i = 0; i < playerMonopolyOptions.length; i++) {
+                        if (playerMonopolyOptions[i].getName() == selectedMonopolyName) {
+                            selectedMonopoly = playerMonopolyOptions[i];
+                        }
+                    }
+
+                    // Chose specific street to sell from
+                    int highestHouseAmount=5;
+                    Street selectedStreet = null;
+                    String[] selectedMonopolyStreetStringArray = selectedMonopoly.getStringArray();
+                    String selectedStreetString = gui.dropdown("Hvilken Bygning vil du bygge på? Et hus koster: "+selectedMonopoly.getStreetArray()[0].getHousePrice(), selectedMonopolyStreetStringArray);
+                    for (int i = 0; i < selectedMonopoly.getStreetArray().length; i++) {
+                        // Check highest house amount
+                        if (selectedMonopoly.getStreetArray()[i].getHouseAmount() > highestHouseAmount){highestHouseAmount = selectedMonopoly.getStreetArray()[i].getHouseAmount();}
+                        // Match player selection with string array number
+                        if (selectedStreetString == selectedMonopolyStreetStringArray[i]) {
+                            selectedStreet = selectedMonopoly.getStreetArray()[i];
+                        }
+                    }
+
+                // Make sure Street has house
+                if (selectedStreet.getHouseAmount() > 0) {
+
+                    // Check for uneven house amounts
+                    if (selectedStreet.getHouseAmount() == highestHouseAmount) {
+                        // Add house to selected Street, pay for it & add GUI element
+                        selectedStreet.setHouseAmount(selectedStreet.getHouseAmount() - 1);
+                        // Build house/hotel
+                        gui.setGuiHouseAmount(selectedStreet.getPlacement(), selectedStreet.getHouseAmount());
+                        gui.updateFieldRent(selectedStreet.getPlacement(), selectedStreet.getCurrentRent());
+                        currentPlayer.setPlayerBalance(selectedStreet.getHousePrice() / 2);
+                    } else {
+                        gui.message("Du skal sælge jævnt, forskelle i husmængder på farven må maksimalt være 1");
+                    }
+                } else {
+                    gui.message("Her er ikke nogen huse at sælge");
+                }
+            }
+            else
+            {
+                // Don't sell Houses
+                stopBuilding = true;
+            }
+        }
+    }
+
+
 
     /*
     - Make an array with the player's properties.
