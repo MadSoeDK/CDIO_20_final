@@ -39,7 +39,7 @@ public class GameController {
     public void takeTurn() {
         boolean playerHasRolledDice=false;
         while (!playerHasRolledDice) {
-            String[] playerStartOptions = {"Slå med terningerne", "Handle med Spiller", "Betal Pantsætning"};
+            String[] playerStartOptions = {"Slå med terningerne", "Handle med Spiller", "Betal Pantsætning", "Sælg Hus"};
             String playerStartChoice = gui.getUserSelection("Hvilken handling vil du tage?", playerStartOptions);
             // Run actions
             if (playerStartOptions[0] == playerStartChoice) { // Roll dice
@@ -53,6 +53,14 @@ public class GameController {
                 //ask if currentplayer wants to buy mortgaged properties
                 event.playerOptionsBuyMortgaged(currentPlayer, board);
             }
+            if (playerStartOptions[3] == playerStartChoice) { // Sell houses
+                //Sell houses
+                if (board.getPlayerOwnsMonopoly(currentPlayer)) {
+                    sellHouse();
+                } else{
+                    gui.message("Du ejer ikke nogle huse");
+                }
+            }
         }
 
         // Check jail status
@@ -60,7 +68,7 @@ public class GameController {
         {
             // Roll die, get value, show die
             cup.roll();
-            sum = 3;//cup.getSum();
+            sum = 1;//cup.getSum();
             gui.showDice(cup.getFacevalues()[0], cup.getFacevalues()[1]);
             moveplayer(currentPlayer, sum);
         }
@@ -387,10 +395,10 @@ public class GameController {
                     }
 
                     // Chose specific street to sell from
-                    int highestHouseAmount=5;
+                    int highestHouseAmount=0;
                     Street selectedStreet = null;
                     String[] selectedMonopolyStreetStringArray = selectedMonopoly.getStringArray();
-                    String selectedStreetString = gui.dropdown("Hvilken Bygning vil du bygge på? Et hus koster: "+selectedMonopoly.getStreetArray()[0].getHousePrice(), selectedMonopolyStreetStringArray);
+                    String selectedStreetString = gui.dropdown("Hvilken Bygning vil sælge for: "+selectedMonopoly.getStreetArray()[0].getHousePrice()/2, selectedMonopolyStreetStringArray);
                     for (int i = 0; i < selectedMonopoly.getStreetArray().length; i++) {
                         // Check highest house amount
                         if (selectedMonopoly.getStreetArray()[i].getHouseAmount() > highestHouseAmount){highestHouseAmount = selectedMonopoly.getStreetArray()[i].getHouseAmount();}
