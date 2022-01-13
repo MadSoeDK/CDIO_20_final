@@ -33,12 +33,14 @@ public class GameController {
     }
 
     public void playGame() {
-        do {
-            gui.message(Language.getText("playgame1") + currentPlayer.getName() + Language.getText("playgame2"));
-            takeTurn();
-            nextTurn();
-        } while (players.length > 1); //Check winner
-        gui.message(currentPlayer.getName() + Language.getText("playgame3"));
+        if(!checkWinner()) {
+            do {
+                gui.message("Nu er det " + currentPlayer.getName() + "'s tur");
+                takeTurn();
+                nextTurn();
+            } while (!checkWinner());
+            gui.message(players[0].getName() + " VANDT SPILLET");
+        }
     }
 
     public void takeTurn() {
@@ -69,7 +71,7 @@ public class GameController {
         }
 
         // Check jail status
-        if (currentPlayer.getInJailStatus() == false && currentPlayer.getBankruptStatus() == false)
+        if (currentPlayer.getInJailStatus() == false)
         {
             // Roll die, get value, show die
             cup.roll();
@@ -142,9 +144,7 @@ public class GameController {
             {
                 gui.message(currentPlayer.getName() + " tager en ekstra tur fordi der blev slået par!");
                 currentPlayer.incrementTurnsInRow();
-            }
-            else
-            {
+            } else {
                 // Go to jail
                 currentPlayer.setTurnsInRow(0);
                 currentPlayer.setInJailStatus(true);
@@ -265,9 +265,9 @@ public class GameController {
 
     //Copies the player array except the bankrupt player
     public void eliminatePlayer(Player player, int placement) {
-        Player[] newPlayers = new Player[gui.getPlayers() - 1];
+        Player[] newPlayers = new Player[players.length - 1];
         int j = 0;
-        for (int i = 0; i < gui.getPlayers(); i++) {
+        for (int i = 0; i < players.length; i++) {
             if(players[i].getBankruptStatus()) {
                 gui.removePlayer(player, placement);
                 gui.getGuiPlayer(players[i]).setName(players[i].getName() + "\n[BANKEROT]");
@@ -278,6 +278,7 @@ public class GameController {
             }
         }
         players = newPlayers;
+
     }
 
     public boolean bankrupt(Player player, int placement) {
@@ -306,8 +307,8 @@ public class GameController {
                         }
                     }
                     //Removes player from the player array, Note: does not work if more players bankrupt same turn
+                    gui.message(player.getName() + " ER GÅET BANKEROT! \nTak for spillet " + player.getName() + ".");
                     eliminatePlayer(player, placement);
-                    gui.message(player.getName() + " IS BANKRUPT! \nThank you for playing " + player.getName() + ".");
                     //System.out.println(player.getName() + " IS BANKRUPT");
                 } else { // When you are able to mortgage to survive
                     //While loop that checks if balance is higher than rent

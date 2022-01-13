@@ -50,8 +50,9 @@ public class GUIController {
                 case "ChanceField":
                     guiFields[i] = new GUI_Chance();
                     guiFields[i].setSubText("");
-                    guiFields[i].setBackGroundColor(Color.LIGHT_GRAY);
-                    guiFields[i].setForeGroundColor(Color.BLACK);
+
+                    //guiFields[i].setBackGroundColor(Color.LIGHT_GRAY);
+                    //guiFields[i].setForeGroundColor(Color.BLACK);
                     break;
                 case "Jail":
                     guiFields[i] = new GUI_Jail();
