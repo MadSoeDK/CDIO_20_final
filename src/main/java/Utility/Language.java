@@ -27,7 +27,7 @@ public class Language {
     }
     public static void read() {
         String row = "";
-        file = new String[10][3];
+        file = new String[30][3];
         String path = "src/main/resources/language.csv";
         try {
             CSV = new BufferedReader(new FileReader(path));

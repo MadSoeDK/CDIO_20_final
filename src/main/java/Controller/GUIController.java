@@ -87,7 +87,7 @@ public class GUIController {
     }
 
     public void createPlayers(int STARTBALANCE) {
-        int qty = Integer.parseInt(gui.getUserSelection(Language.getText("createPlayers"), "3", "4", "5", "6"));
+        int qty = Integer.parseInt(gui.getUserSelection(Language.getText("createPlayers1"), "3", "4", "5", "6"));
 
         guiPlayers = new GUI_Player[qty];
 
@@ -123,6 +123,7 @@ public class GUIController {
             field.setCar(guiPlayers[i], true);
         }
     }
+
     public void removePlayer(Player player, int placement) {
             GUI_Field field = gui.getFields()[placement];
             field.setCar(getGuiPlayer(player), false);

@@ -2,6 +2,7 @@ package Controller;
 
 import Model.*;
 import Model.Board.*;
+import Utility.Language;
 
 public class GameController {
 
@@ -33,18 +34,18 @@ public class GameController {
 
     public void playGame() {
         do {
-            gui.message("Nu er det " + currentPlayer.getName() + "'s tur");
+            gui.message(Language.getText("playgame1") + currentPlayer.getName() + Language.getText("playgame2"));
             takeTurn();
             nextTurn();
         } while (players.length > 1); //Check winner
-        gui.message(currentPlayer.getName() + " HAR VUNDET SPILLET!");
+        gui.message(currentPlayer.getName() + Language.getText("playgame3"));
     }
 
     public void takeTurn() {
         boolean playerHasRolledDice=false;
         while (!playerHasRolledDice) {
-            String[] playerStartOptions = {"Slå med terningerne", "Handle med Spiller", "Betal Pantsætning", "Sælg Hus"};
-            String playerStartChoice = gui.getUserSelection("Hvilken handling vil du tage?", playerStartOptions);
+            String[] playerStartOptions = {Language.getText("taketurn1"), Language.getText("taketurn2"), Language.getText("taketurn3"), Language.getText("taketurn4")};
+            String playerStartChoice = gui.getUserSelection(Language.getText("taketurn5"), playerStartOptions);
             // Run actions
             if (playerStartOptions[0] == playerStartChoice) { // Roll dice
                 playerHasRolledDice=true;
@@ -62,21 +63,19 @@ public class GameController {
                 if (board.getPlayerOwnsMonopoly(currentPlayer)) {
                     sellHouse();
                 } else{
-                    gui.message("Du ejer ikke nogle huse");
+                    gui.message("taketurn6");
                 }
             }
         }
 
         // Check jail status
-        if (currentPlayer.getInJailStatus() == false)
-        {
+        if (currentPlayer.getInJailStatus() == false) {
             // Roll die, get value, show die
             cup.roll();
             sum = 5;//cup.getSum();
             gui.showDice(cup.getFacevalues()[0], cup.getFacevalues()[1]);
             moveplayer(currentPlayer, sum);
-        }
-        else {
+        } else {
             escapeJail();
         }
 
