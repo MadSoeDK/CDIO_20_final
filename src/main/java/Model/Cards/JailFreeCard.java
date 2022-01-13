@@ -1,28 +1,23 @@
 package Model.Cards;
-import Model.*;
 
 public class JailFreeCard extends ChanceCard {
-    private String description;
-    private String type;
-    private int value;
+    private final String DESCRIPTION;
+    private final String TYPE;
+    private final int VALUE;
 
     public JailFreeCard(String description, String type, int value) {
         super(description, type, value);
-        this.value = value;
-        this.description = description;
-        this.type = type;
+        this.VALUE = value;
+        this.DESCRIPTION = description;
+        this.TYPE = type;
     }
-    /*
-    We store this in a boolean 'hasJailFreeCard'
-    In options when in jail, choose
-     */
     public String getDescription() {
-        return description;
+        return DESCRIPTION;
     }
     public String getType() {
-        return type;
+        return TYPE;
     }
     public int getValue() {
-        return value;
+        return VALUE;
     }
 }

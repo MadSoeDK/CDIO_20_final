@@ -3,10 +3,10 @@ package Model.Cards;
 import java.util.Random;
 
 /**
- * Initializes ChanceCards, Controls Model.ChanceCard Effects.
+ * Provides methods for chance card deck and holds chance cards.
  */
 public class ChanceCardDeck {
-    private ChanceCard[] deck;
+    private final ChanceCard[] deck;
     public ChanceCardDeck() {
         // Initialize Model.ChanceCard Array
         deck = new ChanceCard[35];
@@ -68,12 +68,15 @@ public class ChanceCardDeck {
         deck[34] = new JailFreeCard(" anledning af kongens fødselsdag benådes De herved for fængsel. Dette kort kan \n" +
                 "opbevares indtil De får brug for det.", "jail", 30);
     }
+
+    /**
+     * Shuffles card deck randomly
+     */
     public void shuffleCard() {
-        //Method that shuffles cards.
         Random r = new Random();
 
-        //Shuffles cards.
         for (int i = 0; i < deck.length; i++) {
+            // produces a uniformly distrubted int
             int indexSwap = r.nextInt(deck.length);
 
             ChanceCard temp = deck[indexSwap];
@@ -81,15 +84,23 @@ public class ChanceCardDeck {
             deck[i] = temp;
         }
     }
+
+    /**
+     * Draw card from top of deck, and place it at the bottom.
+     * @return a Chancecard from top of deck
+     */
     public ChanceCard drawCard() {
         // Method that draws and returns the top card in the deck and afterwards places the card in the bottom of the deck
         ChanceCard card;
-        card = deck[23];
+        // Take the card on top
+        card = deck[0];
 
         for(int i = 0; i < deck.length; i++) {
+            // Shift the index of cards one up.
             if(i > 0) {
                 deck[i - 1] = deck[i];
             }
+            // For index = 0 - Put the card on top
             deck[i] = card;
         }
         return card;
