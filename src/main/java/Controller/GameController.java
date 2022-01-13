@@ -28,6 +28,7 @@ public class GameController {
         event = new EventHandler(gui);
         cardController = new CardController(gui);
         gui.createPlayers(STARTBALANCE);
+        cardController = new CardController(gui);
         setupPlayers(gui.getPlayernames());
         playGame();
     }
@@ -75,7 +76,7 @@ public class GameController {
         {
             // Roll die, get value, show die
             cup.roll();
-            sum = 5;//cup.getSum();
+            sum = cup.getSum();
             gui.showDice(cup.getFacevalues()[0], cup.getFacevalues()[1]);
             moveplayer(currentPlayer, sum);
         } else {
@@ -152,6 +153,13 @@ public class GameController {
             }
         }
     }
+    public boolean checkWinner() {
+        if(players.length == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     public void checkFieldType(Field field, int placement) {
 
@@ -169,6 +177,7 @@ public class GameController {
 
                     // Move to Jail field
                     setPlayerPlacement(currentPlayer, 10, false);
+                    currentPlayer.setInJailStatus(true);
                 }
                 break;
             case "FreeParking":

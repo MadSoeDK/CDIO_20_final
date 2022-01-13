@@ -86,10 +86,6 @@ public class EventHandler {
 
         if (ferry.getOwner() == null) { // Noone owns Ferry
             buyField(player, ferry, players);
-
-            ferry_cost = 4000;
-            player.setPlayerBalance(-ferry_cost);
-
         } else {
             // Get field owner
             Player fieldOwner = ferry.getOwner();
