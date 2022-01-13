@@ -183,6 +183,10 @@ public class GUIController {
         return playernames;
     }
 
+    public GUI_Field[] getGuiFields() {
+        return guiFields;
+    }
+
     public GUI_Player getGuiPlayer(Player currentplayer) {
         GUI_Player guiplayer = null;
         for (int i = 0; i < guiPlayers.length; i++) {

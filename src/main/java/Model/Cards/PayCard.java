@@ -1,13 +1,13 @@
 package Model.Cards;
 import Model.Player;
 
-public class PayCards extends ChanceCard {
+public class PayCard extends ChanceCard {
     private String description;
     private String name;
     private String type;
     private int value;
 
-    public PayCards(String description, String name, String type, int value) {
+    public PayCard(String description, String name, String type, int value) {
         super(description, name, type, value);
         this.value = value;
         this.description = description;
@@ -25,7 +25,7 @@ public class PayCards extends ChanceCard {
         return description;
     }
     public String getType() {
-        return description;
+        return type;
     }
     public int getValue() {
         return value;

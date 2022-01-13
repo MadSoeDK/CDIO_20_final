@@ -1,13 +1,13 @@
 package Model.Cards;
 import Model.*;
 
-public class MoveCards extends ChanceCard {
+public class MoveCard extends ChanceCard {
     private String description;
     private String name;
     private String type;
     private int value;
 
-    public MoveCards(String description, String name, String type, int value) {
+    public MoveCard(String description, String name, String type, int value) {
         super(description, name, type, value);
         this.value = value;
         this.description = description;
@@ -70,7 +70,7 @@ public class MoveCards extends ChanceCard {
         return description;
     }
     public String getType() {
-        return description;
+        return type;
     }
     public int getValue() {
         return value;

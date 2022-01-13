@@ -11,6 +11,7 @@ public class GameController {
     private Board board;
     private Cup cup;
     private GUIController gui;
+    private CardController cardController;
     private EventHandler event;
     private ChanceCardDeck deck;
     private Player[] players;
@@ -29,6 +30,7 @@ public class GameController {
         gui = new GUIController(board.getFields());
         deck = new ChanceCardDeck();
         event = new EventHandler(gui);
+        cardController = new CardController(gui);
         gui.createPlayers(STARTBALANCE);
         setupPlayers(gui.getPlayernames());
         playGame();
@@ -140,7 +142,8 @@ public class GameController {
                 break;
             case "ChanceField":
                 //do something
-                event.fieldEffect(currentPlayer, deck.drawCard());
+                //event.fieldEffect(currentPlayer, deck.drawCard());
+                cardController.doCardAction(currentPlayer, players);
                 break;
             case "Start":
                 //do something
