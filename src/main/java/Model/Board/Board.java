@@ -186,6 +186,23 @@ public class Board {
         }
         return numberOfMortgagedProperties;
     }
+    public int countNumbersOfPropertiesWithHouseForPlayer(Player player) {
+        int numberOfPropertiesWithHouse = 0;
+        for (int i = 0; i < getFields().length; i++) {
+
+            //Type casting field to Ownable
+            if (getField(i) instanceof Ownable) {
+                //Verifying that the current field is of the type Ownable
+                Street property = (Street) getField(i);
+                if (player == property.getOwner()) {
+                    if (property.getHouseAmount() > 0) {
+                        numberOfPropertiesWithHouse++;
+                    }
+                }
+            }
+        }
+        return numberOfPropertiesWithHouse;
+    }
 
     public int getFieldsByColor(int placement) {
         Ownable ownable = (Ownable) fields[placement];
