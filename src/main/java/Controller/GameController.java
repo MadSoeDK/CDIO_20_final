@@ -33,7 +33,8 @@ public class GameController {
             gui.message("Nu er det " + currentPlayer.getName() + "'s tur");
             takeTurn();
             nextTurn();
-        } while (true); //Check winner
+        } while (players.length > 1); //Check winner
+        gui.message(currentPlayer.getName() + " HAR VUNDET SPILLET!");
     }
 
     public void takeTurn() {
@@ -239,14 +240,17 @@ public class GameController {
                 //Checking if field is of type Ferry, Brewery or Street.
                 if (player == property.getOwner() && property instanceof Ferry) {
                     netWorth += property.getPrice();
-                }
-                if (player == property.getOwner() && property instanceof Brewery) {
+                    netWorth += property.getHouses();
+                } else if (player == property.getOwner() && property instanceof Brewery) {
                     netWorth += property.getPrice();
+                    netWorth += property.getHouses();
                 } else if (player == property.getOwner() && property instanceof Street) {
                     netWorth += property.getPrice();
+                    netWorth += property.getHouses();
                 }
             }
         }
+        System.out.println(player.getName() + "'s net worth er " + player.getNetWorth());
         player.setNetWorth(netWorth);
         return netWorth;
     }
@@ -368,7 +372,6 @@ public class GameController {
             }
         }
     }
-
     public void sellHouse(){
 
         boolean stopBuilding = false;
