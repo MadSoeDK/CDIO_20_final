@@ -79,15 +79,15 @@ public class EventHandler {
         }
     }
 
-    public void fieldEffect(Player player, Ferry ferry) {
+    public void fieldEffect(Player player, Ferry ferry, Board board, Player[] players) {
         // Check Ferry Rent
-        int ferry_cost = ferry.getCurrentRent(); //getFerryRent()
+        int ferry_cost = ferry.getRent(ferry,board);//ferry.getCurrentRent();
 
         if (ferry.getOwner() == null) { // Noone owns Ferry
-            //buyField(player, ferry);
+            buyField(player, ferry, players);
 
-            //ferry_cost = getFerryRent(property);
-            //updateFerryGUI(property, ferry_cost);
+            ferry_cost = 4000;
+            player.setPlayerBalance(-ferry_cost);
 
         } else {
             // Get field owner
@@ -99,7 +99,7 @@ public class EventHandler {
         }
     }
 
-    public void fieldEffect(Player player, Brewery brewery, Player[] players,int sum) {
+    public void fieldEffect(Player player, Brewery brewery, Player[] players, Board board, int sum) {
         // Typecast other company
         Ownable otherBrewery;
 
@@ -111,14 +111,14 @@ public class EventHandler {
             // Get field owner
             Player fieldOwner = brewery.getOwner();
 
-            /*if (brewery.getPlacement() == 12) {
+            if (brewery.getPlacement() == 12) {
                 otherBrewery = (Ownable) board.getField(27);
             } else {
                 otherBrewery = (Ownable) board.getField(12);
-            }*/
+            }
 
             // 1. Subtract rent from current player 2. add to field owner
-            if (brewery.getOwner() == brewery.getOwner()) {
+            if (brewery.getOwner() == otherBrewery.getOwner()) {
                 player.setPlayerBalance(-brewery.getRent()[1] * sum);
                 fieldOwner.setPlayerBalance(brewery.getRent()[1] * sum);
             } else {

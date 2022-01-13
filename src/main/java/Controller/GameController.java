@@ -75,7 +75,7 @@ public class GameController {
         {
             // Roll die, get value, show die
             cup.roll();
-            sum = 3;//cup.getSum();
+            sum = 5;//cup.getSum();
             gui.showDice(cup.getFacevalues()[0], cup.getFacevalues()[1]);
             moveplayer(currentPlayer, sum);
         }
@@ -187,11 +187,11 @@ public class GameController {
                 break;
             case "Ferry":
                 Ferry ferry = (Ferry) field;
-                event.fieldEffect(currentPlayer, ferry, players);
+                event.fieldEffect(currentPlayer, ferry, board, players);
                 break;
             case "Brewery":
                 Brewery brewery = (Brewery) field;
-                event.fieldEffect(currentPlayer, brewery, players,  sum);
+                event.fieldEffect(currentPlayer, brewery, players, board,  sum);
                 break;
             case "ChanceField":
                 cardController.doCardAction(currentPlayer, players);
@@ -254,14 +254,14 @@ public class GameController {
                         for (int j = 0; j < ((Street) property).getHouseAmount(); j++) {
                             netWorth += ((Street) property).getHousePrice();
                             if(((Street) property).getHouseAmount() > 4) {
-                                //netWorth += property.getHotelPrice;
+                                //netWorth += property.getHotelPrice();
                             }
                         }
                     }
                 }
             }
         }
-        System.out.println(player.getName() + "'s net worth er " + player.getNetWorth());
+        System.out.println(player.getName() + "'s net worth er " + netWorth);
         player.setNetWorth(netWorth);
         return netWorth;
     }
@@ -271,7 +271,7 @@ public class GameController {
         Player[] newPlayers = new Player[gui.getPlayers() - 1];
         int j = 0;
         for (int i = 0; i < gui.getPlayers(); i++) {
-            if (players[i].getBankruptStatus()) {
+            if(players[i].getBankruptStatus()) {
                 gui.removePlayer(player, placement);
                 gui.getGuiPlayer(players[i]).setName(players[i].getName() + "\n[BANKEROT]");
                 gui.getGuiPlayer(players[i]).setBalance(0);
