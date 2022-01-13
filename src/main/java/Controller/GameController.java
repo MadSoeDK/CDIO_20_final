@@ -161,7 +161,7 @@ public class GameController {
         switch (fieldType) {
             case "Street":
                 Street street = (Street) field;
-                event.fieldEffect(currentPlayer, street, players);
+                event.fieldEffect(currentPlayer, street, board, players);
                 break;
             case "Jail":
                 Jail jail = (Jail) field;
