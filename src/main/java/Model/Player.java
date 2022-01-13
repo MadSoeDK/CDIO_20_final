@@ -1,29 +1,23 @@
 package Model;
 
 /**
- * Used in Model.Player Array, Controls Model.Account-class, used to move, earn & lose money.
+ * Provides player functionality
  */
 public class Player {
 
     private int placement;
-    private final String name;
+    private final String NAME;
     int balance;
-    int netWorth;
-    int escapeAttempt;
-    int turnsInRow;
-    boolean bankrupt;
-    boolean inJail;
-    boolean hasJailFreeCard;
+    int netWorth = getPlayerBalance();
+    int escapeAttempt = 0;
+    int turnsInRow = 0;
+    boolean bankrupt = false;
+    boolean inJail = false;
+    boolean hasJailFreeCard = false;
 
     public Player(String name, int balance) {
          this.balance = balance;
-         this.name = name;
-         this.netWorth = getPlayerBalance();
-         this.bankrupt = false;
-         hasJailFreeCard = false;
-         this.escapeAttempt = 0;
-         this.inJail=false;
-         this.turnsInRow=0;
+         this.NAME = name;
     }
 
     public int getPlayerBalance() {
@@ -33,13 +27,11 @@ public class Player {
     public int getPlacement() {
         return placement;
     }
-    public void gotoPlacement(int placement) { this.placement = placement; }
-    public void setPlacement(int sum) {
-        //placement += sum;
-        placement = sum;
+    public void setPlacement(int placement) {
+        this.placement = placement;
     }
     public String getName() {
-        return name;
+        return NAME;
     }
     public void setNetWorth(int addValue) {
         netWorth = addValue;
