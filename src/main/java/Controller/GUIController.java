@@ -334,4 +334,9 @@ public class GUIController {
     public void setChanceCard(ChanceCard card) {
         gui.displayChanceCard(card.getDescription());
     }
+
+    public void setSubText(String subText, Field field) {
+        GUI_Field gui_field = getGuiField(field.getPlacement());
+        gui_field.setSubText(subText);
+    }
 }
