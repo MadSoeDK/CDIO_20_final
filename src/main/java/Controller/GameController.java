@@ -141,12 +141,10 @@ public class GameController {
                 event.fieldEffect(currentPlayer, brewery, players, sum);
                 break;
             case "ChanceField":
-                //do something
-                //event.fieldEffect(currentPlayer, deck.drawCard());
                 cardController.doCardAction(currentPlayer, players);
                 break;
             case "Start":
-                //do something
+                //do nothing
                 break;
             default:
                 System.out.println("Fieldtype unknown" + fieldType);
