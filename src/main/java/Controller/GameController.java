@@ -63,13 +63,14 @@ public class GameController {
                 if (board.getPlayerOwnsMonopoly(currentPlayer)) {
                     sellHouse();
                 } else{
-                    gui.message("taketurn6");
+                    gui.message(Language.getText("taketurn6"));
                 }
             }
         }
 
         // Check jail status
-        if (currentPlayer.getInJailStatus() == false) {
+        if (currentPlayer.getInJailStatus() == false && currentPlayer.getBankruptStatus() == false)
+        {
             // Roll die, get value, show die
             cup.roll();
             sum = 5;//cup.getSum();

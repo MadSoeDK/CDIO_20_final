@@ -246,10 +246,10 @@ public class Board {
 
         return playerProperties;
     }
-    /*public boolean hasMonopoly(int placement) {
+    public boolean hasMonopoly(int placement) {
 
 
-        Property property = (Property) getField(placement);
+        Street property = (Street) getField(placement);
 
         boolean monopoly = false;
 
@@ -257,10 +257,10 @@ public class Board {
         if (placement - 2 < 0) {
             for (int i = 0; i < (placement + 3); i++) {
                 // Check 2 field in either direction
-                if (getField(i) instanceof Property) {
+                if (getField(i) instanceof Street) {
 
                     // Typecast to Property
-                    Property property_check = (Property) getField(i);
+                    Street property_check = (Street) getField(i);
 
                     // Check if owner/color is the same
                     if (property_check.getColor() == property.getColor() && property_check.getOwner() == property.getOwner()) {
@@ -272,9 +272,9 @@ public class Board {
             for (int i = placement - 2; i < placement + 3; i++) {
                 // Check 2 field in either direction
                 if (i < 24) {
-                    if (getField(i) instanceof Property) {
+                    if (getField(i) instanceof Street) {
                         // Typecast to Property
-                        Property property_check = (Property) getField(i);
+                        Street property_check = (Street) getField(i);
                         // Check if owner/color is the same
                         if (property_check.getColor() == property.getColor() && property_check.getOwner() == property.getOwner()) {
                             monopoly = true;
@@ -284,7 +284,7 @@ public class Board {
             }
         }
         return monopoly;
-    }*/
+    }
 
     public Monopoly[] getMonopolies() {
         return monopolies;

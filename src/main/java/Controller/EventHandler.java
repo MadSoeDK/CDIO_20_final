@@ -61,14 +61,15 @@ public class EventHandler {
         }
     }
 
-    public void fieldEffect(Player player, Street street) {
+    public void fieldEffect(Player player, Street street, Board board, Player[] players) {
         if (street.getOwner() == null) { // No owner - ask to buy it
-            //buyField(player, street);
+            buyField(player, street, players);
         } else { //Pay rent to owner
             Player fieldOwner = street.getOwner();
 
+
             // Check if Owner has Monopoly
-            if (false /*board.hasMonopoly(placement)*/) {
+            if (board.hasMonopoly(player.getPlacement()) && street.getHouseAmount() == 0) {
                 // 1. Subtract rent from current player 2. add to field owner
                 player.setPlayerBalance(-street.getCurrentRent() * 2);
                 fieldOwner.setPlayerBalance(street.getCurrentRent() * 2);
