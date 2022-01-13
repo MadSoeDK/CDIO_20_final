@@ -248,14 +248,14 @@ public class GameController {
                         for (int j = 0; j < ((Street) property).getHouseAmount(); j++) {
                             netWorth += ((Street) property).getHousePrice();
                             if(((Street) property).getHouseAmount() > 4) {
-                                //netWorth += property.getHotelPrice;
+                                //netWorth += property.getHotelPrice();
                             }
                         }
                     }
                 }
             }
         }
-        System.out.println(player.getName() + "'s net worth er " + player.getNetWorth());
+        System.out.println(player.getName() + "'s net worth er " + netWorth);
         player.setNetWorth(netWorth);
         return netWorth;
     }
@@ -265,7 +265,7 @@ public class GameController {
         Player[] newPlayers = new Player[gui.getPlayers() - 1];
         int j = 0;
         for (int i = 0; i < gui.getPlayers(); i++) {
-            if (players[i].getBankruptStatus()) {
+            if(players[i].getBankruptStatus()) {
                 gui.removePlayer(player, placement);
                 gui.getGuiPlayer(players[i]).setName(players[i].getName() + "\n[BANKEROT]");
                 gui.getGuiPlayer(players[i]).setBalance(0);
