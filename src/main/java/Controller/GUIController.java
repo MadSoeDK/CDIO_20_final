@@ -27,9 +27,10 @@ public class GUIController {
     }
 
     public void chooseLanguage() {
-        String language = gui.getUserSelection("Select Language", "Danish", "English");
-        Language.read();
+        String[] options = {"Danish", "English"};
+        String language = getUserSelection("Select Language", options);
         Language.setLanguage(language);
+        Language.read();
     }
 
     public GUI_Field[] createBoard(Field[] fields) {
@@ -92,7 +93,7 @@ public class GUIController {
         guiPlayers = new GUI_Player[qty];
 
         for (int i = 0; i < qty; i++) {
-            gui.showMessage("Indtast spiller navn: ");
+            gui.showMessage(Language.getText("createPlayers2"));
 
             // Get random car type
             Random rand = new Random();

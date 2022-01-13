@@ -13,7 +13,7 @@ public class Language {
         for (int i = 0; i < file.length; i++) {
             String varName = file[i][0];
             if (varName.equals(text)) {
-                if (language.equals("Engelsk")) {
+                if (language.equals("English")) {
                     return file[i][2];
                 } else {
                     return file[i][1];

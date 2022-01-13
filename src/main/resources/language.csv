@@ -1,2 +1,8 @@
 id, danish, english
-players?, Hvor mange spillere?, How many players?
+GUIController,,
+createPlayers,Hvor mange spillere?,How many players?
+createPlayers2,Indtast spiller navn:,
+
+General,,
+valuta,kr.,$
+price,pris,price
