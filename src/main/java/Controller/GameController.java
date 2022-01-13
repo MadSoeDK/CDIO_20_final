@@ -17,7 +17,7 @@ public class GameController {
 
 
     // Game Constants
-    final int STARTBALANCE = 30000;
+    final int STARTBALANCE = 10000;
 
     int sum;
 
@@ -47,8 +47,8 @@ public class GameController {
     public void takeTurn() {
         boolean playerHasRolledDice=false;
         while (!playerHasRolledDice) {
-            String[] playerStartOptions = {Language.getText("taketurn1"), Language.getText("taketurn2"), Language.getText("taketurn3"), Language.getText("taketurn4")};
-            String playerStartChoice = gui.getUserSelection(Language.getText("taketurn5"), playerStartOptions);
+            String[] playerStartOptions = {Language.getText("taketurn2"), Language.getText("taketurn3"), Language.getText("taketurn4"), Language.getText("taketurn5")};
+            String playerStartChoice = gui.getUserSelection(Language.getText("taketurn1"), playerStartOptions);
             // Run actions
             if (playerStartOptions[0] == playerStartChoice) { // Roll dice
                 playerHasRolledDice=true;
