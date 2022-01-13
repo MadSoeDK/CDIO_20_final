@@ -113,7 +113,6 @@ public class GameController {
 
         netWorth(currentPlayer);
         bankrupt(currentPlayer, placement);
-
     }
 
     public void setupPlayers(String[] playerNames) {
