@@ -145,10 +145,6 @@ public class EventHandler {
         }
     }
 
-    public void fieldEffect(Player player, ChanceField chanceField, int sum) {
-
-    }
-
     public void buyField(Player player, Ownable field, Player[] players) {
         //boolean answer = gui.getUserBool("Buy this field?", "Yes", "No");
         boolean answer = gui.getUserBool("Køb dette felt?", "Køb", "Auktioner");
@@ -158,7 +154,6 @@ public class EventHandler {
             player.setPlayerBalance(-field.getPrice());
             field.setOwner(player);
             gui.setOwner(player, field);
-            gui.getGuiField(player.getPlacement()).setSubText("Leje: "+field.getCurrentRent());
         } else {
             auction(players, field);
         }
@@ -281,7 +276,6 @@ public class EventHandler {
         players[auctionWinner].setPlayerBalance(-auctionSum);
         field.setOwner(players[auctionWinner]);
         gui.setOwner(players[auctionWinner], field);
-        gui.getGuiField(field.getPlacement()).setSubText("Leje: "+field.getCurrentRent());
         /*
         if (auctionSum > propertyWorth) {
             // After the auction you will be charged for the property, here we account for that
@@ -508,6 +502,7 @@ public class EventHandler {
 
 
     }
+
     public void buyMortgage(Player player, Board board) {
         boolean value = true;
         int numberOfMortgagedProperties;

@@ -32,4 +32,11 @@ public class Cup {
         facevalues[0] = fv1;
         facevalues[1] = fv2;
     }
+    public boolean getPair() {
+        if(facevalues[0] == facevalues[1]) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

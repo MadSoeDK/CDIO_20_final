@@ -7,6 +7,7 @@ import Model.Board.Street;
 import Utility.Language;
 import gui_fields.*;
 import gui_main.GUI;
+import Model.Cards.*;
 
 import java.awt.*;
 import java.util.Random;
@@ -122,12 +123,9 @@ public class GUIController {
             field.setCar(guiPlayers[i], true);
         }
     }
-
     public void removePlayer(Player player, int placement) {
-        if(player.getBankruptStatus()) {
             GUI_Field field = gui.getFields()[placement];
             field.setCar(getGuiPlayer(player), false);
-        }
     }
 
     public void movePlayer(Player player, int placement, int preplacement) {
@@ -213,6 +211,10 @@ public class GUIController {
             playernames[i] = guiPlayers[i].getName();
         }
         return playernames;
+    }
+
+    public GUI_Field[] getGuiFields() {
+        return guiFields;
     }
 
     public GUI_Player getGuiPlayer(Player currentplayer) {
@@ -326,5 +328,8 @@ public class GUIController {
         GUI_Street street = (GUI_Street) field;
 
         street.setSubText("Pris: "+rent);
+    }
+    public void setChanceCard(ChanceCard card) {
+        gui.displayChanceCard(card.getDescription());
     }
 }

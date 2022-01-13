@@ -1,6 +1,6 @@
 package Model.Board;
 
-import Model.ChanceCardDeck;
+import Model.ChanceField;
 import Model.Player;
 
 import java.awt.*;
@@ -93,8 +93,7 @@ public class Board {
                     break;
 
                 case "chance":
-                    fields[Integer.parseInt(field[position])] = new ChanceField(
-                            field[name],
+                    fields[Integer.parseInt(field[position])] = new ChanceField(field[name],
                             Integer.parseInt(field[position])
                     );
                     break;

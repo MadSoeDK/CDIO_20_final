@@ -13,12 +13,14 @@ public class Player {
     int turnsInRow;
     boolean bankrupt;
     boolean inJail;
+    boolean hasJailFreeCard;
 
     public Player(String name, int balance) {
          this.balance = balance;
          this.name = name;
          this.netWorth = getPlayerBalance();
          this.bankrupt = false;
+         hasJailFreeCard = false;
          this.escapeAttempt = 0;
          this.inJail=false;
          this.turnsInRow=0;
@@ -59,4 +61,10 @@ public class Player {
     public int getTurnsInRow(){return turnsInRow;}
     public void setTurnsInRow(int amount){turnsInRow = amount;}
     public void incrementTurnsInRow(){turnsInRow++;}
+    public void setHasJailFreeCard(boolean value) {
+        hasJailFreeCard = value;
+    }
+    public boolean gethasJailFreecard() {
+        return hasJailFreeCard;
+    }
 }

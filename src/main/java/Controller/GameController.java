@@ -2,16 +2,21 @@ package Controller;
 
 import Model.*;
 import Model.Board.*;
+import Model.Cards.ChanceCard;
+import Model.Cards.ChanceCardDeck;
+import Model.ChanceField;
 
 public class GameController {
 
     private Board board;
     private Cup cup;
     private GUIController gui;
+    private CardController cardController;
     private EventHandler event;
     private Player[] players;
     private Player currentPlayer;
     private int playerindex = 0;
+
 
     // Game Constants
     final int STARTBALANCE = 30000;
@@ -23,6 +28,7 @@ public class GameController {
         cup = new Cup();
         gui = new GUIController(board.getFields());
         event = new EventHandler(gui);
+        cardController = new CardController(gui);
         gui.createPlayers(STARTBALANCE);
         setupPlayers(gui.getPlayernames());
         playGame();
@@ -188,10 +194,10 @@ public class GameController {
                 event.fieldEffect(currentPlayer, brewery, players,  sum);
                 break;
             case "ChanceField":
-                //do something
+                cardController.doCardAction(currentPlayer, players);
                 break;
             case "Start":
-                //do something
+                //do nothing
                 break;
             default:
                 System.out.println("Fieldtype unknown" + fieldType);
