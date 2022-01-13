@@ -193,9 +193,9 @@ public class Board {
             //Type casting field to Ownable
             if (getField(i) instanceof Ownable) {
                 //Verifying that the current field is of the type Ownable
-                Street property = (Street) getField(i);
-                if (player == property.getOwner()) {
-                    if (property.getHouseAmount() > 0) {
+                Ownable property = (Ownable) getField(i);
+                if (player == property.getOwner() && property instanceof Street) {;
+                    if (((Street) property).getHouseAmount() > 0) {
                         numberOfPropertiesWithHouse++;
                     }
                 }

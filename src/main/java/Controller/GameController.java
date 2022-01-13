@@ -16,7 +16,7 @@ public class GameController {
     private int playerindex = 0;
 
     // Game Constants
-    final int STARTBALANCE = 30000;
+    final int STARTBALANCE = 7500;
 
     int sum;
 
@@ -264,12 +264,7 @@ public class GameController {
                 } else if (player == property.getOwner() && property instanceof Street) {
                     netWorth += property.getPrice()/2;
                     if(((Street) property).getHouseAmount() > 0) {
-                        for (int j = 0; j < ((Street) property).getHouseAmount(); j++) {
-                            netWorth += ((Street) property).getHousePrice()/2;
-                            if(((Street) property).getHouseAmount() > 4) {
-                                //netWorth += property.getHotelPrice()/2;
-                            }
-                        }
+                        netWorth += property.getPrice() + (((Street) property).getHouseAmount() * ((Street) property).getHousePrice());
                     }
                 }
             }

@@ -172,9 +172,9 @@ public class EventHandler {
 
         // Bid/Pass
         while (auctionPlayersLeft != 1) {
-            String[] options = {"Pass", "100", "200", "500", "1000", "2000"};
-            switch (gui.getUserSelection("Current Bid Amount: " + (auctionSum) + " " + curAucPlayer.getName() + ": Select Bid Option", options)) {
-                case "Pass":
+            String[] options = {"Afvis", "100", "200", "500", "1000", "2000"};
+            switch (gui.getUserSelection("Nuværende totale bud: " + (auctionSum) + " " + curAucPlayer.getName() + ": Vælg budvalgmulighed", options)) {
+                case "Afvis":
                     auctionPlayersLeft -= 1;
                     aucPlayers[curAucIndex] = null;
                     break;
@@ -538,6 +538,10 @@ public class EventHandler {
                         player.setPlayerBalance(-((property.getPrice()) / 2)+(((property.getPrice()) / 2) * 10/100));
                         String[] newMortgagedPropertyNames = new String[mortgagedPropertyNames.length - 1];
                         int j = 0;
+                        if(newMortgagedPropertyNames.length == 0) {
+                            gui.button("Du har ikke nogen pantsatte ejendomme","ok");
+                            value = false;
+                        }
                         if (property.getOwner() == player && (property.getName().equals(guiSelection))) {
                             mortgagedPropertyNames[i] = newMortgagedPropertyNames[j];
                             j++;
