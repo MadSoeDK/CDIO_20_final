@@ -240,13 +240,18 @@ public class GameController {
                 //Checking if field is of type Ferry, Brewery or Street.
                 if (player == property.getOwner() && property instanceof Ferry) {
                     netWorth += property.getPrice();
-                    netWorth += property.getHouses();
                 } else if (player == property.getOwner() && property instanceof Brewery) {
                     netWorth += property.getPrice();
-                    netWorth += property.getHouses();
                 } else if (player == property.getOwner() && property instanceof Street) {
                     netWorth += property.getPrice();
-                    netWorth += property.getHouses();
+                    if(((Street) property).getHouseAmount() > 0) {
+                        for (int j = 0; j < ((Street) property).getHouseAmount(); j++) {
+                            netWorth += ((Street) property).getHousePrice();
+                            if(((Street) property).getHouseAmount() > 4) {
+                                //netWorth += property.getHotelPrice;
+                            }
+                        }
+                    }
                 }
             }
         }
