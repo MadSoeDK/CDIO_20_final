@@ -47,6 +47,7 @@ public class EventHandler {
             }
         }
     }
+
     public void fieldEffect(Player player, Ownable ownable, Player[] players, int sum) {
         if (ownable.getOwner() == null) {
             buyField(player, ownable, players);
@@ -130,8 +131,7 @@ public class EventHandler {
         }
     }
 
-    public void fieldEffect(Player player, Jail jail) {
-    }
+    public void fieldEffect(Player player, Jail jail) {}
 
     public void fieldEffect(Player player, Tax tax, int netWorth) {
         if (tax.getPlacement() == 4) { // first tax field
@@ -143,38 +143,6 @@ public class EventHandler {
             }
         } else { // last tax field
             player.setPlayerBalance(-2000);
-        }
-    }
-
-    public void fieldEffect(Player player, ChanceCard card) {
-        if(card instanceof PayCards) {
-            ((PayCards) card).pay(player);
-            gui.setChanceCard(card);
-            gui.message(player.getName() + " trak prøv-lykken kortet: " + card.getDescription());
-        } else if(card instanceof MoveCards) {
-            gui.setChanceCard(card);
-            gui.message(player.getName() + " trak prøv-lykken kortet: " + card.getDescription());
-            gui.removePlayer(player, player.getPlacement());
-            gui.movePlayer(player, ((MoveCards) card).move(player), player.getPlacement());
-            //((MoveCards) card).move(player);
-        } else if(card instanceof JailFreeCards) {
-            ((JailFreeCards) card).setPlayerFree(player);
-            gui.setChanceCard(card);
-            gui.message(player.getName() + " trak prøv-lykken kortet: " + card.getDescription());
-        } else if(card instanceof ReceiveCards) {
-            if(card.getName().equals("receivecard 14")) {
-                ((ReceiveCards) card).receiveLegation(player);
-                gui.setChanceCard(card);
-                gui.message(player.getName() + " trak prøv-lykken kortet: " + card.getDescription());
-            } else if(card.getName().equals("receiveplayers")) {
-                //((ReceiveCards) card).receiveFromPlayers(player, );
-                gui.setChanceCard(card);
-                gui.message(player.getName() + " trak prøv-lykken kortet: " + card.getDescription());
-            } else {
-                ((ReceiveCards) card).receive(player);
-                gui.setChanceCard(card);
-                gui.message(player.getName() + " trak prøv-lykken kortet: " + card.getDescription());
-            }
         }
     }
 
@@ -530,6 +498,7 @@ public class EventHandler {
 
 
     }
+
     public void buyMortgage(Player player, Board board) {
         boolean value = true;
         int numberOfMortgagedProperties;
