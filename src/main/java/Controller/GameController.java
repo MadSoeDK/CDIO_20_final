@@ -73,7 +73,7 @@ public class GameController {
         }
 
         // Check jail status
-        if (currentPlayer.getInJailStatus()) { //False - not in jail
+        if (!currentPlayer.getInJailStatus()) { //False - not in jail
             // Roll die, get value, show die, move player
             cup.roll();
             sum = cup.getSum();
@@ -120,7 +120,7 @@ public class GameController {
         // Get index of player
         playerindex = java.util.Arrays.asList(players).indexOf(currentPlayer);
 
-        if (cup.getPair()) {
+        if (!cup.getPair()) {
             // No pair, new player turn. If it's the last player turn, reset to first player
             if (playerindex == players.length - 1) {
                 currentPlayer = players[0];
@@ -557,7 +557,7 @@ public class GameController {
         String[] oneEscapeOption = {"Betal 1000"};
 
         // If you have jailcard
-        if (false) {
+        if (currentPlayer.gethasJailFreecard()) {
             escapeOption = allEscapeOption;
         }
 
@@ -565,7 +565,7 @@ public class GameController {
             escapeOption = oneEscapeOption;
         }
 
-        switch(gui.dropdown("Hvordan vil du undslippe fængsel",escapeOption)){
+        switch(gui.dropdown("Hvordan vil du undslippe fængsel", escapeOption)){
 
             case "Slå et par":
                 cup.roll();
