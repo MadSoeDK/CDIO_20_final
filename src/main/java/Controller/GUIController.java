@@ -44,7 +44,6 @@ public class GUIController {
                     break;
                 case "Street":
                     guiFields[i] = new GUI_Street();
-                    //((GUI_Ownable)guiFields[i]).setRent(((Ownable) fields[i]).getCurrentRent() + "kr.");
                     guiFields[i].setBackGroundColor(convertColor(((Street) fields[i]).getColor()));
                     guiFields[i].setSubText("Pris: " + ((Ownable) fields[i]).getPrice() + " kr.");
                     break;
@@ -88,7 +87,7 @@ public class GUIController {
     }
 
     public void createPlayers(int STARTBALANCE) {
-        int qty = Integer.parseInt(gui.getUserSelection(Language.getText("players?"), "3", "4", "5", "6"));
+        int qty = Integer.parseInt(gui.getUserSelection(Language.getText("createPlayers"), "3", "4", "5", "6"));
 
         guiPlayers = new GUI_Player[qty];
 
