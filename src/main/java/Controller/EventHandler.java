@@ -99,13 +99,13 @@ public class EventHandler {
         }
     }
 
-    public void fieldEffect(Player player, Brewery brewery, int sum) {
+    public void fieldEffect(Player player, Brewery brewery, Player[] players,int sum) {
         // Typecast other company
         Ownable otherBrewery;
 
         // No one owns Company
         if (brewery.getOwner() == null) {
-            //buyField(player, brewery);
+            buyField(player, brewery, players);
         } else { // Other player Owns Company
 
             // Get field owner
@@ -555,9 +555,6 @@ public class EventHandler {
             }
         }
     }
-
-
-
 
 }
 

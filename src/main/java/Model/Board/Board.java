@@ -121,16 +121,14 @@ public class Board {
         Monopoly monopolies[] = {
                 new Monopoly("Blå",Color.blue, this, 1,3,0),
                 new Monopoly("Orange",Color.orange, this, 6,8,9),
-                new Monopoly("Grøn",Color.green, this,11,13,14),
-                new Monopoly("Grå",Color.gray, this,16,18,19),
+                new Monopoly("Lysegrøn",Color.green, this,11,13,14),
+                new Monopoly("Mørkegrøn",Color.gray, this,16,18,19),
                 new Monopoly("Rød",Color.red, this, 21,23,24),
-                new Monopoly("Hvid",Color.white, this, 26,27,29),
+                new Monopoly("Lyseblå",Color.white, this, 26,27,29),
                 new Monopoly("Gul",Color.yellow, this, 31,32,34),
                 new Monopoly("Lilla",Color.magenta, this, 37,39, 0)
         };
-
         this.monopolies = monopolies;
-
     }
 
     public Field getField(int placement) {

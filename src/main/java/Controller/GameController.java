@@ -68,7 +68,7 @@ public class GameController {
         {
             // Roll die, get value, show die
             cup.roll();
-            sum = cup.getSum();
+            sum = 3;//cup.getSum();
             gui.showDice(cup.getFacevalues()[0], cup.getFacevalues()[1]);
             moveplayer(currentPlayer, sum);
         }
@@ -183,8 +183,8 @@ public class GameController {
                 event.fieldEffect(currentPlayer, ferry, players);
                 break;
             case "Brewery":
-                Ownable brewery = (Ownable) field;
-                event.fieldEffect(currentPlayer, brewery, players, sum);
+                Brewery brewery = (Brewery) field;
+                event.fieldEffect(currentPlayer, brewery, players,  sum);
                 break;
             case "ChanceField":
                 //do something
@@ -272,7 +272,9 @@ public class GameController {
         //Type casting field to Ownable
         if ((board.getField(placement) instanceof Ownable)) {
             //Verifying that the current field is of the type Ownable
-            Street property = (Street) board.getField(placement);
+            Ownable property = (Ownable) board.getField(placement);
+            // Check if the propert is a street, so that houses are calculated
+            if (property instanceof Street){property = (Street) board.getField(placement);}
             if (player.getPlayerBalance() < property.getCurrentRent()) {
                 //If netWorth is lower than the rent, then you are bankrupt
                 if (player.getNetWorth() < property.getCurrentRent()) {
