@@ -309,7 +309,7 @@ public class GUIController {
                 result = new Color(235,97,35);
                 break;
             case "grey" :
-                result = new Color(107, 107, 107);
+                result = new Color(13,138,17);
                 break;
             case "teal" :
                 result = new Color(8, 230, 216);

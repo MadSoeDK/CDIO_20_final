@@ -276,7 +276,7 @@ public class GameController {
         //Type casting field to Ownable
         if ((board.getField(placement) instanceof Ownable)) {
             //Verifying that the current field is of the type Ownable
-            Ownable property = (Ownable) board.getField(placement);
+            Street property = (Street) board.getField(placement);
             if (player.getPlayerBalance() < property.getCurrentRent()) {
                 //If netWorth is lower than the rent, then you are bankrupt
                 if (player.getNetWorth() < property.getCurrentRent()) {
