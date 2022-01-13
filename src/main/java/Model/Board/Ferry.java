@@ -17,7 +17,7 @@ public class Ferry extends Ownable {
 
         // Check amounts of other ferries owned
         int same_ferry_owner=0;
-        int ferry_cost=500;
+        int ferry_cost=30000;
 
         for (var i=5; i<35; i+=10) {
             // Typecast

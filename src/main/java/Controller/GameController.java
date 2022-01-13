@@ -72,7 +72,7 @@ public class GameController {
         {
             // Roll die, get value, show die
             cup.roll();
-            sum = 5;//cup.getSum();
+            sum = 1;//cup.getSum();
             gui.showDice(cup.getFacevalues()[0], cup.getFacevalues()[1]);
             moveplayer(currentPlayer, sum);
         }
@@ -457,7 +457,9 @@ public class GameController {
     public void mortgage(Player player) {
         //Property[] playerProperties = new Property[4];
         int numberOfProperties;
+        int numberOfPropertiesWithHouses;
         numberOfProperties = board.countNumbersOfPropertiesForPlayer(player);
+        numberOfPropertiesWithHouses = board.countNumbersOfPropertiesWithHouseForPlayer(player);
 
         Ownable[] playerProperties = new Ownable[numberOfProperties];
         String[] propertyNames = new String[numberOfProperties];
@@ -472,35 +474,44 @@ public class GameController {
                     propertyNames[currentProperty] = property.getName();
                     currentProperty++;
                 }
-
             }
         }
         // Mortgage until you have enough money to pay rent
         while (player.getPlayerBalance() < ((Ownable) board.getField(player.getPlacement())).getCurrentRent()) {
+            if (numberOfPropertiesWithHouses == 0) {
+                String guiSelection = gui.dropdown("Vælg en ejendom du skal sælge:", propertyNames);
 
-            String guiSelection = gui.dropdown("Vælg en ejendom du skal sælge:", propertyNames);
+                String[] newPropertyNames = new String[propertyNames.length - 1];
+                int j = 0;
+                int m = 0;
+                for (int i = 0; i < propertyNames.length; i++) {
+                    //Verifying that the current field is of the type Ownable
+                    Ownable property = playerProperties[m];
+                    if (property.getName().equals(guiSelection)) {
+                        property.setMortgage(true);
+                        //set GUI mortgage
+                        player.setPlayerBalance((property.getPrice()) / 2);
 
-            for (int i = 0; i < propertyNames.length; i++) {
-                //Verifying that the current field is of the type Ownable
-                Ownable property = playerProperties[i];
-                if (property.getName().equals(guiSelection)) {
-                    property.setMortgage(true);
-                    //set GUI mortgage
-                    player.setPlayerBalance((property.getPrice()) / 2);
-
-                    if (numberOfProperties == 1) {
-                        String msg = "Ikke flere ejendomme";
-                        propertyNames[0] = msg;
-                    } else {
-                        String[] newPropertyNames = new String[propertyNames.length - 1];
-                        //String[] propertyNames = new String[newPropertyNames.length];
-                        int j = 0;
-                        if (property.getOwner() == player && (property.getName().equals(guiSelection))) {
-                            propertyNames[i] = newPropertyNames[j];
-                            j++;
+                        if (propertyNames.length == 0) {
+                            String msg = "Ikke flere ejendomme";
+                            newPropertyNames = new String[1];
+                            newPropertyNames[0] = msg;
+                            //propertyNames[0] = msg;
                         }
+
+                    } else {
+                        newPropertyNames = new String[propertyNames.length - 1];
+                        //String[] propertyNames = new String[newPropertyNames.length];
+                        newPropertyNames[j] = propertyNames[i];
+                        j++;
+                        //propertyNames = newPropertyNames;
                     }
+                    m++;
                 }
+                propertyNames = newPropertyNames;
+
+            } else {
+                sellHouse();
             }
         }
     }
