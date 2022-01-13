@@ -136,7 +136,8 @@ public class GameController {
                 currentPlayer = players[playerindex + 1];
             }
         }
-        else
+
+        /*else
         {
             if (currentPlayer.getTurnsInRow() != 2)
             {
@@ -152,6 +153,8 @@ public class GameController {
                 setPlayerPlacement(currentPlayer, 10, false);
             }
         }
+
+         */
     }
 
     public void checkFieldType(Field field, int placement) {
@@ -242,23 +245,23 @@ public class GameController {
                 Ownable property = (Ownable) board.getField(i);
                 //Checking if field is of type Ferry, Brewery or Street.
                 if (player == property.getOwner() && property instanceof Ferry) {
-                    netWorth += property.getPrice();
+                    netWorth += property.getPrice()/2;
                 } else if (player == property.getOwner() && property instanceof Brewery) {
-                    netWorth += property.getPrice();
+                    netWorth += property.getPrice()/2;
                 } else if (player == property.getOwner() && property instanceof Street) {
-                    netWorth += property.getPrice();
+                    netWorth += property.getPrice()/2;
                     if(((Street) property).getHouseAmount() > 0) {
                         for (int j = 0; j < ((Street) property).getHouseAmount(); j++) {
-                            netWorth += ((Street) property).getHousePrice();
+                            netWorth += ((Street) property).getHousePrice()/2;
                             if(((Street) property).getHouseAmount() > 4) {
-                                //netWorth += property.getHotelPrice();
+                                //netWorth += property.getHotelPrice()/2;
                             }
                         }
                     }
                 }
             }
         }
-        System.out.println(player.getName() + "'s net worth er " + netWorth);
+        //System.out.println(player.getName() + "'s net worth er " + netWorth);
         player.setNetWorth(netWorth);
         return netWorth;
     }
@@ -469,50 +472,49 @@ public class GameController {
             if (board.getField(i) instanceof Ownable) {
                 //Verifying that the current field is of the type Ownable
                 Ownable property = (Ownable) board.getField(i);
-                if (player == property.getOwner()) {
+                if (player == property.getOwner() && !property.getMortgage()) {
                     playerProperties[currentProperty] = property;
                     propertyNames[currentProperty] = property.getName();
                     currentProperty++;
                 }
             }
         }
+        int j = 0;
         // Mortgage until you have enough money to pay rent
         while (player.getPlayerBalance() < ((Ownable) board.getField(player.getPlacement())).getCurrentRent()) {
             if (numberOfPropertiesWithHouses == 0) {
                 String guiSelection = gui.dropdown("Vælg en ejendom du skal sælge:", propertyNames);
 
                 String[] newPropertyNames = new String[propertyNames.length - 1];
-                int j = 0;
-                int m = 0;
+                Ownable[] newPlayerProperties = new Ownable[playerProperties.length - 1];
                 for (int i = 0; i < propertyNames.length; i++) {
                     //Verifying that the current field is of the type Ownable
-                    Ownable property = playerProperties[m];
+                    Ownable property = playerProperties[i];
                     if (property.getName().equals(guiSelection)) {
                         property.setMortgage(true);
-                        //set GUI mortgage
+                        //update gui field text
+                        gui.setSubText("Pantsat",property);
                         player.setPlayerBalance((property.getPrice()) / 2);
 
-                        if (propertyNames.length == 0) {
+                        if (newPropertyNames.length == 0) {
                             String msg = "Ikke flere ejendomme";
                             newPropertyNames = new String[1];
                             newPropertyNames[0] = msg;
-                            //propertyNames[0] = msg;
                         }
 
                     } else {
-                        newPropertyNames = new String[propertyNames.length - 1];
-                        //String[] propertyNames = new String[newPropertyNames.length];
                         newPropertyNames[j] = propertyNames[i];
+                        newPlayerProperties[j] = playerProperties[i];
                         j++;
-                        //propertyNames = newPropertyNames;
                     }
-                    m++;
                 }
                 propertyNames = newPropertyNames;
-
+                playerProperties = newPlayerProperties;
             } else {
                 sellHouse();
             }
+            j=0;
+            gui.setguiPlayerBalance(player, player.getPlayerBalance());
         }
     }
 

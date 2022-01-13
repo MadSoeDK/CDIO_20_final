@@ -162,7 +162,7 @@ public class Board {
             if (getField(i) instanceof Ownable) {
                 //Verifying that the current field is of the type Ownable
                 Ownable property = (Ownable) getField(i);
-                if (player == property.getOwner()) {
+                if (player == property.getOwner() && !property.getMortgage()) {
                     numberOfProperties++;
                 }
             }
@@ -245,7 +245,7 @@ public class Board {
 
     public Ownable[] getPlayerProperties(Player player){
         int numberOfProperties;
-        numberOfProperties = countNumbersOfPropertiesForPlayer(player);
+        numberOfProperties = countNumbersOfPropertiesForPlayer(player) + countNumberOfMortgagedPropertiesForPlayer(player);
 
         Ownable[] playerProperties = new Ownable[numberOfProperties];
         int currentProperty = 0;
