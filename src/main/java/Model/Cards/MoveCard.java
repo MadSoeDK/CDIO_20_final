@@ -1,23 +1,23 @@
 package Model.Cards;
 
 public class MoveCard extends ChanceCard {
-    private String description;
-    private String type;
-    private int value;
+    private final String DESCRIPTION;
+    private final String TYPE;
+    private final int VALUE;
 
     public MoveCard(String description, String type, int value) {
         super(description, type, value);
-        this.value = value;
-        this.description = description;
-        this.type = type;
+        this.VALUE = value;
+        this.DESCRIPTION = description;
+        this.TYPE = type;
     }
     public String getDescription() {
-        return description;
+        return DESCRIPTION;
     }
     public String getType() {
-        return type;
+        return TYPE;
     }
     public int getValue() {
-        return value;
+        return VALUE;
     }
 }
