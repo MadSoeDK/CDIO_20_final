@@ -2,9 +2,6 @@ package Controller;
 
 import Model.*;
 import Model.Board.*;
-import Model.Cards.ChanceCard;
-import Model.Cards.ChanceCardDeck;
-import Model.ChanceField;
 
 public class GameController {
 
