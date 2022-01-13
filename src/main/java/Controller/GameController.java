@@ -487,6 +487,7 @@ public class GameController {
      * @param player
      */
     public void mortgage(Player player) {
+        //checks number of properties the player own
         int numberOfProperties;
         int numberOfPropertiesWithHouses;
         numberOfProperties = board.countNumbersOfPropertiesForPlayer(player);
@@ -495,6 +496,7 @@ public class GameController {
         Ownable[] playerProperties = new Ownable[numberOfProperties];
         String[] propertyNames = new String[numberOfProperties];
         int currentProperty = 0;
+        //fills property arrays
         for (int i = 0; i < board.getFields().length; i++) {
             //Type casting field to Ownable
             if (board.getField(i) instanceof Ownable) {
@@ -510,9 +512,10 @@ public class GameController {
         int j = 0;
         // Mortgage until you have enough money to pay rent
         while (player.getPlayerBalance() < ((Ownable) board.getField(player.getPlacement())).getCurrentRent()) {
+            //checks if the player own properties with houses
             if (numberOfPropertiesWithHouses == 0) {
                 String guiSelection = gui.dropdown("Vælg en ejendom du skal sælge:", propertyNames);
-
+                //creates new arrays without mortgaged properties
                 String[] newPropertyNames = new String[propertyNames.length - 1];
                 Ownable[] newPlayerProperties = new Ownable[playerProperties.length - 1];
                 for (int i = 0; i < propertyNames.length; i++) {
@@ -523,7 +526,7 @@ public class GameController {
                         //update gui field text
                         gui.setSubText("Pantsat",property);
                         player.setPlayerBalance((property.getPrice()) / 2);
-
+                        //changes array if length is 0 to escape null pointer exception
                         if (newPropertyNames.length == 0) {
                             String msg = "Ikke flere ejendomme";
                             newPropertyNames = new String[1];
@@ -539,6 +542,7 @@ public class GameController {
                 propertyNames = newPropertyNames;
                 playerProperties = newPlayerProperties;
             } else {
+                //makes player sell houses before mortgage properties
                 sellHouse();
             }
             j=0;
