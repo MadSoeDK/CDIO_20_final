@@ -1,13 +1,10 @@
 import Controller.CardController;
-import Model.Cards.*;
 import Model.*;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class chanceCardTest {
-    //creates new chancecard deck and player to access methods
-
-    ChanceCardDeck deck = new ChanceCardDeck();
+    //creates new chancecard deck, card controller and player to access methods
     CardController controller = new CardController();
     Player player = new Player("", 30000);
     Player[] players = new Player[1];

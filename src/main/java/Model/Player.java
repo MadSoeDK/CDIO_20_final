@@ -59,4 +59,9 @@ public class Player {
     public boolean gethasJailFreecard() {
         return hasJailFreeCard;
     }
+    public void testJail(){
+        if (getPlacement() == 30) {
+            setInJailStatus(true);
+        }
+    }
 }
