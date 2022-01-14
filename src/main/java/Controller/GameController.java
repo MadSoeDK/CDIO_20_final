@@ -477,6 +477,7 @@ public class GameController {
                     gui.message(Language.getText("sell5"));
                 }
             } else { // Don't sell Houses
+
                 stopBuilding = true;
             }
         }
@@ -543,6 +544,7 @@ public class GameController {
                 playerProperties = newPlayerProperties;
             } else {
                 //makes player sell houses before mortgage properties
+                gui.message("Du skal sælge dine huse for at undgå at gå bankerot");
                 sellHouse();
             }
             j=0;
@@ -552,10 +554,14 @@ public class GameController {
 
     public void escapeJail() {
         // Make string array based on jailcard
+        /*
         String[] escapeOption = {"escapejail1", "escapejail2"};
         String[] allEscapeOption = {"escapejail1", "escapejail2", "escapejail3"};
         String[] oneEscapeOption = {"escapejail2"};
-
+*/
+        String[] escapeOption = {"Rul Terning", "Betal 1000"};
+        String[] allEscapeOption = {"Rul Terning", "Betal 1000", "Brug Chancekort"};
+        String[] oneEscapeOption = {"Betal 1000"};
         // If you have jailcard
         if (currentPlayer.gethasJailFreecard()) {
             escapeOption = allEscapeOption;
@@ -565,9 +571,9 @@ public class GameController {
             escapeOption = oneEscapeOption;
         }
 
-        switch(gui.dropdown("escapejail4", escapeOption)){
+        switch(gui.dropdown("Hvordan vil du slipper ud af fængsel?", escapeOption)){
 
-            case "escapejail1":
+            case "Rul Terning":
                 cup.roll();
                 sum = cup.getSum();
                 gui.showDice(cup.getFacevalues()[0],cup.getFacevalues()[1]);
@@ -581,15 +587,14 @@ public class GameController {
                 }
                 break;
 
-            case "escapejail2":
+            case "Betal 1000":
                 currentPlayer.setPlayerBalance(-1000);
                 hasEscapedJail();
                 break;
 
-            case "escapejail3":
+            case "Brug Chancekort":
                 hasEscapedJail();
                 break;
-
         }
     }
 
