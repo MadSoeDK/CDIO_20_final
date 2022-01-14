@@ -279,7 +279,6 @@ public class GUIController {
                 brewery.setRent((field.getCurrentRent() + " kr."));
                 break;
             default:
-                //((GUI_Ownable) getGuiField(field.getPlacement())).setRent(((Ownable) field).getCurrentRent() + "kr.");
                 System.out.println("Not a ownable");
         }
     }
