@@ -65,7 +65,7 @@ public class ChanceCardDeck {
         deck[33] = new MoveCard("Ryk frem til Vimmelskaftet, hvis de passerer start indkasser da 4000 kroner", "set", 32);
 
         //All JailFreeCards
-        deck[34] = new JailFreeCard(" anledning af kongens fødselsdag benådes De herved for fængsel. Dette kort kan \n" +
+        deck[34] = new JailFreeCard("I anledning af kongens fødselsdag benådes De herved for fængsel. Dette kort kan \n" +
                 "opbevares indtil De får brug for det.", "jail", 30);
     }
 
@@ -103,6 +103,11 @@ public class ChanceCardDeck {
             // For index = 0 - Put the card on top
             deck[i] = card;
         }
+        return card;
+    }
+    public ChanceCard drawSpecificCard(int position) {
+        ChanceCard card;
+        card = deck[position];
         return card;
     }
 }

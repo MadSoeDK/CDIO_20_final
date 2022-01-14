@@ -25,9 +25,9 @@ public class GameController {
         cup = new Cup();
         gui = new GUIController(board.getFields());
         event = new EventHandler(gui);
-        cardController = new CardController(gui);
+        cardController = new CardController();
         gui.createPlayers(STARTBALANCE);
-        cardController = new CardController(gui);
+        cardController = new CardController();
         setupPlayers(gui.getPlayernames());
         playGame();
     }
@@ -191,7 +191,7 @@ public class GameController {
                 event.fieldEffect(currentPlayer, brewery, players, board,  sum);
                 break;
             case "ChanceField":
-                cardController.doCardAction(currentPlayer, players);
+                cardController.doCardAction(currentPlayer, players, 0);
                 break;
             case "Start":
                 //do nothing

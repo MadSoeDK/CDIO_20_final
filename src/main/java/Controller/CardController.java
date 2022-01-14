@@ -10,15 +10,15 @@ public class CardController {
     private ChanceCardDeck deck;
     private GUIController gui;
 
-    public CardController(GUIController gui) {
+    public CardController() {
         this.gui = gui;
         deck = new ChanceCardDeck();
-        deck.shuffleCard();
+        //deck.shuffleCard();
     }
 
-    public void doCardAction(Player player, Player[] players) {
-        ChanceCard card = deck.drawCard();
-
+    public void doCardAction(Player player, Player[] players, int position) {
+        //ChanceCard card = deck.drawCard();
+        ChanceCard card = deck.drawSpecificCard(position);
         switch (card.getClass().getSimpleName()) {
             case "MoveCard":
                 move(card, player);
@@ -34,8 +34,8 @@ public class CardController {
                 break;
 
         }
-        gui.setChanceCard(card);
-        gui.message(player.getName() + " trak prøv-lykken kortet: " + card.getDescription());
+        //gui.setChanceCard(card);
+        //gui.message(player.getName() + " trak prøv-lykken kortet: " + card.getDescription());
     }
 
     public void moveplayer(Player player, int amount) {
