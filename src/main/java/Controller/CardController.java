@@ -27,7 +27,7 @@ public class CardController {
                 pay(card, player);
                 break;
             case "ReceiveCard":
-                recieve(card, player, players);
+                receive(card, player, players);
                 break;
             case "JailFreeCard":
                 player.setHasJailFreeCard(true);
@@ -38,7 +38,7 @@ public class CardController {
         gui.message(player.getName() + " trak prøv-lykken kortet: " + card.getDescription());
     }
 
-    public void moveplayer(Player player, int amount) {
+    public void movePlayer(Player player, int amount) {
         int prePlacement = player.getPlacement();
         int endPlacement = player.getPlacement() + amount;
         int newPlacement;
@@ -96,7 +96,7 @@ public class CardController {
         if (type.equals("set")) {
             setPlayerPlacement(player, card.getValue(), true);
         } else if (type.equals("move")) {
-            moveplayer(player, card.getValue());
+            movePlayer(player, card.getValue());
         } else if (type.equals("jail")) {
             setPlayerPlacement(player, card.getValue(), false);
         }
@@ -105,7 +105,7 @@ public class CardController {
         int amount = card.getValue();
         player.setPlayerBalance(-amount);
     }
-    private void recieve(ChanceCard card, Player player, Player[] players) {
+    private void receive(ChanceCard card, Player player, Player[] players) {
         int amount = card.getValue();
 
         if (card.getType().equals("legation")) {
