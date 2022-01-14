@@ -87,7 +87,7 @@ public class GameController {
         int placement = currentPlayer.getPlacement();
         Field field = board.getField(placement);
 
-        gui.message(currentPlayer.getName() + " landede på " + field.getName());
+        gui.message(currentPlayer.getName() + "taketurn7" + field.getName());
 
         checkFieldType(field, placement);
 
@@ -129,12 +129,12 @@ public class GameController {
             }
         } else { // Rolled a pair, take extra turn.
             if (currentPlayer.getTurnsInRow() != 2) {
-                gui.message(currentPlayer.getName() + " tager en ekstra tur fordi der blev slået par!");
+                gui.message(currentPlayer.getName() + "nextturn1");
                 currentPlayer.incrementTurnsInRow();
             } else { // If 3 pairs is rolled in a row, Go to jail.
                 currentPlayer.setTurnsInRow(0);
                 currentPlayer.setInJailStatus(true);
-                gui.message(currentPlayer.getName() + " rykker til fængsel.");
+                gui.message(currentPlayer.getName() + "nextturn2");
                 setPlayerPlacement(currentPlayer, 10, false);
             }
         }
@@ -165,7 +165,7 @@ public class GameController {
             case "Jail":
                 Jail jail = (Jail) field;
                 if (jail.getPlacement() == 30) {
-                    gui.message(currentPlayer.getName() + " rykker til fængsel.");
+                    gui.message(currentPlayer.getName() + "nextturn2");
 
                     // Move to Jail field
                     setPlayerPlacement(currentPlayer, 10, false);
@@ -286,7 +286,7 @@ public class GameController {
         for (int i = 0; i < players.length; i++) {
             if(players[i].getBankruptStatus()) {
                 gui.removePlayer(player, placement);
-                gui.getGuiPlayer(players[i]).setName(players[i].getName() + "\n[BANKEROT]");
+                gui.getGuiPlayer(players[i]).setName(players[i].getName() + "eliminateplayer1");
                 gui.getGuiPlayer(players[i]).setBalance(0);
             } else {
                 newPlayers[j] = players[i];
@@ -339,12 +339,12 @@ public class GameController {
                     }
 
                     //Removes player from the player array, Note: does not work if more players bankrupt same turn
-                    gui.message(player.getName() + " ER GÅET BANKEROT! \nTak for spillet " + player.getName() + ".");
+                    gui.message(player.getName() + "bankrupt1" + player.getName() + ".");
                     eliminatePlayer(player, placement);
 
                 } else { // When you are able to mortgage properties to survive
                     //While loop that checks if balance is higher than rent
-                    boolean answer = gui.getUserBool("Gå bankerot eller pantsæt ejendomme?", "Bankerot", "Pantsæt");
+                    boolean answer = gui.getUserBool("bankrupt2", "Bankerot", "Pantsæt");
 
                     // If player gives up - set bankrupt status true
                     if (answer) {
@@ -370,7 +370,7 @@ public class GameController {
 
             boolean stopBuilding = false;
             while (!stopBuilding) {
-                if (gui.getUserBool("Vil du bygge på din grund", "Jeg vil bygge", "Jeg vil IKKE bygge")) {
+                if (gui.getUserBool("build1", "Jeg vil bygge", "Jeg vil IKKE bygge")) {
 
                     // Get player monopolies and store as Strings
                     Monopoly[] playerMonopolyOptions = board.getOwnedPlayerMonopolyList(currentPlayer);
@@ -380,7 +380,7 @@ public class GameController {
                         PlayerMonopolyOptionsString[i] = playerMonopolyOptions[i].getName();
                     }
 
-                    String selectedMonopolyName = gui.dropdown("Hvilken farve vil du bygge på?", PlayerMonopolyOptionsString);
+                    String selectedMonopolyName = gui.dropdown("build2", PlayerMonopolyOptionsString);
                     Monopoly selectedMonopoly = null;
                     // Match the string array to the object reference array
                     for (int i = 0; i < playerMonopolyOptions.length; i++) {
@@ -393,7 +393,7 @@ public class GameController {
                     int lowestHouseAmount=5;
                     Street selectedStreet = null;
                     String[] selectedMonopolyStreetStringArray = selectedMonopoly.getStringArray();
-                    String selectedStreetString = gui.dropdown("Hvilken Bygning vil du bygge på? Et hus koster: "+selectedMonopoly.getStreetArray()[0].getHousePrice(), selectedMonopolyStreetStringArray);
+                    String selectedStreetString = gui.dropdown("build3"+selectedMonopoly.getStreetArray()[0].getHousePrice(), selectedMonopolyStreetStringArray);
                     for (int i = 0; i < selectedMonopoly.getStreetArray().length; i++) {
                         // Check highest house amount
                         if (selectedMonopoly.getStreetArray()[i].getHouseAmount() < lowestHouseAmount){lowestHouseAmount = selectedMonopoly.getStreetArray()[i].getHouseAmount();}
@@ -412,7 +412,7 @@ public class GameController {
                         gui.updateFieldRent(selectedStreet.getPlacement(), selectedStreet.getCurrentRent());
                         currentPlayer.setPlayerBalance(-selectedStreet.getHousePrice());
                     } else {
-                        gui.message("Du skal bygge jævnt, forskelle i husmængder på farven må maksimalt være 1");
+                        gui.message("build4");
                     }
                 } else {
                     stopBuilding = true;
@@ -423,7 +423,7 @@ public class GameController {
     public void sellHouse(){
         boolean stopBuilding = false;
         while (!stopBuilding) {
-            if (gui.getUserBool("Vil sælge et hus?", "Jeg vil sælge huse", "Jeg vil IKKE sælge huse")) {
+            if (gui.getUserBool("sell1", "Jeg vil sælge huse", "Jeg vil IKKE sælge huse")) {
 
                 // Sell Houses
                 // Give player option over monopolies
@@ -432,7 +432,7 @@ public class GameController {
                 for (int i = 0; i < playerMonopolyOptions.length; i++) {
                     PlayerMonopolyOptionsString[i] = playerMonopolyOptions[i].getName();
                 }
-                String selectedMonopolyName = gui.dropdown("Hvilken farve vil du sælge Fra?", PlayerMonopolyOptionsString);
+                String selectedMonopolyName = gui.dropdown("sell2", PlayerMonopolyOptionsString);
                 Monopoly selectedMonopoly = null;// = new Monopoly();
 
                 // Match the string array to the object referance array
@@ -446,7 +446,7 @@ public class GameController {
                 int highestHouseAmount=0;
                 Street selectedStreet = null;
                 String[] selectedMonopolyStreetStringArray = selectedMonopoly.getStringArray();
-                String selectedStreetString = gui.dropdown("Hvilken Bygning vil sælge for: "+selectedMonopoly.getStreetArray()[0].getHousePrice()/2, selectedMonopolyStreetStringArray);
+                String selectedStreetString = gui.dropdown("sell3"+selectedMonopoly.getStreetArray()[0].getHousePrice()/2, selectedMonopolyStreetStringArray);
                 for (int i = 0; i < selectedMonopoly.getStreetArray().length; i++) {
                     // Check highest house amount
                     if (selectedMonopoly.getStreetArray()[i].getHouseAmount() > highestHouseAmount){highestHouseAmount = selectedMonopoly.getStreetArray()[i].getHouseAmount();}
@@ -466,10 +466,10 @@ public class GameController {
                         gui.updateFieldRent(selectedStreet.getPlacement(), selectedStreet.getCurrentRent());
                         currentPlayer.setPlayerBalance(selectedStreet.getHousePrice() / 2);
                     } else {
-                        gui.message("Du skal sælge jævnt, forskelle i husmængder på farven må maksimalt være 1");
+                        gui.message("sell4");
                     }
                 } else {
-                    gui.message("Her er ikke nogen huse at sælge");
+                    gui.message("sell5");
                 }
             } else { // Don't sell Houses
                 stopBuilding = true;
@@ -509,7 +509,7 @@ public class GameController {
         while (player.getPlayerBalance() < ((Ownable) board.getField(player.getPlacement())).getCurrentRent()) {
             //checks if the player own properties with houses
             if (numberOfPropertiesWithHouses == 0) {
-                String guiSelection = gui.dropdown("Vælg en ejendom du skal sælge:", propertyNames);
+                String guiSelection = gui.dropdown("mortgage1", propertyNames);
                 //creates new arrays without mortgaged properties
                 String[] newPropertyNames = new String[propertyNames.length - 1];
                 Ownable[] newPlayerProperties = new Ownable[playerProperties.length - 1];
@@ -519,11 +519,11 @@ public class GameController {
                     if (property.getName().equals(guiSelection)) {
                         property.setMortgage(true);
                         //update gui field text
-                        gui.setSubText("Pantsat",property);
+                        gui.setSubText("mortgage2",property);
                         player.setPlayerBalance((property.getPrice()) / 2);
                         //changes array if length is 0 to escape null pointer exception
                         if (newPropertyNames.length == 0) {
-                            String msg = "Ikke flere ejendomme";
+                            String msg = "mortgage3";
                             newPropertyNames = new String[1];
                             newPropertyNames[0] = msg;
                         }
@@ -547,9 +547,9 @@ public class GameController {
 
     public void escapeJail() {
         // Make string array based on jailcard
-        String[] escapeOption = {"Slå et par", "Betal 1000"};
-        String[] allEscapeOption = {"Slå et par", "Betal 1000", "Brug Chance Kort"};
-        String[] oneEscapeOption = {"Betal 1000"};
+        String[] escapeOption = {"escapejail1", "escapejail2"};
+        String[] allEscapeOption = {"escapejail1", "escapejail2", "escapejail3"};
+        String[] oneEscapeOption = {"escapejail2"};
 
         // If you have jailcard
         if (currentPlayer.gethasJailFreecard()) {
@@ -560,9 +560,9 @@ public class GameController {
             escapeOption = oneEscapeOption;
         }
 
-        switch(gui.dropdown("Hvordan vil du undslippe fængsel", escapeOption)){
+        switch(gui.dropdown("escapejail4", escapeOption)){
 
-            case "Slå et par":
+            case "escapejail1":
                 cup.roll();
                 sum = cup.getSum();
                 gui.showDice(cup.getFacevalues()[0],cup.getFacevalues()[1]);
@@ -576,12 +576,12 @@ public class GameController {
                 }
                 break;
 
-            case "Betal 1000":
+            case "escapejail2":
                 currentPlayer.setPlayerBalance(-1000);
                 hasEscapedJail();
                 break;
 
-            case "Brug Chance Kort":
+            case "escapejail3":
                 hasEscapedJail();
                 break;
 

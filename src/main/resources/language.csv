@@ -1,15 +1,37 @@
 id, danish, english
 
 GameController,,
-playgame1,Nu er det,
-playgame2,'s tur,
-playgame3, HAR VUNDET SPILLET!,
-taketurn1,Hvilken handling vil du tage?,
-taketurn2,Slå med terningerne,
-taketurn3,Handle med Spiller,
-taketurn4,Betal Pantsætning,
-taketurn5,Sælg Hus,
-taketurn6,Du ejer ikke nogle huse
+playgame1,Nu er det,It is now,
+playgame2,'s tur,'s turn
+playgame3, HAR VUNDET SPILLET!, HAS WON THE GAME
+taketurn1,Hvilken handling vil du tage?,What action do you wish to take?
+taketurn2,Slå med terningerne,Roll the dice
+taketurn3,Handle med Spiller,Trade with Player
+taketurn4,Betal Pantsætning,Pay Mortgage back
+taketurn5,Sælg Hus,Sell house
+taketurn6,Du ejer ikke nogle huse,You don't own any houses
+taketurn7, landede på , Landed on
+nextturn1, tager en ekstra tur fordi der blev slået par!, takes an extra turn because they rolled a pair
+nextturn2, rykker til fængsel., moves to jail.
+eliminateplayer1, \n[BANKEROT], \n[Bankrupt]
+bankrupt1, ER GÅET BANKEROT! \nTak for spillet, HAS GONE BANKRUPT \nThanks for the game
+bankrupt2, Gå bankerot eller pantsæt ejendomme?, Go bankrupt or Mortgage your properties?
+build1, Vil du bygge på din grund, Would you like to build on your properties?
+build2, Hvilken farve vil du bygge på?, What color do you wish to build on?
+build3, Hvilken Bygning vil du bygge på? Et hus koster: , What property do you wish to build on? A house costs: ,
+build4, Du skal bygge jævnt forskelle i husmængder på farven må maksimalt være 1, You must build evenly differences in house amount must not exceed 1,
+sell1, Vil du sælge et hus?, Do you wish to sell a house?
+sell2, Hvilken farve vil du sælge Fra?, What color do you wish to sell from?
+sell3,Hvilken Gade vil du sælge fra: ,What property will you sell from:
+sell4,Du skal sælge jævnt forskelle i husmængder på farven må maksimalt være 1, You must sell evenly differences in house amount must not exceed 1,
+sell5,Her er ikke nogen huse at sælge, There are no houses to sell,
+mortgage1,Vælg en ejendom du skal pantsætte:,Chose a property to mortgage
+mortgage2,Pantsat,Mortgaged
+mortgage3,Ikke flere ejendomme,No more Properties
+escapejail1,Slå et par,Roll a pair,
+escapejail2,Betal 1000,Pay 1000,
+escapejail3,Brug Chance Kort,Use Chance Card,
+escapejail4,Hvordan vil du undslippe fængsel,How do you wish to escape Jail
 
 GUIController,,
 createPlayers1,Hvor mange spillere?,How many players?
