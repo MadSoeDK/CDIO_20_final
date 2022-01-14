@@ -1,6 +1,6 @@
 package Model.Board;
 
-import Model.ChanceField;
+import Model.*;
 import Model.Player;
 
 import java.awt.*;
