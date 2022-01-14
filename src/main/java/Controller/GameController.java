@@ -269,7 +269,6 @@ public class GameController {
                 }
             }
         }
-        //System.out.println(player.getName() + "'s net worth er " + netWorth);
         player.setNetWorth(netWorth);
         return netWorth;
     }
@@ -286,7 +285,7 @@ public class GameController {
         for (int i = 0; i < players.length; i++) {
             if(players[i].getBankruptStatus()) {
                 gui.removePlayer(player, placement);
-                gui.getGuiPlayer(players[i]).setName(players[i].getName() + "eliminateplayer1");
+                gui.getGuiPlayer(players[i]).setName(players[i].getName() + Language.getText("eliminateplayer1"));
                 gui.getGuiPlayer(players[i]).setBalance(0);
             } else {
                 newPlayers[j] = players[i];
@@ -339,12 +338,12 @@ public class GameController {
                     }
 
                     //Removes player from the player array, Note: does not work if more players bankrupt same turn
-                    gui.message(player.getName() + "bankrupt1" + player.getName() + ".");
+                    gui.message(player.getName() + Language.getText("bankrupt1") + player.getName() + ".");
                     eliminatePlayer(player, placement);
 
                 } else { // When you are able to mortgage properties to survive
                     //While loop that checks if balance is higher than rent
-                    boolean answer = gui.getUserBool("bankrupt2", "Bankerot", "Pantsæt");
+                    boolean answer = gui.getUserBool(Language.getText("bankrupt2"), "Bankerot", "Pantsæt");
 
                     // If player gives up - set bankrupt status true
                     if (answer) {
@@ -370,7 +369,7 @@ public class GameController {
 
             boolean stopBuilding = false;
             while (!stopBuilding) {
-                if (gui.getUserBool("build1", "Jeg vil bygge", "Jeg vil IKKE bygge")) {
+                if (gui.getUserBool(Language.getText("build1"), "Jeg vil bygge", "Jeg vil IKKE bygge")) {
 
                     // Get player monopolies and store as Strings
                     Monopoly[] playerMonopolyOptions = board.getOwnedPlayerMonopolyList(currentPlayer);
@@ -380,7 +379,7 @@ public class GameController {
                         PlayerMonopolyOptionsString[i] = playerMonopolyOptions[i].getName();
                     }
 
-                    String selectedMonopolyName = gui.dropdown("build2", PlayerMonopolyOptionsString);
+                    String selectedMonopolyName = gui.dropdown(Language.getText("build2"), PlayerMonopolyOptionsString);
                     Monopoly selectedMonopoly = null;
                     // Match the string array to the object reference array
                     for (int i = 0; i < playerMonopolyOptions.length; i++) {
@@ -393,7 +392,7 @@ public class GameController {
                     int lowestHouseAmount=5;
                     Street selectedStreet = null;
                     String[] selectedMonopolyStreetStringArray = selectedMonopoly.getStringArray();
-                    String selectedStreetString = gui.dropdown("build3"+selectedMonopoly.getStreetArray()[0].getHousePrice(), selectedMonopolyStreetStringArray);
+                    String selectedStreetString = gui.dropdown(Language.getText("build3")+selectedMonopoly.getStreetArray()[0].getHousePrice(), selectedMonopolyStreetStringArray);
                     for (int i = 0; i < selectedMonopoly.getStreetArray().length; i++) {
                         // Check highest house amount
                         if (selectedMonopoly.getStreetArray()[i].getHouseAmount() < lowestHouseAmount){lowestHouseAmount = selectedMonopoly.getStreetArray()[i].getHouseAmount();}
@@ -412,7 +411,7 @@ public class GameController {
                         gui.updateFieldRent(selectedStreet.getPlacement(), selectedStreet.getCurrentRent());
                         currentPlayer.setPlayerBalance(-selectedStreet.getHousePrice());
                     } else {
-                        gui.message("build4");
+                        gui.message(Language.getText("build4"));
                     }
                 } else {
                     stopBuilding = true;
@@ -423,7 +422,7 @@ public class GameController {
     public void sellHouse(){
         boolean stopBuilding = false;
         while (!stopBuilding) {
-            if (gui.getUserBool("sell1", "Jeg vil sælge huse", "Jeg vil IKKE sælge huse")) {
+            if (gui.getUserBool(Language.getText("sell1"), "Jeg vil sælge huse", "Jeg vil IKKE sælge huse")) {
 
                 // Sell Houses
                 // Give player option over monopolies
@@ -432,7 +431,7 @@ public class GameController {
                 for (int i = 0; i < playerMonopolyOptions.length; i++) {
                     PlayerMonopolyOptionsString[i] = playerMonopolyOptions[i].getName();
                 }
-                String selectedMonopolyName = gui.dropdown("sell2", PlayerMonopolyOptionsString);
+                String selectedMonopolyName = gui.dropdown(Language.getText("sell2"), PlayerMonopolyOptionsString);
                 Monopoly selectedMonopoly = null;// = new Monopoly();
 
                 // Match the string array to the object referance array
@@ -446,7 +445,7 @@ public class GameController {
                 int highestHouseAmount=0;
                 Street selectedStreet = null;
                 String[] selectedMonopolyStreetStringArray = selectedMonopoly.getStringArray();
-                String selectedStreetString = gui.dropdown("sell3"+selectedMonopoly.getStreetArray()[0].getHousePrice()/2, selectedMonopolyStreetStringArray);
+                String selectedStreetString = gui.dropdown(Language.getText("sell3")+selectedMonopoly.getStreetArray()[0].getHousePrice()/2, selectedMonopolyStreetStringArray);
                 for (int i = 0; i < selectedMonopoly.getStreetArray().length; i++) {
                     // Check highest house amount
                     if (selectedMonopoly.getStreetArray()[i].getHouseAmount() > highestHouseAmount){highestHouseAmount = selectedMonopoly.getStreetArray()[i].getHouseAmount();}
@@ -466,10 +465,10 @@ public class GameController {
                         gui.updateFieldRent(selectedStreet.getPlacement(), selectedStreet.getCurrentRent());
                         currentPlayer.setPlayerBalance(selectedStreet.getHousePrice() / 2);
                     } else {
-                        gui.message("sell4");
+                        gui.message(Language.getText("sell4"));
                     }
                 } else {
-                    gui.message("sell5");
+                    gui.message(Language.getText("sell5"));
                 }
             } else { // Don't sell Houses
                 stopBuilding = true;

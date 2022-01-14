@@ -33,6 +33,14 @@ escapejail2,Betal 1000,Pay 1000,
 escapejail3,Brug Chance Kort,Use Chance Card,
 escapejail4,Hvordan vil du undslippe fængsel,How do you wish to escape Jail,
 
+EventController,,
+playeroptionstrade1,Vil du handle?,Do you wish to trade?
+playeroptionsbuymortgage1,Vil du købe pantsatte ejendomme tilbage,
+tax1,Betal 10% eller 4000 kr?,Pay 10% or 4000$,
+buyfield1,Køb dette felt?,Buy this field?,
+buyfield2,Køb,Buy
+buyfield3,Auctioner,Auction
+
 GUIController,,
 createPlayers1,Hvor mange spillere?,How many players?
 createPlayers2,Indtast spiller navn:,Enter player name:
@@ -40,3 +48,5 @@ createPlayers2,Indtast spiller navn:,Enter player name:
 General,,
 valuta,kr.,$
 price,pris,price
+yes,Ja,Yes
+no,Nej,No

@@ -2,6 +2,7 @@ package Controller;
 
 import Model.*;
 import Model.Board.*;
+import Utility.Language;
 
 public class EventHandler {
 
@@ -13,7 +14,7 @@ public class EventHandler {
 
     public void playerOptionsTrade(Player player, Player [] players, Board board) {
         int playerIndex = java.util.Arrays.asList(players).indexOf(player);
-        boolean answer = gui.getUserBool("Vil du handle?", "Ja", "Nej, gå tilbage");
+        boolean answer = gui.getUserBool(Language.getText("playeroptionstrade1"), Language.getText("yes"), Language.getText("no"));
 
         if (answer) {
                 trade(playerIndex, players, board);
@@ -22,7 +23,7 @@ public class EventHandler {
     }
 
     public void playerOptionsBuyMortgaged(Player player, Board board) {
-        boolean answer = gui.getUserBool("Vil du købe pantsatte ejendomme tilbage", "Ja", "Nej, gå tilbage");
+        boolean answer = gui.getUserBool(Language.getText("playeroptionsbuymortgage1"), Language.getText("yes"), Language.getText("no"));
         if (answer) {
             buyMortgage(player, board);
         }
@@ -131,7 +132,7 @@ public class EventHandler {
 
     public void fieldEffect(Player player, Tax tax, int netWorth) {
         if (tax.getPlacement() == 4) { // first tax field
-            boolean answer = gui.getUserBool("Betal 10% eller 4000 kr?", "4000 kr.", "10%");
+            boolean answer = gui.getUserBool(Language.getText("tax1"), "4000"+Language.getText("valuta"), "10%");
             if (answer) {
                 player.setPlayerBalance(-4000);
             } else {
@@ -143,8 +144,8 @@ public class EventHandler {
     }
 
     public void buyField(Player player, Ownable field, Player[] players) {
-        //boolean answer = gui.getUserBool("Buy this field?", "Yes", "No");
-        boolean answer = gui.getUserBool("Køb dette felt?", "Køb", "Auktioner");
+        //boolean answer = gui.getUserBool("Buy this field?", "Yes", "No");Language.getText("yes")
+        boolean answer = gui.getUserBool(Language.getText("buyfield1"), Language.getText("buyfield2"), Language.getText("buyfields3"));
 
         // Buy if yes
         if (answer) {
