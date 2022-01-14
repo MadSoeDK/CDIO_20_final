@@ -1,6 +1,5 @@
 package Controller;
 
-import Model.Board.ChanceField;
 import Model.Board.Field;
 import Model.Board.Ownable;
 import Model.Player;
@@ -51,12 +50,10 @@ public class GUIController {
                     break;
                 case "ChanceField":
                     guiFields[i] = new GUI_Chance();
-
                     break;
                 case "Jail":
                     guiFields[i] = new GUI_Jail();
                     guiFields[i].setBackGroundColor(Color.LIGHT_GRAY);
-                    //guiFields[i].setSubText("");
                     break;
                 case "Ferry":
                     guiFields[i] = new GUI_Shipping();

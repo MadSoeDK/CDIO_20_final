@@ -11,7 +11,6 @@ public abstract class Ownable extends Field {
     private Player owner;
 
     private boolean mortgage;
-    private int mortgageRent = 0;
 
     public Ownable(String name, int placement, String color, int[] rent, int price) {
         super(name, placement);
@@ -37,7 +36,7 @@ public abstract class Ownable extends Field {
         int rent;
         if (owner != null) {
             if (mortgage){
-                return mortgageRent;
+                return 0;
             }
             rent = RENT[0];
         } else {
