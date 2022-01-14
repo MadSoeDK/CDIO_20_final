@@ -264,7 +264,7 @@ public class GameController {
                 } else if (player == property.getOwner() && property instanceof Street) {
                     netWorth += property.getPrice()/2;
                     if(((Street) property).getHouseAmount() > 0) {
-                        netWorth += property.getPrice() + (((Street) property).getHouseAmount() * ((Street) property).getHousePrice());
+                        netWorth += (property.getPrice() / 2) + (((Street) property).getHouseAmount() * ((Street) property).getHousePrice());
                     }
                 }
             }
