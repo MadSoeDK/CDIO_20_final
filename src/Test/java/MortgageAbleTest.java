@@ -28,7 +28,6 @@ public class MortgageAbleTest {
     @Test
     public void mortgageAble() {
         rent[0] = 100;
-        //makes player an owner of property
         property.setOwner(player);
         //updates mortgage and checks if rent is 0 when property is mortgaged
         property.setMortgage(true);
