@@ -10,8 +10,11 @@ import java.io.FileReader;
 public class Board {
 
     private final Field[] fields;
-    private Monopoly monopolies[];
+    private Monopoly[] monopolies;
 
+    /**
+     * Load and initilize fields
+     */
     public Board() {
         BufferedReader CSV;
         String row = "";
@@ -47,7 +50,7 @@ public class Board {
             String[] field = data[i];
             switch (field[type]) {
                 case "street":
-                    fields[Integer.parseInt(field[position])] = new Street (
+                    fields[Integer.parseInt(field[position])] = new Street(
                             field[name],
                             Integer.parseInt(field[position]),
                             field[color],
@@ -116,8 +119,49 @@ public class Board {
             }
         }
 
+        String[] streetColors = {"blue", "orange", "green", "grey", "red", "teal", "yellow", "purple"};
+
+        monopolies = new Monopoly[streetColors.length];
+
+        for (int i = 0; i < streetColors.length; i++) {
+            switch (streetColors[i]) {
+                case "blue":
+                    Street[] bluestreets = getStreetsByColor(streetColors[i]);
+                    monopolies[i] = new Monopoly("Blå", Color.blue, bluestreets);
+                    break;
+                case "orange":
+                    Street[] orangestreets = getStreetsByColor(streetColors[i]);
+                    monopolies[i] = new Monopoly("Orange", Color.orange, orangestreets);
+                    break;
+                case "green":
+                    Street[] greenstreets = getStreetsByColor(streetColors[i]);
+                    monopolies[i] = new Monopoly("Lysegrøn", Color.green, greenstreets);
+                    break;
+                case "grey":
+                    Street[] dgreenstreets = getStreetsByColor(streetColors[i]);
+                    monopolies[i] = new Monopoly("Mørkegrøn", Color.gray, dgreenstreets);
+                    break;
+                case "red":
+                    Street[] redstreets = getStreetsByColor(streetColors[i]);
+                    monopolies[i] = new Monopoly("Rød", Color.red, redstreets);
+                    break;
+                case "teal":
+                    Street[] lightbluestreets = getStreetsByColor(streetColors[i]);
+                    monopolies[i] = new Monopoly("Lyseblå", Color.white, lightbluestreets);
+                    break;
+                case "yellow":
+                    Street[] yellowstreets = getStreetsByColor(streetColors[i]);
+                    monopolies[i] = new Monopoly("Gul", Color.yellow, yellowstreets);
+                    break;
+                case "purple":
+                    Street[] purplestreets = getStreetsByColor(streetColors[i]);
+                    monopolies[i] = new Monopoly("Lilla", Color.magenta, purplestreets);
+                    break;
+            }
+        }
+
         // Initialize Monopoly Array
-        Monopoly monopolies[] = {
+        /*Monopoly monopolies[] = {
                 new Monopoly("Blå",Color.blue, this, 1,3,0),
                 new Monopoly("Orange",Color.orange, this, 6,8,9),
                 new Monopoly("Lysegrøn",Color.green, this,11,13,14),
@@ -127,17 +171,41 @@ public class Board {
                 new Monopoly("Gul",Color.yellow, this, 31,32,34),
                 new Monopoly("Lilla",Color.magenta, this, 37,39, 0)
         };
-        this.monopolies = monopolies;
+        this.monopolies = monopolies;*/
+    }
+
+    public Street[] getStreetsByColor(String color) {
+        Street[] streets = new Street[getFields().length];
+        int j = 0;
+        for (int i = 0; i < getFields().length; i++) {
+            if ((getFields()[i]) instanceof Street) {
+                Street street = (Street) getFields()[i];
+                if (street.getColor().equals(color)) {
+                    streets[j] = (Street) getFields()[i];
+                    j++;
+                }
+            }
+        }
+        Street[] result = new Street[j];
+        for (int i = 0; i < j; i++) {
+            result[i] = streets[i];
+        }
+        return result;
     }
 
     public Field getField(int placement) {
             return fields[placement];
     }
-
     public Field[] getFields() {
         return fields;
     }
 
+    /**
+     *
+     * @param array
+     * @param type
+     * @return
+     */
     public int[] stringToIntarr(String[] array, String type) {
         int col = 6;
         int[] result;
@@ -217,32 +285,6 @@ public class Board {
         return result;
     }
 
-    public Brewery[] getBreweryFields() {
-        Brewery[] breweryFields = new Brewery[2];
-
-        for (int i = 0; i < fields.length; i++) {
-            if (fields[i] instanceof Brewery) {
-                breweryFields[i] = (Brewery) fields[i];
-            }
-        }
-        return breweryFields;
-    }
-
-    public Ferry[] getFerryFields() {
-        Ferry[] ferryFields = new Ferry[4];
-
-        for (int i = 0; i < fields.length; i++) {
-            if (fields[i] instanceof Brewery) {
-                ferryFields[i] = (Ferry) fields[i];
-            }
-        }
-        return ferryFields;
-    }
-
-    /*public Brewery[] addBreweryToField() {
-
-    }*/
-
     public Ownable[] getPlayerProperties(Player player){
         int numberOfProperties;
         numberOfProperties = countNumbersOfPropertiesForPlayer(player) + countNumberOfMortgagedPropertiesForPlayer(player);
@@ -263,6 +305,7 @@ public class Board {
 
         return playerProperties;
     }
+
     public boolean hasMonopoly(int placement) {
 
 
@@ -303,6 +346,10 @@ public class Board {
         return monopoly;
     }
 
+    public String getStreetColor(Street street) {
+        return street.getColor();
+    }
+
     public Monopoly[] getMonopolies() {
         return monopolies;
     }
@@ -310,7 +357,7 @@ public class Board {
     public boolean getPlayerOwnsMonopoly (Player player){
         boolean playerOwnsMonopoly = false;
 
-        for(int i=0; i<monopolies.length; i++){
+        for(int i=0; i < monopolies.length; i++){
             monopolies[i].updateMonopoly();
             if (monopolies[i].getOwner() == player){
                 playerOwnsMonopoly = true;
