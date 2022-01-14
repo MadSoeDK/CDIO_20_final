@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Board.ChanceField;
 import Model.Board.Field;
 import Model.Board.Ownable;
 import Model.Player;
@@ -41,6 +42,7 @@ public class GUIController {
                 case "Start":
                     guiFields[i] = new GUI_Start();
                     guiFields[i].setBackGroundColor(Color.WHITE);
+                    guiFields[i].setSubText("");
                     break;
                 case "Street":
                     guiFields[i] = new GUI_Street();
@@ -49,10 +51,7 @@ public class GUIController {
                     break;
                 case "ChanceField":
                     guiFields[i] = new GUI_Chance();
-                    guiFields[i].setSubText("");
 
-                    //guiFields[i].setBackGroundColor(Color.LIGHT_GRAY);
-                    //guiFields[i].setForeGroundColor(Color.BLACK);
                     break;
                 case "Jail":
                     guiFields[i] = new GUI_Jail();
@@ -79,7 +78,9 @@ public class GUIController {
                     guiFields[i].setSubText("Pris: " + ((Ownable) fields[i]).getPrice() + " kr.");
                     break;
             }
-            guiFields[i].setTitle(fields[i].getName());
+            if(!(guiFields[i] instanceof GUI_Chance)) {
+                guiFields[i].setTitle(fields[i].getName());
+            }
             guiFields[i].setDescription(fields[i].getName());
         }
         guiFields[10].setSubText("Besøg");

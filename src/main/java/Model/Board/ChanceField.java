@@ -1,8 +1,4 @@
-package Model;
-
-import Model.Board.*;
-
-import java.awt.*;
+package Model.Board;
 
 /**
  * Is used within the Fieldarray, is used to draw a chance card when landed on.
