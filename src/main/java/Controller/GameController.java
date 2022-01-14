@@ -128,7 +128,7 @@ public class GameController {
                 currentPlayer = players[playerindex + 1];
             }
         } else { // Rolled a pair, take extra turn.
-            if (currentPlayer.getTurnsInRow() != 2) {
+            if (currentPlayer.getTurnsInRow() != 2 && currentPlayer.getInJailStatus() == false) {
                 gui.message(currentPlayer.getName() + Language.getText("nextturn1"));
                 currentPlayer.incrementTurnsInRow();
             } else { // If 3 pairs is rolled in a row, Go to jail.
