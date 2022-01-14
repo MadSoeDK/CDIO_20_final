@@ -401,17 +401,24 @@ public class GameController {
                             selectedStreet = selectedMonopoly.getStreetArray()[i];
                         }
                     }
-
-                    // Check for uneven house amounts
-                    if (selectedStreet.getHouseAmount() == lowestHouseAmount) {
-                        // Add house to selected Street, pay for it & add GUI element
-                        selectedStreet.incrementHouseAmount();
-                        // Build house/hotel
-                        gui.setGuiHouseAmount(selectedStreet.getPlacement(), selectedStreet.getHouseAmount());
-                        gui.updateFieldRent(selectedStreet.getPlacement(), selectedStreet.getCurrentRent());
-                        currentPlayer.setPlayerBalance(-selectedStreet.getHousePrice());
-                    } else {
-                        gui.message(Language.getText("build4"));
+                    // Check for money
+                    if (currentPlayer.getPlayerBalance() > selectedStreet.getHousePrice())
+                    {
+                        // Check for uneven house amounts
+                        if (selectedStreet.getHouseAmount() == lowestHouseAmount) {
+                            // Add house to selected Street, pay for it & add GUI element
+                            selectedStreet.incrementHouseAmount();
+                            // Build house/hotel
+                            gui.setGuiHouseAmount(selectedStreet.getPlacement(), selectedStreet.getHouseAmount());
+                            gui.updateFieldRent(selectedStreet.getPlacement(), selectedStreet.getCurrentRent());
+                            currentPlayer.setPlayerBalance(-selectedStreet.getHousePrice());
+                            gui.setguiPlayerBalance(currentPlayer, currentPlayer.getPlayerBalance());
+                        } else {
+                            gui.message(Language.getText("build4"));
+                        }
+                    }else {
+                        gui.message(Language.getText("Du har ikke nok penge"));
+                        stopBuilding = true;
                     }
                 } else {
                     stopBuilding = true;
