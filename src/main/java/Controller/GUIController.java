@@ -65,7 +65,7 @@ public class GUIController {
                     guiFields[i].setSubText("Pris: " + ((Ownable) fields[i]).getPrice() + " kr.");
                     break;
                 case "FreeParking":
-                    guiFields[i] = new GUI_Tax();
+                    guiFields[i] = new GUI_Refuge();
                     guiFields[i].setBackGroundColor(Color.WHITE);
                     guiFields[i].setSubText("");
                     break;
@@ -329,8 +329,10 @@ public class GUIController {
         GUI_Field field = gui.getFields()[placement];
         GUI_Street street = (GUI_Street) field;
 
-        street.setSubText("Pris: "+rent);
+        street.setRent(" " + rent);
+        //street.setSubText("Leje: " + rent);
     }
+
     public void setChanceCard(ChanceCard card) {
         gui.displayChanceCard(card.getDescription());
     }
