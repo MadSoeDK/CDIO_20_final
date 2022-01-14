@@ -351,7 +351,6 @@ public class GameController {
                         eliminatePlayer(player, placement);
 
                         //Change ownership
-
                     } else { //Pay by mortgage
                         mortgage(player);
                     }
