@@ -35,11 +35,11 @@ public class GameController {
     public void playGame() {
         if(!checkWinner()) {
             do {
-                gui.message("Nu er det " + currentPlayer.getName() + "'s tur");
+                gui.message(Language.getText("playgame1") +" "+ currentPlayer.getName() +" "+ Language.getText("playgame2"));
                 takeTurn();
                 nextTurn();
             } while (!checkWinner());
-            gui.message(players[0].getName() + " VANDT SPILLET");
+            gui.message(players[0].getName() + Language.getText("playgame3"));
         }
     }
 
@@ -87,7 +87,7 @@ public class GameController {
         int placement = currentPlayer.getPlacement();
         Field field = board.getField(placement);
 
-        gui.message(currentPlayer.getName() + "taketurn7" + field.getName());
+        gui.message(currentPlayer.getName() + Language.getText("taketurn7") + field.getName());
 
         checkFieldType(field, placement);
 
@@ -129,12 +129,12 @@ public class GameController {
             }
         } else { // Rolled a pair, take extra turn.
             if (currentPlayer.getTurnsInRow() != 2) {
-                gui.message(currentPlayer.getName() + "nextturn1");
+                gui.message(currentPlayer.getName() + Language.getText("nextturn1"));
                 currentPlayer.incrementTurnsInRow();
             } else { // If 3 pairs is rolled in a row, Go to jail.
                 currentPlayer.setTurnsInRow(0);
                 currentPlayer.setInJailStatus(true);
-                gui.message(currentPlayer.getName() + "nextturn2");
+                gui.message(currentPlayer.getName() + Language.getText("nextturn2"));
                 setPlayerPlacement(currentPlayer, 10, false);
             }
         }
@@ -165,7 +165,7 @@ public class GameController {
             case "Jail":
                 Jail jail = (Jail) field;
                 if (jail.getPlacement() == 30) {
-                    gui.message(currentPlayer.getName() + "nextturn2");
+                    gui.message(currentPlayer.getName() + Language.getText("nextturn2"));
 
                     // Move to Jail field
                     setPlayerPlacement(currentPlayer, 10, false);
