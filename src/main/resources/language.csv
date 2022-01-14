@@ -10,7 +10,7 @@ taketurn3,Handle med Spiller,Trade with Player,
 taketurn4,Betal Pantsætning,Pay Mortgage back,
 taketurn5,Sælg Hus,Sell house,
 taketurn6,Du ejer ikke nogle huse,You don't own any houses,
-taketurn7, landede på , Landed on,
+taketurn7, landede på , Landed on ,
 nextturn1, tager en ekstra tur fordi der blev slået par!, takes an extra turn because they rolled a pair,
 nextturn2, rykker til fængsel., moves to jail.,
 eliminateplayer1, \n[BANKEROT], \n[Bankrupt],
@@ -22,7 +22,7 @@ build3, Hvilken Bygning vil du bygge på? Et hus koster: , What property do you 
 build4, Du skal bygge jævnt forskelle i husmængder på farven må maksimalt være 1, You must build evenly differences in house amount must not exceed 1,
 sell1, Vil du sælge et hus?, Do you wish to sell a house?,
 sell2, Hvilken farve vil du sælge Fra?, What color do you wish to sell from?,
-sell3,Hvilken Gade vil du sælge fra: ,What property will you sell from:,
+sell3,Hvilken Gade vil du sælge fra: ,What property will you sell from: ,
 sell4,Du skal sælge jævnt forskelle i husmængder på farven må maksimalt være 1, You must sell evenly differences in house amount must not exceed 1,
 sell5,Her er ikke nogen huse at sælge, There are no houses to sell,
 mortgage1,Vælg en ejendom du skal pantsætte:,Chose a property to mortgage,
@@ -38,15 +38,15 @@ playeroptionstrade1,Vil du handle?,Do you wish to trade?
 playeroptionsbuymortgage1,Vil du købe pantsatte ejendomme tilbage,
 tax1,Betal 10% eller 4000 kr?,Pay 10% or 4000$,
 buyfield1,Køb dette felt?,Buy this field?,
-buyfield2,Køb,Buy
-buyfield3,Auctioner,Auction
+buyfield2,Køb,Buy,
+buyfield3,Auctioner,Auction,
 
 GUIController,,
-createPlayers1,Hvor mange spillere?,How many players?
-createPlayers2,Indtast spiller navn:,Enter player name:
+createPlayers1,Hvor mange spillere?,How many players?,
+createPlayers2,Indtast spiller navn:,Enter player name:,
 
 General,,
 valuta,kr.,$
 price,pris,price
-yes,Ja,Yes
-no,Nej,No
+yes,Ja,Yes,
+no,Nej,No,

@@ -145,7 +145,7 @@ public class EventHandler {
 
     public void buyField(Player player, Ownable field, Player[] players) {
         //boolean answer = gui.getUserBool("Buy this field?", "Yes", "No");Language.getText("yes")
-        boolean answer = gui.getUserBool(Language.getText("buyfield1"), Language.getText("buyfield2"), Language.getText("buyfields3"));
+        boolean answer = gui.getUserBool(Language.getText("buyfield1"), Language.getText("buyfield2"), Language.getText("buyfield3"));
 
         // Buy if yes
         if (answer) {
