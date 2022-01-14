@@ -504,7 +504,7 @@ public class EventHandler {
     public void buyMortgage(Player player, Board board) {
         boolean value = true;
         int numberOfMortgagedProperties;
-        numberOfMortgagedProperties = board.countNumberOfMortgagedPropertiesForPlayer(player);
+        numberOfMortgagedProperties = board.MortgagedPropertiesForPlayer(player);
         Ownable[] playerMortgagedProperties = new Ownable[numberOfMortgagedProperties];
         String[] mortgagedPropertyNames = new String[numberOfMortgagedProperties];
         int currentMortgagedProperty = 0;

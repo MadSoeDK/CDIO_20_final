@@ -1,6 +1,5 @@
 package Model.Board;
 
-import Model.*;
 import Model.Player;
 
 import java.awt.*;
@@ -192,10 +191,10 @@ public class Board {
     }
 
     /**
-     *
+     * Returns rent as a integer array
      * @param array
      * @param type
-     * @return
+     * @return int rent array
      */
     public int[] stringToIntarr(String[] array, String type) {
         int col = 6;
@@ -213,7 +212,8 @@ public class Board {
         }
         return result;
     }
-    public int countNumbersOfPropertiesForPlayer(Player player) {
+
+    public int PropertiesForPlayer(Player player) {
         int numberOfProperties = 0;
         for (int i = 0; i < getFields().length; i++) {
 
@@ -228,7 +228,7 @@ public class Board {
         }
         return numberOfProperties;
     }
-    public int countNumberOfMortgagedPropertiesForPlayer(Player player) {
+    public int MortgagedPropertiesForPlayer(Player player) {
         int numberOfMortgagedProperties = 0;
         for (int i = 0; i < getFields().length; i++) {
             //Type casting field to Ownable
@@ -245,7 +245,7 @@ public class Board {
         }
         return numberOfMortgagedProperties;
     }
-    public int countNumbersOfPropertiesWithHouseForPlayer(Player player) {
+    public int PropertiesWithHouseForPlayer(Player player) {
         int numberOfPropertiesWithHouse = 0;
         for (int i = 0; i < getFields().length; i++) {
 
@@ -278,7 +278,7 @@ public class Board {
 
     public Ownable[] getPlayerProperties(Player player){
         int numberOfProperties;
-        numberOfProperties = countNumbersOfPropertiesForPlayer(player) + countNumberOfMortgagedPropertiesForPlayer(player);
+        numberOfProperties = PropertiesForPlayer(player) + MortgagedPropertiesForPlayer(player);
 
         Ownable[] playerProperties = new Ownable[numberOfProperties];
         int currentProperty = 0;

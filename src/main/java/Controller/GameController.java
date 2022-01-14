@@ -351,7 +351,6 @@ public class GameController {
                         eliminatePlayer(player, placement);
 
                         //Change ownership
-
                     } else { //Pay by mortgage
                         mortgage(player);
                     }
@@ -491,8 +490,8 @@ public class GameController {
         //checks number of properties the player own
         int numberOfProperties;
         int numberOfPropertiesWithHouses;
-        numberOfProperties = board.countNumbersOfPropertiesForPlayer(player);
-        numberOfPropertiesWithHouses = board.countNumbersOfPropertiesWithHouseForPlayer(player);
+        numberOfProperties = board.PropertiesForPlayer(player);
+        numberOfPropertiesWithHouses = board.PropertiesWithHouseForPlayer(player);
 
         Ownable[] playerProperties = new Ownable[numberOfProperties];
         String[] propertyNames = new String[numberOfProperties];

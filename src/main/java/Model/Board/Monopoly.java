@@ -6,14 +6,14 @@ import java.awt.*;
 
 public class Monopoly {
 
-    private String name;
+    private final String name;
     private Color color;
     private boolean monopolyTrue = false;
     private Player monopolyOwner;
     private final Street[] streets;
-    private int monopolySize;
+    private final int monopolySize;
 
-    public Monopoly(String name, Color color, Street[] streets/*Board board, int firstHouse, int secHouse, int thirdHouse*/) {
+    public Monopoly(String name, Color color, Street[] streets) {
         this.name = name;
         this.color = color;
         this.streets = streets;
@@ -44,26 +44,6 @@ public class Monopoly {
         if (monopolyTrue && streets[0].getOwner() != null) {
             monopolyOwner = streets[0].getOwner();
         }
-
-        /*if (streets.length == 2) {// If the monopoly is Blue or Magenta
-            if (streets[0].getOwner() == streets[1].getOwner() && streets[0].getOwner() != null) {
-                monopolyTrue=true;
-                monopolyOwner=streets[0].getOwner();
-            } else {
-                monopolyTrue=false;
-                monopolyOwner=null;
-            }
-        }
-        else {
-
-            if (streets[0].getOwner() == streets[1].getOwner() && streets[1].getOwner() == streets[2].getOwner() && streets[0].getOwner() != null) {
-                monopolyTrue=true;
-                monopolyOwner=streets[0].getOwner();
-            } else {
-                monopolyTrue=false;
-                monopolyOwner=null;
-            }
-        }*/
     }
 
     public String getName(){
