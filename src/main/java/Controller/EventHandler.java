@@ -83,7 +83,8 @@ public class EventHandler {
 
     public void fieldEffect(Player player, Ferry ferry, Board board, Player[] players) {
         // Check Ferry Rent
-        int ferry_cost = ferry.getRent(ferry,board);//ferry.getCurrentRent();
+        ferry.updateNumberOfFerriesOwned(player,board);
+        int ferry_cost = ferry.getCurrentRent();//ferry.getCurrentRent();
 
         if (ferry.getOwner() == null) { // Noone owns Ferry
             buyField(player, ferry, players);
