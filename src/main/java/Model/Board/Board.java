@@ -44,6 +44,51 @@ public class Board {
 
         fields = new Field[40];
 
+        createBoard(data);
+
+        String[] streetColors = {"blue", "orange", "green", "grey", "red", "teal", "yellow", "purple"};
+
+        monopolies = new Monopoly[streetColors.length];
+
+        for (int i = 0; i < streetColors.length; i++) {
+            switch (streetColors[i]) {
+                case "blue":
+                    Street[] bluestreets = getStreetsByColor(streetColors[i]);
+                    monopolies[i] = new Monopoly("Blå", Color.blue, bluestreets);
+                    break;
+                case "orange":
+                    Street[] orangestreets = getStreetsByColor(streetColors[i]);
+                    monopolies[i] = new Monopoly("Orange", Color.orange, orangestreets);
+                    break;
+                case "green":
+                    Street[] greenstreets = getStreetsByColor(streetColors[i]);
+                    monopolies[i] = new Monopoly("Lysegrøn", Color.green, greenstreets);
+                    break;
+                case "grey":
+                    Street[] dgreenstreets = getStreetsByColor(streetColors[i]);
+                    monopolies[i] = new Monopoly("Mørkegrøn", Color.gray, dgreenstreets);
+                    break;
+                case "red":
+                    Street[] redstreets = getStreetsByColor(streetColors[i]);
+                    monopolies[i] = new Monopoly("Rød", Color.red, redstreets);
+                    break;
+                case "teal":
+                    Street[] lightbluestreets = getStreetsByColor(streetColors[i]);
+                    monopolies[i] = new Monopoly("Lyseblå", Color.white, lightbluestreets);
+                    break;
+                case "yellow":
+                    Street[] yellowstreets = getStreetsByColor(streetColors[i]);
+                    monopolies[i] = new Monopoly("Gul", Color.yellow, yellowstreets);
+                    break;
+                case "purple":
+                    Street[] purplestreets = getStreetsByColor(streetColors[i]);
+                    monopolies[i] = new Monopoly("Lilla", Color.magenta, purplestreets);
+                    break;
+            }
+        }
+    }
+
+    public void createBoard(String[][] data) {
         int name = 0, position = 1, type = 2, color = 3, price = 4, housePrice = 5;
 
         for (int i = 0; i < 40; i++) {
@@ -118,60 +163,6 @@ public class Board {
                     System.out.println("No field type match");
             }
         }
-
-        String[] streetColors = {"blue", "orange", "green", "grey", "red", "teal", "yellow", "purple"};
-
-        monopolies = new Monopoly[streetColors.length];
-
-        for (int i = 0; i < streetColors.length; i++) {
-            switch (streetColors[i]) {
-                case "blue":
-                    Street[] bluestreets = getStreetsByColor(streetColors[i]);
-                    monopolies[i] = new Monopoly("Blå", Color.blue, bluestreets);
-                    break;
-                case "orange":
-                    Street[] orangestreets = getStreetsByColor(streetColors[i]);
-                    monopolies[i] = new Monopoly("Orange", Color.orange, orangestreets);
-                    break;
-                case "green":
-                    Street[] greenstreets = getStreetsByColor(streetColors[i]);
-                    monopolies[i] = new Monopoly("Lysegrøn", Color.green, greenstreets);
-                    break;
-                case "grey":
-                    Street[] dgreenstreets = getStreetsByColor(streetColors[i]);
-                    monopolies[i] = new Monopoly("Mørkegrøn", Color.gray, dgreenstreets);
-                    break;
-                case "red":
-                    Street[] redstreets = getStreetsByColor(streetColors[i]);
-                    monopolies[i] = new Monopoly("Rød", Color.red, redstreets);
-                    break;
-                case "teal":
-                    Street[] lightbluestreets = getStreetsByColor(streetColors[i]);
-                    monopolies[i] = new Monopoly("Lyseblå", Color.white, lightbluestreets);
-                    break;
-                case "yellow":
-                    Street[] yellowstreets = getStreetsByColor(streetColors[i]);
-                    monopolies[i] = new Monopoly("Gul", Color.yellow, yellowstreets);
-                    break;
-                case "purple":
-                    Street[] purplestreets = getStreetsByColor(streetColors[i]);
-                    monopolies[i] = new Monopoly("Lilla", Color.magenta, purplestreets);
-                    break;
-            }
-        }
-
-        // Initialize Monopoly Array
-        /*Monopoly monopolies[] = {
-                new Monopoly("Blå",Color.blue, this, 1,3,0),
-                new Monopoly("Orange",Color.orange, this, 6,8,9),
-                new Monopoly("Lysegrøn",Color.green, this,11,13,14),
-                new Monopoly("Mørkegrøn",Color.gray, this,16,18,19),
-                new Monopoly("Rød",Color.red, this, 21,23,24),
-                new Monopoly("Lyseblå",Color.white, this, 26,27,29),
-                new Monopoly("Gul",Color.yellow, this, 31,32,34),
-                new Monopoly("Lilla",Color.magenta, this, 37,39, 0)
-        };
-        this.monopolies = monopolies;*/
     }
 
     public Street[] getStreetsByColor(String color) {
