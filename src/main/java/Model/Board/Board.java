@@ -192,10 +192,10 @@ public class Board {
     }
 
     /**
-     *
+     * Returns rent as a integer array
      * @param array
      * @param type
-     * @return
+     * @return int rent array
      */
     public int[] stringToIntarr(String[] array, String type) {
         int col = 6;
