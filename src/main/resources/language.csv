@@ -1,0 +1,20 @@
+id, danish, english
+
+GameController,,
+playgame1,Nu er det,
+playgame2,'s tur,
+playgame3, HAR VUNDET SPILLET!,
+taketurn1,Hvilken handling vil du tage?,
+taketurn2,Slå med terningerne,
+taketurn3,Handle med Spiller,
+taketurn4,Betal Pantsætning,
+taketurn5,Sælg Hus,
+taketurn6,Du ejer ikke nogle huse
+
+GUIController,,
+createPlayers1,Hvor mange spillere?,How many players?
+createPlayers2,Indtast spiller navn:,Enter player name:
+
+General,,
+valuta,kr.,$
+price,pris,price

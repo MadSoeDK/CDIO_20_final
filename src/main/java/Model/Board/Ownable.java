@@ -10,8 +10,6 @@ public abstract class Ownable extends Field {
 
     private Player owner;
 
-    private int houses = 0;
-
     private boolean mortgage;
     private int mortgageRent = 0;
 
@@ -41,7 +39,7 @@ public abstract class Ownable extends Field {
             if (mortgage){
                 return mortgageRent;
             }
-            rent = RENT[houses];
+            rent = RENT[0];
         } else {
             rent = PRICE;
         }
@@ -49,9 +47,6 @@ public abstract class Ownable extends Field {
     }
     public int getPrice() {
         return PRICE;
-    }
-    public int getHouses() {
-        return houses;
     }
     public void changeOwner(Player player) {
         owner = null;

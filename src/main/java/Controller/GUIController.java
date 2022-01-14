@@ -1,12 +1,16 @@
+package Controller;
+
 import Model.Board.Field;
 import Model.Board.Ownable;
 import Model.Player;
-//import Model.Property;
 import Model.Board.Street;
+import Utility.Language;
 import gui_fields.*;
 import gui_main.GUI;
+import Model.Cards.*;
 
 import java.awt.*;
+import java.util.Random;
 
 public class GUIController {
 
@@ -14,11 +18,19 @@ public class GUIController {
     private GUI_Player[] guiPlayers;
     private String[] playernames;
     private GUI_Field[] guiFields;
-    private final Color[] colors = {Color.RED, Color.WHITE, Color.ORANGE, Color.MAGENTA, Color.BLACK, Color.BLUE};
+    private final Color[] colors = {new Color(180,0,0), new Color(0,90,0), new Color(0,0,180), new Color(210,9,214), new Color(0,209,206), new Color(255,106,0)};
 
     public GUIController(Field[] fields) {
         GUI_Field[] guiBoard = createBoard(fields);
-        gui = new GUI(guiBoard,Color.white);
+        gui = new GUI(guiBoard, new Color(112, 171, 79));
+        chooseLanguage();
+    }
+
+    public void chooseLanguage() {
+        String[] options = {"Danish", "English"};
+        String language = getUserSelection("Select Language", options);
+        Language.setLanguage(language);
+        Language.read();
     }
 
     public GUI_Field[] createBoard(Field[] fields) {
@@ -28,21 +40,23 @@ public class GUIController {
             switch (fields[i].getClass().getSimpleName()) {
                 case "Start":
                     guiFields[i] = new GUI_Start();
+                    guiFields[i].setBackGroundColor(Color.WHITE);
                     break;
                 case "Street":
                     guiFields[i] = new GUI_Street();
-                    //((GUI_Ownable)guiFields[i]).setRent(((Ownable) fields[i]).getCurrentRent() + "kr.");
                     guiFields[i].setBackGroundColor(convertColor(((Street) fields[i]).getColor()));
                     guiFields[i].setSubText("Pris: " + ((Ownable) fields[i]).getPrice() + " kr.");
                     break;
                 case "ChanceField":
                     guiFields[i] = new GUI_Chance();
                     guiFields[i].setSubText("");
-                    guiFields[i].setBackGroundColor(Color.BLACK);
-                    guiFields[i].setForeGroundColor(Color.GREEN);
+
+                    //guiFields[i].setBackGroundColor(Color.LIGHT_GRAY);
+                    //guiFields[i].setForeGroundColor(Color.BLACK);
                     break;
                 case "Jail":
                     guiFields[i] = new GUI_Jail();
+                    guiFields[i].setBackGroundColor(Color.LIGHT_GRAY);
                     //guiFields[i].setSubText("");
                     break;
                 case "Ferry":
@@ -74,14 +88,33 @@ public class GUIController {
     }
 
     public void createPlayers(int STARTBALANCE) {
-        int qty = Integer.parseInt(gui.getUserSelection("How many players?", "3", "4", "5", "6"));
+        int qty = Integer.parseInt(gui.getUserSelection(Language.getText("createPlayers1"), "3", "4", "5", "6"));
 
         guiPlayers = new GUI_Player[qty];
 
         for (int i = 0; i < qty; i++) {
-            gui.showMessage("Indtast spiller navn: ");
+            gui.showMessage(Language.getText("createPlayers2"));
 
-            GUI_Car playerCar = new GUI_Car(colors[i], colors[i], GUI_Car.Type.UFO, GUI_Car.Pattern.FILL);
+            // Get random car type
+            Random rand = new Random();
+            int carOptions = rand.nextInt(4);
+            GUI_Car.Type carOptionChosen = GUI_Car.Type.TRACTOR;
+            switch(carOptions){
+                case 0:
+                    carOptionChosen = GUI_Car.Type.CAR;
+                    break;
+                case 1:
+                    carOptionChosen = GUI_Car.Type.RACECAR;
+                    break;
+                case 2:
+                    carOptionChosen = GUI_Car.Type.TRACTOR;
+                    break;
+                case 3:
+                    carOptionChosen = GUI_Car.Type.UFO;
+                    break;
+            }
+
+            GUI_Car playerCar = new GUI_Car(colors[i], colors[i], carOptionChosen, GUI_Car.Pattern.FILL);
 
             guiPlayers[i] = new GUI_Player(gui.getUserString(""), STARTBALANCE, playerCar);
 
@@ -91,11 +124,10 @@ public class GUIController {
             field.setCar(guiPlayers[i], true);
         }
     }
+
     public void removePlayer(Player player, int placement) {
-        if(player.getBankruptStatus()) {
             GUI_Field field = gui.getFields()[placement];
             field.setCar(getGuiPlayer(player), false);
-        }
     }
 
     public void movePlayer(Player player, int placement, int preplacement) {
@@ -156,12 +188,35 @@ public class GUIController {
         return guiFields[placement];
     }
 
+    public void setGuiHouseAmount(int placement, int houseAmount){
+
+        // Typecast to Street
+        GUI_Field field = gui.getFields()[placement];
+        GUI_Street street = (GUI_Street) field;
+
+        if (houseAmount == 5)
+        {
+            street.setHouses(0);
+            street.setHotel(true);
+        }
+        else
+        {
+            street.setHouses(houseAmount);
+            //street.setHotel(false);
+        }
+
+    }
+
     public String[] getPlayernames() {
         playernames = new String[guiPlayers.length];
         for (int i = 0; i < guiPlayers.length; i++) {
             playernames[i] = guiPlayers[i].getName();
         }
         return playernames;
+    }
+
+    public GUI_Field[] getGuiFields() {
+        return guiFields;
     }
 
     public GUI_Player getGuiPlayer(Player currentplayer) {
@@ -173,9 +228,11 @@ public class GUIController {
         }
         return guiplayer;
     }
+
     public GUI_Player[] getGuiPlayers() {
         return guiPlayers;
     }
+
     public int getPlayers() {
         return guiPlayers.length;
     }
@@ -232,19 +289,19 @@ public class GUIController {
 
         switch (color.toLowerCase()) {
             case "red" :
-                result = Color.red;
+                result = new Color(255,80,80);
                 break;
             case "green" :
-                result = Color.green;
+                result = new Color(94,255,110);
                 break;
             case "blue" :
                 result = new Color(45, 137, 239);
                 break;
             case "yellow" :
-                result = Color.yellow;
+                result = new Color(242,236,51);
                 break;
             case "purple" :
-                result = new Color(255, 90, 255);
+                result = new Color(185, 105, 200);
                 break;
             case "turquoise" :
                 result = new Color(0,255,239);
@@ -255,8 +312,31 @@ public class GUIController {
             case "orange" :
                 result = new Color(235,97,35);
                 break;
+            case "grey" :
+                result = new Color(13,138,17);
+                break;
+            case "teal" :
+                result = new Color(8, 230, 216);
+                break;
         }
 
         return result;
+    }
+
+    public void updateFieldRent (int placement, int rent){
+
+        // Typecast to Street
+        GUI_Field field = gui.getFields()[placement];
+        GUI_Street street = (GUI_Street) field;
+
+        street.setSubText("Pris: "+rent);
+    }
+    public void setChanceCard(ChanceCard card) {
+        gui.displayChanceCard(card.getDescription());
+    }
+
+    public void setSubText(String subText, Field field) {
+        GUI_Field gui_field = getGuiField(field.getPlacement());
+        gui_field.setSubText(subText);
     }
 }

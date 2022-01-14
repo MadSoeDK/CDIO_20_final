@@ -1,3 +1,5 @@
+package Controller;
+
 import Model.*;
 import Model.Board.*;
 
@@ -9,12 +11,20 @@ public class EventHandler {
         this.gui = gui;
     }
 
-    public void playerOptions(Player player, Player [] players, Board board) {
+    public void playerOptionsTrade(Player player, Player [] players, Board board) {
         int playerIndex = java.util.Arrays.asList(players).indexOf(player);
-        boolean answer = gui.getUserBool("Vil du handle?", "Ja", "Nej, rul terning");
+        boolean answer = gui.getUserBool("Vil du handle?", "Ja", "Nej, gå tilbage");
 
         if (answer) {
                 trade(playerIndex, players, board);
+        }
+        // Roll dice
+    }
+
+    public void playerOptionsBuyMortgaged(Player player, Board board) {
+        boolean answer = gui.getUserBool("Vil du købe pantsatte ejendomme tilbage", "Ja", "Nej, gå tilbage");
+        if (answer) {
+            buyMortgage(player, board);
         }
         // Roll dice
     }
@@ -35,7 +45,6 @@ public class EventHandler {
             }
         }
     }
-
     public void fieldEffect(Player player, Ownable ownable, Player[] players, int sum) {
         if (ownable.getOwner() == null) {
             buyField(player, ownable, players);
@@ -52,14 +61,15 @@ public class EventHandler {
         }
     }
 
-    public void fieldEffect(Player player, Street street) {
+    public void fieldEffect(Player player, Street street, Board board, Player[] players) {
         if (street.getOwner() == null) { // No owner - ask to buy it
-            //buyField(player, street);
+            buyField(player, street, players);
         } else { //Pay rent to owner
             Player fieldOwner = street.getOwner();
 
+
             // Check if Owner has Monopoly
-            if (false /*board.hasMonopoly(placement)*/) {
+            if (board.hasMonopoly(player.getPlacement()) && street.getHouseAmount() == 0) {
                 // 1. Subtract rent from current player 2. add to field owner
                 player.setPlayerBalance(-street.getCurrentRent() * 2);
                 fieldOwner.setPlayerBalance(street.getCurrentRent() * 2);
@@ -70,16 +80,12 @@ public class EventHandler {
         }
     }
 
-    public void fieldEffect(Player player, Ferry ferry) {
+    public void fieldEffect(Player player, Ferry ferry, Board board, Player[] players) {
         // Check Ferry Rent
-        int ferry_cost = ferry.getCurrentRent(); //getFerryRent()
+        int ferry_cost = ferry.getRent(ferry,board);//ferry.getCurrentRent();
 
         if (ferry.getOwner() == null) { // Noone owns Ferry
-            //buyField(player, ferry);
-
-            //ferry_cost = getFerryRent(property);
-            //updateFerryGUI(property, ferry_cost);
-
+            buyField(player, ferry, players);
         } else {
             // Get field owner
             Player fieldOwner = ferry.getOwner();
@@ -90,26 +96,26 @@ public class EventHandler {
         }
     }
 
-    public void fieldEffect(Player player, Brewery brewery, int sum) {
+    public void fieldEffect(Player player, Brewery brewery, Player[] players, Board board, int sum) {
         // Typecast other company
         Ownable otherBrewery;
 
         // No one owns Company
         if (brewery.getOwner() == null) {
-            //buyField(player, brewery);
+            buyField(player, brewery, players);
         } else { // Other player Owns Company
 
             // Get field owner
             Player fieldOwner = brewery.getOwner();
 
-            /*if (brewery.getPlacement() == 12) {
+            if (brewery.getPlacement() == 12) {
                 otherBrewery = (Ownable) board.getField(27);
             } else {
                 otherBrewery = (Ownable) board.getField(12);
-            }*/
+            }
 
             // 1. Subtract rent from current player 2. add to field owner
-            if (brewery.getOwner() == brewery.getOwner()) {
+            if (brewery.getOwner() == otherBrewery.getOwner()) {
                 player.setPlayerBalance(-brewery.getRent()[1] * sum);
                 fieldOwner.setPlayerBalance(brewery.getRent()[1] * sum);
             } else {
@@ -120,6 +126,7 @@ public class EventHandler {
     }
 
     public void fieldEffect(Player player, Jail jail) {
+
     }
 
     public void fieldEffect(Player player, Tax tax, int netWorth) {
@@ -133,10 +140,6 @@ public class EventHandler {
         } else { // last tax field
             player.setPlayerBalance(-2000);
         }
-    }
-
-    public void fieldEffect(Player player, ChanceField chanceField, int sum) {
-
     }
 
     public void buyField(Player player, Ownable field, Player[] players) {
@@ -169,26 +172,56 @@ public class EventHandler {
 
         // Bid/Pass
         while (auctionPlayersLeft != 1) {
-            String[] options = {"Pass", "100", "200", "500", "1000", "2000"};
-            switch (gui.getUserSelection("Current Bid Amount: " + (auctionSum) + " " + curAucPlayer.getName() + ": Select Bid Option", options)) {
-                case "Pass":
+            String[] options = {"Afvis", "100", "200", "500", "1000", "2000"};
+            switch (gui.getUserSelection("Nuværende totale bud: " + (auctionSum) + " " + curAucPlayer.getName() + ": Vælg budvalgmulighed", options)) {
+                case "Afvis":
                     auctionPlayersLeft -= 1;
                     aucPlayers[curAucIndex] = null;
                     break;
                 case "100":
-                    auctionSum += 100;
+                    if (curAucPlayer.getPlayerBalance() >= auctionSum+100) {
+                        auctionSum += 100;
+                    }
+                    else{
+                        auctionPlayersLeft -= 1;
+                        aucPlayers[curAucIndex] = null;
+                    }
                     break;
                 case "200":
-                    auctionSum += 200;
+                    if (curAucPlayer.getPlayerBalance() >= auctionSum+200) {
+                        auctionSum += 200;
+                    }
+                    else{
+                        auctionPlayersLeft -= 1;
+                        aucPlayers[curAucIndex] = null;
+                    }
                     break;
                 case "500":
-                    auctionSum += 500;
+                    if (curAucPlayer.getPlayerBalance() >= auctionSum+500) {
+                        auctionSum += 500;
+                    }
+                    else{
+                        auctionPlayersLeft -= 1;
+                        aucPlayers[curAucIndex] = null;
+                    }
                     break;
                 case "1000":
-                    auctionSum += 1000;
+                    if (curAucPlayer.getPlayerBalance() >= auctionSum+1000) {
+                        auctionSum += 1000;
+                    }
+                    else{
+                        auctionPlayersLeft -= 1;
+                        aucPlayers[curAucIndex] = null;
+                    }
                     break;
                 case "2000":
-                    auctionSum += 2000;
+                    if (curAucPlayer.getPlayerBalance() >= auctionSum+2000) {
+                        auctionSum += 2000;
+                    }
+                    else{
+                        auctionPlayersLeft -= 1;
+                        aucPlayers[curAucIndex] = null;
+                    }
                     break;
             }
             // Next Player
@@ -276,11 +309,6 @@ public class EventHandler {
             tradePlayersNames[i] = tradePlayers[i].getName();
         }
 
-        // Display array as Dropdown Menu
-        /*for(int i = 0; i<tradePlayers.length; i++){
-            System.out.println(tradePlayers[i].getName());
-        }*/
-
         // Create a dropdown based on tradeable player amount
         String selectedTradePartner = gui.getUserSelection(currentPlayer.getName() + " Vælg spiller at handle med", tradePlayersNames);
 
@@ -290,55 +318,30 @@ public class EventHandler {
             }
         }
 
-        /*if (tradePlayersNames[0] == selectedTradePartner) {
-            tradePartnerId=0;
-            System.out.println("Tradepartner: "+tradePlayersNames[0]);
-        }
-        if (tradePlayersNames[1] == selectedTradePartner) {
-            tradePartnerId=1;
-            System.out.println("Tradepartner: "+tradePlayersNames[1]);
-        }
-        if (tradePlayersNames.length > 2) {
-            if (tradePlayersNames[2] == selectedTradePartner) {
-                tradePartnerId = 2;
-                System.out.println("Tradepartner: " + tradePlayersNames[2]);
-            }
-        }
-        if (tradePlayersNames.length > 3) {
-            if (tradePlayersNames[3] == selectedTradePartner) {
-                tradePartnerId = 3;
-                System.out.println("Tradepartner: " + tradePlayersNames[3]);
-            }
-        }
-        if (tradePlayersNames.length > 4) {
-            if (tradePlayersNames[4] == selectedTradePartner) {
-                tradePartnerId = 4;
-                System.out.println("Tradepartner: " + tradePlayersNames[4]);
-            }
-        }*/
-
         // Display Chosen players property
         Ownable[] tradePartProperties = board.getPlayerProperties(tradePlayers[tradePartnerId]);
         String[] fieldNames = new String[tradePartProperties.length];
         String[] options = fieldNames;
         String fieldName = "";
         Ownable chosenProp = null;
-        if (tradePartProperties.length > 0) {
-            for (int i = 0; i < tradePartProperties.length; i++) {
-                fieldNames[i] = tradePartProperties[i].getName();
-            }
-            options = fieldNames;
-            chosenProp = tradePartProperties[0];
-            fieldName = gui.getUserSelection(currentPlayer.getName() + " Vælg hvilke ejendomme du vil købe", options);
-            for (int i = 0; i < fieldNames.length; i++) {
-                if (fieldNames[i].equals(fieldName)) {
-                    chosenProp = tradePartProperties[i];
+        if (gui.getUserBool("Vil du købe en af spillerens ejendomme?", "Ja, Køb ejendom", "Køb ikke ejendom")) {
+            if (tradePartProperties.length > 0) {
+                for (int i = 0; i < tradePartProperties.length; i++) {
+                    fieldNames[i] = tradePartProperties[i].getName();
+                }
+                options = fieldNames;
+                chosenProp = tradePartProperties[0];
+                fieldName = gui.getUserSelection(currentPlayer.getName() + " Vælg hvilke ejendomme du vil købe", options);
+                for (int i = 0; i < fieldNames.length; i++) {
+                    if (fieldNames[i].equals(fieldName)) {
+                        chosenProp = tradePartProperties[i];
+                    }
                 }
             }
         }
 
         // Display Menu for money
-        boolean correctPartnerPayAmount = false;
+        boolean correctPartnerPayAmount=false;
         String[] optionsMoney = {"Accepter mængde", "+50", "+100", "+200", "+500", "+1000", "+5000", "+10000"};
         while (!correctPartnerPayAmount) {
 
@@ -347,25 +350,39 @@ public class EventHandler {
                     correctPartnerPayAmount=true;
                     break;
                 case "+50":
-                    tradePartnerPayed+=50;
+                    if (tradePlayers[tradePartnerId].getPlayerBalance() >= tradePartnerPayed+50) {
+                        tradePartnerPayed += 50;
+                    }
                     break;
                 case "+100":
-                    tradePartnerPayed+=100;
+                    if (tradePlayers[tradePartnerId].getPlayerBalance() >= tradePartnerPayed+100) {
+                        tradePartnerPayed += 100;
+                    }
                     break;
                 case "+200":
-                    tradePartnerPayed+=200;
+                    if (tradePlayers[tradePartnerId].getPlayerBalance() >= tradePartnerPayed+200) {
+                        tradePartnerPayed += 200;
+                    }
                     break;
                 case "+500":
-                    tradePartnerPayed+=500;
+                    if (tradePlayers[tradePartnerId].getPlayerBalance() >= tradePartnerPayed+500) {
+                        tradePartnerPayed += 500;
+                    }
                     break;
                 case "+1000":
-                    tradePartnerPayed+=1000;
+                    if (tradePlayers[tradePartnerId].getPlayerBalance() >= tradePartnerPayed+1000) {
+                        tradePartnerPayed += 1000;
+                    }
                     break;
                 case "+5000":
-                    tradePartnerPayed+=5000;
+                    if (tradePlayers[tradePartnerId].getPlayerBalance() >= tradePartnerPayed+5000) {
+                        tradePartnerPayed += 5000;
+                    }
                     break;
                 case "+10000":
-                    tradePartnerPayed+=10000;
+                    if (tradePlayers[tradePartnerId].getPlayerBalance() >= tradePartnerPayed+10000){
+                        tradePartnerPayed+=10000;
+                    }
                     break;
             }
         }
@@ -374,16 +391,18 @@ public class EventHandler {
         Ownable[] traderProperties = board.getPlayerProperties(currentPlayer);
         fieldNames = new String[traderProperties.length];
         Ownable chosenSoldProp = null;
-        if (traderProperties.length > 0) {
-            for (int i = 0; i < traderProperties.length; i++) {
-                fieldNames[i] = traderProperties[i].getName();
-            }
-            String[] playerOptions = fieldNames;
-            chosenSoldProp = null;
-            fieldName = gui.getUserSelection(currentPlayer.getName() + " Vælg hvilke ejendomme du vil sælge", playerOptions);
-            for (int i = 0; i < fieldNames.length; i++) {
-                if (fieldNames[i].equals(fieldName)) {
-                    chosenSoldProp = tradePartProperties[i];
+        if (gui.getUserBool("Vil du sælge en af dine ejendomme?", "Ja, Sælg en ejendom", "Sælg ikke ejendom")) {
+            if (traderProperties.length > 0) {
+                for (int i = 0; i < traderProperties.length; i++) {
+                    fieldNames[i] = traderProperties[i].getName();
+                }
+                String[] playerOptions = fieldNames;
+                chosenSoldProp = null;
+                fieldName = gui.getUserSelection(currentPlayer.getName() + " Vælg hvilke ejendomme du vil sælge", playerOptions);
+                for (int i = 0; i < fieldNames.length; i++) {
+                    if (fieldNames[i].equals(fieldName)) {
+                        chosenSoldProp = traderProperties[i];
+                    }
                 }
             }
         }
@@ -396,25 +415,39 @@ public class EventHandler {
                     correctPlayerPayAmount=true;
                     break;
                 case "+50":
-                    traderPayed+=50;
+                    if (currentPlayer.getPlayerBalance() >= traderPayed+50) {
+                        traderPayed += 50;
+                    }
                     break;
                 case "+100":
-                    traderPayed+=100;
+                    if (currentPlayer.getPlayerBalance() >= traderPayed+100) {
+                        traderPayed += 100;
+                    }
                     break;
                 case "+200":
-                    traderPayed+=200;
+                    if (currentPlayer.getPlayerBalance() >= traderPayed+200) {
+                        traderPayed += 200;
+                    }
                     break;
                 case "+500":
-                    traderPayed+=500;
+                    if (currentPlayer.getPlayerBalance() >= traderPayed+500) {
+                        traderPayed += 500;
+                    }
                     break;
                 case "+1000":
-                    traderPayed+=1000;
+                    if (currentPlayer.getPlayerBalance() >= traderPayed+1000) {
+                        traderPayed += 1000;
+                    }
                     break;
                 case "+5000":
-                    traderPayed+=5000;
+                    if (currentPlayer.getPlayerBalance() >= traderPayed+5000) {
+                        traderPayed += 5000;
+                    }
                     break;
                 case "+10000":
-                    traderPayed+=10000;
+                    if (currentPlayer.getPlayerBalance() >= traderPayed+10000) {
+                        traderPayed += 10000;
+                    }
                     break;
             }
         }
@@ -446,22 +479,77 @@ public class EventHandler {
             currentPlayer.setPlayerBalance(tradePartnerPayed - traderPayed);
             if (chosenProp != null){
                 chosenProp.setOwner(currentPlayer);
+                //gui.setOwner(currentPlayer, chosenProp);
                 gui.setOwner(currentPlayer, chosenProp);
             }
             if (chosenSoldProp != null){
                 chosenSoldProp.setOwner(tradePlayers[tradePartnerId]);
-                gui.setOwner(currentPlayer, chosenProp);
+                //gui.setOwner(tradePlayers[tradePartnerId], chosenProp);
+                gui.setOwner(tradePlayers[tradePartnerId], chosenSoldProp);
             }
 
             // Opdate GUI
             //board.getPlayer(curPlayer).getPlayer().setBalance(board.getPlayer(curPlayer).getPlayerBalance());
             //tradePlayers[tradePartnerId].getPlayer().setBalance(tradePlayers[tradePartnerId].getPlayerBalance());
+            // Update Ownership
 
             gui.setguiPlayerBalance(currentPlayer,currentPlayer.getPlayerBalance());
             gui.setguiPlayerBalance(tradePlayers[tradePartnerId],tradePlayers[tradePartnerId].getPlayerBalance());
         }
 
 
+    }
+
+    public void buyMortgage(Player player, Board board) {
+        boolean value = true;
+        int numberOfMortgagedProperties;
+        numberOfMortgagedProperties = board.countNumberOfMortgagedPropertiesForPlayer(player);
+        Ownable[] playerMortgagedProperties = new Ownable[numberOfMortgagedProperties];
+        String[] mortgagedPropertyNames = new String[numberOfMortgagedProperties];
+        int currentMortgagedProperty = 0;
+        for (int i = 0; i < board.getFields().length; i++) {
+            //Type casting field to Ownable
+            if (board.getField(i) instanceof Ownable) {
+                //Verifying that the current field is of the type Ownable
+                Ownable property = (Ownable) board.getField(i);
+                if (player == property.getOwner()) {
+                    if (property.getMortgage()) {
+                        playerMortgagedProperties[currentMortgagedProperty] = property;
+                        mortgagedPropertyNames[currentMortgagedProperty] = property.getName();
+                        currentMortgagedProperty++;
+                    }
+                }
+            }
+        }
+        while (value) {
+            //stops while loop if no mortgaged properties
+            if (numberOfMortgagedProperties == 0) {
+                gui.button("Du har ikke nogen pantsatte ejendomme","ok");
+                value = false;
+            }
+            else {
+                String guiSelection = gui.dropdown("Vælg en pantsat ejendom du skal købe:", mortgagedPropertyNames);
+                for (int i = 0; i < mortgagedPropertyNames.length; i++) {
+                    //Verifying that the current field is of the type Ownable
+                    Ownable property = playerMortgagedProperties[i];
+                    if (property.getName().equals(guiSelection)) {
+                        property.setMortgage(false);
+                        //set GUI mortgage
+                        player.setPlayerBalance(-((property.getPrice()) / 2)+(((property.getPrice()) / 2) * 10/100));
+                        String[] newMortgagedPropertyNames = new String[mortgagedPropertyNames.length - 1];
+                        int j = 0;
+                        if(newMortgagedPropertyNames.length == 0) {
+                            gui.button("Du har ikke nogen pantsatte ejendomme","ok");
+                            value = false;
+                        }
+                        if (property.getOwner() == player && (property.getName().equals(guiSelection))) {
+                            mortgagedPropertyNames[i] = newMortgagedPropertyNames[j];
+                            j++;
+                        }
+                    }
+                }
+            }
+        }
     }
 
 }

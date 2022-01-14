@@ -1,15 +1,16 @@
 package Model.Board;
 
-import Model.ChanceCardDeck;
+import Model.ChanceField;
 import Model.Player;
 
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 
 public class Board {
 
     private final Field[] fields;
-    //private Monopoly monopolies[];
+    private Monopoly monopolies[];
 
     public Board() {
         BufferedReader CSV;
@@ -92,8 +93,7 @@ public class Board {
                     break;
 
                 case "chance":
-                    fields[Integer.parseInt(field[position])] = new ChanceField(
-                            field[name],
+                    fields[Integer.parseInt(field[position])] = new ChanceField(field[name],
                             Integer.parseInt(field[position])
                     );
                     break;
@@ -117,18 +117,17 @@ public class Board {
         }
 
         // Initialize Monopoly Array
-        /*
         Monopoly monopolies[] = {
-                new Monopoly(Color.blue, this, 1,3,0),
-                new Monopoly(Color.orange, this, 6,8,9),
-                new Monopoly(Color.green, this,11,13,14),
-                new Monopoly(Color.gray, this,16,18,19),
-                new Monopoly(Color.red, this, 21,23,24),
-                new Monopoly(Color.white, this, 26,27,29),
-                new Monopoly(Color.yellow, this, 31,32,34),
-                new Monopoly(Color.magenta, this, 37,39, 0)
-        };*/
-
+                new Monopoly("Blå",Color.blue, this, 1,3,0),
+                new Monopoly("Orange",Color.orange, this, 6,8,9),
+                new Monopoly("Lysegrøn",Color.green, this,11,13,14),
+                new Monopoly("Mørkegrøn",Color.gray, this,16,18,19),
+                new Monopoly("Rød",Color.red, this, 21,23,24),
+                new Monopoly("Lyseblå",Color.white, this, 26,27,29),
+                new Monopoly("Gul",Color.yellow, this, 31,32,34),
+                new Monopoly("Lilla",Color.magenta, this, 37,39, 0)
+        };
+        this.monopolies = monopolies;
     }
 
     public Field getField(int placement) {
@@ -163,12 +162,46 @@ public class Board {
             if (getField(i) instanceof Ownable) {
                 //Verifying that the current field is of the type Ownable
                 Ownable property = (Ownable) getField(i);
-                if (player == property.getOwner()) {
+                if (player == property.getOwner() && !property.getMortgage()) {
                     numberOfProperties++;
                 }
             }
         }
         return numberOfProperties;
+    }
+    public int countNumberOfMortgagedPropertiesForPlayer(Player player) {
+        int numberOfMortgagedProperties = 0;
+        for (int i = 0; i < getFields().length; i++) {
+            //Type casting field to Ownable
+            if (getField(i) instanceof Ownable) {
+                //Verifying that the current field is of the type Ownable
+                Ownable property = (Ownable) getField(i);
+                if (player == property.getOwner()) {
+                    //if property is mortgaged count++
+                    if (property.getMortgage()) {
+                        numberOfMortgagedProperties++;
+                    }
+                }
+            }
+        }
+        return numberOfMortgagedProperties;
+    }
+    public int countNumbersOfPropertiesWithHouseForPlayer(Player player) {
+        int numberOfPropertiesWithHouse = 0;
+        for (int i = 0; i < getFields().length; i++) {
+
+            //Type casting field to Ownable
+            if (getField(i) instanceof Ownable) {
+                //Verifying that the current field is of the type Ownable
+                Ownable property = (Ownable) getField(i);
+                if (player == property.getOwner() && property instanceof Street) {;
+                    if (((Street) property).getHouseAmount() > 0) {
+                        numberOfPropertiesWithHouse++;
+                    }
+                }
+            }
+        }
+        return numberOfPropertiesWithHouse;
     }
 
     public int getFieldsByColor(int placement) {
@@ -212,7 +245,7 @@ public class Board {
 
     public Ownable[] getPlayerProperties(Player player){
         int numberOfProperties;
-        numberOfProperties = countNumbersOfPropertiesForPlayer(player);
+        numberOfProperties = countNumbersOfPropertiesForPlayer(player) + countNumberOfMortgagedPropertiesForPlayer(player);
 
         Ownable[] playerProperties = new Ownable[numberOfProperties];
         int currentProperty = 0;
@@ -230,10 +263,10 @@ public class Board {
 
         return playerProperties;
     }
-    /*public boolean hasMonopoly(int placement) {
+    public boolean hasMonopoly(int placement) {
 
 
-        Property property = (Property) getField(placement);
+        Street property = (Street) getField(placement);
 
         boolean monopoly = false;
 
@@ -241,10 +274,10 @@ public class Board {
         if (placement - 2 < 0) {
             for (int i = 0; i < (placement + 3); i++) {
                 // Check 2 field in either direction
-                if (getField(i) instanceof Property) {
+                if (getField(i) instanceof Street) {
 
                     // Typecast to Property
-                    Property property_check = (Property) getField(i);
+                    Street property_check = (Street) getField(i);
 
                     // Check if owner/color is the same
                     if (property_check.getColor() == property.getColor() && property_check.getOwner() == property.getOwner()) {
@@ -256,9 +289,9 @@ public class Board {
             for (int i = placement - 2; i < placement + 3; i++) {
                 // Check 2 field in either direction
                 if (i < 24) {
-                    if (getField(i) instanceof Property) {
+                    if (getField(i) instanceof Street) {
                         // Typecast to Property
-                        Property property_check = (Property) getField(i);
+                        Street property_check = (Street) getField(i);
                         // Check if owner/color is the same
                         if (property_check.getColor() == property.getColor() && property_check.getOwner() == property.getOwner()) {
                             monopoly = true;
@@ -268,5 +301,50 @@ public class Board {
             }
         }
         return monopoly;
-    }*/
+    }
+
+    public Monopoly[] getMonopolies() {
+        return monopolies;
+    }
+
+    public boolean getPlayerOwnsMonopoly (Player player){
+        boolean playerOwnsMonopoly = false;
+
+        for(int i=0; i<monopolies.length; i++){
+            monopolies[i].updateMonopoly();
+            if (monopolies[i].getOwner() == player){
+                playerOwnsMonopoly = true;
+            }
+        }
+        return playerOwnsMonopoly;
+    }
+
+    public Monopoly[] getOwnedPlayerMonopolyList(Player player) {
+        int playerMonopolyAmount=0;
+
+        // Check amount of Monopolies owned
+        for (int i=0; i< monopolies.length; i++){
+            monopolies[i].updateMonopoly();
+            if (monopolies[i].getOwner() == player)
+            {
+                playerMonopolyAmount++;
+            }
+        }
+
+        // Create array with owned arrays
+        Monopoly[] playerOwnedMonopolyList = new Monopoly[playerMonopolyAmount];
+        int playerOwnedIndex=0;
+        for (int i=0; i< monopolies.length; i++)
+        {
+            monopolies[i].updateMonopoly();
+            if (monopolies[i].getOwner() == player)
+            {
+                playerOwnedMonopolyList[playerOwnedIndex] = monopolies[i];
+                System.out.println(playerOwnedMonopolyList[playerOwnedIndex].getName());
+                playerOwnedIndex++;
+            }
+        }
+
+        return playerOwnedMonopolyList;
+    }
 }

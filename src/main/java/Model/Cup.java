@@ -7,8 +7,8 @@ package Model;
 public class Cup {
 
     private int sum;
-    Die die1;
-    Die die2;
+    private Die die1;
+    private Die die2;
 
     int[] facevalues;
 
@@ -31,5 +31,12 @@ public class Cup {
         facevalues = new int[2];
         facevalues[0] = fv1;
         facevalues[1] = fv2;
+    }
+    public boolean getPair() {
+        if(facevalues[0] == facevalues[1]) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

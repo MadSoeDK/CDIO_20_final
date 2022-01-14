@@ -2,7 +2,8 @@ package Model.Board;
 
 public class Street extends Ownable {
 
-    protected int HOUSEPRICE;
+    private int HOUSEPRICE;
+    private int houseAmount=0;
 
     public Street (String name, int placement, String color, int[] rent, int price, int housePrice) {
         super(name, placement, color, rent, price);
@@ -10,5 +11,23 @@ public class Street extends Ownable {
     }
     public int getHousePrice() {
         return HOUSEPRICE;
+    }
+    public void setHouseAmount(int newHouseAmount) {
+        houseAmount=newHouseAmount;
+    }
+    public void incrementHouseAmount(){
+        if (houseAmount < 5){
+            houseAmount++;
+        }
+        System.out.println(houseAmount);
+    }
+
+    @Override
+    public int getCurrentRent(){
+        return super.getRent()[houseAmount];
+    }
+
+    public int getHouseAmount(){
+        return houseAmount;
     }
 }
