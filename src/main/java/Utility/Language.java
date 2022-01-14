@@ -12,7 +12,7 @@ public class Language {
     public static String getText(String text) {
         for (int i = 0; i < file.length; i++) {
             String varName = file[i][0];
-            if (varName.equals(text)) {
+            if (text.equals(varName)) {
                 if (language.equals("English")) {
                     return file[i][2];
                 } else {
