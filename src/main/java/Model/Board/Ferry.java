@@ -7,12 +7,7 @@ public class Ferry extends Ownable {
     public Ferry(String name, int placement, String color, int[] rent, int price) {
         super(name,placement,color,rent,price);
     }
-/*
-    public int getRent(int owners) {
-        return rent[owners];
-    }*/
 
-    //@Override
     public int getRent(Ferry property, Board board){
 
         // Check amounts of other ferries owned

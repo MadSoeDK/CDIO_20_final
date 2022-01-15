@@ -4,13 +4,15 @@ import Model.*;
 import Model.Board.*;
 import Utility.Language;
 
+import java.util.Objects;
+
 public class GameController {
 
-    private Board board;
-    private Cup cup;
-    private GUIController gui;
+    private final Board board;
+    private final Cup cup;
+    private final GUIController gui;
     private CardController cardController;
-    private EventHandler event;
+    private final EventHandler event;
     private Player[] players;
     private Player currentPlayer;
     private int playerindex = 0;
@@ -32,6 +34,9 @@ public class GameController {
         playGame();
     }
 
+    /**
+     * Where overall gameloop is controlled
+     */
     public void playGame() {
         if(!checkWinner()) {
             do {
@@ -43,6 +48,9 @@ public class GameController {
         }
     }
 
+    /**
+     * Turn options shown: Roll dice, Trade, Pay back mortgage & sell houses.
+     */
     public void takeTurn() {
         boolean playerHasRolledDice=false;
         while (!playerHasRolledDice) {
@@ -50,19 +58,19 @@ public class GameController {
             String[] playerStartOptions = {Language.getText("taketurn2"), Language.getText("taketurn3"), Language.getText("taketurn4"), Language.getText("taketurn5")};
             String playerStartChoice = gui.getUserSelection(Language.getText("taketurn1"), playerStartOptions);
 
-            // Run actions
-            if (playerStartOptions[0] == playerStartChoice) { // Roll dice
+            // Run actions based on option selected
+            if (Objects.equals(playerStartOptions[0], playerStartChoice)) { // Roll dice
                 playerHasRolledDice=true;
             }
-            if (playerStartOptions[1] == playerStartChoice) { // Trade
+            if (Objects.equals(playerStartOptions[1], playerStartChoice)) { // Trade
                 // Ask if currentplayer wishes to trade?
                 event.playerOptionsTrade(currentPlayer, players, board);
             }
-            if (playerStartOptions[2] == playerStartChoice) { // Pay Mortgage
+            if (Objects.equals(playerStartOptions[2], playerStartChoice)) { // Pay Mortgage
                 //ask if currentplayer wants to buy mortgaged properties
                 event.playerOptionsBuyMortgaged(currentPlayer, board);
             }
-            if (playerStartOptions[3] == playerStartChoice) { // Sell houses
+            if (Objects.equals(playerStartOptions[3], playerStartChoice)) { // Sell houses
                 //Sell houses
                 if (board.getPlayerOwnsMonopoly(currentPlayer)) {
                     sellHouse();
@@ -86,9 +94,7 @@ public class GameController {
         // get new placement and field
         int placement = currentPlayer.getPlacement();
         Field field = board.getField(placement);
-
         gui.message(currentPlayer.getName() + Language.getText("taketurn7") + field.getName());
-
         checkFieldType(field, placement);
 
         // Ask about building houses?
@@ -128,7 +134,7 @@ public class GameController {
                 currentPlayer = players[playerindex + 1];
             }
         } else { // Rolled a pair, take extra turn.
-            if (currentPlayer.getTurnsInRow() != 2 && currentPlayer.getInJailStatus() == false && currentPlayer.getBankruptStatus()==false) {
+            if (currentPlayer.getTurnsInRow() != 2 && !currentPlayer.getInJailStatus() && !currentPlayer.getBankruptStatus()) {
                 gui.message(currentPlayer.getName() + Language.getText("nextturn1"));
                 currentPlayer.incrementTurnsInRow();
             } else { // If 3 pairs is rolled in a row, Go to jail.
@@ -141,11 +147,7 @@ public class GameController {
     }
 
     public boolean checkWinner() {
-        if(players.length == 1) {
-            return true;
-        } else {
-            return false;
-        }
+        return players.length == 1;
     }
 
     /**
@@ -282,13 +284,13 @@ public class GameController {
         // Makes a new player array one size less and copies the old array one by one except for the bankrupt player
         Player[] newPlayers = new Player[players.length - 1];
         int j = 0;
-        for (int i = 0; i < players.length; i++) {
-            if(players[i].getBankruptStatus()) {
+        for (Player value : players) {
+            if (value.getBankruptStatus()) {
                 gui.removePlayer(player, placement);
-                gui.getGuiPlayer(players[i]).setName(players[i].getName() + Language.getText("eliminateplayer1"));
-                gui.getGuiPlayer(players[i]).setBalance(0);
+                gui.getGuiPlayer(value).setName(value.getName() + Language.getText("eliminateplayer1"));
+                gui.getGuiPlayer(value).setBalance(0);
             } else {
-                newPlayers[j] = players[i];
+                newPlayers[j] = value;
                 j++;
             }
         }
@@ -381,9 +383,9 @@ public class GameController {
                     String selectedMonopolyName = gui.dropdown(Language.getText("build2"), PlayerMonopolyOptionsString);
                     Monopoly selectedMonopoly = null;
                     // Match the string array to the object reference array
-                    for (int i = 0; i < playerMonopolyOptions.length; i++) {
-                        if (playerMonopolyOptions[i].getName() == selectedMonopolyName) {
-                            selectedMonopoly = playerMonopolyOptions[i];
+                    for (Monopoly playerMonopolyOption : playerMonopolyOptions) {
+                        if (Objects.equals(playerMonopolyOption.getName(), selectedMonopolyName)) {
+                            selectedMonopoly = playerMonopolyOption;
                         }
                     }
 
@@ -396,7 +398,7 @@ public class GameController {
                         // Check highest house amount
                         if (selectedMonopoly.getStreetArray()[i].getHouseAmount() < lowestHouseAmount){lowestHouseAmount = selectedMonopoly.getStreetArray()[i].getHouseAmount();}
                         // Match player selection with string array number
-                        if (selectedStreetString == selectedMonopolyStreetStringArray[i]) {
+                        if (Objects.equals(selectedStreetString, selectedMonopolyStreetStringArray[i])) {
                             selectedStreet = selectedMonopoly.getStreetArray()[i];
                         }
                     }
@@ -441,9 +443,9 @@ public class GameController {
                 Monopoly selectedMonopoly = null;// = new Monopoly();
 
                 // Match the string array to the object referance array
-                for (int i = 0; i < playerMonopolyOptions.length; i++) {
-                    if (playerMonopolyOptions[i].getName() == selectedMonopolyName) {
-                        selectedMonopoly = playerMonopolyOptions[i];
+                for (Monopoly playerMonopolyOption : playerMonopolyOptions) {
+                    if (Objects.equals(playerMonopolyOption.getName(), selectedMonopolyName)) {
+                        selectedMonopoly = playerMonopolyOption;
                     }
                 }
 
@@ -456,7 +458,7 @@ public class GameController {
                     // Check highest house amount
                     if (selectedMonopoly.getStreetArray()[i].getHouseAmount() > highestHouseAmount){highestHouseAmount = selectedMonopoly.getStreetArray()[i].getHouseAmount();}
                     // Match player selection with string array number
-                    if (selectedStreetString == selectedMonopolyStreetStringArray[i]) {
+                    if (Objects.equals(selectedStreetString, selectedMonopolyStreetStringArray[i])) {
                         selectedStreet = selectedMonopoly.getStreetArray()[i];
                     }
                 }

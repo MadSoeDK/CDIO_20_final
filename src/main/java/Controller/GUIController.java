@@ -14,7 +14,7 @@ import java.util.Random;
 
 public class GUIController {
 
-    private GUI gui;
+    private final GUI gui;
     private GUI_Player[] guiPlayers;
     private String[] playernames;
     private GUI_Field[] guiFields;
@@ -135,19 +135,17 @@ public class GUIController {
 
 
         // Get the GUI Player
-        for (int i = 0; i < guiPlayers.length; i++) {
+        for (GUI_Player guiPlayer : guiPlayers) {
 
-            if (guiPlayers[i].getName().equals(player.getName())) {
+            if (guiPlayer.getName().equals(player.getName())) {
 
-                playerToMove = guiPlayers[i];
+                playerToMove = guiPlayer;
 
                 //Remove from previus position
                 GUI_Field from = gui.getFields()[preplacement];
 
                 from.setCar(playerToMove, false);
-
             }
-
         }
         to.setCar(playerToMove, true);
     }
@@ -226,14 +224,6 @@ public class GUIController {
         }
         return guiplayer;
     }
-
-    /*public GUI_Player[] getGuiPlayers() {
-        return guiPlayers;
-    }
-
-    /*public int getPlayers() {
-        return guiPlayers.length;
-    }*/
 
     public void setguiPlayerBalance(Player player, int amount) {
         for (int i = 0; i < playernames.length; i++) {

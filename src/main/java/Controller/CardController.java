@@ -3,12 +3,11 @@ package Controller;
 import Model.Cards.ChanceCard;
 import Model.Cards.ChanceCardDeck;
 import Model.Player;
-import gui_main.GUI;
 
 public class CardController {
 
-    private ChanceCardDeck deck;
-    private GUIController gui;
+    private final ChanceCardDeck deck;
+    private final GUIController gui;
 
     public CardController(GUIController gui) {
         this.gui = gui;
@@ -91,14 +90,17 @@ public class CardController {
         if (to < 0) {
             to = from + 40 + move;
         }
-        //setPlayerPlacement(player, to, true);
         String type = card.getType();
-        if (type.equals("set")) {
-            setPlayerPlacement(player, card.getValue(), true);
-        } else if (type.equals("move")) {
-            movePlayer(player, card.getValue());
-        } else if (type.equals("jail")) {
-            setPlayerPlacement(player, card.getValue(), false);
+        switch (type) {
+            case "set":
+                setPlayerPlacement(player, card.getValue(), true);
+                break;
+            case "move":
+                movePlayer(player, card.getValue());
+                break;
+            case "jail":
+                setPlayerPlacement(player, card.getValue(), false);
+                break;
         }
     }
     private void pay(ChanceCard card, Player player) {
@@ -113,9 +115,9 @@ public class CardController {
                 player.setPlayerBalance(40000);
             }
         } else if (card.getType().equals("receiveplayers")) {
-            for(int i = 0; i < players.length; i++) {
-                if(players[i] != player) {
-                    players[i].setPlayerBalance(-amount);
+            for (Player value : players) {
+                if (value != player) {
+                    value.setPlayerBalance(-amount);
                 }
             }
             int newAmount = amount * (players.length - 1);

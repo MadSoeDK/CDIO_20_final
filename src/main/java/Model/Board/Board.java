@@ -5,18 +5,19 @@ import Model.Player;
 import java.awt.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.Objects;
 
 public class Board {
 
     private final Field[] fields;
-    private Monopoly[] monopolies;
+    private final Monopoly[] monopolies;
 
     /**
      * Load and initilize fields
      */
     public Board() {
         BufferedReader CSV;
-        String row = "";
+        String row;
         String[][] data = new String[40][12];
         String path = "src/main/resources/da_board.csv";
         try {
@@ -177,9 +178,7 @@ public class Board {
             }
         }
         Street[] result = new Street[j];
-        for (int i = 0; i < j; i++) {
-            result[i] = streets[i];
-        }
+        System.arraycopy(streets, 0, result, 0, j);
         return result;
     }
 
@@ -253,7 +252,7 @@ public class Board {
             if (getField(i) instanceof Ownable) {
                 //Verifying that the current field is of the type Ownable
                 Ownable property = (Ownable) getField(i);
-                if (player == property.getOwner() && property instanceof Street) {;
+                if (player == property.getOwner() && property instanceof Street) {
                     if (((Street) property).getHouseAmount() > 0) {
                         numberOfPropertiesWithHouse++;
                     }
@@ -298,12 +297,8 @@ public class Board {
     }
 
     public boolean hasMonopoly(int placement) {
-
-
         Street property = (Street) getField(placement);
-
         boolean monopoly = false;
-
         // Check if both fields of same color is owned by the same player
         if (placement - 2 < 0) {
             for (int i = 0; i < (placement + 3); i++) {
@@ -314,7 +309,7 @@ public class Board {
                     Street property_check = (Street) getField(i);
 
                     // Check if owner/color is the same
-                    if (property_check.getColor() == property.getColor() && property_check.getOwner() == property.getOwner()) {
+                    if (Objects.equals(property_check.getColor(), property.getColor()) && property_check.getOwner() == property.getOwner()) {
                         monopoly = true;
                     }
                 }
@@ -327,7 +322,7 @@ public class Board {
                         // Typecast to Property
                         Street property_check = (Street) getField(i);
                         // Check if owner/color is the same
-                        if (property_check.getColor() == property.getColor() && property_check.getOwner() == property.getOwner()) {
+                        if (Objects.equals(property_check.getColor(), property.getColor()) && property_check.getOwner() == property.getOwner()) {
                             monopoly = true;
                         }
                     }
@@ -348,9 +343,9 @@ public class Board {
     public boolean getPlayerOwnsMonopoly (Player player){
         boolean playerOwnsMonopoly = false;
 
-        for(int i=0; i < monopolies.length; i++){
-            monopolies[i].updateMonopoly();
-            if (monopolies[i].getOwner() == player){
+        for (Monopoly monopoly : monopolies) {
+            monopoly.updateMonopoly();
+            if (monopoly.getOwner() == player) {
                 playerOwnsMonopoly = true;
             }
         }
@@ -361,10 +356,9 @@ public class Board {
         int playerMonopolyAmount=0;
 
         // Check amount of Monopolies owned
-        for (int i=0; i< monopolies.length; i++){
-            monopolies[i].updateMonopoly();
-            if (monopolies[i].getOwner() == player)
-            {
+        for (Monopoly monopoly : monopolies) {
+            monopoly.updateMonopoly();
+            if (monopoly.getOwner() == player) {
                 playerMonopolyAmount++;
             }
         }
@@ -372,12 +366,10 @@ public class Board {
         // Create array with owned arrays
         Monopoly[] playerOwnedMonopolyList = new Monopoly[playerMonopolyAmount];
         int playerOwnedIndex=0;
-        for (int i=0; i< monopolies.length; i++)
-        {
-            monopolies[i].updateMonopoly();
-            if (monopolies[i].getOwner() == player)
-            {
-                playerOwnedMonopolyList[playerOwnedIndex] = monopolies[i];
+        for (Monopoly monopoly : monopolies) {
+            monopoly.updateMonopoly();
+            if (monopoly.getOwner() == player) {
+                playerOwnedMonopolyList[playerOwnedIndex] = monopoly;
                 System.out.println(playerOwnedMonopolyList[playerOwnedIndex].getName());
                 playerOwnedIndex++;
             }

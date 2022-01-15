@@ -4,9 +4,11 @@ import Model.*;
 import Model.Board.*;
 import Utility.Language;
 
+import java.util.Objects;
+
 public class EventHandler {
 
-    private GUIController gui;
+    private final GUIController gui;
 
     public EventHandler(GUIController gui) {
         this.gui = gui;
@@ -41,45 +43,6 @@ public class EventHandler {
         // Roll dice
     }
 
-    /*public void fieldEffect(Player player, Ownable ownable, Player[] players) {
-        if (ownable.getOwner() == null) {
-            buyField(player, ownable, players);
-        } else {
-            Player fieldOwner = ownable.getOwner();
-
-            if (false /*board.hasMonopoly(placement)) {
-                // 1. Subtract rent from current player 2. add to field owner
-                player.setPlayerBalance(-ownable.getCurrentRent() * 2);
-                fieldOwner.setPlayerBalance(ownable.getCurrentRent() * 2);
-            } else {
-                player.setPlayerBalance(-ownable.getCurrentRent());
-                fieldOwner.setPlayerBalance(ownable.getCurrentRent());
-            }
-        }
-    }*/
-    /*public void fieldEffect(Player player, Ownable ownable, Player[] players, int sum) {
-        if (ownable.getOwner() == null) {
-            buyField(player, ownable, players);
-        } else {
-            Player fieldOwner = ownable.getOwner();
-
-            if (ownable.getOwner() == ownable.getOwner()) {
-                player.setPlayerBalance(-ownable.getCurrentRent() * sum);
-                fieldOwner.setPlayerBalance(ownable.getCurrentRent() * sum);
-            } else {
-                player.setPlayerBalance(-ownable.getCurrentRent() * sum);
-                fieldOwner.setPlayerBalance(ownable.getCurrentRent() * sum);
-            }
-        }
-    }*/
-
-    /**
-     * Street Effect: Player pays rent. Rent is based on monopoly status & house amount.
-     * @param player
-     * @param street
-     * @param board
-     * @param players
-     */
     public void fieldEffect(Player player, Street street, Board board, Player[] players) {
         if (street.getOwner() == null) { // No owner - ask to buy it
             buyField(player, street, players);
@@ -204,9 +167,7 @@ public class EventHandler {
     public void auction(Player[] players, Ownable field) {
         // Add players to auction array
         Player[] aucPlayers = new Player[players.length];
-        for (int q = 0; q < players.length; q++) {
-            aucPlayers[q] = players[q];
-        }
+        System.arraycopy(players, 0, aucPlayers, 0, players.length);
 
         // Initialize Auction start variables
         int auctionWinner = 0;
@@ -362,7 +323,7 @@ public class EventHandler {
         String selectedTradePartner = gui.getUserSelection(currentPlayer.getName() + " Vælg spiller at handle med", tradePlayersNames);
 
         for (int i = 0; i < tradePlayersNames.length; i++) {
-            if (tradePlayersNames[i] == selectedTradePartner) {
+            if (Objects.equals(tradePlayersNames[i], selectedTradePartner)) {
                 tradePartnerId = i;
             }
         }
@@ -370,8 +331,8 @@ public class EventHandler {
         // Display Chosen players property
         Ownable[] tradePartProperties = board.getPlayerProperties(tradePlayers[tradePartnerId]);
         String[] fieldNames = new String[tradePartProperties.length];
-        String[] options = fieldNames;
-        String fieldName = "";
+        String[] options;
+        String fieldName;
         Ownable chosenProp = null;
         if (gui.getUserBool("Vil du købe en af spillerens ejendomme?", "Ja, Køb ejendom", "Køb ikke ejendom")) {
             if (tradePartProperties.length > 0) {
@@ -445,9 +406,7 @@ public class EventHandler {
                 for (int i = 0; i < traderProperties.length; i++) {
                     fieldNames[i] = traderProperties[i].getName();
                 }
-                String[] playerOptions = fieldNames;
-                chosenSoldProp = null;
-                fieldName = gui.getUserSelection(currentPlayer.getName() + " Vælg hvilke ejendomme du vil sælge", playerOptions);
+                fieldName = gui.getUserSelection(currentPlayer.getName() + " Vælg hvilke ejendomme du vil sælge", fieldNames);
                 for (int i = 0; i < fieldNames.length; i++) {
                     if (fieldNames[i].equals(fieldName)) {
                         chosenSoldProp = traderProperties[i];
@@ -504,23 +463,13 @@ public class EventHandler {
         // Display Yes/No option to recipient
         String soldPropString = " Og ingen ejendomme: ";
         String propString = " For ingen ejendomme: ";
-        boolean tradeAccepted=false;
-        String[] optionsAccept = {};
+        boolean tradeAccepted;
         if (chosenProp != null) {propString = " For denne egendom: "+chosenProp.getName();}
         if (chosenSoldProp != null) {soldPropString = " og denne egendom "+chosenSoldProp.getName();}
         String msg = tradePlayersNames[tradePartnerId] + " Acceptere du denne handel? Du modtager " + (traderPayed-tradePartnerPayed) + soldPropString + propString;
         boolean answer =gui.getUserBool(msg, "Accepter handel","Accepter IKKE handel");
 
-        if(answer)
-        {
-            tradeAccepted=true;
-        }
-        else
-        {
-            tradeAccepted=false;
-        }
-
-        // Transfer Ownership
+        tradeAccepted= answer;
 
         // Pay for trade
         if (tradeAccepted) {
@@ -537,11 +486,7 @@ public class EventHandler {
                 gui.setOwner(tradePlayers[tradePartnerId], chosenSoldProp);
             }
 
-            // Opdate GUI
-            //board.getPlayer(curPlayer).getPlayer().setBalance(board.getPlayer(curPlayer).getPlayerBalance());
-            //tradePlayers[tradePartnerId].getPlayer().setBalance(tradePlayers[tradePartnerId].getPlayerBalance());
             // Update Ownership
-
             gui.setguiPlayerBalance(currentPlayer,currentPlayer.getPlayerBalance());
             gui.setguiPlayerBalance(tradePlayers[tradePartnerId],tradePlayers[tradePartnerId].getPlayerBalance());
         }
@@ -578,7 +523,7 @@ public class EventHandler {
         while (value) {
             //stops while loop if no mortgaged properties
             if (numberOfMortgagedProperties == 0) {
-                gui.button("Du har ikke nogen pantsatte ejendomme","ok");
+                gui.button("Du har ikke nogen pantsatte ejendomme","OK");
                 value = false;
             }
             else {
