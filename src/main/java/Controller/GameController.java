@@ -309,8 +309,7 @@ public class GameController {
     public boolean bankrupt(Player player, int placement) {
 
         // If player landed on an ownable, proceed to more checks
-        if ((board.getField(placement) instanceof Ownable)) {
-
+        if ((board.getField(placement) instanceof Ownable) && ((Ownable) board.getField(placement)).getOwner() == player) {
             // Cast to ownable
             Ownable ownable = (Ownable) board.getField(placement);
 
