@@ -517,6 +517,7 @@ public class EventHandler {
                     Ownable property = playerMortgagedProperties[i];
                     if (property.getName().equals(guiSelection)) {
                         property.setMortgage(false);
+                        playerMortgagedProperties[i].setOwner(player);
                         //set GUI mortgage
                         player.setPlayerBalance(-((property.getPrice()) / 2)+(((property.getPrice()) / 2) * 10/100));
                         String[] newMortgagedPropertyNames = new String[mortgagedPropertyNames.length - 1];

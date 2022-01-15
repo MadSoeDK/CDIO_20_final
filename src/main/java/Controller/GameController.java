@@ -44,7 +44,7 @@ public class GameController {
                 nextTurn();
             } while (!checkWinner());
             gui.message(players[0].getName() + Language.getText("playgame3"));
-            gui.message(players[0].getName() + Language.getText("playgame4"));
+            gui.message(Language.getText("playgame4") + players[0].getName());
         }
     }
 
@@ -538,7 +538,7 @@ public class GameController {
         while (player.getPlayerBalance() < 0) {
             //checks if the player own properties with houses
             if (numberOfPropertiesWithHouses == 0) {
-                String guiSelection = gui.dropdown("mortgage1", propertyNames);
+                String guiSelection = gui.dropdown(Language.getText("mortgage1"), propertyNames);
                 //creates new arrays without mortgaged properties
                 String[] newPropertyNames = new String[propertyNames.length - 1];
                 Ownable[] newPlayerProperties = new Ownable[playerProperties.length - 1];
@@ -548,11 +548,11 @@ public class GameController {
                     if (property.getName().equals(guiSelection)) {
                         property.setMortgage(true);
                         //update gui field text
-                        gui.setSubText("mortgage2",property);
+                        gui.setSubText(Language.getText("mortgage2"),property);
                         player.setPlayerBalance((property.getPrice()) / 2);
                         //changes array if length is 0 to escape null pointer exception
                         if (newPropertyNames.length == 0) {
-                            String msg = "mortgage3";
+                            String msg = Language.getText("mortgage3");
                             newPropertyNames = new String[1];
                             newPropertyNames[0] = msg;
                         }
