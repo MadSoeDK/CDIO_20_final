@@ -5,12 +5,12 @@ import Model.Player;
 public abstract class Ownable extends Field {
 
     private final String COLOR;
-    private final int[] RENT;
-    private final int PRICE;
+    protected final int[] RENT;
+    protected final int PRICE;
 
-    private Player owner;
+    protected Player owner;
 
-    private boolean mortgage;
+    protected boolean mortgage;
 
     public Ownable(String name, int placement, String color, int[] rent, int price) {
         super(name, placement);
