@@ -11,8 +11,12 @@ public class EventHandler {
     public EventHandler(GUIController gui) {
         this.gui = gui;
     }
+
     /**
      * Asks player if they wish to trade with another player, then runs methods accordingly.
+     * @param player
+     * @param players
+     * @param board
      */
     public void playerOptionsTrade(Player player, Player [] players, Board board) {
         int playerIndex = java.util.Arrays.asList(players).indexOf(player);
@@ -23,8 +27,11 @@ public class EventHandler {
         }
         // Roll dice
     }
+
     /**
      * Asks player if they wish to buyback mortgaged properties, then runs methods accordingly.
+     * @param player
+     * @param board
      */
     public void playerOptionsBuyMortgaged(Player player, Board board) {
         boolean answer = gui.getUserBool(Language.getText("playeroptionsbuymortgage1"), Language.getText("yes"), Language.getText("no"));
@@ -65,6 +72,14 @@ public class EventHandler {
             }
         }
     }*/
+
+    /**
+     * Street Effect: Player pays rent. Rent is based on monopoly status & house amount.
+     * @param player
+     * @param street
+     * @param board
+     * @param players
+     */
     public void fieldEffect(Player player, Street street, Board board, Player[] players) {
         if (street.getOwner() == null) { // No owner - ask to buy it
             buyField(player, street, players);
@@ -82,6 +97,14 @@ public class EventHandler {
             }
         }
     }
+
+    /**
+     * Ferry Effect: Player pays rent. Rent is based on amount of ferries owned by same player.
+     * @param player
+     * @param ferry
+     * @param board
+     * @param players
+     */
     public void fieldEffect(Player player, Ferry ferry, Board board, Player[] players) {
         // Check Ferry Rent
         int ferry_cost = ferry.getRent(ferry,board);//ferry.getCurrentRent();
@@ -97,6 +120,15 @@ public class EventHandler {
             fieldOwner.setPlayerBalance(ferry_cost);
         }
     }
+
+    /**
+     * Brewery Effect: Player pays rent. Rent is based on sum of dice and ownership of other brewery.
+     * @param player
+     * @param brewery
+     * @param players
+     * @param board
+     * @param sum
+     */
     public void fieldEffect(Player player, Brewery brewery, Player[] players, Board board, int sum) {
         // Typecast other company
         Ownable otherBrewery;
@@ -125,6 +157,13 @@ public class EventHandler {
             }
         }
     }
+
+    /**
+     * Player pays either 4000 or 10% of netWorth.
+     * @param player
+     * @param tax
+     * @param netWorth
+     */
     public void fieldEffect(Player player, Tax tax, int netWorth) {
         if (tax.getPlacement() == 4) { // first tax field
             boolean answer = gui.getUserBool(Language.getText("tax1"), "4000"+Language.getText("valuta"), "10%");
@@ -140,7 +179,10 @@ public class EventHandler {
 
     /**
      * Asks the player if they wish to buy or auction the property, then runs the code accordingly
-    * */
+     * @param player
+     * @param field
+     * @param players
+     */
     public void buyField(Player player, Ownable field, Player[] players) {
         boolean answer = gui.getUserBool(Language.getText("buyfield1"), Language.getText("buyfield2"), Language.getText("buyfield3"));
 
@@ -155,8 +197,10 @@ public class EventHandler {
     }
 
     /**
-    *   The players take turns bidding on property if the first players doesn't buy it first
-    * */
+     * The players take turns bidding on property if the first players doesn't buy it first
+     * @param players
+     * @param field
+     */
     public void auction(Player[] players, Ownable field) {
         // Add players to auction array
         Player[] aucPlayers = new Player[players.length];
@@ -507,6 +551,8 @@ public class EventHandler {
 
     /**
      * Allows players to buy back mortgaged properties.
+     * @param player
+     * @param board
      */
     public void buyMortgage(Player player, Board board) {
         boolean value = true;
