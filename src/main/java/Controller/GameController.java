@@ -76,7 +76,7 @@ public class GameController {
         if (!currentPlayer.getInJailStatus()) { //False - not in jail
             // Roll die, get value, show die, move player
             cup.roll();
-            sum = 5;//cup.getSum();
+            sum = cup.getSum();
             gui.showDice(cup.getFacevalues()[0], cup.getFacevalues()[1]);
             moveplayer(currentPlayer, sum);
         } else { // In jail
@@ -320,6 +320,7 @@ public class GameController {
                 checkBankruptOrMorgage(player, property);
             } else if (ownable instanceof Brewery) {
                 Brewery property = (Brewery) ownable;
+                property.updateNumberOfBreweryOwned(player, board);
                 checkBankruptOrMorgage(player, property);
             }
         }
@@ -328,12 +329,16 @@ public class GameController {
 
     public void checkBankruptOrMorgage(Player player, Ownable property) {
         int placement = property.getPlacement();
+        int currentRent = property.getCurrentRent();
+        if (property instanceof Brewery) {
+            currentRent = currentRent * sum;
+        }
 
         // If player can't pay the rent by current balance, proceed to more checks
-        if (player.getPlayerBalance() <= property.getCurrentRent()) {
+        if (player.getPlayerBalance() <= currentRent) {
 
             // If netWorth is lower than the rent, then player is bankrupt. Else pay debt by mortgage
-            if (player.getNetWorth() <= property.getCurrentRent()) {
+            if (player.getNetWorth() <= currentRent) {
                 player.setBankruptStatus(true);
 
                 // transfer ownership of the bankrupt player to creditor
