@@ -416,7 +416,7 @@ public class GameController {
                             gui.message(Language.getText("build4"));
                         }
                     }else {
-                        gui.message(Language.getText("Du har ikke nok penge"));
+                        gui.message("Du har ikke nok penge");
                         stopBuilding = true;
                     }
                 } else {
