@@ -44,6 +44,7 @@ public class GameController {
                 nextTurn();
             } while (!checkWinner());
             gui.message(players[0].getName() + Language.getText("playgame3"));
+            gui.message(players[0].getName() + Language.getText("playgame4"));
         }
     }
 
@@ -276,7 +277,6 @@ public class GameController {
             }
         }
         player.setNetWorth(netWorth);
-        System.out.println(currentPlayer.getName() + "'s net worth: " + currentPlayer.getNetWorth());
         return netWorth;
     }
 
@@ -363,7 +363,7 @@ public class GameController {
                 }
 
                 //Removes player from the player array, Note: does not work if more players bankrupt same turn
-                gui.message(player.getName() + Language.getText("bankrupt1") + player.getName() + ".");
+                gui.message(player.getName() + Language.getText("bankrupt1") + "\n" + Language.getText("bankrupt1.1") + player.getName() + ".");
                 eliminatePlayer(player, placement);
 
             } else { // When you are able to mortgage properties to survive
