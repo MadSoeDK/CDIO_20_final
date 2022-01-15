@@ -467,9 +467,7 @@ public class EventHandler {
         if (chosenProp != null) {propString = " For denne egendom: "+chosenProp.getName();}
         if (chosenSoldProp != null) {soldPropString = " og denne egendom "+chosenSoldProp.getName();}
         String msg = tradePlayersNames[tradePartnerId] + " Acceptere du denne handel? Du modtager " + (traderPayed-tradePartnerPayed) + soldPropString + propString;
-        boolean answer =gui.getUserBool(msg, "Accepter handel","Accepter IKKE handel");
-
-        tradeAccepted= answer;
+        tradeAccepted= gui.getUserBool(msg, "Accepter handel","Accepter IKKE handel");
 
         // Pay for trade
         if (tradeAccepted) {
@@ -490,8 +488,6 @@ public class EventHandler {
             gui.setguiPlayerBalance(currentPlayer,currentPlayer.getPlayerBalance());
             gui.setguiPlayerBalance(tradePlayers[tradePartnerId],tradePlayers[tradePartnerId].getPlayerBalance());
         }
-
-
     }
 
     /**
@@ -522,31 +518,42 @@ public class EventHandler {
         }
         while (value) {
             //stops while loop if no mortgaged properties
-            if (numberOfMortgagedProperties == 0) {
+            //String guiSelection = gui.dropdown("Vælg en pantsat ejendom du skal købe:", mortgagedPropertyNames);
+
+            if (mortgagedPropertyNames.length == 0) {
+                String message = "mortgage3";
                 gui.button("Du har ikke nogen pantsatte ejendomme","OK");
                 value = false;
             }
-            else {
+            else if (player.getPlayerBalance() > 4000){
+
                 String guiSelection = gui.dropdown("Vælg en pantsat ejendom du skal købe:", mortgagedPropertyNames);
+                String[] newMortgagedPropertyNames = new String[mortgagedPropertyNames.length - 1];
                 for (int i = 0; i < mortgagedPropertyNames.length; i++) {
                     //Verifying that the current field is of the type Ownable
                     Ownable property = playerMortgagedProperties[i];
-                    if (property.getName().equals(guiSelection)) {
+                    if (property.getName().equals(guiSelection) && player.getPlayerBalance() > ((property.getPrice()) / 2)+(((property.getPrice()) / 2) * 10/100)) {
                         property.setMortgage(false);
                         //set GUI mortgage
                         player.setPlayerBalance(-((property.getPrice()) / 2)+(((property.getPrice()) / 2) * 10/100));
-                        String[] newMortgagedPropertyNames = new String[mortgagedPropertyNames.length - 1];
+                        gui.setguiPlayerBalance(player,player.getPlayerBalance());
+                        //String[] newMortgagedPropertyNames = new String[mortgagedPropertyNames.length - 1];
                         int j = 0;
                         if(newMortgagedPropertyNames.length == 0) {
-                            gui.button("Du har ikke nogen pantsatte ejendomme","ok");
+                            gui.button("Du har ikke nogen pantsatte ejendomme","OK");
                             value = false;
                         }
-                        if (property.getOwner() == player && (property.getName().equals(guiSelection))) {
-                            mortgagedPropertyNames[i] = newMortgagedPropertyNames[j];
+                        if (property.getOwner() == player && (property.getName().equals(guiSelection)) && newMortgagedPropertyNames.length !=0) {
+                            //mortgagedPropertyNames[i] = newMortgagedPropertyNames[j];
+                            newMortgagedPropertyNames[j] = mortgagedPropertyNames[i];
                             j++;
                         }
                     }
                 }
+                mortgagedPropertyNames = newMortgagedPropertyNames;
+            } else {
+                gui.button("Du har ikke penge til at betale pantsætning","OK");
+                value = false;
             }
         }
     }
