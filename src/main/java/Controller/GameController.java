@@ -338,7 +338,7 @@ public class GameController {
                     }
 
                     //Removes player from the player array, Note: does not work if more players bankrupt same turn
-                    gui.message(player.getName() + Language.getText("bankrupt1") + player.getName() + ".");
+                    gui.message(player.getName() + Language.getText("bankrupt1")  + "\n" + Language.getText("bankrupt1.1")+ player.getName() + ".");
                     eliminatePlayer(player, placement);
 
                 } else { // When you are able to mortgage properties to survive
@@ -368,7 +368,7 @@ public class GameController {
 
             boolean stopBuilding = false;
             while (!stopBuilding) {
-                if (gui.getUserBool(Language.getText("build1"), "Jeg vil bygge", "Jeg vil IKKE bygge")) {
+                if (gui.getUserBool("Vil du bygge på din grund?", "Jeg vil bygge", "Jeg vil IKKE bygge")) {
 
                     // Get player monopolies and store as Strings
                     Monopoly[] playerMonopolyOptions = board.getOwnedPlayerMonopolyList(currentPlayer);
@@ -391,7 +391,7 @@ public class GameController {
                     int lowestHouseAmount=5;
                     Street selectedStreet = null;
                     String[] selectedMonopolyStreetStringArray = selectedMonopoly.getStringArray();
-                    String selectedStreetString = gui.dropdown(Language.getText("build3")+selectedMonopoly.getStreetArray()[0].getHousePrice(), selectedMonopolyStreetStringArray);
+                    String selectedStreetString = gui.dropdown(Language.getText("build3") + selectedMonopoly.getStreetArray()[0].getHousePrice(), selectedMonopolyStreetStringArray);
                     for (int i = 0; i < selectedMonopoly.getStreetArray().length; i++) {
                         // Check highest house amount
                         if (selectedMonopoly.getStreetArray()[i].getHouseAmount() < lowestHouseAmount){lowestHouseAmount = selectedMonopoly.getStreetArray()[i].getHouseAmount();}
