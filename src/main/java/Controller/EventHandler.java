@@ -30,13 +30,13 @@ public class EventHandler {
         // Roll dice
     }
 
-    public void fieldEffect(Player player, Ownable ownable, Player[] players) {
+    /*public void fieldEffect(Player player, Ownable ownable, Player[] players) {
         if (ownable.getOwner() == null) {
             buyField(player, ownable, players);
         } else {
             Player fieldOwner = ownable.getOwner();
 
-            if (false /*board.hasMonopoly(placement)*/) {
+            if (false /*board.hasMonopoly(placement)) {
                 // 1. Subtract rent from current player 2. add to field owner
                 player.setPlayerBalance(-ownable.getCurrentRent() * 2);
                 fieldOwner.setPlayerBalance(ownable.getCurrentRent() * 2);
@@ -45,8 +45,8 @@ public class EventHandler {
                 fieldOwner.setPlayerBalance(ownable.getCurrentRent());
             }
         }
-    }
-    public void fieldEffect(Player player, Ownable ownable, Player[] players, int sum) {
+    }*/
+    /*public void fieldEffect(Player player, Ownable ownable, Player[] players, int sum) {
         if (ownable.getOwner() == null) {
             buyField(player, ownable, players);
         } else {
@@ -60,14 +60,12 @@ public class EventHandler {
                 fieldOwner.setPlayerBalance(ownable.getCurrentRent() * sum);
             }
         }
-    }
-
+    }*/
     public void fieldEffect(Player player, Street street, Board board, Player[] players) {
         if (street.getOwner() == null) { // No owner - ask to buy it
             buyField(player, street, players);
         } else { //Pay rent to owner
             Player fieldOwner = street.getOwner();
-
 
             // Check if Owner has Monopoly
             if (board.hasMonopoly(player.getPlacement()) && street.getHouseAmount() == 0) {
@@ -80,7 +78,6 @@ public class EventHandler {
             }
         }
     }
-
     public void fieldEffect(Player player, Ferry ferry, Board board, Player[] players) {
         // Check Ferry Rent
         int ferry_cost = ferry.getRent(ferry,board);//ferry.getCurrentRent();
@@ -96,7 +93,6 @@ public class EventHandler {
             fieldOwner.setPlayerBalance(ferry_cost);
         }
     }
-
     public void fieldEffect(Player player, Brewery brewery, Player[] players, Board board, int sum) {
         // Typecast other company
         Ownable otherBrewery;
@@ -125,11 +121,6 @@ public class EventHandler {
             }
         }
     }
-
-    public void fieldEffect(Player player, Jail jail) {
-
-    }
-
     public void fieldEffect(Player player, Tax tax, int netWorth) {
         if (tax.getPlacement() == 4) { // first tax field
             boolean answer = gui.getUserBool(Language.getText("tax1"), "4000"+Language.getText("valuta"), "10%");
@@ -157,6 +148,9 @@ public class EventHandler {
         }
     }
 
+    /*
+    *   The players take turns bidding on property if the first players doesn't buy it first
+    * */
     public void auction(Player[] players, Ownable field) {
         // Add players to auction array
         Player[] aucPlayers = new Player[players.length];
@@ -286,6 +280,10 @@ public class EventHandler {
          */
     }
 
+    /*
+    *  The player choses tradepartner, Chosen property to buy, Chosen amount of money from player, Chosen Property to sell, Chosen money to spend.
+    *  The target player then choses to accept or decline the trade. If accepted the ownership of the properties switches.
+    * */
     public void trade(int curPlayer, Player[] players, Board board) {
 
         Player currentPlayer = players[curPlayer];
