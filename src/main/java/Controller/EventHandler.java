@@ -11,7 +11,9 @@ public class EventHandler {
     public EventHandler(GUIController gui) {
         this.gui = gui;
     }
-
+    /**
+     * Asks player if they wish to trade with another player, then runs methods accordingly.
+     */
     public void playerOptionsTrade(Player player, Player [] players, Board board) {
         int playerIndex = java.util.Arrays.asList(players).indexOf(player);
         boolean answer = gui.getUserBool(Language.getText("playeroptionstrade1"), Language.getText("yes"), Language.getText("no"));
@@ -21,7 +23,9 @@ public class EventHandler {
         }
         // Roll dice
     }
-
+    /**
+     * Asks player if they wish to buyback mortgaged properties, then runs methods accordingly.
+     */
     public void playerOptionsBuyMortgaged(Player player, Board board) {
         boolean answer = gui.getUserBool(Language.getText("playeroptionsbuymortgage1"), Language.getText("yes"), Language.getText("no"));
         if (answer) {
@@ -134,8 +138,10 @@ public class EventHandler {
         }
     }
 
+    /**
+     * Asks the player if they wish to buy or auction the property, then runs the code accordingly
+    * */
     public void buyField(Player player, Ownable field, Player[] players) {
-        //boolean answer = gui.getUserBool("Buy this field?", "Yes", "No");Language.getText("yes")
         boolean answer = gui.getUserBool(Language.getText("buyfield1"), Language.getText("buyfield2"), Language.getText("buyfield3"));
 
         // Buy if yes
@@ -148,7 +154,7 @@ public class EventHandler {
         }
     }
 
-    /*
+    /**
     *   The players take turns bidding on property if the first players doesn't buy it first
     * */
     public void auction(Player[] players, Ownable field) {
@@ -280,7 +286,7 @@ public class EventHandler {
          */
     }
 
-    /*
+    /**
     *  The player choses tradepartner, Chosen property to buy, Chosen amount of money from player, Chosen Property to sell, Chosen money to spend.
     *  The target player then choses to accept or decline the trade. If accepted the ownership of the properties switches.
     * */
@@ -499,6 +505,9 @@ public class EventHandler {
 
     }
 
+    /**
+     * Allows players to buy back mortgaged properties.
+     */
     public void buyMortgage(Player player, Board board) {
         boolean value = true;
         int numberOfMortgagedProperties;

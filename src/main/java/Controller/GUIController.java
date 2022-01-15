@@ -227,13 +227,13 @@ public class GUIController {
         return guiplayer;
     }
 
-    public GUI_Player[] getGuiPlayers() {
+    /*public GUI_Player[] getGuiPlayers() {
         return guiPlayers;
     }
 
-    public int getPlayers() {
+    /*public int getPlayers() {
         return guiPlayers.length;
-    }
+    }*/
 
     public void setguiPlayerBalance(Player player, int amount) {
         for (int i = 0; i < playernames.length; i++) {
