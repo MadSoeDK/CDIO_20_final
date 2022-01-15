@@ -12,7 +12,7 @@ public class CardController {
     public CardController(GUIController gui) {
         this.gui = gui;
         deck = new ChanceCardDeck();
-        deck.shuffleCard();
+        //deck.shuffleCard();
     }
 
     public void doCardAction(Player player, Player[] players) {

@@ -244,16 +244,16 @@ public class Board {
         }
         return numberOfMortgagedProperties;
     }
-    public int PropertiesWithHouseForPlayer(Player player) {
+    public int countNumbersOfPropertiesWithHouseForPlayer(Player player) {
         int numberOfPropertiesWithHouse = 0;
         for (int i = 0; i < getFields().length; i++) {
 
             //Type casting field to Ownable
-            if (getField(i) instanceof Ownable) {
+            if (getField(i) instanceof Street) {
                 //Verifying that the current field is of the type Ownable
-                Ownable property = (Ownable) getField(i);
-                if (player == property.getOwner() && property instanceof Street) {
-                    if (((Street) property).getHouseAmount() > 0) {
+                Street property = (Street) getField(i);
+                if (player == property.getOwner()) {
+                    if (property.getHouseAmount() > 0) {
                         numberOfPropertiesWithHouse++;
                     }
                 }

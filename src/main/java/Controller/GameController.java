@@ -18,7 +18,7 @@ public class GameController {
     private int playerindex = 0;
 
     // Game Constants
-    final int STARTBALANCE = 7500;
+    final int STARTBALANCE = 30000;
 
     int sum;
 
@@ -27,8 +27,8 @@ public class GameController {
         cup = new Cup();
         gui = new GUIController(board.getFields());
         event = new EventHandler(gui);
-        gui.createPlayers(STARTBALANCE);
         cardController = new CardController(gui);
+        gui.createPlayers(STARTBALANCE);
         setupPlayers(gui.getPlayernames());
         playGame();
     }
@@ -101,6 +101,8 @@ public class GameController {
 
         // Ask about building houses?
         build();
+
+        //event.auction(2000, players);
 
         //Update GUI players balance
         for (Player p : players) {
@@ -486,6 +488,7 @@ public class GameController {
                 }
                 // Make sure Street has house
                 if (selectedStreet.getHouseAmount() > 0) {
+
                     // Check for uneven house amounts
                     if (selectedStreet.getHouseAmount() == highestHouseAmount) {
                         // Add house to selected Street, pay for it & add GUI element
@@ -515,7 +518,7 @@ public class GameController {
         int numberOfProperties;
         int numberOfPropertiesWithHouses;
         numberOfProperties = board.PropertiesForPlayer(player);
-        numberOfPropertiesWithHouses = board.PropertiesWithHouseForPlayer(player);
+        numberOfPropertiesWithHouses = board.countNumbersOfPropertiesWithHouseForPlayer(player);
 
         Ownable[] playerProperties = new Ownable[numberOfProperties];
         String[] propertyNames = new String[numberOfProperties];
@@ -619,7 +622,7 @@ public class GameController {
 
     private void hasEscapedJail(){
         cup.roll();
-        sum = 1;//cup.getSum();
+        sum = cup.getSum();
         currentPlayer.setInJailStatus(false);
         currentPlayer.setEscapeAttempts(0);
         moveplayer(currentPlayer,sum);
