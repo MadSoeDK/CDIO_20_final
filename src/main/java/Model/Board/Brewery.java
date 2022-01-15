@@ -17,6 +17,7 @@ public class Brewery extends Ownable {
                 return 0;
             }
             rent = RENT[numberBreweryOwned];
+            numberBreweryOwned = 0;
         } else {
             rent = PRICE;
         }

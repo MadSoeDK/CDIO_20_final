@@ -256,8 +256,11 @@ public class GameController {
             if (board.getField(i) instanceof Ownable) {
                 //Verifying that the current field is of the type Ownable
                 Ownable property = (Ownable) board.getField(i);
+                if(property.getMortgage()) {
+                    netWorth += 0;
+                }
                 //Checking if field is of type Ferry, Brewery or Street.
-                if (player == property.getOwner() && property instanceof Ferry) {
+                else if (player == property.getOwner() && property instanceof Ferry) {
                     netWorth += property.getPrice()/2;
                 } else if (player == property.getOwner() && property instanceof Brewery) {
                     netWorth += property.getPrice()/2;
@@ -270,6 +273,7 @@ public class GameController {
             }
         }
         player.setNetWorth(netWorth);
+        System.out.println(currentPlayer.getName() + "'s net worth: " + currentPlayer.getNetWorth());
         return netWorth;
     }
 
