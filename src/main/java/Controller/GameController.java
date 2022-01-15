@@ -577,9 +577,9 @@ public class GameController {
 
     public void escapeJail() {
         // Make string array based on jailcard
-        String[] escapeOption = {"escapejail1", "escapejail2"};
-        String[] allEscapeOption = {"escapejail1", "escapejail2", "escapejail3"};
-        String[] oneEscapeOption = {"escapejail2"};
+        String[] escapeOption = {"Slå et par", "Betal 1000"};
+        String[] allEscapeOption = {"Slå et par", "Betal 1000", "Brug Chancekort"};
+        String[] oneEscapeOption = {"Betal 1000"};
 
         // If you have jailcard
         if (currentPlayer.gethasJailFreecard()) {

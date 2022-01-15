@@ -34,7 +34,7 @@ mortgage2,Pantsat,Mortgaged,
 mortgage3,Ikke flere ejendomme,No more Properties,
 escapejail1,Slå et par,Roll a pair,
 escapejail2,Betal 1000,Pay 1000,
-escapejail3,Brug Chance Kort,Use Chance Card,
+escapejail3,Brug Chancekort,Use Chance Card,
 escapejail4,Hvordan vil du undslippe fængsel,How do you wish to escape Jail,
 
 EventController,,
