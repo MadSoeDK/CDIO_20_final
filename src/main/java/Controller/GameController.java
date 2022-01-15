@@ -76,7 +76,7 @@ public class GameController {
         if (!currentPlayer.getInJailStatus()) { //False - not in jail
             // Roll die, get value, show die, move player
             cup.roll();
-            sum = 5;//cup.getSum();
+            sum = cup.getSum();
             gui.showDice(cup.getFacevalues()[0], cup.getFacevalues()[1]);
             moveplayer(currentPlayer, sum);
         } else { // In jail
@@ -256,8 +256,11 @@ public class GameController {
             if (board.getField(i) instanceof Ownable) {
                 //Verifying that the current field is of the type Ownable
                 Ownable property = (Ownable) board.getField(i);
+                if(property.getMortgage()) {
+                    netWorth += 0;
+                }
                 //Checking if field is of type Ferry, Brewery or Street.
-                if (player == property.getOwner() && property instanceof Ferry) {
+                else if (player == property.getOwner() && property instanceof Ferry) {
                     netWorth += property.getPrice()/2;
                 } else if (player == property.getOwner() && property instanceof Brewery) {
                     netWorth += property.getPrice()/2;
@@ -270,6 +273,7 @@ public class GameController {
             }
         }
         player.setNetWorth(netWorth);
+        System.out.println(currentPlayer.getName() + "'s net worth: " + currentPlayer.getNetWorth());
         return netWorth;
     }
 
@@ -320,6 +324,7 @@ public class GameController {
                 checkBankruptOrMorgage(player, property);
             } else if (ownable instanceof Brewery) {
                 Brewery property = (Brewery) ownable;
+                property.updateNumberOfBreweryOwned(player, board);
                 checkBankruptOrMorgage(player, property);
             }
         }
@@ -328,12 +333,16 @@ public class GameController {
 
     public void checkBankruptOrMorgage(Player player, Ownable property) {
         int placement = property.getPlacement();
+        int currentRent = property.getCurrentRent();
+        if (property instanceof Brewery) {
+            currentRent = currentRent * sum;
+        }
 
         // If player can't pay the rent by current balance, proceed to more checks
-        if (player.getPlayerBalance() <= property.getCurrentRent()) {
+        if (player.getPlayerBalance() <= currentRent) {
 
             // If netWorth is lower than the rent, then player is bankrupt. Else pay debt by mortgage
-            if (player.getNetWorth() <= property.getCurrentRent()) {
+            if (player.getNetWorth() <= currentRent) {
                 player.setBankruptStatus(true);
 
                 // transfer ownership of the bankrupt player to creditor
@@ -517,7 +526,7 @@ public class GameController {
         }
         int j = 0;
         // Mortgage until you have enough money to pay rent
-        while (player.getPlayerBalance() < ((Ownable) board.getField(player.getPlacement())).getCurrentRent()) {
+        while (player.getPlayerBalance() < 0) {
             //checks if the player own properties with houses
             if (numberOfPropertiesWithHouses == 0) {
                 String guiSelection = gui.dropdown("mortgage1", propertyNames);
