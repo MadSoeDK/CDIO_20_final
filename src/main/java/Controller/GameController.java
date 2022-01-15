@@ -8,11 +8,11 @@ import java.util.Objects;
 
 public class GameController {
 
-    private final Board board;
-    private final Cup cup;
-    private final GUIController gui;
+    private Board board;
+    private Cup cup;
+    private GUIController gui;
     private CardController cardController;
-    private final EventHandler event;
+    private EventHandler event;
     private Player[] players;
     private Player currentPlayer;
     private int playerindex = 0;
@@ -27,7 +27,6 @@ public class GameController {
         cup = new Cup();
         gui = new GUIController(board.getFields());
         event = new EventHandler(gui);
-        cardController = new CardController(gui);
         gui.createPlayers(STARTBALANCE);
         cardController = new CardController(gui);
         setupPlayers(gui.getPlayernames());
@@ -94,7 +93,9 @@ public class GameController {
         // get new placement and field
         int placement = currentPlayer.getPlacement();
         Field field = board.getField(placement);
+
         gui.message(currentPlayer.getName() + Language.getText("taketurn7") + field.getName());
+
         checkFieldType(field, placement);
 
         // Ask about building houses?
@@ -258,20 +259,24 @@ public class GameController {
             if (board.getField(i) instanceof Ownable) {
                 //Verifying that the current field is of the type Ownable
                 Ownable property = (Ownable) board.getField(i);
+                if(property.getMortgage()) {
+                    netWorth += 0;
+                }
                 //Checking if field is of type Ferry, Brewery or Street.
-                if (player == property.getOwner() && property instanceof Ferry) {
+                else if (player == property.getOwner() && property instanceof Ferry) {
                     netWorth += property.getPrice()/2;
                 } else if (player == property.getOwner() && property instanceof Brewery) {
                     netWorth += property.getPrice()/2;
                 } else if (player == property.getOwner() && property instanceof Street) {
                     netWorth += property.getPrice()/2;
                     if(((Street) property).getHouseAmount() > 0) {
-                        netWorth += (property.getPrice() / 2) + (((Street) property).getHouseAmount() * ((Street) property).getHousePrice());
+                        netWorth += property.getPrice() + (((Street) property).getHouseAmount() * ((Street) property).getHousePrice());
                     }
                 }
             }
         }
         player.setNetWorth(netWorth);
+        System.out.println(currentPlayer.getName() + "'s net worth: " + currentPlayer.getNetWorth());
         return netWorth;
     }
 
@@ -284,13 +289,13 @@ public class GameController {
         // Makes a new player array one size less and copies the old array one by one except for the bankrupt player
         Player[] newPlayers = new Player[players.length - 1];
         int j = 0;
-        for (Player value : players) {
-            if (value.getBankruptStatus()) {
+        for (int i = 0; i < players.length; i++) {
+            if(players[i].getBankruptStatus()) {
                 gui.removePlayer(player, placement);
-                gui.getGuiPlayer(value).setName(value.getName() + Language.getText("eliminateplayer1"));
-                gui.getGuiPlayer(value).setBalance(0);
+                gui.getGuiPlayer(players[i]).setName(players[i].getName() + Language.getText("eliminateplayer1"));
+                gui.getGuiPlayer(players[i]).setBalance(0);
             } else {
-                newPlayers[j] = value;
+                newPlayers[j] = players[i];
                 j++;
             }
         }
@@ -307,59 +312,76 @@ public class GameController {
     public boolean bankrupt(Player player, int placement) {
 
         // If player landed on an ownable, proceed to more checks
-        if ((board.getField(placement) instanceof Ownable)) {
-
+        if ((board.getField(placement) instanceof Ownable) && ((Ownable) board.getField(placement)).getOwner() == player) {
             // Cast to ownable
-            Ownable property = (Ownable) board.getField(placement);
+            Ownable ownable = (Ownable) board.getField(placement);
 
             // Check if the propert is a street, so that houses are calculated correctly
-            if (property instanceof Street) {
-                property = (Street) board.getField(placement);
-            }
-
-            // If player can't pay the rent by current balance, proceed to more checks
-            if (player.getPlayerBalance() < property.getCurrentRent()) {
-
-                // If netWorth is lower than the rent, then player is bankrupt. Else pay debt by mortgage
-                if (player.getNetWorth() < property.getCurrentRent()) {
-                    player.setBankruptStatus(true);
-
-                    // transfer ownership of the bankrupt player to creditor
-                    for (int i = 0; i < board.getFields().length; i++) {
-                        //Type casting field to Ownable
-                        if (board.getField(i) instanceof Ownable) {
-                            //Verifying that the current field is of the type Ownable
-                            Ownable playerProperty = (Ownable) board.getField(i);
-                            //Gives players properties to debt collector
-                            if (player == playerProperty.getOwner()) {
-                                playerProperty.changeOwner(player);
-                                playerProperty.setOwner(((Ownable) board.getField(placement)).getOwner());
-                                player.setNetWorth(-((Ownable) board.getField(i)).getPrice());
-                            }
-                        }
-                    }
-
-                    //Removes player from the player array, Note: does not work if more players bankrupt same turn
-                    gui.message(player.getName() + Language.getText("bankrupt1")  + "\n" + Language.getText("bankrupt1.1")+ player.getName() + ".");
-                    eliminatePlayer(player, placement);
-
-                } else { // When you are able to mortgage properties to survive
-                    //While loop that checks if balance is higher than rent
-                    boolean answer = gui.getUserBool(Language.getText("bankrupt2"), "Bankerot", "Pantsæt");
-
-                    // If player gives up - set bankrupt status true
-                    if (answer) {
-                        player.setBankruptStatus(true);
-                        eliminatePlayer(player, placement);
-
-                        //Change ownership
-                    } else { //Pay by mortgage
-                        mortgage(player);
-                    }
-                }
+            if (ownable instanceof Street) {
+                Street property = (Street) ownable;
+                checkBankruptOrMorgage(player, property);
+            } else if (ownable instanceof Ferry) {
+                Ferry property = (Ferry) ownable;
+                property.updateNumberOfFerriesOwned(player, board);
+                checkBankruptOrMorgage(player, property);
+            } else if (ownable instanceof Brewery) {
+                Brewery property = (Brewery) ownable;
+                property.updateNumberOfBreweryOwned(player, board);
+                checkBankruptOrMorgage(player, property);
             }
         }
         return player.getBankruptStatus();
+    }
+
+    public void checkBankruptOrMorgage(Player player, Ownable property) {
+        int placement = property.getPlacement();
+        int currentRent = property.getCurrentRent();
+        if (property instanceof Brewery) {
+            currentRent = currentRent * sum;
+        }
+
+        // If player can't pay the rent by current balance, proceed to more checks
+        if (player.getPlayerBalance() <= currentRent) {
+
+            // If netWorth is lower than the rent, then player is bankrupt. Else pay debt by mortgage
+            if (player.getNetWorth() <= currentRent) {
+                player.setBankruptStatus(true);
+
+                // transfer ownership of the bankrupt player to creditor
+                for (int i = 0; i < board.getFields().length; i++) {
+                    //Type casting field to Ownable
+                    if (board.getField(i) instanceof Ownable) {
+                        //Verifying that the current field is of the type Ownable
+                        Ownable playerProperty = (Ownable) board.getField(i);
+                        //Gives players properties to debt collector
+                        if (player == playerProperty.getOwner()) {
+                            playerProperty.changeOwner(player);
+                            playerProperty.setOwner(((Ownable) board.getField(placement)).getOwner());
+                            player.setNetWorth(-((Ownable) board.getField(i)).getPrice());
+                        }
+                    }
+                }
+
+                //Removes player from the player array, Note: does not work if more players bankrupt same turn
+                gui.message(player.getName() + Language.getText("bankrupt1") + player.getName() + ".");
+                eliminatePlayer(player, placement);
+
+            } else { // When you are able to mortgage properties to survive
+                //While loop that checks if balance is higher than rent
+                boolean answer = gui.getUserBool(Language.getText("bankrupt2"), "Bankerot", "Pantsæt");
+
+                // If player gives up - set bankrupt status true
+                if (answer) {
+                    player.setBankruptStatus(true);
+                    eliminatePlayer(player, placement);
+
+                    //Change ownership
+
+                } else { //Pay by mortgage
+                    mortgage(player);
+                }
+            }
+        }
     }
 
     /**
@@ -479,7 +501,6 @@ public class GameController {
                     gui.message(Language.getText("sell5"));
                 }
             } else { // Don't sell Houses
-
                 stopBuilding = true;
             }
         }
@@ -514,7 +535,7 @@ public class GameController {
         }
         int j = 0;
         // Mortgage until you have enough money to pay rent
-        while (player.getPlayerBalance() < ((Ownable) board.getField(player.getPlacement())).getCurrentRent()) {
+        while (player.getPlayerBalance() < 0) {
             //checks if the player own properties with houses
             if (numberOfPropertiesWithHouses == 0) {
                 String guiSelection = gui.dropdown("mortgage1", propertyNames);
@@ -556,14 +577,10 @@ public class GameController {
 
     public void escapeJail() {
         // Make string array based on jailcard
-        /*
         String[] escapeOption = {"escapejail1", "escapejail2"};
         String[] allEscapeOption = {"escapejail1", "escapejail2", "escapejail3"};
         String[] oneEscapeOption = {"escapejail2"};
-*/
-        String[] escapeOption = {"Rul Terning", "Betal 1000"};
-        String[] allEscapeOption = {"Rul Terning", "Betal 1000", "Brug Chancekort"};
-        String[] oneEscapeOption = {"Betal 1000"};
+
         // If you have jailcard
         if (currentPlayer.gethasJailFreecard()) {
             escapeOption = allEscapeOption;

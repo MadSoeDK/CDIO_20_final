@@ -7,11 +7,10 @@ import java.util.Random;
  */
 public class Die {
 
-    private final Random rand = new Random();
+    private Random rand = new Random();
     private final int MAXVALUE = 6;
 
     public int roll() {
-        int facevalue;
-        return facevalue = rand.nextInt(MAXVALUE) + 1;
+        return rand.nextInt(MAXVALUE) + 1;
     }
 }
