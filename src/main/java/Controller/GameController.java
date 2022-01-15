@@ -522,7 +522,7 @@ public class GameController {
         }
         int j = 0;
         // Mortgage until you have enough money to pay rent
-        while (player.getPlayerBalance() < ((Ownable) board.getField(player.getPlacement())).getCurrentRent()) {
+        while (player.getPlayerBalance() < 0) {
             //checks if the player own properties with houses
             if (numberOfPropertiesWithHouses == 0) {
                 String guiSelection = gui.dropdown("mortgage1", propertyNames);
