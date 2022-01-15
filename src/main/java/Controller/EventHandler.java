@@ -21,7 +21,7 @@ public class EventHandler {
      * @param board
      */
     public void playerOptionsTrade(Player player, Player [] players, Board board) {
-        int playerIndex = java.util.Arrays.asList(players).indexOf(player);
+        int playerIndex = board.getField(player.getPlacement()).getPlacement();
         boolean answer = gui.getUserBool(Language.getText("playeroptionstrade1"), Language.getText("yes"), Language.getText("no"));
 
         if (answer) {
