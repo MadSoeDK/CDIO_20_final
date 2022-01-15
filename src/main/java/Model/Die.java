@@ -8,10 +8,9 @@ import java.util.Random;
 public class Die {
 
     private Random rand = new Random();
-    private int facevalue;
     private final int MAXVALUE = 6;
 
     public int roll() {
-        return facevalue = rand.nextInt(MAXVALUE) + 1;
+        return rand.nextInt(MAXVALUE) + 1;
     }
 }
