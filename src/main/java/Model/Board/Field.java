@@ -7,7 +7,7 @@ public abstract class Field {
     private final String NAME;
     private final int PLACEMENT;
 
-    public Field(String name,int placement) {
+    public Field(String name, int placement) {
         this.NAME = name;
         this.PLACEMENT = placement;
     }
@@ -15,6 +15,7 @@ public abstract class Field {
     public String getName() {
         return NAME;
     }
+
     public int getPlacement() {
         return PLACEMENT;
     }

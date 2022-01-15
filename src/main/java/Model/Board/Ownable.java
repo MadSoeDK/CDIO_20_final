@@ -23,19 +23,23 @@ public abstract class Ownable extends Field {
     public void setOwner(Player player) {
         this.owner = player;
     }
+
     public Player getOwner() {
         return owner;
     }
+
     public String getColor() {
         return COLOR;
     }
+
     public int[] getRent() {
         return RENT;
     }
+
     public int getCurrentRent() {
         int rent;
         if (owner != null) {
-            if (mortgage){
+            if (mortgage) {
                 return 0;
             }
             rent = RENT[0];
@@ -44,15 +48,19 @@ public abstract class Ownable extends Field {
         }
         return rent;
     }
+
     public int getPrice() {
         return PRICE;
     }
+
     public void changeOwner(Player player) {
         owner = null;
     }
+
     public void setMortgage(boolean value) {
         this.mortgage = value;
     }
+
     public boolean getMortgage() {
         return mortgage;
     }

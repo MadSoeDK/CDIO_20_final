@@ -103,10 +103,12 @@ public class CardController {
                 break;
         }
     }
+
     private void pay(ChanceCard card, Player player) {
         int amount = card.getValue();
         player.setPlayerBalance(-amount);
     }
+
     private void receive(ChanceCard card, Player player, Player[] players) {
         int amount = card.getValue();
 

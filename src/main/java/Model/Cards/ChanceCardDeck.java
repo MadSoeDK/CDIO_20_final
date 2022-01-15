@@ -7,6 +7,7 @@ import java.util.Random;
  */
 public class ChanceCardDeck {
     private final ChanceCard[] deck;
+
     public ChanceCardDeck() {
         // Initialize Model.ChanceCard Array
         deck = new ChanceCard[35];
@@ -24,26 +25,26 @@ public class ChanceCardDeck {
         deck[9] = new PayCard("Tandlægeregning, betal 2000 kroner.", "pay", 2000);
 
         //All ReceiveCards
-        deck[10] = new ReceiveCard("De har vundet i klasselotteriet. Modtag 500 kroner.",  "receive", 500);
-        deck[11] = new ReceiveCard("De har vundet i klasselotteriet. Modtag 500 kroner.",  "receive", 500);
-        deck[12] = new ReceiveCard("De modtager Deres aktieudbytte. Modtag 1000 kroner af banken.",  "receive", 1000);
-        deck[13] = new ReceiveCard("De modtager Deres aktieudbytte. Modtag 1000 kroner af banken.",  "receive", 1000);
-        deck[14] = new ReceiveCard("De modtager Deres aktieudbytte. Modtag 1000 kroner af banken.",  "receive", 1000);
-        deck[15] = new ReceiveCard("Kommunen har eftergivet et kvartals skat. Hæv i banken 3000 kroner.",  "receive", 3000);
-        deck[16] = new ReceiveCard("De have en række med elleve rigtige i tipning, modtag 1000 kroner.",  "receive", 1000);
-        deck[17] = new ReceiveCard("Grundet dyrtiden har De fået gageforhøjelse, modtag 1000 kroner.",  "receive", 1000);
-        deck[18] = new ReceiveCard("Deres præmieobligation er udtrykket. De modtager 1000 kroner af banken.",  "receive", 1000);
-        deck[19] = new ReceiveCard("Deres præmieobligation er udtrykket. De modtager 1000 kroner af banken.",  "receive", 1000);
-        deck[20] = new ReceiveCard("De har solgt nogle gamle møbler på auktion. Modtag 1000 kroner af banken.",  "receive", 1000);
+        deck[10] = new ReceiveCard("De har vundet i klasselotteriet. Modtag 500 kroner.", "receive", 500);
+        deck[11] = new ReceiveCard("De har vundet i klasselotteriet. Modtag 500 kroner.", "receive", 500);
+        deck[12] = new ReceiveCard("De modtager Deres aktieudbytte. Modtag 1000 kroner af banken.", "receive", 1000);
+        deck[13] = new ReceiveCard("De modtager Deres aktieudbytte. Modtag 1000 kroner af banken.", "receive", 1000);
+        deck[14] = new ReceiveCard("De modtager Deres aktieudbytte. Modtag 1000 kroner af banken.", "receive", 1000);
+        deck[15] = new ReceiveCard("Kommunen har eftergivet et kvartals skat. Hæv i banken 3000 kroner.", "receive", 3000);
+        deck[16] = new ReceiveCard("De have en række med elleve rigtige i tipning, modtag 1000 kroner.", "receive", 1000);
+        deck[17] = new ReceiveCard("Grundet dyrtiden har De fået gageforhøjelse, modtag 1000 kroner.", "receive", 1000);
+        deck[18] = new ReceiveCard("Deres præmieobligation er udtrykket. De modtager 1000 kroner af banken.", "receive", 1000);
+        deck[19] = new ReceiveCard("Deres præmieobligation er udtrykket. De modtager 1000 kroner af banken.", "receive", 1000);
+        deck[20] = new ReceiveCard("De har solgt nogle gamle møbler på auktion. Modtag 1000 kroner af banken.", "receive", 1000);
         deck[21] = new ReceiveCard("Værdien af egen avl fra nyttehaven udgør 200 kroner" +
-                " som de modtager af banken",  "receive", 200);
+                " som de modtager af banken", "receive", 200);
 
         //Receive legation
         deck[22] = new ReceiveCard("De modtager “Matador-legatet” på kr 40.000, men kun hvis værdier ikke overstiger " +
-                "15.000 kroner.",  "legation", 40000);
+                "15.000 kroner.", "legation", 40000);
 
         //Receive money from other players
-        deck[23] = new ReceiveCard("Det er deres fødselsdag. Modtag af hver medspiller 200 kr.",  "receiveplayers", 200);
+        deck[23] = new ReceiveCard("Det er deres fødselsdag. Modtag af hver medspiller 200 kr.", "receiveplayers", 200);
 
         //All MoveCards
         deck[24] = new MoveCard("Ryk frem til START.", "set", 0);
@@ -87,6 +88,7 @@ public class ChanceCardDeck {
 
     /**
      * Draw card from top of deck, and place it at the bottom.
+     *
      * @return a Chancecard from top of deck
      */
     public ChanceCard drawCard() {
@@ -95,9 +97,9 @@ public class ChanceCardDeck {
         // Take the card on top
         card = deck[0];
 
-        for(int i = 0; i < deck.length; i++) {
+        for (int i = 0; i < deck.length; i++) {
             // Shift the index of cards one up.
-            if(i > 0) {
+            if (i > 0) {
                 deck[i - 1] = deck[i];
             }
             // For index = 0 - Put the card on top

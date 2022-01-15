@@ -16,12 +16,15 @@ public class Cup {
         die1 = new Die();
         die2 = new Die();
     }
+
     public int getSum() {
         return sum;
     }
+
     public int[] getFacevalues() {
         return facevalues;
     }
+
     public void roll() {
         int fv1 = die1.roll();
         int fv2 = die2.roll();
@@ -32,6 +35,7 @@ public class Cup {
         facevalues[0] = fv1;
         facevalues[1] = fv2;
     }
+
     public boolean getPair() {
         return facevalues[0] == facevalues[1];
     }

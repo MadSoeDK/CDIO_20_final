@@ -11,12 +11,15 @@ public class MoveCard extends ChanceCard {
         this.DESCRIPTION = description;
         this.TYPE = type;
     }
+
     public String getDescription() {
         return DESCRIPTION;
     }
+
     public String getType() {
         return TYPE;
     }
+
     public int getValue() {
         return VALUE;
     }

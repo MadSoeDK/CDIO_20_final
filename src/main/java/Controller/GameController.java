@@ -37,9 +37,9 @@ public class GameController {
      * Where overall gameloop is controlled
      */
     public void playGame() {
-        if(!checkWinner()) {
+        if (!checkWinner()) {
             do {
-                gui.message(Language.getText("playgame1") +" "+ currentPlayer.getName() +" "+ Language.getText("playgame2"));
+                gui.message(Language.getText("playgame1") + " " + currentPlayer.getName() + " " + Language.getText("playgame2"));
                 takeTurn();
                 nextTurn();
             } while (!checkWinner());
@@ -52,7 +52,7 @@ public class GameController {
      * Turn options shown: Roll dice, Trade, Pay back mortgage & sell houses.
      */
     public void takeTurn() {
-        boolean playerHasRolledDice=false;
+        boolean playerHasRolledDice = false;
         while (!playerHasRolledDice) {
 
             String[] playerStartOptions = {Language.getText("taketurn2"), Language.getText("taketurn3"), Language.getText("taketurn4"), Language.getText("taketurn5")};
@@ -60,7 +60,7 @@ public class GameController {
 
             // Run actions based on option selected
             if (Objects.equals(playerStartOptions[0], playerStartChoice)) { // Roll dice
-                playerHasRolledDice=true;
+                playerHasRolledDice = true;
             }
             if (Objects.equals(playerStartOptions[1], playerStartChoice)) { // Trade
                 // Ask if currentplayer wishes to trade?
@@ -74,7 +74,7 @@ public class GameController {
                 //Sell houses
                 if (board.getPlayerOwnsMonopoly(currentPlayer)) {
                     sellHouse();
-                } else{
+                } else {
                     gui.message(Language.getText("taketurn6"));
                 }
             }
@@ -156,7 +156,8 @@ public class GameController {
 
     /**
      * Checks field type and perform field effect.
-     * @param field on board
+     *
+     * @param field     on board
      * @param placement on board
      */
     public void checkFieldType(Field field, int placement) {
@@ -194,7 +195,7 @@ public class GameController {
                 break;
             case "Brewery":
                 Brewery brewery = (Brewery) field;
-                event.fieldEffect(currentPlayer, brewery, players, board,  sum);
+                event.fieldEffect(currentPlayer, brewery, players, board, sum);
                 break;
             case "ChanceField":
                 cardController.doCardAction(currentPlayer, players);
@@ -209,6 +210,7 @@ public class GameController {
 
     /**
      * Moves player on the board by amount
+     *
      * @param player
      * @param amount
      */
@@ -235,9 +237,10 @@ public class GameController {
 
     /**
      * Set player placement on the board by giving an endplacement
+     *
      * @param player
      * @param endplacement - desired player placement
-     * @param passStart - true if money by passing start should by paid to player
+     * @param passStart    - true if money by passing start should by paid to player
      */
     public void setPlayerPlacement(Player player, int endplacement, boolean passStart) {
         int preplacement = player.getPlacement();
@@ -252,6 +255,7 @@ public class GameController {
 
     /**
      * Calculates networth of player. Calculation includes ownables, player balance and buildings.
+     *
      * @param player
      * @return integer amount of networth
      */
@@ -262,17 +266,17 @@ public class GameController {
             if (board.getField(i) instanceof Ownable) {
                 //Verifying that the current field is of the type Ownable
                 Ownable property = (Ownable) board.getField(i);
-                if(property.getMortgage()) {
+                if (property.getMortgage()) {
                     netWorth += 0;
                 }
                 //Checking if field is of type Ferry, Brewery or Street.
                 else if (player == property.getOwner() && property instanceof Ferry) {
-                    netWorth += property.getPrice()/2;
+                    netWorth += property.getPrice() / 2;
                 } else if (player == property.getOwner() && property instanceof Brewery) {
-                    netWorth += property.getPrice()/2;
+                    netWorth += property.getPrice() / 2;
                 } else if (player == property.getOwner() && property instanceof Street) {
-                    netWorth += property.getPrice()/2;
-                    if(((Street) property).getHouseAmount() > 0) {
+                    netWorth += property.getPrice() / 2;
+                    if (((Street) property).getHouseAmount() > 0) {
                         netWorth += property.getPrice() + (((Street) property).getHouseAmount() * ((Street) property).getHousePrice());
                     }
                 }
@@ -284,6 +288,7 @@ public class GameController {
 
     /**
      * Eliminates a selected player from the game by removing the player from the player array
+     *
      * @param player
      * @param placement - to remove from the GUI also
      */
@@ -292,7 +297,7 @@ public class GameController {
         Player[] newPlayers = new Player[players.length - 1];
         int j = 0;
         for (int i = 0; i < players.length; i++) {
-            if(players[i].getBankruptStatus()) {
+            if (players[i].getBankruptStatus()) {
                 gui.removePlayer(player, placement);
                 gui.getGuiPlayer(players[i]).setName(players[i].getName() + Language.getText("eliminateplayer1"));
                 gui.getGuiPlayer(players[i]).setBalance(0);
@@ -307,6 +312,7 @@ public class GameController {
 
     /**
      * Sets bankrupt status if the player can't pay rent
+     *
      * @param player
      * @param placement
      * @return
@@ -389,7 +395,7 @@ public class GameController {
     /**
      * Build house when player hos monopoly
      */
-    public void build(){
+    public void build() {
         if (board.getPlayerOwnsMonopoly(currentPlayer)) {
 
             boolean stopBuilding = false;
@@ -414,21 +420,22 @@ public class GameController {
                     }
 
                     // Chose specific street in monopoly
-                    int lowestHouseAmount=5;
+                    int lowestHouseAmount = 5;
                     Street selectedStreet = null;
                     String[] selectedMonopolyStreetStringArray = selectedMonopoly.getStringArray();
                     String selectedStreetString = gui.dropdown(Language.getText("build3") + selectedMonopoly.getStreetArray()[0].getHousePrice(), selectedMonopolyStreetStringArray);
                     for (int i = 0; i < selectedMonopoly.getStreetArray().length; i++) {
                         // Check highest house amount
-                        if (selectedMonopoly.getStreetArray()[i].getHouseAmount() < lowestHouseAmount){lowestHouseAmount = selectedMonopoly.getStreetArray()[i].getHouseAmount();}
+                        if (selectedMonopoly.getStreetArray()[i].getHouseAmount() < lowestHouseAmount) {
+                            lowestHouseAmount = selectedMonopoly.getStreetArray()[i].getHouseAmount();
+                        }
                         // Match player selection with string array number
                         if (Objects.equals(selectedStreetString, selectedMonopolyStreetStringArray[i])) {
                             selectedStreet = selectedMonopoly.getStreetArray()[i];
                         }
                     }
                     // Check for money
-                    if (currentPlayer.getPlayerBalance() > selectedStreet.getHousePrice())
-                    {
+                    if (currentPlayer.getPlayerBalance() > selectedStreet.getHousePrice()) {
                         // Check for uneven house amounts
                         if (selectedStreet.getHouseAmount() == lowestHouseAmount) {
                             // Add house to selected Street, pay for it & add GUI element
@@ -441,7 +448,7 @@ public class GameController {
                         } else {
                             gui.message(Language.getText("build4"));
                         }
-                    }else {
+                    } else {
                         gui.message("Du har ikke nok penge");
                         stopBuilding = true;
                     }
@@ -451,7 +458,8 @@ public class GameController {
             }
         }
     }
-    public void sellHouse(){
+
+    public void sellHouse() {
         boolean stopBuilding = false;
         while (!stopBuilding) {
             if (gui.getUserBool(Language.getText("sell1"), "Jeg vil sælge huse", "Jeg vil IKKE sælge huse")) {
@@ -474,13 +482,15 @@ public class GameController {
                 }
 
                 // Chose specific street to sell from
-                int highestHouseAmount=0;
+                int highestHouseAmount = 0;
                 Street selectedStreet = null;
                 String[] selectedMonopolyStreetStringArray = selectedMonopoly.getStringArray();
-                String selectedStreetString = gui.dropdown(Language.getText("sell3")+selectedMonopoly.getStreetArray()[0].getHousePrice()/2, selectedMonopolyStreetStringArray);
+                String selectedStreetString = gui.dropdown(Language.getText("sell3") + selectedMonopoly.getStreetArray()[0].getHousePrice() / 2, selectedMonopolyStreetStringArray);
                 for (int i = 0; i < selectedMonopoly.getStreetArray().length; i++) {
                     // Check highest house amount
-                    if (selectedMonopoly.getStreetArray()[i].getHouseAmount() > highestHouseAmount){highestHouseAmount = selectedMonopoly.getStreetArray()[i].getHouseAmount();}
+                    if (selectedMonopoly.getStreetArray()[i].getHouseAmount() > highestHouseAmount) {
+                        highestHouseAmount = selectedMonopoly.getStreetArray()[i].getHouseAmount();
+                    }
                     // Match player selection with string array number
                     if (Objects.equals(selectedStreetString, selectedMonopolyStreetStringArray[i])) {
                         selectedStreet = selectedMonopoly.getStreetArray()[i];
@@ -511,6 +521,7 @@ public class GameController {
 
     /**
      * Method to mortgage properties when bankrupt
+     *
      * @param player
      */
     public void mortgage(Player player) {
@@ -551,7 +562,7 @@ public class GameController {
                     if (property.getName().equals(guiSelection)) {
                         property.setMortgage(true);
                         //update gui field text
-                        gui.setSubText(Language.getText("mortgage2"),property);
+                        gui.setSubText(Language.getText("mortgage2"), property);
                         player.setPlayerBalance((property.getPrice()) / 2);
                         //changes array if length is 0 to escape null pointer exception
                         if (newPropertyNames.length == 0) {
@@ -573,7 +584,7 @@ public class GameController {
                 gui.message("Du skal sælge dine huse for at undgå at gå bankerot");
                 sellHouse();
             }
-            j=0;
+            j = 0;
             gui.setguiPlayerBalance(player, player.getPlayerBalance());
         }
     }
@@ -593,16 +604,16 @@ public class GameController {
             escapeOption = oneEscapeOption;
         }
 
-        switch(gui.dropdown("Hvordan vil du slipper ud af fængsel?", escapeOption)){
+        switch (gui.dropdown("Hvordan vil du slipper ud af fængsel?", escapeOption)) {
 
             case "Rul Terning":
                 cup.roll();
                 sum = cup.getSum();
-                gui.showDice(cup.getFacevalues()[0],cup.getFacevalues()[1]);
+                gui.showDice(cup.getFacevalues()[0], cup.getFacevalues()[1]);
                 // If pair
                 if (cup.getPair()) {
                     currentPlayer.setInJailStatus(false);
-                    moveplayer(currentPlayer,sum);
+                    moveplayer(currentPlayer, sum);
                     currentPlayer.setEscapeAttempts(0);
                 } else {
                     currentPlayer.incrementEscapeAttempts();
@@ -620,13 +631,13 @@ public class GameController {
         }
     }
 
-    private void hasEscapedJail(){
+    private void hasEscapedJail() {
         cup.roll();
         sum = cup.getSum();
         currentPlayer.setInJailStatus(false);
         currentPlayer.setEscapeAttempts(0);
-        moveplayer(currentPlayer,sum);
-        gui.showDice(cup.getFacevalues()[0],cup.getFacevalues()[1]);
+        moveplayer(currentPlayer, sum);
+        gui.showDice(cup.getFacevalues()[0], cup.getFacevalues()[1]);
     }
 }
 

@@ -7,6 +7,7 @@ public class Tax extends Field {
         super(name, position);
         this.TAX = tax;
     }
+
     public int getTax() {
         return TAX;
     }

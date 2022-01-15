@@ -7,13 +7,16 @@ public class FreeParking extends Field {
     public FreeParking(String name, int placement) {
         super(name, placement);
     }
-    public static void setBalance(int value){
-        balance=balance+value;
+
+    public static void setBalance(int value) {
+        balance = balance + value;
     }
-    public static int getBalance(){
+
+    public static int getBalance() {
         return balance;
     }
-    public static void resetBalance(){
-        balance=0;
+
+    public static void resetBalance() {
+        balance = 0;
     }
 }

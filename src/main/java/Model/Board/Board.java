@@ -99,7 +99,7 @@ public class Board {
                             field[name],
                             Integer.parseInt(field[position]),
                             field[color],
-                            stringToIntarr(field,field[type]),
+                            stringToIntarr(field, field[type]),
                             Integer.parseInt(field[price]),
                             Integer.parseInt(field[housePrice])
                     );
@@ -118,7 +118,7 @@ public class Board {
                             field[name],
                             Integer.parseInt(field[position]),
                             field[color],
-                            stringToIntarr(field,field[type]),
+                            stringToIntarr(field, field[type]),
                             Integer.parseInt(field[price])
                     );
                     break;
@@ -128,7 +128,7 @@ public class Board {
                             field[name],
                             Integer.parseInt(field[position]),
                             field[color],
-                            stringToIntarr(field,field[type]),
+                            stringToIntarr(field, field[type]),
                             Integer.parseInt(field[price])
                     );
                     break;
@@ -183,14 +183,16 @@ public class Board {
     }
 
     public Field getField(int placement) {
-            return fields[placement];
+        return fields[placement];
     }
+
     public Field[] getFields() {
         return fields;
     }
 
     /**
      * Returns rent as a integer array
+     *
      * @param array
      * @param type
      * @return int rent array
@@ -206,7 +208,7 @@ public class Board {
         } else {
             result = new int[2];
         }
-        for (int i = 0; i < result.length; i++){
+        for (int i = 0; i < result.length; i++) {
             result[i] = Integer.parseInt(array[col + i]);
         }
         return result;
@@ -227,6 +229,7 @@ public class Board {
         }
         return numberOfProperties;
     }
+
     public int MortgagedPropertiesForPlayer(Player player) {
         int numberOfMortgagedProperties = 0;
         for (int i = 0; i < getFields().length; i++) {
@@ -244,6 +247,7 @@ public class Board {
         }
         return numberOfMortgagedProperties;
     }
+
     public int countNumbersOfPropertiesWithHouseForPlayer(Player player) {
         int numberOfPropertiesWithHouse = 0;
         for (int i = 0; i < getFields().length; i++) {
@@ -275,7 +279,7 @@ public class Board {
         return result;
     }
 
-    public Ownable[] getPlayerProperties(Player player){
+    public Ownable[] getPlayerProperties(Player player) {
         int numberOfProperties;
         numberOfProperties = PropertiesForPlayer(player) + MortgagedPropertiesForPlayer(player);
 
@@ -340,7 +344,7 @@ public class Board {
         return monopolies;
     }
 
-    public boolean getPlayerOwnsMonopoly (Player player){
+    public boolean getPlayerOwnsMonopoly(Player player) {
         boolean playerOwnsMonopoly = false;
 
         for (Monopoly monopoly : monopolies) {
@@ -353,7 +357,7 @@ public class Board {
     }
 
     public Monopoly[] getOwnedPlayerMonopolyList(Player player) {
-        int playerMonopolyAmount=0;
+        int playerMonopolyAmount = 0;
 
         // Check amount of Monopolies owned
         for (Monopoly monopoly : monopolies) {
@@ -365,7 +369,7 @@ public class Board {
 
         // Create array with owned arrays
         Monopoly[] playerOwnedMonopolyList = new Monopoly[playerMonopolyAmount];
-        int playerOwnedIndex=0;
+        int playerOwnedIndex = 0;
         for (Monopoly monopoly : monopolies) {
             monopoly.updateMonopoly();
             if (monopoly.getOwner() == player) {

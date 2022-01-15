@@ -16,22 +16,24 @@ public class EventHandler {
 
     /**
      * Asks player if they wish to trade with another player, then runs methods accordingly.
+     *
      * @param player
      * @param players
      * @param board
      */
-    public void playerOptionsTrade(Player player, Player [] players, Board board) {
+    public void playerOptionsTrade(Player player, Player[] players, Board board) {
         int playerIndex = board.getField(player.getPlacement()).getPlacement();
         boolean answer = gui.getUserBool(Language.getText("playeroptionstrade1"), Language.getText("yes"), Language.getText("no"));
 
         if (answer) {
-                trade(playerIndex, players, board);
+            trade(playerIndex, players, board);
         }
         // Roll dice
     }
 
     /**
      * Asks player if they wish to buyback mortgaged properties, then runs methods accordingly.
+     *
      * @param player
      * @param board
      */
@@ -63,6 +65,7 @@ public class EventHandler {
 
     /**
      * Ferry Effect: Player pays rent. Rent is based on amount of ferries owned by same player.
+     *
      * @param player
      * @param ferry
      * @param board
@@ -70,7 +73,7 @@ public class EventHandler {
      */
     public void fieldEffect(Player player, Ferry ferry, Board board, Player[] players) {
         // Check Ferry Rent
-        ferry.updateNumberOfFerriesOwned(player,board);
+        ferry.updateNumberOfFerriesOwned(player, board);
         int ferry_cost = ferry.getCurrentRent();//ferry.getCurrentRent();
 
         if (ferry.getOwner() == null) { // Noone owns Ferry
@@ -87,6 +90,7 @@ public class EventHandler {
 
     /**
      * Brewery Effect: Player pays rent. Rent is based on sum of dice and ownership of other brewery.
+     *
      * @param player
      * @param brewery
      * @param players
@@ -107,17 +111,18 @@ public class EventHandler {
 
     /**
      * Player pays either 4000 or 10% of netWorth.
+     *
      * @param player
      * @param tax
      * @param netWorth
      */
     public void fieldEffect(Player player, Tax tax, int netWorth) {
         if (tax.getPlacement() == 4) { // first tax field
-            boolean answer = gui.getUserBool(Language.getText("tax1"), "4000"+Language.getText("valuta"), "10%");
+            boolean answer = gui.getUserBool(Language.getText("tax1"), "4000" + Language.getText("valuta"), "10%");
             if (answer) {
                 player.setPlayerBalance(-4000);
             } else {
-                player.setPlayerBalance(-(int)(netWorth*(10.0f/100.0f)));
+                player.setPlayerBalance(-(int) (netWorth * (10.0f / 100.0f)));
             }
         } else { // last tax field
             player.setPlayerBalance(-2000);
@@ -126,6 +131,7 @@ public class EventHandler {
 
     /**
      * Asks the player if they wish to buy or auction the property, then runs the code accordingly
+     *
      * @param player
      * @param field
      * @param players
@@ -145,6 +151,7 @@ public class EventHandler {
 
     /**
      * The players take turns bidding on property if the first players doesn't buy it first
+     *
      * @param players
      * @param field
      */
@@ -169,46 +176,41 @@ public class EventHandler {
                     aucPlayers[curAucIndex] = null;
                     break;
                 case "100":
-                    if (curAucPlayer.getPlayerBalance() >= auctionSum+100) {
+                    if (curAucPlayer.getPlayerBalance() >= auctionSum + 100) {
                         auctionSum += 100;
-                    }
-                    else{
+                    } else {
                         auctionPlayersLeft -= 1;
                         aucPlayers[curAucIndex] = null;
                     }
                     break;
                 case "200":
-                    if (curAucPlayer.getPlayerBalance() >= auctionSum+200) {
+                    if (curAucPlayer.getPlayerBalance() >= auctionSum + 200) {
                         auctionSum += 200;
-                    }
-                    else{
+                    } else {
                         auctionPlayersLeft -= 1;
                         aucPlayers[curAucIndex] = null;
                     }
                     break;
                 case "500":
-                    if (curAucPlayer.getPlayerBalance() >= auctionSum+500) {
+                    if (curAucPlayer.getPlayerBalance() >= auctionSum + 500) {
                         auctionSum += 500;
-                    }
-                    else{
+                    } else {
                         auctionPlayersLeft -= 1;
                         aucPlayers[curAucIndex] = null;
                     }
                     break;
                 case "1000":
-                    if (curAucPlayer.getPlayerBalance() >= auctionSum+1000) {
+                    if (curAucPlayer.getPlayerBalance() >= auctionSum + 1000) {
                         auctionSum += 1000;
-                    }
-                    else{
+                    } else {
                         auctionPlayersLeft -= 1;
                         aucPlayers[curAucIndex] = null;
                     }
                     break;
                 case "2000":
-                    if (curAucPlayer.getPlayerBalance() >= auctionSum+2000) {
+                    if (curAucPlayer.getPlayerBalance() >= auctionSum + 2000) {
                         auctionSum += 2000;
-                    }
-                    else{
+                    } else {
                         auctionPlayersLeft -= 1;
                         aucPlayers[curAucIndex] = null;
                     }
@@ -276,30 +278,32 @@ public class EventHandler {
     }
 
     /**
-    *  The player choses tradepartner, Chosen property to buy, Chosen amount of money from player, Chosen Property to sell, Chosen money to spend.
-    *  The target player then choses to accept or decline the trade. If accepted the ownership of the properties switches.
-    * */
+     * The player choses tradepartner, Chosen property to buy, Chosen amount of money from player, Chosen Property to sell, Chosen money to spend.
+     * The target player then choses to accept or decline the trade. If accepted the ownership of the properties switches.
+     */
     public void trade(int curPlayer, Player[] players, Board board) {
 
         Player currentPlayer = players[curPlayer];
 
         // Initialize Trade variables
-        int tradePartnerId=0;
-        int tradePartnerPayed=0;
-        int traderPayed=0;
+        int tradePartnerId = 0;
+        int tradePartnerPayed = 0;
+        int traderPayed = 0;
 
         // Add possible player to trade options array
-        Player[] tradePlayers = new Player[ players.length -1];
-        int a=0;
-        for (int i = 0; i< players.length-1; i++) {
-            if (i == curPlayer){a++;}
+        Player[] tradePlayers = new Player[players.length - 1];
+        int a = 0;
+        for (int i = 0; i < players.length - 1; i++) {
+            if (i == curPlayer) {
+                a++;
+            }
             tradePlayers[i] = players[a];
             a++;
         }
 
         // Create String array of possible trade partners
         String[] tradePlayersNames = new String[tradePlayers.length];
-        for (int i = 0; i<players.length-1; i++) {
+        for (int i = 0; i < players.length - 1; i++) {
             tradePlayersNames[i] = tradePlayers[i].getName();
         }
 
@@ -335,47 +339,47 @@ public class EventHandler {
         }
 
         // Display Menu for money
-        boolean correctPartnerPayAmount=false;
+        boolean correctPartnerPayAmount = false;
         String[] optionsMoney = {"Accepter mængde", "+50", "+100", "+200", "+500", "+1000", "+5000", "+10000"};
         while (!correctPartnerPayAmount) {
 
             switch (gui.getUserSelection(currentPlayer.getName() + " Vælg hvor meget " + tradePlayersNames[tradePartnerId] + " skal betale: " + tradePartnerPayed, optionsMoney)) {
                 case "Accepter mængde":
-                    correctPartnerPayAmount=true;
+                    correctPartnerPayAmount = true;
                     break;
                 case "+50":
-                    if (tradePlayers[tradePartnerId].getPlayerBalance() >= tradePartnerPayed+50) {
+                    if (tradePlayers[tradePartnerId].getPlayerBalance() >= tradePartnerPayed + 50) {
                         tradePartnerPayed += 50;
                     }
                     break;
                 case "+100":
-                    if (tradePlayers[tradePartnerId].getPlayerBalance() >= tradePartnerPayed+100) {
+                    if (tradePlayers[tradePartnerId].getPlayerBalance() >= tradePartnerPayed + 100) {
                         tradePartnerPayed += 100;
                     }
                     break;
                 case "+200":
-                    if (tradePlayers[tradePartnerId].getPlayerBalance() >= tradePartnerPayed+200) {
+                    if (tradePlayers[tradePartnerId].getPlayerBalance() >= tradePartnerPayed + 200) {
                         tradePartnerPayed += 200;
                     }
                     break;
                 case "+500":
-                    if (tradePlayers[tradePartnerId].getPlayerBalance() >= tradePartnerPayed+500) {
+                    if (tradePlayers[tradePartnerId].getPlayerBalance() >= tradePartnerPayed + 500) {
                         tradePartnerPayed += 500;
                     }
                     break;
                 case "+1000":
-                    if (tradePlayers[tradePartnerId].getPlayerBalance() >= tradePartnerPayed+1000) {
+                    if (tradePlayers[tradePartnerId].getPlayerBalance() >= tradePartnerPayed + 1000) {
                         tradePartnerPayed += 1000;
                     }
                     break;
                 case "+5000":
-                    if (tradePlayers[tradePartnerId].getPlayerBalance() >= tradePartnerPayed+5000) {
+                    if (tradePlayers[tradePartnerId].getPlayerBalance() >= tradePartnerPayed + 5000) {
                         tradePartnerPayed += 5000;
                     }
                     break;
                 case "+10000":
-                    if (tradePlayers[tradePartnerId].getPlayerBalance() >= tradePartnerPayed+10000){
-                        tradePartnerPayed+=10000;
+                    if (tradePlayers[tradePartnerId].getPlayerBalance() >= tradePartnerPayed + 10000) {
+                        tradePartnerPayed += 10000;
                     }
                     break;
             }
@@ -400,44 +404,44 @@ public class EventHandler {
         }
 
         // Display menu for own players money
-        boolean correctPlayerPayAmount=false;
+        boolean correctPlayerPayAmount = false;
         while (!correctPlayerPayAmount) {
             switch (gui.getUserSelection(currentPlayer.getName() + " Vælg hvor meget du skal betale: " + traderPayed, optionsMoney)) {
                 case "Accepter mængde":
-                    correctPlayerPayAmount=true;
+                    correctPlayerPayAmount = true;
                     break;
                 case "+50":
-                    if (currentPlayer.getPlayerBalance() >= traderPayed+50) {
+                    if (currentPlayer.getPlayerBalance() >= traderPayed + 50) {
                         traderPayed += 50;
                     }
                     break;
                 case "+100":
-                    if (currentPlayer.getPlayerBalance() >= traderPayed+100) {
+                    if (currentPlayer.getPlayerBalance() >= traderPayed + 100) {
                         traderPayed += 100;
                     }
                     break;
                 case "+200":
-                    if (currentPlayer.getPlayerBalance() >= traderPayed+200) {
+                    if (currentPlayer.getPlayerBalance() >= traderPayed + 200) {
                         traderPayed += 200;
                     }
                     break;
                 case "+500":
-                    if (currentPlayer.getPlayerBalance() >= traderPayed+500) {
+                    if (currentPlayer.getPlayerBalance() >= traderPayed + 500) {
                         traderPayed += 500;
                     }
                     break;
                 case "+1000":
-                    if (currentPlayer.getPlayerBalance() >= traderPayed+1000) {
+                    if (currentPlayer.getPlayerBalance() >= traderPayed + 1000) {
                         traderPayed += 1000;
                     }
                     break;
                 case "+5000":
-                    if (currentPlayer.getPlayerBalance() >= traderPayed+5000) {
+                    if (currentPlayer.getPlayerBalance() >= traderPayed + 5000) {
                         traderPayed += 5000;
                     }
                     break;
                 case "+10000":
-                    if (currentPlayer.getPlayerBalance() >= traderPayed+10000) {
+                    if (currentPlayer.getPlayerBalance() >= traderPayed + 10000) {
                         traderPayed += 10000;
                     }
                     break;
@@ -448,31 +452,35 @@ public class EventHandler {
         String soldPropString = " Og ingen ejendomme: ";
         String propString = " For ingen ejendomme: ";
         boolean tradeAccepted;
-        if (chosenProp != null) {propString = " For denne egendom: "+chosenProp.getName();}
-        if (chosenSoldProp != null) {soldPropString = " og denne egendom "+chosenSoldProp.getName();}
-        String msg = tradePlayersNames[tradePartnerId] + " Acceptere du denne handel? Du modtager " + (traderPayed-tradePartnerPayed) + soldPropString + propString;
-        boolean answer =gui.getUserBool(msg, "Accepter handel","Accepter IKKE handel");
+        if (chosenProp != null) {
+            propString = " For denne egendom: " + chosenProp.getName();
+        }
+        if (chosenSoldProp != null) {
+            soldPropString = " og denne egendom " + chosenSoldProp.getName();
+        }
+        String msg = tradePlayersNames[tradePartnerId] + " Acceptere du denne handel? Du modtager " + (traderPayed - tradePartnerPayed) + soldPropString + propString;
+        boolean answer = gui.getUserBool(msg, "Accepter handel", "Accepter IKKE handel");
 
-        tradeAccepted= answer;
+        tradeAccepted = answer;
 
         // Pay for trade
         if (tradeAccepted) {
             tradePlayers[tradePartnerId].setPlayerBalance(traderPayed - tradePartnerPayed);
             currentPlayer.setPlayerBalance(tradePartnerPayed - traderPayed);
-            if (chosenProp != null){
+            if (chosenProp != null) {
                 chosenProp.setOwner(currentPlayer);
                 //gui.setOwner(currentPlayer, chosenProp);
                 gui.setOwner(currentPlayer, chosenProp);
             }
-            if (chosenSoldProp != null){
+            if (chosenSoldProp != null) {
                 chosenSoldProp.setOwner(tradePlayers[tradePartnerId]);
                 //gui.setOwner(tradePlayers[tradePartnerId], chosenProp);
                 gui.setOwner(tradePlayers[tradePartnerId], chosenSoldProp);
             }
 
             // Update Ownership
-            gui.setguiPlayerBalance(currentPlayer,currentPlayer.getPlayerBalance());
-            gui.setguiPlayerBalance(tradePlayers[tradePartnerId],tradePlayers[tradePartnerId].getPlayerBalance());
+            gui.setguiPlayerBalance(currentPlayer, currentPlayer.getPlayerBalance());
+            gui.setguiPlayerBalance(tradePlayers[tradePartnerId], tradePlayers[tradePartnerId].getPlayerBalance());
         }
 
 
@@ -480,6 +488,7 @@ public class EventHandler {
 
     /**
      * Allows players to buy back mortgaged properties.
+     *
      * @param player
      * @param board
      */
@@ -507,10 +516,9 @@ public class EventHandler {
         while (value) {
             //stops while loop if no mortgaged properties
             if (numberOfMortgagedProperties == 0) {
-                gui.button("Du har ikke nogen pantsatte ejendomme","OK");
+                gui.button("Du har ikke nogen pantsatte ejendomme", "OK");
                 value = false;
-            }
-            else {
+            } else {
                 String guiSelection = gui.dropdown("Vælg en pantsat ejendom du skal købe:", mortgagedPropertyNames);
                 for (int i = 0; i < mortgagedPropertyNames.length; i++) {
                     //Verifying that the current field is of the type Ownable
@@ -519,11 +527,11 @@ public class EventHandler {
                         property.setMortgage(false);
                         playerMortgagedProperties[i].setOwner(player);
                         //set GUI mortgage
-                        player.setPlayerBalance(-((property.getPrice()) / 2)+(((property.getPrice()) / 2) * 10/100));
+                        player.setPlayerBalance(-((property.getPrice()) / 2) + (((property.getPrice()) / 2) * 10 / 100));
                         String[] newMortgagedPropertyNames = new String[mortgagedPropertyNames.length - 1];
                         int j = 0;
-                        if(newMortgagedPropertyNames.length == 0) {
-                            gui.button("Du har ikke nogen pantsatte ejendomme","ok");
+                        if (newMortgagedPropertyNames.length == 0) {
+                            gui.button("Du har ikke nogen pantsatte ejendomme", "ok");
                             value = false;
                         }
                         if (property.getOwner() == player && (property.getName().equals(guiSelection))) {

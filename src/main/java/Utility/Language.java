@@ -22,9 +22,11 @@ public class Language {
         }
         return "Text not found";
     }
+
     public static void setLanguage(String chosenLanguage) {
         language = chosenLanguage;
     }
+
     public static void read() {
         String row = "";
         file = new String[100][3];

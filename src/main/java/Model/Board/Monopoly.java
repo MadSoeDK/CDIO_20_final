@@ -24,7 +24,7 @@ public class Monopoly {
         return streets;
     }
 
-    public Player getOwner(){
+    public Player getOwner() {
         return monopolyOwner;
     }
 
@@ -46,14 +46,14 @@ public class Monopoly {
         }
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
     public String[] getStringArray() {
         String[] streetsString = new String[monopolySize];
 
-        for (int i=0; i < streetsString.length; i++) {
+        for (int i = 0; i < streetsString.length; i++) {
             streetsString[i] = streets[i].getName();
         }
         return streetsString;

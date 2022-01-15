@@ -8,7 +8,7 @@ public class Board_Test {
 
         Field[] fields = board.getFields();
 
-        for (int i = 0; i < fields.length;i++) {
+        for (int i = 0; i < fields.length; i++) {
             System.out.println(fields[i].getClass().getSimpleName());
         }
 
