@@ -28,7 +28,7 @@ public class GUIController {
 
     public void chooseLanguage() {
         String[] options = {"Danish", "English"};
-        String language = getUserSelection("Select language", options);
+        String language = getUserSelection("Select language - (English version not finished)", options);
         Language.setLanguage(language);
         Language.read();
     }
