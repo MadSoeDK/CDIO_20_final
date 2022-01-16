@@ -22,7 +22,6 @@ public class Street extends Ownable {
         if (houseAmount < 5) {
             houseAmount++;
         }
-        System.out.println(houseAmount);
     }
 
     @Override
