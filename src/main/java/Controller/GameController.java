@@ -639,6 +639,21 @@ public class GameController {
         moveplayer(currentPlayer, sum);
         gui.showDice(cup.getFacevalues()[0], cup.getFacevalues()[1]);
     }
+
+    private void setUpMortgageGlitchTestState(Player player){
+
+        // Target player owns purple monopoly
+        Ownable property_1 = (Ownable) board.getField(37);
+        Ownable property_2 = (Ownable) board.getField(39);
+
+        // Set ownership of fields
+        property_1.setOwner(player);
+        property_2.setOwner(player);
+
+        // Set morgaged
+        property_1.setMortgage(true);
+        property_2.setMortgage(true);
+    }
 }
 
 

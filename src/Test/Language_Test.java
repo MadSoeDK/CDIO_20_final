@@ -6,5 +6,4 @@ public class Language_Test {
         Language.read();
         Language.getText("players?");
     }
-
 }

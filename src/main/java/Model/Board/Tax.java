@@ -8,8 +8,4 @@ public class Tax extends Field {
         this.TAX = tax;
     }
 
-    public int getTax() {
-        return TAX;
-    }
-
 }
